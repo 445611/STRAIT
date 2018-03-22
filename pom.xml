@@ -9,6 +9,8 @@
     <modules>
         <module>Reliability-Tool-DataProvider</module>
         <module>Reliability-Tool-Models</module>
+        <module>Reliability-Tool-Core</module>
+        <module>Reliability-Tool-Utils</module>
     </modules>
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
