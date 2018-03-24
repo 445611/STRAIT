@@ -9,6 +9,18 @@
     <artifactId>Reliability-Tool-DataProvider</artifactId>
     <name>Reliability Tool Data Provider</name>  
     <packaging>jar</packaging>
+    <dependencies>
+        <dependency>
+            <groupId>org.eclipse.mylyn.github</groupId>
+            <artifactId>org.eclipse.egit.github.core</artifactId>
+            <version>2.1.5</version>
+        </dependency>
+        <dependency>
+            <groupId>${project.groupId}</groupId>
+            <artifactId>Reliability-Tool-Core</artifactId>
+            <version>${project.version}</version>
+        </dependency>
+    </dependencies>
     <properties>
         <maven.compiler.source>1.8</maven.compiler.source>
         <maven.compiler.target>1.8</maven.compiler.target>
