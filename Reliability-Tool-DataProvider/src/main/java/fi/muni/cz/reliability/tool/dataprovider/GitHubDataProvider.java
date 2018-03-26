@@ -12,14 +12,19 @@ import org.dozer.DozerBeanMapper;
 import org.eclipse.egit.github.core.Issue;
 import org.eclipse.egit.github.core.client.GitHubClient;
 import org.eclipse.egit.github.core.service.IssueService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 
 /**
  * @author Radoslav Micko <445611@muni.cz>
  */
+@Component
 public class GitHubDataProvider implements DataProvider {
 
     static final String O_AUTH_2_TOKEN = "07d185523c583404fb7aabe851d6c715e5352dc9";
-    private DozerBeanMapper mapper = new DozerBeanMapper();
+    
+    @Autowired
+    private DozerBeanMapper mapper /*= new DozerBeanMapper()*/;
     
     @Override
     public List<GeneralIssue> getIssuesByOwnerRepoName(String owner, String repositoryName) {
@@ -55,7 +60,6 @@ public class GitHubDataProvider implements DataProvider {
         */
         return null; 
     }
-    
     
     public  <T> List<T> mapTo(Collection<?> objects, Class<T> mapToClass) {
         List<T> mappedCollection = new ArrayList<>();

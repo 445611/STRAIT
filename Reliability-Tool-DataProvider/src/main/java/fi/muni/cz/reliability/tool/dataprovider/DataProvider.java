@@ -2,10 +2,12 @@ package fi.muni.cz.reliability.tool.dataprovider;
 
 import fi.muni.cz.reliability.tool.core.GeneralIssue;
 import java.util.List;
+import org.springframework.stereotype.Component;
 
 /**
  * @author Radoslav Micko <445611@muni.cz>
  */
+@Component
 public interface DataProvider {
     
     /**
