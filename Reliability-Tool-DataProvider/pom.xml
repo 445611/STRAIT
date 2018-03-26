@@ -20,6 +20,11 @@
             <artifactId>Reliability-Tool-Core</artifactId>
             <version>${project.version}</version>
         </dependency>
+        <dependency>
+            <groupId>net.sf.dozer</groupId>
+            <artifactId>dozer</artifactId>
+            <version>5.5.1</version>
+        </dependency>
     </dependencies>
     <properties>
         <maven.compiler.source>1.8</maven.compiler.source>

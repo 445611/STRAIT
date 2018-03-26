@@ -15,6 +15,13 @@ public interface DataProvider {
      * @param repositoryName    Name of repositry
      * @return                  list of GeneralIssue
      */
-    List<GeneralIssue> getIssues(String owner, String repositoryName);
+    List<GeneralIssue> getIssuesByOwnerRepoName(String owner, String repositoryName);
+    
+    /**
+     * Get list of issues for url of repo
+     * @param url   url of repo
+     * @return      list of GeneralIssue
+     */
+    List<GeneralIssue> getIssuesByUrl(String url);
     
 }

@@ -61,7 +61,7 @@ public class GeneralIssue implements Serializable {
         return body;
     }
 
-    public void setBody(String Body) {
+    public void setBody(String body) {
         this.body = body;
     }
 
@@ -74,7 +74,7 @@ public class GeneralIssue implements Serializable {
     }
 
     public List<String> getLabels() {
-        return Collections.unmodifiableList(labels);
+        return labels;
     }
 
     public void setLabels(List<String> labels) {
