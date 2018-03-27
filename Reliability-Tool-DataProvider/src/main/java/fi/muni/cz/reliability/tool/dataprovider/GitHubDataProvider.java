@@ -3,7 +3,6 @@ package fi.muni.cz.reliability.tool.dataprovider;
 import fi.muni.cz.reliability.tool.core.GeneralIssue;
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Collection;
 import java.util.List;
 import java.util.logging.Level;
@@ -24,7 +23,7 @@ public class GitHubDataProvider implements DataProvider {
     static final String O_AUTH_2_TOKEN = "07d185523c583404fb7aabe851d6c715e5352dc9";
     
     @Autowired
-    private DozerBeanMapper mapper /*= new DozerBeanMapper()*/;
+    private DozerBeanMapper dozer /*= new DozerBeanMapper()*/;
     
     @Override
     public List<GeneralIssue> getIssuesByOwnerRepoName(String owner, String repositoryName) {
@@ -35,7 +34,6 @@ public class GitHubDataProvider implements DataProvider {
         
         try {
             List<Issue> issueList = issueService.getIssues(owner, repositoryName, null);
-            mapper.setMappingFiles(Arrays.asList("github_mapping.xml"));
             generalIssueList = mapTo(issueList, GeneralIssue.class);
         } catch (IOException ex) {
             Logger.getLogger(GitHubDataProvider.class.getName())
@@ -61,10 +59,17 @@ public class GitHubDataProvider implements DataProvider {
         return null; 
     }
     
-    public  <T> List<T> mapTo(Collection<?> objects, Class<T> mapToClass) {
+    /**
+     * Method for mapping collection
+     * @param objects collection of objects
+     * @param mapToClass desired class
+     * @param <T> Type
+     * @return mapped collection
+     */
+    private  <T> List<T> mapTo(Collection<?> objects, Class<T> mapToClass) {
         List<T> mappedCollection = new ArrayList<>();
         for (Object object : objects) {
-            mappedCollection.add(mapper.map(object, mapToClass));
+            mappedCollection.add(dozer.map(object, mapToClass));
         }
         return mappedCollection;
     }

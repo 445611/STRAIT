@@ -9,6 +9,8 @@
    http://www.springframework.org/schema/context/spring-context-3.0.xsd">
 
    <context:annotation-config/>
-   <bean id = "mapper" class = "org.dozer.DozerBeanMapper"></bean>
+   <bean id = "dozer" class = "org.dozer.DozerBeanMapper">
+       <property name="mappingFiles" value="dozer_mapping.xml"/>
+   </bean>
    <bean id = "dataProvider" class = "fi.muni.cz.reliability.tool.dataprovider.GitHubDataProvider"></bean>
 </beans>
