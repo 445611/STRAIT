@@ -23,7 +23,7 @@ public class GitHubDataProvider implements DataProvider {
     static final String O_AUTH_2_TOKEN = "07d185523c583404fb7aabe851d6c715e5352dc9";
     
     @Autowired
-    private DozerBeanMapper dozer /*= new DozerBeanMapper()*/;
+    private DozerBeanMapper dozer;
     
     @Override
     public List<GeneralIssue> getIssuesByOwnerRepoName(String owner, String repositoryName) {
@@ -48,6 +48,7 @@ public class GitHubDataProvider implements DataProvider {
         client.setOAuth2Token(O_AUTH_2_TOKEN);
         IssueService issueService = new IssueService(client);
         List<Issue> issueList;
+        //TODO
         /*
         try {
             issueList = issueService.getIssues(, null);

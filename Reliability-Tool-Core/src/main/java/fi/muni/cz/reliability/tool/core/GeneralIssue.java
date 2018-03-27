@@ -1,7 +1,7 @@
 package fi.muni.cz.reliability.tool.core;
 
 import java.io.Serializable;
-import java.util.Collections;
+
 import java.util.Date;
 import java.util.List;
 import java.util.Objects;
@@ -22,9 +22,6 @@ public class GeneralIssue implements Serializable {
     private String state;
     private List<String> labels;
     
-    
-    
-
     public long getId() {
         return id;
     }
@@ -126,12 +123,4 @@ public class GeneralIssue implements Serializable {
         }
         return true;
     }
-    
-    
-    
-    
-    
-    
-            
-    
 }

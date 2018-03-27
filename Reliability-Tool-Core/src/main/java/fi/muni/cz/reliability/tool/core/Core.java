@@ -5,4 +5,7 @@ package fi.muni.cz.reliability.tool.core;
  */
 public interface Core {
     
+    void calculateReliabilityForUrl(String url);
+    
+    
 }

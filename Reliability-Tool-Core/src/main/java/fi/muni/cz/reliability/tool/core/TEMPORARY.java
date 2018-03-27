@@ -1,6 +1,7 @@
-package fi.muni.cz.reliability.tool.dataprovider;
+package fi.muni.cz.reliability.tool.core;
 
-import fi.muni.cz.reliability.tool.core.GeneralIssue;
+import fi.muni.cz.reliability.tool.dataprovider.DataProvider;
+import fi.muni.cz.reliability.tool.dataprovider.GitHubDataProvider;
 import java.util.List;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
