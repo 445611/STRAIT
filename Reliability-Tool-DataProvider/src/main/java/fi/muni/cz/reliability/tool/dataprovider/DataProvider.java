@@ -1,13 +1,10 @@
 package fi.muni.cz.reliability.tool.dataprovider;
 
-import fi.muni.cz.reliability.tool.core.GeneralIssue;
 import java.util.List;
-import org.springframework.stereotype.Component;
 
 /**
  * @author Radoslav Micko <445611@muni.cz>
  */
-@Component
 public interface DataProvider {
     
     /**
@@ -26,4 +23,9 @@ public interface DataProvider {
      */
     List<GeneralIssue> getIssuesByUrl(String url);
     
+    /**
+     * Authenticate user by authentication folder data
+     * @throw AuthenticationException if data from file are insufficient
+     */
+    void authenticate();
 }

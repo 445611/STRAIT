@@ -1,4 +1,4 @@
-package fi.muni.cz.reliability.tool.core;
+package fi.muni.cz.reliability.tool.utils;
 
 import java.io.Serializable;
 import java.util.Date;
@@ -81,7 +81,10 @@ public class OutputData implements Serializable {
 
     @Override
     public String toString() {
-        return "OutputData for repository{" + "userName=" + userName + ", repositoryName=" + repositoryName + ", createdAt=" + createdAt + ", totalNumberOfFaults=" + totalNumberOfFaults + '}';
+        return "OutputData for repository{" + "userName=" 
+                + userName + ", repositoryName=" + repositoryName 
+                + ", createdAt=" + createdAt + ", totalNumberOfFaults=" 
+                + totalNumberOfFaults + '}';
     }
     
     

@@ -5,7 +5,7 @@
       http://dozer.sourceforge.net/schema/beanmapping.xsd">
     <mapping>
         <class-a>org.eclipse.egit.github.core.Issue</class-a>
-        <class-b>fi.muni.cz.reliability.tool.core.GeneralIssue</class-b>
+        <class-b>fi.muni.cz.reliability.tool.dataprovider.GeneralIssue</class-b>
         <field>
             <a>labels</a>
             <b>labels</b>

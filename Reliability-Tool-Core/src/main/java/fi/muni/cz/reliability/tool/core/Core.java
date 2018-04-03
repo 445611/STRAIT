@@ -5,6 +5,10 @@ package fi.muni.cz.reliability.tool.core;
  */
 public interface Core {
     
+    /**
+     * TODO
+     * @param url TODO
+     */
     void calculateReliabilityForUrl(String url);
     
     

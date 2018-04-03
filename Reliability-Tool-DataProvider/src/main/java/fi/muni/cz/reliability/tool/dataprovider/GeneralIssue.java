@@ -1,4 +1,4 @@
-package fi.muni.cz.reliability.tool.core;
+package fi.muni.cz.reliability.tool.dataprovider;
 
 import java.io.Serializable;
 
@@ -11,7 +11,7 @@ import java.util.Objects;
  */
 public class GeneralIssue implements Serializable {
     
-    private long id;
+    private Long id;
     private Date saved;
     
     private Date createdAt;
@@ -21,6 +21,7 @@ public class GeneralIssue implements Serializable {
     private String body;
     private String state;
     private List<String> labels;
+
     
     public long getId() {
         return id;

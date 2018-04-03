@@ -6,10 +6,14 @@ import org.springframework.context.support.ClassPathXmlApplicationContext;
 /**
  * @author Radoslav Micko <445611@muni.cz>
  */
-public class GitHubCore {
+public class GitHubCore implements Core {
     
     private final ApplicationContext context = new ClassPathXmlApplicationContext("beans.xml");
-    
-    
-    
+
+    @Override
+    public void calculateReliabilityForUrl(String url) {
+        throw new UnsupportedOperationException("Not supported yet.");
+        //TODO
+    }
+
 }
