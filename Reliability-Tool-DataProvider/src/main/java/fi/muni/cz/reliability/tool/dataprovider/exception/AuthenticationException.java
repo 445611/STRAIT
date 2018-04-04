@@ -1,12 +1,12 @@
 package fi.muni.cz.reliability.tool.dataprovider.exception;
 
 /**
- * This excpeiton is thrown when there occures problem
+ * This excepeiton is thrown when there occures problem
  * during authetication
  * 
  * @author Radoslav Micko <445611@muni.cz>
  */
-public class AuthenticationException extends RuntimeException {
+public class AuthenticationException extends DataProviderException {
 
     /**
      * Constructor of <code>AuthenticationException</code>

@@ -13,6 +13,8 @@ public interface DataProvider {
      * @param owner             Name of owner
      * @param repositoryName    Name of repositry
      * @return                  list of GeneralIssue
+     * @throws  fi.muni.cz.reliability.tool.dataprovider.exception.AuthenticationException
+     *          when there occures problem with authentication
      */
     List<GeneralIssue> getIssuesByOwnerRepoName(String owner, String repositoryName);
     
@@ -24,8 +26,8 @@ public interface DataProvider {
     List<GeneralIssue> getIssuesByUrl(String url);
     
     /**
-     * Authenticate user by authentication folder data
-     * @throw AuthenticationException if data from file are insufficient
+     * Load credentials from file
+     * @throw AuthenticationException if problem loading file
      */
-    void authenticate();
+    void loadAuthenticationDataFromFile();
 }
