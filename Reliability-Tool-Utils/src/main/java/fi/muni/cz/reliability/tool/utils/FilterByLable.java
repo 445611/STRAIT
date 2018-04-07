@@ -13,23 +13,42 @@ public class FilterByLable implements IssuesProcessor {
 
     private List<String> filteringWords = new ArrayList<>();
     
-    @Override
+    /**
+     * Filters list of issues by <code>filteringWords</code> if lables contains 
+     * words or words as substring
+     * @param list to be filtered
+     * @return list of filtered issues
+     */
     public List<GeneralIssue> process(List<GeneralIssue> list) {
         list = allLablesToLowerCase(list);
         
         List<GeneralIssue> filteredList = new ArrayList<>();
         for (GeneralIssue issue: list) {
             for (String lable: issue.getLabels()) {
-                if (filteringWords.contains(lable)) {
-                    filteredList.add(issue);
+                for (String filteringWord: filteringWords) {
+                    if (lable.contains(filteringWord)) {
+                        filteredList.add(issue);
+                    }
                 }
             }
         }
         return filteredList;
     }
     
+    /**
+     * Add new word to <code>filteringWords</code>
+     * @param word to be added
+     */
     public void addFilteringWords(String word) {
-        filteringWords.add(word);
+        filteringWords.add(word.toLowerCase());
+    }
+    
+    /**
+     * Remove word from <code>filteringWords</code>
+     * @param word to be removed
+     */
+    public void removeFilteringWord(String word) {
+        filteringWords.remove(word);
     }
 
     /**

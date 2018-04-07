@@ -29,7 +29,7 @@ public class TEMPORARY {
         //List<GeneralIssue> list2 = dataProvider.getIssuesByOwnerRepoName("eclipse", "xtext-eclipse");
         //System.out.println(list1.get(0).toString() + list1.size());
         //System.out.println(list2.get(0).toString() + list2.size());
-        List<GeneralIssue> list1 = dataProvider.getIssuesByUrl("https://github.com/eclipse/xtext-eclipse");
+        List<GeneralIssue> list1 = dataProvider.getIssuesByUrl("https://github.com/dotnet/roslyn/issues?page=3&q=is%3Aissue+is%3Aopen");
         IssuesProcessor issuesFilter2 = new FilterByLable();
         
         FilterByLable issuesFilter = new FilterByLable();
