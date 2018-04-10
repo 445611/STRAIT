@@ -18,6 +18,7 @@ import org.springframework.context.support.ClassPathXmlApplicationContext;
  */
 public class TEMPORARY {
     
+    public static final String URL = "https://github.com/beetbox/beets/";
     /**
      * @param args the command line arguments
      */
@@ -36,7 +37,7 @@ public class TEMPORARY {
         //List<GeneralIssue> list1 = dataProvider.
         //        getIssuesByUrl("https://github.com/dotnet/roslyn/issues?page=3&q=is%3Aissue+is%3Aopen");
         
-        List<GeneralIssue> list1 = dataProvider.getIssuesByUrl("https://github.com/beetbox/beets/");
+        List<GeneralIssue> list1 = dataProvider.getIssuesByUrl(URL);
         
         FilterByLable issuesFilter = new FilterByLable();
         issuesFilter.addFilteringWords("bug");
@@ -51,7 +52,7 @@ public class TEMPORARY {
         System.out.println(list2.get(0).toString() + list2.size());
         
         OutputWriter writer = new OutputWriterImpl();
-        writer.writeOutputDataToFileNamed(null, "TESTFILE.txt");
+        writer.writeOutputDataToFile(writer.prepareOutputData(URL, countedWeeks));
     }
     
 }

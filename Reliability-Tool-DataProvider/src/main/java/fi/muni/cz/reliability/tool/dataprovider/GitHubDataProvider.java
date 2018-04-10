@@ -71,15 +71,10 @@ public class GitHubDataProvider implements DataProvider {
     @Override
     public List<GeneralIssue> getIssuesByUrl(String urlString) {
 
-        try { 
-            URL url = new URL(urlString);
-            String[] ownerAndRepositoryName = parseUrlAndCheck(url);
+            UrlParser parser = new UrlParserGitHub();
+            String[] ownerAndRepositoryName = parser.parseUrlAndCheck(urlString);
             return getIssuesByOwnerRepoName(ownerAndRepositoryName[1],
-                    ownerAndRepositoryName[2]);
-        } catch (MalformedURLException ex) {
-            Logger.getLogger(GitHubDataProvider.class.getName()).log(Level.SEVERE, "Incorrect URL.", ex);
-            throw new DataProviderException("Incorrect URL.");
-        }   
+                    ownerAndRepositoryName[2]); 
     }
      
     @Override
@@ -95,15 +90,21 @@ public class GitHubDataProvider implements DataProvider {
     
     /**
      * Check URL if it is github with owner and repository name then parse
-     * @param url to check an parse
+     * @param urlString to check an parse
      * @return String[] parsed URL
      */
-    private String[] parseUrlAndCheck(URL url) {
-        String[] ownerAndRepositoryName = url.getPath().split("/");
-        if (ownerAndRepositoryName.length < 3 || !url.getHost().equals("github.com")) {
+    public String[] parseUrlAndCheck(String urlString) {
+        try {        
+            URL url = new URL(urlString);
+            String[] ownerAndRepositoryName = url.getPath().split("/");
+            if (ownerAndRepositoryName.length < 3 || !url.getHost().equals("github.com")) {
+                throw new DataProviderException("Incorrect URL.");
+            }
+            return ownerAndRepositoryName;
+        } catch (MalformedURLException ex) {
+            Logger.getLogger(GitHubDataProvider.class.getName()).log(Level.SEVERE, "Incorrect URL.", ex);
             throw new DataProviderException("Incorrect URL.");
-        }
-        return ownerAndRepositoryName;
+        } 
     }
     
     /**

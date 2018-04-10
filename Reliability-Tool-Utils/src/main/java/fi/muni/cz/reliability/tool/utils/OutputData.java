@@ -43,12 +43,12 @@ public class OutputData implements Serializable {
         this.createdAt = createdAt;
     }
 
-    public int getTotalNumberOfFaults() {
+    public int getTotalNumberOfDefects() {
         return totalNumberOfDefects;
     }
 
-    public void setTotalNumberOfFaults(int totalNumberOfFaults) {
-        this.totalNumberOfDefects = totalNumberOfFaults;
+    public void setTotalNumberOfDefects(int totalNumberOfDefects) {
+        this.totalNumberOfDefects = totalNumberOfDefects;
     }
 
     public String getUrl() {
@@ -102,7 +102,7 @@ public class OutputData implements Serializable {
     public String toString() {
         return "OutputData for repository{" + "userName=" 
                 + userName + ", repositoryName=" + repositoryName 
-                + ", createdAt=" + createdAt + ", totalNumberOfFaults=" 
+                + ", createdAt=" + createdAt + ", totalNumberOfDefects=" 
                 + totalNumberOfDefects + '}';
     }
     
