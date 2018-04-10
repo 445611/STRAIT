@@ -2,6 +2,7 @@ package fi.muni.cz.reliability.tool.utils;
 
 import java.io.Serializable;
 import java.util.Date;
+import java.util.List;
 import java.util.Objects;
 
 /**
@@ -13,8 +14,8 @@ public class OutputData implements Serializable {
     private String userName;
     private String repositoryName;
     private Date createdAt;
-    private int totalNumberOfFaults;
-    
+    private int totalNumberOfDefects;
+    private List<Tuple<Integer, Integer>> weeksAndDefects;
     //TODO
     //Some kind of calculated data from model
 
@@ -43,13 +44,31 @@ public class OutputData implements Serializable {
     }
 
     public int getTotalNumberOfFaults() {
-        return totalNumberOfFaults;
+        return totalNumberOfDefects;
     }
 
     public void setTotalNumberOfFaults(int totalNumberOfFaults) {
-        this.totalNumberOfFaults = totalNumberOfFaults;
+        this.totalNumberOfDefects = totalNumberOfFaults;
     }
 
+    public String getUrl() {
+        return url;
+    }
+
+    public void setUrl(String url) {
+        this.url = url;
+    }
+
+    public List<Tuple<Integer, Integer>> getWeeksAndDefects() {
+        return weeksAndDefects;
+    }
+
+    public void setWeeksAndDefects(List<Tuple<Integer, Integer>> weeksAndDefects) {
+        this.weeksAndDefects = weeksAndDefects;
+    }
+
+    
+    
     @Override
     public int hashCode() {
         return Objects.hash(this.userName, this.repositoryName, this.createdAt);
@@ -84,7 +103,7 @@ public class OutputData implements Serializable {
         return "OutputData for repository{" + "userName=" 
                 + userName + ", repositoryName=" + repositoryName 
                 + ", createdAt=" + createdAt + ", totalNumberOfFaults=" 
-                + totalNumberOfFaults + '}';
+                + totalNumberOfDefects + '}';
     }
     
     

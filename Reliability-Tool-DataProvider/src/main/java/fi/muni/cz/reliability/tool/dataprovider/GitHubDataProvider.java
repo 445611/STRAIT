@@ -8,6 +8,7 @@ import java.io.IOException;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -63,6 +64,7 @@ public class GitHubDataProvider implements DataProvider {
             Logger.getLogger(GitHubDataProvider.class.getName())
                     .log(Level.SEVERE, "Error while getting repository by Owner and Repository name.", ex);
         }
+        Collections.reverse(generalIssueList);
         return generalIssueList;
     }
     
