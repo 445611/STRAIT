@@ -18,18 +18,19 @@ import org.springframework.context.support.ClassPathXmlApplicationContext;
  */
 public class TEMPORARY {
     
-    public static final String URL = "https://github.com/beetbox/beets/";
+    public static final String URL = "https://github.com/eclipse/sumo/";
     /**
      * @param args the command line arguments
      */
     public static void main(String[] args) {
         
         ApplicationContext context = new ClassPathXmlApplicationContext("beans.xml");
-        
         DataProvider dataProvider = (GitHubDataProvider) context.getBean("dataProvider");
+        dataProvider.loadAuthenticationDataFromFile();
+        
         //dataProvider.setOAuthToken("07d185523c583404fb7aabe851d6c715e5352dc9");
         //dataProvider.authenticate();
-        dataProvider.loadAuthenticationDataFromFile();
+        
         //List<GeneralIssue> list1 = dataProvider.getIssuesByOwnerRepoName("445611", "PB071");
         //List<GeneralIssue> list2 = dataProvider.getIssuesByOwnerRepoName("eclipse", "xtext-eclipse");
         //System.out.println(list1.get(0).toString() + list1.size());

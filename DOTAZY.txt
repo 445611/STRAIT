@@ -1,0 +1,15 @@
+k DB- keï púštame vıpoèet pre rovnaké REPO naraz je to OK
+ale ak budeme chciet spustit vıpoèet pre rovnaké REPO niekedy neskôr 
+budeme musie tak èi tak dáva request aby sme overili èi nepribudli nové ISSUES 
+alebo sa nezmenil stav Issues, ktoré u máme uloené
+-authorizácia OAuth / novı anonımni úèet :D 
+-ApplicationContext - uloi si Meno + Repo ( + stiahnute Issues), pri volaní dalšieho modulu ,kontrola rovnakého Mena + Repa vıpoèet nad rovnakou sadou Issues, AK zmena vyvolá sa novı Request 
+
+- èo je to WEEK ? 7 dní ? alebo pondelok - Nedela
+- èo pokladáme v našom prípade za zaèiatok testovania ? poèiatoènı bod ? 
+- return List ? alebo Collection ? 
+- potrebuje DefectsCounter interface ? èo tak len static metodu ? 
+- pouívanie Interfacu / prístup k public metodam nie je .. ?? 
+
+
+! Oprav DefectsCounter - po poslednej issue sa zastaví v poèítaní
