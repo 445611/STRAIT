@@ -75,35 +75,4 @@ public class FilterByLable implements IssuesProcessor {
         } 
         return list;
     }
-
-    /**
-     * Load filtering words from <code>FILTERING_CONFIG_FILE</code>
-     */
-    /*private void loadFilteringWordsFromFile() {
-        File file = getConfigurationFile();
-        
-        try (BufferedReader reader = new BufferedReader(new FileReader(file))) {
-            String line = reader.readLine();
-            if (line == null || line.isEmpty()) {
-                Logger.getLogger(FilterByLable.class.getName()).log(Level.CONFIG,
-                    "File " + FILTERING_CONFIG_FILE + " is empty.");
-                return;
-            }
-            String[] words = line.split(SPLITTER);
-            filteringWords = Arrays.asList(words);
-        } catch (IOException ex) {
-            Logger.getLogger(FilterByLable.class.getName()).log(Level.SEVERE,
-                    "Error loading " + FILTERING_CONFIG_FILE 
-                            + " file from resources.", ex);
-            throw new UtilsException("Error loading " + FILTERING_CONFIG_FILE
-                    + " file from resources.", ex);
-        }
-        
-    }
-    
-    private File getConfigurationFile() {
-        return new File(getClass().getClassLoader()
-                .getResource(FILTERING_CONFIG_FILE).getFile());
-    }*/
-
 }

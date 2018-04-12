@@ -10,9 +10,7 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.LinkedHashSet;
 import java.util.List;
-import java.util.Set;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -26,23 +24,18 @@ public class FilteringSetupImpl implements FilteringSetup {
     
     @Override
     public void addWordToConfigFile(String word) {
-        List<String> actual = loadFilteringWordsFromFile();
-        if (!actual.contains(word.toLowerCase())) {
-            actual.add(word.toLowerCase());
+        List<String> actualToUpdate = loadFilteringWordsFromFile();
+        if (!actualToUpdate.contains(word.toLowerCase())) {
+            actualToUpdate.add(word.toLowerCase());
         }
-        try (BufferedWriter writer = new BufferedWriter(new FileWriter(getConfigurationFile()))) {
-            for (String wordToWrite: actual) {
-                writer.write(wordToWrite.toLowerCase());
-                writer.write(SPLITTER);
-            }
-        } catch (IOException ex){
-            throw new UtilsException("Error occured during writing to file.", ex);
-        }
+        writeListToFile(actualToUpdate);
     }
     
     @Override
     public void removeWordfromConfigFile(String word) {
-        List<String> actual = loadFilteringWordsFromFile();
+        List<String> actualToUpdate = loadFilteringWordsFromFile();
+        actualToUpdate.remove(word);
+        writeListToFile(actualToUpdate);
     }
     
     @Override
@@ -65,6 +58,17 @@ public class FilteringSetupImpl implements FilteringSetup {
             throw new UtilsException("Error loading " + FILTERING_CONFIG_FILE
                     + " file from resources.", ex);
         } 
+    }
+    
+    private void writeListToFile(List<String> list) {
+        try (BufferedWriter writer = new BufferedWriter(new FileWriter(getConfigurationFile()))) {
+            for (String wordToWrite: list) {
+                writer.write(wordToWrite.toLowerCase());
+                writer.write(SPLITTER);
+            }
+        } catch (IOException ex){
+            throw new UtilsException("Error occured during writing to file.", ex);
+        }
     }
     
     private File getConfigurationFile() {
