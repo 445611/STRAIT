@@ -1,56 +1,68 @@
 package fi.muni.cz.reliability.tool.dataprovider;
 
+import fi.muni.cz.reliability.tool.dataprovider.utils.UrlParserGitHub;
+import fi.muni.cz.reliability.tool.dataprovider.utils.UrlParser;
+import fi.muni.cz.reliability.tool.dataprovider.mapping.BeanMapping;
+import fi.muni.cz.reliability.tool.dataprovider.mapping.BeanMappingImpl;
 import fi.muni.cz.reliability.tool.dataprovider.exception.AuthenticationException;
-import fi.muni.cz.reliability.tool.dataprovider.exception.AuthenticationFileErrorException;
-import fi.muni.cz.reliability.tool.dataprovider.exception.DataProviderException;
-import java.io.File;
 import java.io.IOException;
-import java.net.MalformedURLException;
-import java.net.URL;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import javax.xml.parsers.DocumentBuilder;
-import javax.xml.parsers.DocumentBuilderFactory;
-import javax.xml.parsers.ParserConfigurationException;
 import org.eclipse.egit.github.core.Issue;
 import org.eclipse.egit.github.core.client.GitHubClient;
 import org.eclipse.egit.github.core.client.RequestException;
 import org.eclipse.egit.github.core.service.IssueService;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.w3c.dom.Document;
-import org.w3c.dom.Element;
-import org.w3c.dom.Node;
-import org.w3c.dom.NodeList;
-import org.xml.sax.SAXException;
 
 /**
  * @author Radoslav Micko <445611@muni.cz>
  */
 public class GitHubDataProvider implements DataProvider {
     
-    private static final String AUTHENTICATION_FILE_NAME = "git_hub_authentication_file.xml";
+    /*private static final String AUTHENTICATION_FILE_NAME = "git_hub_authentication_file.xml";
     private static final String USER_ELEMENT_TAG = "user";
     private static final String NAME_ELEMENT_TAG = "name";
     private static final String PASSWORD_ELEMENT_TAG = "password";
-    private static final String TOKEN_ELEMENT_TAG = "token";
+    private static final String TOKEN_ELEMENT_TAG = "token";*/
     private String oAuthToken;
     private String userName;
     private String password;
     
-    @Autowired
     private BeanMapping beanMapping;
     
-    @Autowired
     private GitHubClient gitHubClient;
+
+    /**
+     * Initialize <code>beanMapping</code> and <code>gitHubClient</code>
+     */
+    public GitHubDataProvider() {
+        gitHubClient = new GitHubClient();
+        beanMapping = new BeanMappingImpl();
+    }
+
+    /**
+     * Set authentication attributes
+     * 
+     * @param userName name
+     * @param password password
+     * @param oAuthToken token
+     */
+    public GitHubDataProvider(String userName, String password, String oAuthToken) {
+        this();
+        this.oAuthToken = oAuthToken;
+        this.userName = userName;
+        this.password = password;
+    }
     
     @Override
     public List<GeneralIssue> getIssuesByOwnerRepoName(String owner, String repositoryName) {
-
+        
+        loadAuthenticationToClient();
         IssueService issueService = new IssueService(gitHubClient);
         List<GeneralIssue> generalIssueList = new ArrayList<>();
+        
         
         try {
             List<Issue> issueList = issueService.getIssues(owner, repositoryName, null);
@@ -76,11 +88,12 @@ public class GitHubDataProvider implements DataProvider {
             return getIssuesByOwnerRepoName(ownerAndRepositoryName[1],
                     ownerAndRepositoryName[2]); 
     }
-     
-    @Override
-    public void loadAuthenticationDataFromFile() {
-        Document document = getParsedAuthenticationDocument();
-        parseDocumentAndSaveToVariables(document);
+    
+    /**
+     * Load credentials from file
+     * @throw AuthenticationException if problem loading file
+     */
+    private void loadAuthenticationToClient() { 
         if (oAuthToken == null || oAuthToken.isEmpty()) {
             gitHubClientSetUserNameAndPassword();
         } else {
@@ -89,30 +102,11 @@ public class GitHubDataProvider implements DataProvider {
     }
     
     /**
-     * Check URL if it is github with owner and repository name then parse
-     * @param urlString to check an parse
-     * @return String[] parsed URL
-     */
-    public String[] parseUrlAndCheck(String urlString) {
-        try {        
-            URL url = new URL(urlString);
-            String[] ownerAndRepositoryName = url.getPath().split("/");
-            if (ownerAndRepositoryName.length < 3 || !url.getHost().equals("github.com")) {
-                throw new DataProviderException("Incorrect URL.");
-            }
-            return ownerAndRepositoryName;
-        } catch (MalformedURLException ex) {
-            Logger.getLogger(GitHubDataProvider.class.getName()).log(Level.SEVERE, "Incorrect URL.", ex);
-            throw new DataProviderException("Incorrect URL.");
-        } 
-    }
-    
-    /**
      * Parse data from authentication file
      * @param document to parse
      * @throw AuthenticationFileErrorException if there occures problem while loading file
      */
-    private void parseDocumentAndSaveToVariables(Document document) {
+    /*private void parseDocumentAndSaveToVariables(Document document) {
         NodeList nodeList = document.getElementsByTagName(USER_ELEMENT_TAG);
         try {
             Node node = nodeList.item(0);
@@ -130,13 +124,13 @@ public class GitHubDataProvider implements DataProvider {
                     + "authentication file. Wrong format.", ex);
         } 
     }
-    
+    */
     /**
      * Get normalized and parsed authentication file
      * @return Document parsed
      * @throw AuthenticationFileErrorException if there occures problem while loading file
      */
-    private Document getParsedAuthenticationDocument() {
+    /*private Document getParsedAuthenticationDocument() {
         Document document = null;
         try {
         File authenticationFile = getAuthenticationFile();
@@ -158,15 +152,15 @@ public class GitHubDataProvider implements DataProvider {
         }
         return document; 
     }
-    
+    */
     /**
      * Get authentication file from resource
      * @return File
      */
-    private File getAuthenticationFile() {
+    /*private File getAuthenticationFile() {
         return new File(getClass().getClassLoader()
                 .getResource(AUTHENTICATION_FILE_NAME).getFile());
-    }
+    }*/
     
     /**
      * Set <code>oAuthToken</code> to <code>gitHubClient</code>

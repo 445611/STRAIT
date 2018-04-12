@@ -6,7 +6,7 @@ import org.springframework.context.support.ClassPathXmlApplicationContext;
 /**
  * @author Radoslav Micko <445611@muni.cz>
  */
-public class GitHubCore implements Core {
+public class CoreImpl implements Core {
     
     private final ApplicationContext context = new ClassPathXmlApplicationContext("beans.xml");
 

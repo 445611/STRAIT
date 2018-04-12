@@ -1,6 +1,7 @@
-package fi.muni.cz.reliability.tool.utils;
+package fi.muni.cz.reliability.tool.utils.modeldata;
 
 import fi.muni.cz.reliability.tool.dataprovider.GeneralIssue;
+import fi.muni.cz.reliability.tool.utils.Tuple;
 import java.util.List;
 
 /**

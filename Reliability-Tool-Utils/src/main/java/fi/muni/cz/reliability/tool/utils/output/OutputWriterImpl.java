@@ -1,7 +1,8 @@
-package fi.muni.cz.reliability.tool.utils;
+package fi.muni.cz.reliability.tool.utils.output;
 
-import fi.muni.cz.reliability.tool.dataprovider.UrlParser;
-import fi.muni.cz.reliability.tool.dataprovider.UrlParserGitHub;
+import fi.muni.cz.reliability.tool.dataprovider.utils.UrlParser;
+import fi.muni.cz.reliability.tool.dataprovider.utils.UrlParserGitHub;
+import fi.muni.cz.reliability.tool.utils.Tuple;
 import fi.muni.cz.reliability.tool.utils.exception.UtilsException;
 import java.io.BufferedWriter;
 import java.io.FileWriter;

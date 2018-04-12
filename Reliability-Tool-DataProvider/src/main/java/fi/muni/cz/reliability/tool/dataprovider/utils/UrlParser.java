@@ -1,4 +1,4 @@
-package fi.muni.cz.reliability.tool.dataprovider;
+package fi.muni.cz.reliability.tool.dataprovider.utils;
 
 /**
  * @author Radoslav Micko <445611@muni.cz>

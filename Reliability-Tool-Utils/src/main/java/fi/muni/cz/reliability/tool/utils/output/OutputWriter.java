@@ -1,5 +1,6 @@
-package fi.muni.cz.reliability.tool.utils;
+package fi.muni.cz.reliability.tool.utils.output;
 
+import fi.muni.cz.reliability.tool.utils.Tuple;
 import java.util.List;
 
 /**

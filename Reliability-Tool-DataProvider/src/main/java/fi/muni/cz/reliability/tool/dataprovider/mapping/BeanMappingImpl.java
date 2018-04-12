@@ -1,18 +1,25 @@
-package fi.muni.cz.reliability.tool.dataprovider;
+package fi.muni.cz.reliability.tool.dataprovider.mapping;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collection;
 import java.util.List;
 import org.dozer.DozerBeanMapper;
-import org.springframework.beans.factory.annotation.Autowired;
 
 /**
  * @author Radoslav Micko <445611@muni.cz>
  */
 public class BeanMappingImpl implements BeanMapping {
     
-    @Autowired
-    private DozerBeanMapper dozer;
+    private static final String MAPPING_FILE = "dozer_mapping.xml";
+    private final DozerBeanMapper dozer;
+
+    /**
+     * Initialize <code>dozer</code> with <code>MAPPING_FILE</code> 
+     */
+    public BeanMappingImpl() {
+        dozer = new DozerBeanMapper(Arrays.asList(MAPPING_FILE));
+    }
     
     @Override
     public  <T> List<T> mapTo(Collection<?> objects, Class<T> mapToClass) {

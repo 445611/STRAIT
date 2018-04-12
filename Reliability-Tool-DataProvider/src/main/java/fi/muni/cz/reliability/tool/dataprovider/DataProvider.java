@@ -24,10 +24,4 @@ public interface DataProvider {
      * @return      list of GeneralIssue
      */
     List<GeneralIssue> getIssuesByUrl(String url);
-    
-    /**
-     * Load credentials from file
-     * @throw AuthenticationException if problem loading file
-     */
-    void loadAuthenticationDataFromFile();
 }

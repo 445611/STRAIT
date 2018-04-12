@@ -1,4 +1,4 @@
-package fi.muni.cz.reliability.tool.dataprovider;
+package fi.muni.cz.reliability.tool.dataprovider.mapping;
 
 import java.util.Collection;
 import java.util.List;

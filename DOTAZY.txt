@@ -13,3 +13,4 @@ alebo sa nezmenil stav Issues, ktoré už máme uložené
 
 
 ! Oprav DefectsCounter - po poslednej issue sa zastaví v poèítaní
+! Prerob authoriyacny subor na .properties

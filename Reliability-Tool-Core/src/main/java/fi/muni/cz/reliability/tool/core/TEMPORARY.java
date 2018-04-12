@@ -3,15 +3,18 @@ package fi.muni.cz.reliability.tool.core;
 import fi.muni.cz.reliability.tool.dataprovider.DataProvider;
 import fi.muni.cz.reliability.tool.dataprovider.GeneralIssue;
 import fi.muni.cz.reliability.tool.dataprovider.GitHubDataProvider;
-import fi.muni.cz.reliability.tool.utils.DefectsCounter;
-import fi.muni.cz.reliability.tool.utils.DefectsCounterImpl;
+import fi.muni.cz.reliability.tool.dataprovider.authenticationdata.AuthenticationDataProvider;
+import fi.muni.cz.reliability.tool.dataprovider.authenticationdata.AuthenticationDataProviderGitHub;
+import fi.muni.cz.reliability.tool.utils.modeldata.DefectsCounter;
+import fi.muni.cz.reliability.tool.utils.modeldata.DefectsCounterImpl;
 import fi.muni.cz.reliability.tool.utils.FilterByLable;
-import fi.muni.cz.reliability.tool.utils.OutputWriter;
-import fi.muni.cz.reliability.tool.utils.OutputWriterImpl;
+import fi.muni.cz.reliability.tool.utils.IssuesProcessor;
+import fi.muni.cz.reliability.tool.utils.output.OutputWriter;
+import fi.muni.cz.reliability.tool.utils.output.OutputWriterImpl;
 import fi.muni.cz.reliability.tool.utils.Tuple;
+import fi.muni.cz.reliability.tool.utils.config.FilteringSetup;
+import fi.muni.cz.reliability.tool.utils.config.FilteringSetupImpl;
 import java.util.List;
-import org.springframework.context.ApplicationContext;
-import org.springframework.context.support.ClassPathXmlApplicationContext;
 
 /**
  * @author Radoslav Micko <445611@muni.cz>
@@ -24,9 +27,12 @@ public class TEMPORARY {
      */
     public static void main(String[] args) {
         
-        ApplicationContext context = new ClassPathXmlApplicationContext("beans.xml");
-        DataProvider dataProvider = (GitHubDataProvider) context.getBean("dataProvider");
-        dataProvider.loadAuthenticationDataFromFile();
+        //ApplicationContext context = new ClassPathXmlApplicationContext("beans.xml");
+        
+        AuthenticationDataProvider authProvider = new AuthenticationDataProviderGitHub();
+        List<String> authData = authProvider.getAuthenticationDataFromFile();
+        DataProvider dataProvider = new GitHubDataProvider(authData.get(0), authData.get(1), authData.get(2));
+        
         
         //dataProvider.setOAuthToken("07d185523c583404fb7aabe851d6c715e5352dc9");
         //dataProvider.authenticate();
@@ -40,12 +46,10 @@ public class TEMPORARY {
         
         List<GeneralIssue> list1 = dataProvider.getIssuesByUrl(URL);
         
-        FilterByLable issuesFilter = new FilterByLable();
-        issuesFilter.addFilteringWords("bug");
-        issuesFilter.addFilteringWords("error");
-        issuesFilter.addFilteringWords("fail");
-        issuesFilter.addFilteringWords("fault");
-        
+        IssuesProcessor issuesFilter = new FilterByLable();
+
+        FilteringSetup setup = new FilteringSetupImpl();
+        setup.addWordToConfigFile("TEST");
         List<GeneralIssue> list2 = issuesFilter.process(list1);
         DefectsCounter counter = new DefectsCounterImpl();
         List<Tuple<Integer, Integer>> countedWeeks = counter.countDefectsForWeeks(list2);
