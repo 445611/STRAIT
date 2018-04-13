@@ -16,5 +16,5 @@ public interface DefectsCounter {
      * @param listOfIssues to count over
      * @return List of Tuple where first is week and second is number of defects
      */
-    List<Tuple<Integer, Integer>> countDefectsForWeeks(List<GeneralIssue> listOfIssues);
+    List<Tuple<Integer, Integer>> countDefectsIntoPeriodsOfTime(List<GeneralIssue> listOfIssues);
 }

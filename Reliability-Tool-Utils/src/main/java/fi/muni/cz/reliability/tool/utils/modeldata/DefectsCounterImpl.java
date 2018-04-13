@@ -2,6 +2,7 @@ package fi.muni.cz.reliability.tool.utils.modeldata;
 
 import fi.muni.cz.reliability.tool.dataprovider.GeneralIssue;
 import fi.muni.cz.reliability.tool.utils.Tuple;
+import fi.muni.cz.reliability.tool.utils.exception.UtilsException;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
@@ -13,13 +14,49 @@ import java.util.List;
  */
 public class DefectsCounterImpl implements DefectsCounter {
 
+    private final int typeOfTimeToAdd;
+    private final int howManyToAdd;
+    private Date startOfTesting;
+    private Date endOfTesting;
+    
+    /**
+     * Initialize attributes to default value.
+     * Defaul value is one week.
+     */
+    public DefectsCounterImpl() {
+        typeOfTimeToAdd = Calendar.WEEK_OF_MONTH;
+        howManyToAdd = 1;
+        this.startOfTesting = null;
+        this.endOfTesting = null;
+    }
+    
+    /**
+     * Initialize attributes to certain values.
+     * @param typeOfTimeToAdd type of Calendar enum
+     * @param howManyToAdd number of time parts to add 
+     * @param startOfTesting date when testing started
+     * @param endOfTesting date when testing ended
+     */
+    public DefectsCounterImpl(int typeOfTimeToAdd, int howManyToAdd, 
+            Date startOfTesting, Date endOfTesting) {
+        this.typeOfTimeToAdd = typeOfTimeToAdd;
+        this.howManyToAdd = howManyToAdd;
+        this.startOfTesting = startOfTesting;
+        this.endOfTesting = endOfTesting;
+    }
+    
     @Override
-    public List<Tuple<Integer, Integer>> countDefectsForWeeks(List<GeneralIssue> listOfIssues) {
-        if (listOfIssues == null || listOfIssues.isEmpty()) {
-            return null;
+    public List<Tuple<Integer, Integer>> countDefectsIntoPeriodsOfTime(List<GeneralIssue> listOfIssues) {
+        if (listOfIssues == null) {
+            throw new NullPointerException("listOfIssues is null.");
         }
-        Date start = getDateFromMidNight(listOfIssues.get(0).getCreatedAt());
-        return sortingIssuesIntoWeeks(start, listOfIssues);
+        if (startOfTesting == null) {
+            startOfTesting = getDateFromMidNight(listOfIssues.get(0).getCreatedAt());
+        }
+        if (endOfTesting == null) {
+            endOfTesting = new Date();
+        }
+        return sortingIssuesIntoTimePeriods(listOfIssues);
     }      
     
     /**
@@ -27,39 +64,56 @@ public class DefectsCounterImpl implements DefectsCounter {
      * @param startDate Date to starts counting weeks
      * @param listOfIssues List to iterate over
      * @return List of Tuples 
+     * 
+     * @throw UtilsException when there are no issues in testing period
      */
-    private List<Tuple<Integer, Integer>> sortingIssuesIntoWeeks(Date startDate, 
+    private List<Tuple<Integer, Integer>> sortingIssuesIntoTimePeriods(
             List<GeneralIssue> listOfIssues) {
-        //whitch to USE
-        //Date afterWeek = addOneWeekToDate(start);
-        Date firstDayNextWeek = findFirstDayOfNextWeekAfterDate(startDate);
-        //whitch to USE
+        Date startOfTestingPeriod = startOfTesting;
+        Date endOfTestingPeriod = addSpecificTimeToDate(startOfTesting);
+        
         
         List<Tuple<Integer, Integer>> countedList = new ArrayList<>();
-        int weekCounter = 1;
+        int periodsCounter = 1;
         int defectsCounter = 0;
         
         Iterator<GeneralIssue> issuesIterator = listOfIssues.iterator();
         GeneralIssue issue = issuesIterator.next();
-        while (startDate.before(new Date())) {
-            if (issue == null) {
-                break;
+        while (endOfTestingPeriod.before(endOfTesting)) {
+            
+            if (issue.getCreatedAt().before(startOfTestingPeriod)) {
+                if (issuesIterator.hasNext()) {
+                    issue = issuesIterator.next();
+                    continue;
+                }
+                throw new UtilsException("No issues in testing period.");
             }
-            if (issue.getCreatedAt().after(startDate) && 
-                    issue.getCreatedAt().before(firstDayNextWeek)) {
+            
+            if (issue.getCreatedAt().after(endOfTestingPeriod)) {
+                countedList.add(new Tuple<>(periodsCounter, defectsCounter));
+                periodsCounter++;
+                defectsCounter = 0;
+                startOfTestingPeriod = endOfTestingPeriod;
+                endOfTestingPeriod = addSpecificTimeToDate(endOfTestingPeriod);
+                continue;
+            }
+            
+            if (issue.getCreatedAt().after(startOfTestingPeriod) && 
+                    issue.getCreatedAt().before(endOfTestingPeriod)) {
                 defectsCounter++;
                 if (issuesIterator.hasNext()) {
                     issue = issuesIterator.next();
                 } else {
-                    countedList.add(new Tuple<>(weekCounter, defectsCounter));
-                    break;
+                    countedList.add(new Tuple<>(periodsCounter, defectsCounter));
+                    startOfTestingPeriod = endOfTestingPeriod;
+                    endOfTestingPeriod = addSpecificTimeToDate(endOfTestingPeriod);
+                    while (endOfTestingPeriod.before(endOfTesting)) {
+                        periodsCounter++;
+                        countedList.add(new Tuple<>(periodsCounter, 0));
+                        startOfTestingPeriod = endOfTestingPeriod;
+                        endOfTestingPeriod = addSpecificTimeToDate(endOfTestingPeriod);
+                    }
                 }
-            } else {
-                countedList.add(new Tuple<>(weekCounter, defectsCounter));
-                weekCounter++;
-                defectsCounter = 0;
-                startDate = firstDayNextWeek;
-                firstDayNextWeek = findFirstDayOfNextWeekAfterDate(startDate);
             } 
         }
         return countedList;
@@ -81,11 +135,25 @@ public class DefectsCounterImpl implements DefectsCounter {
     }
     
     /**
+     * Calculate date after <code>howManyToAdd</code> <code>typeOfTimeToAdd</code>
+     * units of time.
+     * 
+     * @param date to add to
+     * @return Date after week
+     */
+    private Date addSpecificTimeToDate(Date date) {
+        Calendar c = Calendar.getInstance();
+        c.setTime(date);
+        c.add(typeOfTimeToAdd, howManyToAdd);
+        return c.getTime(); 
+    }    
+    
+    /**
      * Calculate monday of next week after date
      * @param date to calculate for
      * @return Date of monday
      */
-    private Date findFirstDayOfNextWeekAfterDate(Date date) {
+    /*private Date findFirstDayOfNextWeekAfterDate(Date date) {
         Calendar cal = Calendar.getInstance();
         cal.setTime(date);
         int day = cal.get(Calendar.DAY_OF_WEEK);
@@ -103,17 +171,5 @@ public class DefectsCounterImpl implements DefectsCounter {
         cal.set( Calendar.MILLISECOND, 0);
         
         return cal.getTime();
-    }
-    
-    /**
-     * Calculate date after one week (7 days)
-     * @param date to add to
-     * @return Date after week
-     */
-    private Date addOneWeekToDate(Date date) {
-        Calendar c = Calendar.getInstance();
-        c.setTime(date);
-        c.add(Calendar.WEEK_OF_MONTH, 1);
-        return c.getTime(); 
-    }    
+    }*/
 }

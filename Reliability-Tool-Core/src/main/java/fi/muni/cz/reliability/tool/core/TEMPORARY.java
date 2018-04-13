@@ -14,6 +14,7 @@ import fi.muni.cz.reliability.tool.utils.output.OutputWriterImpl;
 import fi.muni.cz.reliability.tool.utils.Tuple;
 import fi.muni.cz.reliability.tool.utils.config.FilteringSetup;
 import fi.muni.cz.reliability.tool.utils.config.FilteringSetupImpl;
+import java.util.Calendar;
 import java.util.List;
 
 /**
@@ -46,13 +47,22 @@ public class TEMPORARY {
         
         List<GeneralIssue> list1 = dataProvider.getIssuesByUrl(URL);
         
+        
         IssuesProcessor issuesFilter = new FilterByLable();
 
         FilteringSetup setup = new FilteringSetupImpl();
         setup.addWordToConfigFile("TEST");
         List<GeneralIssue> list2 = issuesFilter.process(list1);
-        DefectsCounter counter = new DefectsCounterImpl();
-        List<Tuple<Integer, Integer>> countedWeeks = counter.countDefectsForWeeks(list2);
+        
+        Calendar cal1 = Calendar.getInstance();
+        cal1.set(2008, 1, 1);
+        Calendar cal2 = Calendar.getInstance();
+        cal2.set(2020, 1, 1);
+        
+        
+        DefectsCounter counter = new DefectsCounterImpl(Calendar.DAY_OF_MONTH, 1, 
+                cal1.getTime(), cal2.getTime());
+        List<Tuple<Integer, Integer>> countedWeeks = counter.countDefectsIntoPeriodsOfTime(list2);
         System.out.println(countedWeeks);
         System.out.println(list2.get(0).toString() + list2.size());
         
