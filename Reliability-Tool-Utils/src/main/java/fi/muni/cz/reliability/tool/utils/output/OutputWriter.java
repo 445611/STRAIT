@@ -1,6 +1,8 @@
 package fi.muni.cz.reliability.tool.utils.output;
 
 import fi.muni.cz.reliability.tool.utils.Tuple;
+import java.io.BufferedWriter;
+import java.io.IOException;
 import java.util.List;
 
 /**
@@ -10,6 +12,7 @@ public interface OutputWriter {
     
     /**
      * Write data from <code>OutputData</code> to certain file.
+     * 
      * @param data to write
      * @param fileName name of file
      */
@@ -17,10 +20,20 @@ public interface OutputWriter {
     
     /**
      * Prepare attributes in <code>OutputData</code>
+     * 
      * @param url of repositry
      * @param listOfTuplesData tuple data 
      * @return OutputData prepared with all attributes
      */
     OutputData prepareOutputData(String url, List<Tuple<Integer, Integer>> listOfTuplesData);
     
+    /**
+     * Write list of Tuple in correct foramt
+     * 
+     * @param writer BufferedWriter to use
+     * @param listOfTuplesData data to write
+     * @throws IOException if occures problem while writing to file
+     */
+    void writeListOfDefects(BufferedWriter writer, 
+            List<Tuple<Integer, Integer>> listOfTuplesData) throws IOException;
 }

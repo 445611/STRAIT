@@ -11,18 +11,21 @@ public interface FilteringConfiguration {
     
     /**
      * Add word to configuration file
+     * 
      * @param word to add
      */
     void addWordToConfigFile(String word);
     
     /**
      * Remove word from configuration file
+     * 
      * @param word to remove
      */
     void removeWordfromConfigFile(String word);
     
     /**
      * Load filtering words from file
+     * 
      * @return List of filtering words
      */
     List<String> loadFilteringWordsFromFile();

@@ -15,7 +15,7 @@ import java.util.List;
 /**
  * @author Radoslav Micko <445611@muni.cz>
  */
-public class OutputWriterImpl implements OutputWriter {
+public abstract class OutputWriterImpl implements OutputWriter {
 
     private static final String DATE_FORMAT = "yyyy-MM-dd_HH-mm-ss";
     
@@ -32,11 +32,21 @@ public class OutputWriterImpl implements OutputWriter {
              writer.newLine();
              writer.write(String.format("%-30s %s", "Created = ", data.getCreatedAt().toString()));
              writer.newLine();
+             writer.write(String.format("%-30s %s", "Function param. A = ", 
+                     data.getEvaluatedFunctionParameterA()));
+             writer.newLine();
+             writer.write(String.format("%-30s %s", "Function param. B = ", 
+                     data.getEvaluatedFunctionParameterB()));
+             writer.newLine();
+             writer.write(String.format("%-30s %s", "Model name = ", 
+                     data.getModelName()));
+             writer.newLine();
              writer.write(String.format("%-30s %s", "Total number of defects = ", 
                      data.getTotalNumberOfDefects()));
+             
              writer.newLine();
              writer.newLine();
-             writeWeeksAndDefectsIntoFile(writer, data.getWeeksAndDefects());
+             writeListOfDefects(writer, data.getWeeksAndDefects());  
         } catch (IOException ex){
             throw new UtilsException("Error occured during writing to file.", ex);
         }
@@ -55,21 +65,4 @@ public class OutputWriterImpl implements OutputWriter {
         data.setWeeksAndDefects(countedTuples);
         return data;
     }
-    
-    /**
-     * Write Tuples to new lines
-     * @param writer to use
-     * @param countedWeeks  List of Tuples to write
-     * @throws IOException if any problem to write 
-     */
-    private void writeWeeksAndDefectsIntoFile(BufferedWriter writer, 
-            List<Tuple<Integer, Integer>> countedWeeks) throws IOException {
-        writer.write(String.format("%-30s %s", "Weeks: ", "Defects:"));
-        writer.newLine();
-        for (Tuple<Integer, Integer> tuple: countedWeeks) {
-            writer.write(String.format("%-30s %s", tuple.getA(), tuple.getB()));
-            writer.newLine();
-        }
-    }
-
 }

@@ -17,9 +17,39 @@ public class OutputData implements Serializable {
     private Date createdAt;
     private int totalNumberOfDefects;
     private List<Tuple<Integer, Integer>> weeksAndDefects;
+    private double evaluatedFunctionParameterA;
+    private double evaluatedFunctionParameterB;
+    private String modelName;
+    
     //TODO
     //Some kind of calculated data from model
 
+    public double getEvaluatedFunctionParameterA() {
+        return evaluatedFunctionParameterA;
+    }
+
+    public void setEvaluatedFunctionParameterA(double evaluatedFunctionParameterA) {
+        this.evaluatedFunctionParameterA = evaluatedFunctionParameterA;
+    }
+
+    public double getEvaluatedFunctionParameterB() {
+        return evaluatedFunctionParameterB;
+    }
+
+    public void setEvaluatedFunctionParameterB(double evaluatedFunctionParameterB) {
+        this.evaluatedFunctionParameterB = evaluatedFunctionParameterB;
+    }
+
+    public String getModelName() {
+        return modelName;
+    }
+
+    public void setModelName(String modelName) {
+        this.modelName = modelName;
+    }
+
+    
+    
     public String getUserName() {
         return userName;
     }

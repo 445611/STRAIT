@@ -12,13 +12,14 @@ import fi.muni.cz.reliability.tool.utils.modeldata.DefectsCounterImpl;
 import fi.muni.cz.reliability.tool.utils.FilterByLable;
 import fi.muni.cz.reliability.tool.utils.IssuesProcessor;
 import fi.muni.cz.reliability.tool.utils.output.OutputWriter;
-import fi.muni.cz.reliability.tool.utils.output.OutputWriterImpl;
 import fi.muni.cz.reliability.tool.utils.Tuple;
 import fi.muni.cz.reliability.tool.utils.config.FilteringConfigurationImpl;
 import fi.muni.cz.reliability.tool.utils.output.OutputData;
 import java.util.Calendar;
 import java.util.List;
 import fi.muni.cz.reliability.tool.utils.config.FilteringConfiguration;
+import fi.muni.cz.reliability.tool.utils.output.OutputWriterDefectsForPeriods;
+import fi.muni.cz.reliability.tool.utils.output.OutputWriterTotaDefects;
 
 /**
  * @author Radoslav Micko <445611@muni.cz>
@@ -76,12 +77,21 @@ public class TEMPORARY {
         Model model = new GOModel();
         double[] params = model.calculateFunctionParametersOfModel(countedWeeksWithTotal);
         //System.out.println(params[0]+" ; "+ params[1]);
-        OutputWriter writer = new OutputWriterImpl();
+        OutputWriter writer = new OutputWriterTotaDefects();
+        OutputWriter writerWithPeriods = new OutputWriterDefectsForPeriods();
+        
         int totalDefects = countedWeeksWithTotal.get(countedWeeksWithTotal.size() - 1).getB();
-        writer.writeOutputDataToFile(writer.prepareOutputData(URL, countedWeeks), "DefectsInWeeks");
         OutputData prepareOutputData = writer.prepareOutputData(URL, countedWeeksWithTotal);
         prepareOutputData.setTotalNumberOfDefects(totalDefects);
+        prepareOutputData.setEvaluatedFunctionParameterA(params[0]);
+        prepareOutputData.setEvaluatedFunctionParameterB(params[1]);
+        prepareOutputData.setModelName("Goel-Okemura model");
+        
         writer.writeOutputDataToFile(prepareOutputData, "TotalDefects");
+        
+        prepareOutputData.setWeeksAndDefects(countedWeeks);
+        writerWithPeriods.writeOutputDataToFile(prepareOutputData, "DefectsInWeeks");
+        
     }
     
 }

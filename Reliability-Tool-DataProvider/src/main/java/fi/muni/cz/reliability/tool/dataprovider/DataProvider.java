@@ -13,13 +13,13 @@ public interface DataProvider {
      * @param owner             Name of owner
      * @param repositoryName    Name of repositry
      * @return                  list of GeneralIssue
-     * @throws  fi.muni.cz.reliability.tool.dataprovider.exception.AuthenticationException
-     *          when there occures problem with authentication
+     * @throw  AuthenticationException when there occures problem with authentication
      */
     List<GeneralIssue> getIssuesByOwnerRepoName(String owner, String repositoryName);
     
     /**
-     * Get list of issues for url of repo
+     * Get list of issues for url of repository
+     * 
      * @param url   url of repo
      * @return      list of GeneralIssue
      */

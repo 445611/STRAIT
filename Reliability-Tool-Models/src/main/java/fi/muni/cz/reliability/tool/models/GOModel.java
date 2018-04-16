@@ -23,8 +23,8 @@ public class GOModel implements Model {
         //double[] y = getYValues(list);
         //double[] x = getXValues(list);
         
-        List<Double> x = new ArrayList<Double>();
-	List<Double> y = new ArrayList<Double>();
+        List<Double> x = new ArrayList<>();
+        List<Double> y = new ArrayList<>();
         
         GOFunction function = new GOFunction(x, y);
         
@@ -38,34 +38,34 @@ public class GOModel implements Model {
         double[] newTarget = function.calculateTarget();
         
         //set target data
-	lsb.target(newTarget);
-	double[] newStart = {1,1};
-	//set initial parameters
-	lsb.start(newStart);
-	//set upper limit of evaluation time
-	lsb.maxEvaluations(100000);
-	//set upper limit of iteration time
-	lsb.maxIterations(100000);
-        
+        lsb.target(newTarget);
+        double[] newStart = {1,1};
+        //set initial parameters
+        lsb.start(newStart);
+        //set upper limit of evaluation time
+        lsb.maxEvaluations(100000);
+        //set upper limit of iteration time
+        lsb.maxIterations(100000);
+
         
         LevenbergMarquardtOptimizer lmo = new LevenbergMarquardtOptimizer();
-	try{
+        try {
             //do LevenbergMarquardt optimization
-			LeastSquaresOptimizer.Optimum lsoo = lmo.optimize(lsb.build());
-			
-			//get optimized parameters
-			final double[] optimalValues = lsoo.getPoint().toArray();			
-			//output data
-			System.out.println("A: " + optimalValues[0]);
-			System.out.println("B: " + optimalValues[1]);
-			System.out.println("Iteration number: "+lsoo.getIterations());
-			System.out.println("Evaluation number: "+lsoo.getEvaluations());
-		} catch (Exception e) {
-			System.out.println(e.toString());
-		}		
-        return null;
-        
-        
+            LeastSquaresOptimizer.Optimum lsoo = lmo.optimize(lsb.build());
+            //get optimized parameters
+            final double[] optimalValues = lsoo.getPoint().toArray();
+            //output data
+            System.out.println("A: " + optimalValues[0]);
+            System.out.println("B: " + optimalValues[1]);
+            System.out.println("Iteration number: "+lsoo.getIterations());
+            System.out.println("Evaluation number: "+lsoo.getEvaluations());
+            return new double[]{optimalValues[0], optimalValues[1]};
+        } catch (Exception e) {
+            System.out.println(e.toString());
+            //TODO
+
+            throw new RuntimeException();
+        }
         //double[][] x = {{0}, {1}, {2}, {3}, {4}, {5}};
         /*double[][] x = getXValues(list);
         //double[] y = {1.1, 0.9, 1.0, 1.35, 1.82, 2.5};

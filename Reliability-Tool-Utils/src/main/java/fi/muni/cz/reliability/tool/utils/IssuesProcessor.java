@@ -10,6 +10,7 @@ public interface IssuesProcessor {
     
     /**
      * Process list of <code>GeneralIssue</code> 
+     * 
      * @param list to be processed
      * @return List processed list
      */
