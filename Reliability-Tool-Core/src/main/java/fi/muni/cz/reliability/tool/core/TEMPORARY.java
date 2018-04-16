@@ -27,7 +27,8 @@ public class TEMPORARY {
     
     //public static final String URL = "https://github.com/eclipse/sumo/";
     //public static final String URL = "https://github.com/beetbox/beets/issues";
-    public static final String URL = "https://github.com/spring-projects/spring-boot/issues";
+    //public static final String URL = "https://github.com/spring-projects/spring-boot/issues";
+    public static final String URL = "https://github.com/google/guava";
     
     /**
      * @param args the command line arguments
@@ -74,7 +75,7 @@ public class TEMPORARY {
         
         Model model = new GOModel();
         double[] params = model.calculateFunctionParametersOfModel(countedWeeksWithTotal);
-        System.out.println(params[0]+" ; "+ params[1]);
+        //System.out.println(params[0]+" ; "+ params[1]);
         OutputWriter writer = new OutputWriterImpl();
         int totalDefects = countedWeeksWithTotal.get(countedWeeksWithTotal.size() - 1).getB();
         writer.writeOutputDataToFile(writer.prepareOutputData(URL, countedWeeks), "DefectsInWeeks");
