@@ -9,8 +9,7 @@ public interface AuthenticationDataProvider {
     
     /**
      * Get needed authentication data from file
-     * @return List of Strings
+     * @return List of authentication data. List={Name, Password, OAuthToken}
      */
     List<String> getAuthenticationDataFromFile();
-    
 }

@@ -18,15 +18,15 @@ import java.util.List;
 public class OutputWriterImpl implements OutputWriter {
 
     private static final String DATE_FORMAT = "yyyy-MM-dd_HH-mm-ss";
-    private static final String FILE_NAME = "OutputData";
+    //private static final String FILE_NAME = "OutputData";
     
     @Override
-    public void writeOutputDataToFile(OutputData data) {
+    public void writeOutputDataToFile(OutputData data,String fileName) {
         
         //TODO 
         
         String timeStamp = new SimpleDateFormat(DATE_FORMAT).format(Calendar.getInstance().getTime());
-        try (BufferedWriter writer = new BufferedWriter(new FileWriter(FILE_NAME + "_" + timeStamp + ".txt"))) {
+        try (BufferedWriter writer = new BufferedWriter(new FileWriter(fileName + "_" + timeStamp + ".txt"))) {
              writer.write(String.format("%-30s %s", "URL = ", data.getUrl()));
              writer.newLine();
              writer.write(String.format("%-30s %s", "User name = ", data.getUserName()));

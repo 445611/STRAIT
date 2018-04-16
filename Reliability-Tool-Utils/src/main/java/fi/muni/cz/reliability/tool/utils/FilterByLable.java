@@ -1,10 +1,10 @@
 package fi.muni.cz.reliability.tool.utils;
 
 import fi.muni.cz.reliability.tool.dataprovider.GeneralIssue;
-import fi.muni.cz.reliability.tool.utils.config.FilteringSetup;
-import fi.muni.cz.reliability.tool.utils.config.FilteringSetupImpl;
+import fi.muni.cz.reliability.tool.utils.config.FilteringConfigurationImpl;
 import java.util.ArrayList;
 import java.util.List;
+import fi.muni.cz.reliability.tool.utils.config.FilteringConfiguration;
 
 
 /**
@@ -29,8 +29,8 @@ public class FilterByLable implements IssuesProcessor {
     
     @Override
     public List<GeneralIssue> process(List<GeneralIssue> list) {
-        FilteringSetup setup = new FilteringSetupImpl();
-        filteringWords = setup.loadFilteringWordsFromFile();
+        FilteringConfiguration config = new FilteringConfigurationImpl();
+        filteringWords = config.loadFilteringWordsFromFile();
         if (filteringWords.isEmpty()) {
             return list;
         }

@@ -12,10 +12,11 @@ import fi.muni.cz.reliability.tool.utils.IssuesProcessor;
 import fi.muni.cz.reliability.tool.utils.output.OutputWriter;
 import fi.muni.cz.reliability.tool.utils.output.OutputWriterImpl;
 import fi.muni.cz.reliability.tool.utils.Tuple;
-import fi.muni.cz.reliability.tool.utils.config.FilteringSetup;
-import fi.muni.cz.reliability.tool.utils.config.FilteringSetupImpl;
+import fi.muni.cz.reliability.tool.utils.config.FilteringConfigurationImpl;
+import fi.muni.cz.reliability.tool.utils.output.OutputData;
 import java.util.Calendar;
 import java.util.List;
+import fi.muni.cz.reliability.tool.utils.config.FilteringConfiguration;
 
 /**
  * @author Radoslav Micko <445611@muni.cz>
@@ -23,6 +24,9 @@ import java.util.List;
 public class TEMPORARY {
     
     public static final String URL = "https://github.com/eclipse/sumo/";
+    //public static final String URL = "https://github.com/beetbox/beets/issues";
+    //public static final String URL = "https://github.com/spring-projects/spring-boot/issues";
+    
     /**
      * @param args the command line arguments
      */
@@ -50,8 +54,8 @@ public class TEMPORARY {
         
         IssuesProcessor issuesFilter = new FilterByLable();
 
-        FilteringSetup setup = new FilteringSetupImpl();
-        setup.addWordToConfigFile("TEST");
+        FilteringConfiguration setup = new FilteringConfigurationImpl();
+        setup.addWordToConfigFile("sumo");
         List<GeneralIssue> list2 = issuesFilter.process(list1);
         
         Calendar cal1 = Calendar.getInstance();
@@ -60,14 +64,17 @@ public class TEMPORARY {
         cal2.set(2020, 1, 1);
         
         
-        DefectsCounter counter = new DefectsCounterImpl(Calendar.DAY_OF_MONTH, 1, 
-                cal1.getTime(), cal2.getTime());
-        List<Tuple<Integer, Integer>> countedWeeks = counter.countDefectsIntoPeriodsOfTime(list2);
-        System.out.println(countedWeeks);
+        DefectsCounter counter = new DefectsCounterImpl();
+        List<Tuple<Integer, Integer>> countedWeeks = counter.spreadDefectsIntoPeriodsOfTime(list2);
+        List<Tuple<Integer, Integer>> countedWeeksWithTotal = counter.countTotalDefectsForPeriodsOfTime(countedWeeks);
         System.out.println(list2.get(0).toString() + list2.size());
         
         OutputWriter writer = new OutputWriterImpl();
-        writer.writeOutputDataToFile(writer.prepareOutputData(URL, countedWeeks));
+        int totalDefects = countedWeeksWithTotal.get(countedWeeksWithTotal.size() - 1).getB();
+        writer.writeOutputDataToFile(writer.prepareOutputData(URL, countedWeeks), "DefectsInWeeks");
+        OutputData prepareOutputData = writer.prepareOutputData(URL, countedWeeksWithTotal);
+        prepareOutputData.setTotalNumberOfDefects(totalDefects);
+        writer.writeOutputDataToFile(prepareOutputData, "TotalDefects");
     }
     
 }

@@ -11,8 +11,9 @@ public interface OutputWriter {
     /**
      * Write data from <code>OutputData</code> to certain file.
      * @param data to write
+     * @param fileName name of file
      */
-    void writeOutputDataToFile(OutputData data);
+    void writeOutputDataToFile(OutputData data, String fileName);
     
     /**
      * Prepare attributes in <code>OutputData</code>

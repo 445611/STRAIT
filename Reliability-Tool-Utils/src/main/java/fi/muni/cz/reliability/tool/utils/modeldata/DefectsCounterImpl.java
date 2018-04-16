@@ -46,7 +46,7 @@ public class DefectsCounterImpl implements DefectsCounter {
     }
     
     @Override
-    public List<Tuple<Integer, Integer>> countDefectsIntoPeriodsOfTime(List<GeneralIssue> listOfIssues) {
+    public List<Tuple<Integer, Integer>> spreadDefectsIntoPeriodsOfTime(List<GeneralIssue> listOfIssues) {
         if (listOfIssues == null) {
             throw new NullPointerException("listOfIssues is null.");
         }
@@ -58,6 +58,18 @@ public class DefectsCounterImpl implements DefectsCounter {
         }
         return sortingIssuesIntoTimePeriods(listOfIssues);
     }      
+    
+    @Override
+    public List<Tuple<Integer, Integer>> countTotalDefectsForPeriodsOfTime(
+            List<Tuple<Integer, Integer>> spreadedDefects) {
+        Integer totalNumber = 0;
+        List<Tuple<Integer, Integer>> listOfTotalDefects = new ArrayList<>();
+        for (Tuple<Integer, Integer> tuple: spreadedDefects) {
+            totalNumber = totalNumber + tuple.getB();
+            listOfTotalDefects.add(new Tuple(tuple.getA(), totalNumber));
+        }
+        return listOfTotalDefects;
+    }
     
     /**
      * Get list of Tuple of week and number of defects.
@@ -147,29 +159,5 @@ public class DefectsCounterImpl implements DefectsCounter {
         c.add(typeOfTimeToAdd, howManyToAdd);
         return c.getTime(); 
     }    
-    
-    /**
-     * Calculate monday of next week after date
-     * @param date to calculate for
-     * @return Date of monday
-     */
-    /*private Date findFirstDayOfNextWeekAfterDate(Date date) {
-        Calendar cal = Calendar.getInstance();
-        cal.setTime(date);
-        int day = cal.get(Calendar.DAY_OF_WEEK);
-        int daysToAdd;
-        if (day == 2) {
-            daysToAdd = 7;
-        } else {
-            daysToAdd = (9 - day) % 7;
-        }
-                
-        cal.add(Calendar.DAY_OF_WEEK, daysToAdd);
-        cal.set(Calendar.HOUR_OF_DAY, 0);
-        cal.set( Calendar.MINUTE, 0);
-        cal.set( Calendar.SECOND, 0);
-        cal.set( Calendar.MILLISECOND, 0);
-        
-        return cal.getTime();
-    }*/
+
 }

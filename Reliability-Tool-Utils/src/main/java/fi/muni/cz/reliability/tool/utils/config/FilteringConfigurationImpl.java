@@ -17,7 +17,7 @@ import java.util.logging.Logger;
 /**
  * @author Radoslav Micko <445611@muni.cz>
  */
-public class FilteringSetupImpl implements FilteringSetup {
+public class FilteringConfigurationImpl implements FilteringConfiguration {
 
     private static final String FILTERING_CONFIG_FILE = "Filtering_config";
     private static final String SPLITTER = "/"; 

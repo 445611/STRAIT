@@ -184,16 +184,4 @@ public class GitHubDataProvider implements DataProvider {
         }
         gitHubClient.setCredentials(userName, password);
     }
-    
-    public void setOAuthToken(String oAuthToken) {
-        this.oAuthToken = oAuthToken;
-    }
-
-    public void setUserName(String userName) {
-        this.userName = userName;
-    }
-
-    public void setPassword(String password) {
-        this.password = password;
-    }
 }

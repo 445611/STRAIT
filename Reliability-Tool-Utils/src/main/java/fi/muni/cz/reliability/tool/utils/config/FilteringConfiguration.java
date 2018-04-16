@@ -7,7 +7,7 @@ import java.util.List;
  * 
  * @author Radoslav Micko <445611@muni.cz>
  */
-public interface FilteringSetup {
+public interface FilteringConfiguration {
     
     /**
      * Add word to configuration file
