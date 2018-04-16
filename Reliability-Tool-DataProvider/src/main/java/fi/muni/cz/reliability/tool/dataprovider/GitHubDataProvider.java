@@ -21,11 +21,6 @@ import org.eclipse.egit.github.core.service.IssueService;
  */
 public class GitHubDataProvider implements DataProvider {
     
-    /*private static final String AUTHENTICATION_FILE_NAME = "git_hub_authentication_file.xml";
-    private static final String USER_ELEMENT_TAG = "user";
-    private static final String NAME_ELEMENT_TAG = "name";
-    private static final String PASSWORD_ELEMENT_TAG = "password";
-    private static final String TOKEN_ELEMENT_TAG = "token";*/
     private String oAuthToken;
     private String userName;
     private String password;
@@ -100,67 +95,6 @@ public class GitHubDataProvider implements DataProvider {
             gitHubClientSetOAuthToken();
         }   
     }
-    
-    /**
-     * Parse data from authentication file
-     * @param document to parse
-     * @throw AuthenticationFileErrorException if there occures problem while loading file
-     */
-    /*private void parseDocumentAndSaveToVariables(Document document) {
-        NodeList nodeList = document.getElementsByTagName(USER_ELEMENT_TAG);
-        try {
-            Node node = nodeList.item(0);
-            if (node.getNodeType() == Node.ELEMENT_NODE) {
-                Element eElement = (Element) node;
-                userName = eElement.getElementsByTagName(NAME_ELEMENT_TAG)
-                    .item(0).getTextContent();
-                password = eElement.getElementsByTagName(PASSWORD_ELEMENT_TAG)
-                    .item(0).getTextContent();
-                oAuthToken = eElement.getElementsByTagName(TOKEN_ELEMENT_TAG)
-                    .item(0).getTextContent();
-            } 
-        } catch (NullPointerException ex) {
-            throw new AuthenticationFileErrorException("Error while parsing "
-                    + "authentication file. Wrong format.", ex);
-        } 
-    }
-    */
-    /**
-     * Get normalized and parsed authentication file
-     * @return Document parsed
-     * @throw AuthenticationFileErrorException if there occures problem while loading file
-     */
-    /*private Document getParsedAuthenticationDocument() {
-        Document document = null;
-        try {
-        File authenticationFile = getAuthenticationFile();
-        DocumentBuilderFactory documentBuilderFactory = DocumentBuilderFactory.newInstance();
-        DocumentBuilder documentBuilder = documentBuilderFactory.newDocumentBuilder();
-        document = documentBuilder.parse(authenticationFile);
-        document.getDocumentElement().normalize(); 
-        } catch (SAXException ex) { 
-            Logger.getLogger(GitHubDataProvider.class.getName()).log(Level.SEVERE, 
-                    "Error while parsing authenticationFile.xml file.", ex);
-        } catch (IOException ex) {
-            Logger.getLogger(GitHubDataProvider.class.getName()).log(Level.SEVERE,
-                    "Error loading authenticationFile.xml file from resources.", ex);
-            throw new AuthenticationFileErrorException("Error loading "
-                    + "authenticationFile.xml file from resources.", ex);
-        } catch (ParserConfigurationException ex) {
-            Logger.getLogger(GitHubDataProvider.class.getName()).log(Level.SEVERE, 
-                    "Error while creating DocumentBuilder.", ex);
-        }
-        return document; 
-    }
-    */
-    /**
-     * Get authentication file from resource
-     * @return File
-     */
-    /*private File getAuthenticationFile() {
-        return new File(getClass().getClassLoader()
-                .getResource(AUTHENTICATION_FILE_NAME).getFile());
-    }*/
     
     /**
      * Set <code>oAuthToken</code> to <code>gitHubClient</code>

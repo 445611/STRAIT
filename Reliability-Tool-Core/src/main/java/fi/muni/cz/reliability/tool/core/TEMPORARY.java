@@ -5,6 +5,8 @@ import fi.muni.cz.reliability.tool.dataprovider.GeneralIssue;
 import fi.muni.cz.reliability.tool.dataprovider.GitHubDataProvider;
 import fi.muni.cz.reliability.tool.dataprovider.authenticationdata.AuthenticationDataProvider;
 import fi.muni.cz.reliability.tool.dataprovider.authenticationdata.AuthenticationDataProviderGitHub;
+import fi.muni.cz.reliability.tool.models.GOModel;
+import fi.muni.cz.reliability.tool.models.Model;
 import fi.muni.cz.reliability.tool.utils.modeldata.DefectsCounter;
 import fi.muni.cz.reliability.tool.utils.modeldata.DefectsCounterImpl;
 import fi.muni.cz.reliability.tool.utils.FilterByLable;
@@ -23,9 +25,9 @@ import fi.muni.cz.reliability.tool.utils.config.FilteringConfiguration;
  */
 public class TEMPORARY {
     
-    public static final String URL = "https://github.com/eclipse/sumo/";
+    //public static final String URL = "https://github.com/eclipse/sumo/";
     //public static final String URL = "https://github.com/beetbox/beets/issues";
-    //public static final String URL = "https://github.com/spring-projects/spring-boot/issues";
+    public static final String URL = "https://github.com/spring-projects/spring-boot/issues";
     
     /**
      * @param args the command line arguments
@@ -67,8 +69,12 @@ public class TEMPORARY {
         DefectsCounter counter = new DefectsCounterImpl();
         List<Tuple<Integer, Integer>> countedWeeks = counter.spreadDefectsIntoPeriodsOfTime(list2);
         List<Tuple<Integer, Integer>> countedWeeksWithTotal = counter.countTotalDefectsForPeriodsOfTime(countedWeeks);
-        System.out.println(list2.get(0).toString() + list2.size());
         
+        
+        
+        Model model = new GOModel();
+        double[] params = model.calculateFunctionParametersOfModel(countedWeeksWithTotal);
+        System.out.println(params[0]+" ; "+ params[1]);
         OutputWriter writer = new OutputWriterImpl();
         int totalDefects = countedWeeksWithTotal.get(countedWeeksWithTotal.size() - 1).getB();
         writer.writeOutputDataToFile(writer.prepareOutputData(URL, countedWeeks), "DefectsInWeeks");
