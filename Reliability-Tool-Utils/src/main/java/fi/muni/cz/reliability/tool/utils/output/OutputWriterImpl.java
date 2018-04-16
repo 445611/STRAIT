@@ -18,12 +18,9 @@ import java.util.List;
 public class OutputWriterImpl implements OutputWriter {
 
     private static final String DATE_FORMAT = "yyyy-MM-dd_HH-mm-ss";
-    //private static final String FILE_NAME = "OutputData";
     
     @Override
     public void writeOutputDataToFile(OutputData data,String fileName) {
-        
-        //TODO 
         
         String timeStamp = new SimpleDateFormat(DATE_FORMAT).format(Calendar.getInstance().getTime());
         try (BufferedWriter writer = new BufferedWriter(new FileWriter(fileName + "_" + timeStamp + ".txt"))) {
@@ -48,12 +45,13 @@ public class OutputWriterImpl implements OutputWriter {
     @Override
     public OutputData prepareOutputData(String url, List<Tuple<Integer, Integer>> countedTuples) {
         UrlParser parser = new UrlParserGitHub();
+        String[] parsedUrl = parser.parseUrlAndCheck(url);
         OutputData data = new OutputData();
         data.setCreatedAt(new Date());
-        data.setRepositoryName(parser.parseUrlAndCheck(url)[2]);
+        data.setRepositoryName(parsedUrl[2]);
         data.setTotalNumberOfDefects(countedTuples.stream().mapToInt(a -> a.getB()).sum());
         data.setUrl(url);
-        data.setUserName(parser.parseUrlAndCheck(url)[1]);
+        data.setUserName(parsedUrl[1]);
         data.setWeeksAndDefects(countedTuples);
         return data;
     }
