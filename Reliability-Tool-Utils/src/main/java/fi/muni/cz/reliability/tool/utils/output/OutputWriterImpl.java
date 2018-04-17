@@ -24,29 +24,20 @@ public abstract class OutputWriterImpl implements OutputWriter {
         
         String timeStamp = new SimpleDateFormat(DATE_FORMAT).format(Calendar.getInstance().getTime());
         try (BufferedWriter writer = new BufferedWriter(new FileWriter(fileName + "_" + timeStamp + ".txt"))) {
-             writer.write(String.format("%-30s %s", "URL = ", data.getUrl()));
-             writer.newLine();
-             writer.write(String.format("%-30s %s", "User name = ", data.getUserName()));
-             writer.newLine();
-             writer.write(String.format("%-30s %s", "Repository name = ", data.getRepositoryName()));            
-             writer.newLine();
-             writer.write(String.format("%-30s %s", "Created = ", data.getCreatedAt().toString()));
-             writer.newLine();
-             writer.write(String.format("%-30s %s", "Function param. A = ", 
-                     data.getEvaluatedFunctionParameterA()));
-             writer.newLine();
-             writer.write(String.format("%-30s %s", "Function param. B = ", 
-                     data.getEvaluatedFunctionParameterB()));
-             writer.newLine();
-             writer.write(String.format("%-30s %s", "Model name = ", 
-                     data.getModelName()));
-             writer.newLine();
-             writer.write(String.format("%-30s %s", "Total number of defects = ", 
-                     data.getTotalNumberOfDefects()));
              
-             writer.newLine();
-             writer.newLine();
-             writeListOfDefects(writer, data.getWeeksAndDefects());  
+            writeTwoStingInFormatWithNewLine(writer, "URL = ", data.getUrl());
+            writeTwoStingInFormatWithNewLine(writer, "User name = ", data.getUserName());
+            writeTwoStingInFormatWithNewLine(writer, "Repository name = ", data.getRepositoryName());
+            writeTwoStingInFormatWithNewLine(writer, "Created = ", data.getCreatedAt().toString());
+            writeTwoStingInFormatWithNewLine(writer, "Function param. A = ", 
+                    Double.toString(data.getEvaluatedFunctionParameterA()));
+            writeTwoStingInFormatWithNewLine(writer, "Function param. B = ", 
+                    Double.toString(data.getEvaluatedFunctionParameterB()));
+            writeTwoStingInFormatWithNewLine(writer, "Model name = ", data.getModelName());
+            writeTwoStingInFormatWithNewLine(writer, "Total number of defects = ", 
+                    Integer.toString(data.getTotalNumberOfDefects()));
+            writer.newLine();
+            writeListOfDefects(writer, data.getWeeksAndDefects());  
         } catch (IOException ex){
             throw new UtilsException("Error occured during writing to file.", ex);
         }
@@ -64,5 +55,11 @@ public abstract class OutputWriterImpl implements OutputWriter {
         data.setUserName(parsedUrl[1]);
         data.setWeeksAndDefects(countedTuples);
         return data;
+    }
+    
+    private void writeTwoStingInFormatWithNewLine(BufferedWriter writer, 
+            String first, String second) throws IOException {
+        writer.write(String.format("%-30s %s", first, second));
+        writer.newLine();
     }
 }
