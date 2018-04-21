@@ -74,7 +74,7 @@ public class TEMPORARY {
         
         
         
-        Model model = new GOModel();
+        Model model = new GOModel(new double[]{1,1});
         double[] params = model.calculateFunctionParametersOfModel(countedWeeksWithTotal);
         //System.out.println(params[0]+" ; "+ params[1]);
         OutputWriter writer = new OutputWriterTotaDefects();

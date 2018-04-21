@@ -25,16 +25,16 @@ public abstract class OutputWriterImpl implements OutputWriter {
         String timeStamp = new SimpleDateFormat(DATE_FORMAT).format(Calendar.getInstance().getTime());
         try (BufferedWriter writer = new BufferedWriter(new FileWriter(fileName + "_" + timeStamp + ".txt"))) {
              
-            writeTwoStingInFormatWithNewLine(writer, "URL = ", data.getUrl());
-            writeTwoStingInFormatWithNewLine(writer, "User name = ", data.getUserName());
-            writeTwoStingInFormatWithNewLine(writer, "Repository name = ", data.getRepositoryName());
-            writeTwoStingInFormatWithNewLine(writer, "Created = ", data.getCreatedAt().toString());
-            writeTwoStingInFormatWithNewLine(writer, "Function param. A = ", 
+            writeTwoStingsInFormatWithNewLine(writer, "URL = ", data.getUrl());
+            writeTwoStingsInFormatWithNewLine(writer, "User name = ", data.getUserName());
+            writeTwoStingsInFormatWithNewLine(writer, "Repository name = ", data.getRepositoryName());
+            writeTwoStingsInFormatWithNewLine(writer, "Created = ", data.getCreatedAt().toString());
+            writeTwoStingsInFormatWithNewLine(writer, "Function param. A = ", 
                     Double.toString(data.getEvaluatedFunctionParameterA()));
-            writeTwoStingInFormatWithNewLine(writer, "Function param. B = ", 
+            writeTwoStingsInFormatWithNewLine(writer, "Function param. B = ", 
                     Double.toString(data.getEvaluatedFunctionParameterB()));
-            writeTwoStingInFormatWithNewLine(writer, "Model name = ", data.getModelName());
-            writeTwoStingInFormatWithNewLine(writer, "Total number of defects = ", 
+            writeTwoStingsInFormatWithNewLine(writer, "Model name = ", data.getModelName());
+            writeTwoStingsInFormatWithNewLine(writer, "Total number of defects = ", 
                     Integer.toString(data.getTotalNumberOfDefects()));
             writer.newLine();
             writeListOfDefects(writer, data.getWeeksAndDefects());  
@@ -57,7 +57,7 @@ public abstract class OutputWriterImpl implements OutputWriter {
         return data;
     }
     
-    private void writeTwoStingInFormatWithNewLine(BufferedWriter writer, 
+    private void writeTwoStingsInFormatWithNewLine(BufferedWriter writer, 
             String first, String second) throws IOException {
         writer.write(String.format("%-30s %s", first, second));
         writer.newLine();

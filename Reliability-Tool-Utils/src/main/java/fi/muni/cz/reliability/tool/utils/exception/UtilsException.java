@@ -26,7 +26,7 @@ public class UtilsException extends RuntimeException {
      * Constructor of <code>UtilsException</code> with message and cause.
      * 
      * @param message message of exception
-     * @param cause 
+     * @param cause Exception caused the problem
      */
     public UtilsException(String message, Throwable cause) {
         super(message, cause);

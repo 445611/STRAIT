@@ -27,7 +27,7 @@ public class AuthenticationException extends DataProviderException {
      * Constructor of <code>AuthenticationException</code> with message and cause.
      * 
      * @param message message of exception
-     * @param cause 
+     * @param cause Exception caused the problem
      */
     public AuthenticationException(String message, Throwable cause) {
         super(message, cause);

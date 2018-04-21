@@ -27,7 +27,7 @@ public class DataProviderException extends RuntimeException {
      * Constructor of <code>DataProviderException</code> with message and cause.
      * 
      * @param message message of exception
-     * @param cause 
+     * @param cause Exception caused the problem
      */
     public DataProviderException(String message, Throwable cause) {
         super(message, cause);

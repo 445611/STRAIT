@@ -14,6 +14,8 @@ public class UrlParserGitHub implements UrlParser {
 
     private static final String HOST = "github.com";
     
+    
+    
     @Override
     public String[] parseUrlAndCheck(String urlString) {
         try {        

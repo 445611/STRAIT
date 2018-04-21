@@ -27,7 +27,7 @@ public class AuthenticationFileErrorException extends AuthenticationException {
      * Constructor of <code>AuthenticationFileErrorException</code> with message and cause.
      * 
      * @param message message of exception
-     * @param cause 
+     * @param cause Exception caused the problem
      */
     public AuthenticationFileErrorException(String message, Throwable cause) {
         super(message, cause);

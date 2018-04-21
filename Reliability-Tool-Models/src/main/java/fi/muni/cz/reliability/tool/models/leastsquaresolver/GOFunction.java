@@ -1,6 +1,6 @@
-
 package fi.muni.cz.reliability.tool.models.leastsquaresolver;
 
+import java.util.ArrayList;
 import java.util.List;
 import org.apache.commons.math3.analysis.MultivariateMatrixFunction;
 import org.apache.commons.math3.analysis.MultivariateVectorFunction;
@@ -8,49 +8,26 @@ import org.apache.commons.math3.analysis.MultivariateVectorFunction;
 /**
  * @author Radoslav Micko <445611@muni.cz>
  */
-public class GOFunction {
+public class GOFunction implements Function {
     
-    private List<Double> x;
-    private List<Double> y;
+    private final List<Double> x;
+    private final List<Double> y;
 
     /**
-     * TODO
-     * 
-     * 
-     * 
-     * 
-     * 
-     * @param x SDFS
-     * @param y  SDF
+     * Initialize variables.
      */
-    public GOFunction(List<Double> x, List<Double> y) {
-        this.x = x;
-        this.y = y;
+    public GOFunction() {
+        this.x = new ArrayList<>();
+        this.y = new ArrayList<>();
     }
     
-    /**
-     * TODO 
-     * 
-     * 
-     * 
-     * 
-     * 
-     * @param xin AFS
-     * @param yin SDFSDF
-     */
+    @Override
     public void addPoint(double xin, double yin) {
         this.x.add(xin);
         this.y.add(yin);
     }
     
-    /**
-     * TODO
-     * 
-     * 
-     * 
-     * 
-     * @return SDFSDF
-     */
+    @Override
     public double[] calculateTarget() {
         double[] target = new double[y.size()];
         for (int i = 0; i < y.size(); i++) {
@@ -59,11 +36,8 @@ public class GOFunction {
         return target;
     }
     
-    /**
-     * Define model function and return values
-     * @return the values of model function by input data
-     */
-    public MultivariateVectorFunction retMVF() {
+    @Override
+    public MultivariateVectorFunction getMultivariateVectorFunction() {
         return (double[] variables) -> {
             double[] values = new double[x.size()];
             for (int i = 0; i < values.length; ++i) {
@@ -73,11 +47,8 @@ public class GOFunction {
         };
     }
     
-    /**
-     * Return the jacobian of the model function
-     * @return the jacobian
-     */
-    public MultivariateMatrixFunction retMMF() {
+    @Override
+    public MultivariateMatrixFunction getMultivariateMatrixFunction() {
         return new MultivariateMatrixFunction() {
             @Override
             public double[][] value(double[] point)

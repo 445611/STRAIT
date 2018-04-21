@@ -13,4 +13,15 @@
             <b-hint>java.lang.String</b-hint>
         </field>
     </mapping>
+    
+    <mapping>
+        <class-a>org.eclipse.egit.github.core.Issue</class-a>
+        <class-b>fi.muni.cz.reliability.tool.dataprovider.GeneralIssue</class-b>
+        <field>
+            <a>labels</a>
+            <b>labels</b>
+            <a-hint>org.eclipse.egit.github.core.Label</a-hint>
+            <b-hint>java.lang.String</b-hint>
+        </field>
+    </mapping>
 </mappings>
