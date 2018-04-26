@@ -5,7 +5,7 @@ import java.util.List;
 /**
  * This class is used for setting data in Filtering_config file
  * 
- * @author Radoslav Micko <445611@muni.cz>
+ * @author Radoslav Micko, 445611@muni.cz
  */
 public interface FilteringConfiguration {
     

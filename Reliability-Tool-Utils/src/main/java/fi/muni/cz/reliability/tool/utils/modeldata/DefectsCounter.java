@@ -7,7 +7,7 @@ import java.util.List;
 /**
  * Spread issues into weeks
  * 
- * @author Radoslav Micko <445611@muni.cz>
+ * @author Radoslav Micko, 445611@muni.cz
  */
 public interface DefectsCounter {
     

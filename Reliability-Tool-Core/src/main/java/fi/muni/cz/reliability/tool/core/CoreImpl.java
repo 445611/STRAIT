@@ -4,7 +4,7 @@ import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
 /**
- * @author Radoslav Micko <445611@muni.cz>
+ * @author Radoslav Micko, 445611@muni.cz
  */
 public class CoreImpl implements Core {
     

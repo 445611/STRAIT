@@ -5,12 +5,14 @@ import fi.muni.cz.reliability.tool.models.leastsquaresolver.GOFunction;
 import fi.muni.cz.reliability.tool.models.leastsquaresolver.LeastSquaresOptimization;
 import fi.muni.cz.reliability.tool.models.leastsquaresolver.LeastSquaresOptimizationImpl;
 import fi.muni.cz.reliability.tool.utils.Tuple;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 /**
  * Goel-Okumoto (G-O) model
  * 
- * @author Radoslav Micko <445611@muni.cz>
+ * @author Radoslav Micko, 445611@muni.cz
  */
 public class GOModel implements Model {
 
@@ -18,6 +20,7 @@ public class GOModel implements Model {
 
     /**
      * Initialize start parameters of model.
+     * 
      * @param startParameters parameters to set
      */
     public GOModel(double[] startParameters) {
@@ -25,11 +28,16 @@ public class GOModel implements Model {
     }
     
     @Override
-    public double[] calculateFunctionParametersOfModel(List<Tuple<Integer, Integer>> list) {
-        
+    public Map<String, Double> calculateFunctionParametersOfModel(List<Tuple<Integer, Integer>> list) {
         Function function = new GOFunction();
-        
         LeastSquaresOptimization optimization = new LeastSquaresOptimizationImpl();
-        return optimization.optimizer(startParameters, list, function);
+        return getMapWithParameters(optimization.optimizer(startParameters, list, function));
+    }
+    
+    private Map<String, Double> getMapWithParameters(double[] params) {
+        Map<String, Double> map = new HashMap<>();
+        map.put("a", params[0]);
+        map.put("b", params[1]);
+        return map;
     }
 }

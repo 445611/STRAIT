@@ -1,6 +1,6 @@
 package fi.muni.cz.reliability.tool.utils.config;
 
-import fi.muni.cz.reliability.tool.utils.FilterByLable;
+import fi.muni.cz.reliability.tool.utils.FilterByLabel;
 import fi.muni.cz.reliability.tool.utils.exception.UtilsException;
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
@@ -15,7 +15,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 /**
- * @author Radoslav Micko <445611@muni.cz>
+ * @author Radoslav Micko, 445611@muni.cz
  */
 public class FilteringConfigurationImpl implements FilteringConfiguration {
 
@@ -45,14 +45,14 @@ public class FilteringConfigurationImpl implements FilteringConfiguration {
         try (BufferedReader reader = new BufferedReader(new FileReader(file))) {
             String line = reader.readLine();
             if (line == null || line.isEmpty()) {
-                Logger.getLogger(FilterByLable.class.getName()).log(Level.CONFIG,
+                Logger.getLogger(FilterByLabel.class.getName()).log(Level.CONFIG,
                     "File " + FILTERING_CONFIG_FILE + " is empty.");
                 return new ArrayList<>();
             }
             String[] words = line.split(SPLITTER);
             return new ArrayList<>(Arrays.asList(words));
         } catch (IOException ex) {
-            Logger.getLogger(FilterByLable.class.getName()).log(Level.SEVERE,
+            Logger.getLogger(FilterByLabel.class.getName()).log(Level.SEVERE,
                     "Error loading " + FILTERING_CONFIG_FILE 
                             + " file from resources.", ex);
             throw new UtilsException("Error loading " + FILTERING_CONFIG_FILE

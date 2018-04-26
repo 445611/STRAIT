@@ -4,7 +4,7 @@ package fi.muni.cz.reliability.tool.dataprovider.exception;
  * This excepeiton is thrown when there occures problem
  * during in <code>DataProvider</code>
  * 
- * @author Radoslav Micko <445611@muni.cz>
+ * @author Radoslav Micko, 445611@muni.cz
  */
 public class DataProviderException extends RuntimeException {
 

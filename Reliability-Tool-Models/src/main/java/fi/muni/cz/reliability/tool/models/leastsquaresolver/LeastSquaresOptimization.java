@@ -4,7 +4,7 @@ import fi.muni.cz.reliability.tool.utils.Tuple;
 import java.util.List;
 
 /**
- * @author Radoslav Micko <445611@muni.cz>
+ * @author Radoslav Micko, 445611@muni.cz
  */
 public interface LeastSquaresOptimization {
     

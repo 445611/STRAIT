@@ -1,7 +1,7 @@
 package fi.muni.cz.reliability.tool.dataprovider.utils;
 
 /**
- * @author Radoslav Micko <445611@muni.cz>
+ * @author Radoslav Micko, 445611@muni.cz
  */
 public interface UrlParser {
     
@@ -11,5 +11,5 @@ public interface UrlParser {
      * @param urlString to check an parse
      * @return String[] parsed URL. String[]={Host, Owner, Repository}
      */
-    String[] parseUrlAndCheck(String urlString);
+    ParsedUrlData parseUrlAndCheck(String urlString);
 }

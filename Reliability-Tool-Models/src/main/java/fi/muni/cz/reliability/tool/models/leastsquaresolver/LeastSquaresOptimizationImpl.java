@@ -10,7 +10,7 @@ import org.apache.commons.math3.fitting.leastsquares.LeastSquaresOptimizer;
 import org.apache.commons.math3.fitting.leastsquares.LevenbergMarquardtOptimizer;
 
 /**
- * @author Radoslav Micko <445611@muni.cz>
+ * @author Radoslav Micko, 445611@muni.cz
  */
 public class LeastSquaresOptimizationImpl implements LeastSquaresOptimization{
     
@@ -53,9 +53,7 @@ public class LeastSquaresOptimizationImpl implements LeastSquaresOptimization{
         leastSquaresBuilder.model(function.getMultivariateVectorFunction(), 
                 function.getMultivariateMatrixFunction());
         
-        double[] newTargetValues = function.calculateTarget();
-        
-        leastSquaresBuilder.target(newTargetValues);
+        leastSquaresBuilder.target(function.calculateTarget());
         leastSquaresBuilder.start(startParameters);
         leastSquaresBuilder.maxEvaluations(MAX_NUMBER_OF_EVALUATIONS);
         leastSquaresBuilder.maxIterations(MAX_NUMBER_OF_ITERATIONS);

@@ -4,10 +4,11 @@ import fi.muni.cz.reliability.tool.utils.Tuple;
 import java.io.Serializable;
 import java.util.Date;
 import java.util.List;
+import java.util.Map;
 import java.util.Objects;
 
 /**
- * @author Radoslav Micko <445611@muni.cz>
+ * @author Radoslav Micko, 445611@muni.cz
  */
 public class OutputData implements Serializable {
     
@@ -17,27 +18,18 @@ public class OutputData implements Serializable {
     private Date createdAt;
     private int totalNumberOfDefects;
     private List<Tuple<Integer, Integer>> weeksAndDefects;
-    private double evaluatedFunctionParameterA;
-    private double evaluatedFunctionParameterB;
+    private Map<String, Double> parameters;
     private String modelName;
     
     //TODO
     //Some kind of calculated data from model
 
-    public double getEvaluatedFunctionParameterA() {
-        return evaluatedFunctionParameterA;
+    public Map<String, Double> getParameters() {
+        return parameters;
     }
 
-    public void setEvaluatedFunctionParameterA(double evaluatedFunctionParameterA) {
-        this.evaluatedFunctionParameterA = evaluatedFunctionParameterA;
-    }
-
-    public double getEvaluatedFunctionParameterB() {
-        return evaluatedFunctionParameterB;
-    }
-
-    public void setEvaluatedFunctionParameterB(double evaluatedFunctionParameterB) {
-        this.evaluatedFunctionParameterB = evaluatedFunctionParameterB;
+    public void setParameters(Map<String, Double> parameters) {
+        this.parameters = parameters;
     }
 
     public String getModelName() {
@@ -47,8 +39,6 @@ public class OutputData implements Serializable {
     public void setModelName(String modelName) {
         this.modelName = modelName;
     }
-
-    
     
     public String getUserName() {
         return userName;
@@ -98,8 +88,6 @@ public class OutputData implements Serializable {
         this.weeksAndDefects = weeksAndDefects;
     }
 
-    
-    
     @Override
     public int hashCode() {
         return Objects.hash(this.userName, this.repositoryName, this.createdAt);
@@ -136,7 +124,4 @@ public class OutputData implements Serializable {
                 + ", createdAt=" + createdAt + ", totalNumberOfDefects=" 
                 + totalNumberOfDefects + '}';
     }
-    
-    
-    
 }

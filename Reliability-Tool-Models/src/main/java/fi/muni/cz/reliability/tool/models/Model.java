@@ -2,11 +2,12 @@ package fi.muni.cz.reliability.tool.models;
 
 import fi.muni.cz.reliability.tool.utils.Tuple;
 import java.util.List;
+import java.util.Map;
 
 /**
  * Represents interface for software reliability models
  * 
- * @author Radoslav Micko <445611@muni.cz>
+ * @author Radoslav Micko, 445611@muni.cz
  */
 public interface Model {
     
@@ -16,5 +17,5 @@ public interface Model {
      * @param list of Tuples for models
      * @return double[] parameters of function
      */
-    double[] calculateFunctionParametersOfModel(List<Tuple<Integer, Integer>> list);
+    Map<String, Double> calculateFunctionParametersOfModel(List<Tuple<Integer, Integer>> list);
 }

@@ -3,7 +3,7 @@ package fi.muni.cz.reliability.tool.utils.exception;
 /**
  * This excepeiton is thrown when there occures problem in Utils
  * 
- * @author Radoslav Micko <445611@muni.cz>
+ * @author Radoslav Micko, 445611@muni.cz
  */
 public class UtilsException extends RuntimeException {
 

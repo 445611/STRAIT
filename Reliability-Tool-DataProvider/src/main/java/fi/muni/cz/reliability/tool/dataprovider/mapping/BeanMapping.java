@@ -4,7 +4,7 @@ import java.util.Collection;
 import java.util.List;
 
 /**
- * @author Radoslav Micko <445611@muni.cz>
+ * @author Radoslav Micko, 445611@muni.cz
  */
 public interface BeanMapping {
     

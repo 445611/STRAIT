@@ -4,7 +4,7 @@ import java.util.Arrays;
 import org.dozer.DozerBeanMapper;
 
 /**
- * @author Radoslav Micko <445611@muni.cz>
+ * @author Radoslav Micko, 445611@muni.cz
  */
 public class GitHubBeanMappingImpl extends BeanMappingImpl {
     

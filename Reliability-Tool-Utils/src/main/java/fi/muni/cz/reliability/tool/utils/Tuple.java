@@ -3,7 +3,7 @@ package fi.muni.cz.reliability.tool.utils;
 import java.util.Objects;
 
 /**
- * @author Radoslav Micko <445611@muni.cz>
+ * @author Radoslav Micko, 445611@muni.cz
  * @param <A> first type of Tuple
  * @param <B> second type of Tuple
  */

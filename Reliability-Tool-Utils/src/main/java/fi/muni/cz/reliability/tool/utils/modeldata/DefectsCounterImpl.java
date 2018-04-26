@@ -1,5 +1,6 @@
 package fi.muni.cz.reliability.tool.utils.modeldata;
 
+
 import fi.muni.cz.reliability.tool.dataprovider.GeneralIssue;
 import fi.muni.cz.reliability.tool.utils.Tuple;
 import fi.muni.cz.reliability.tool.utils.exception.UtilsException;
@@ -10,7 +11,7 @@ import java.util.Iterator;
 import java.util.List;
 
 /**
- * @author Radoslav Micko <445611@muni.cz>
+ * @author Radoslav Micko, 445611@muni.cz
  */
 public class DefectsCounterImpl implements DefectsCounter {
 
@@ -47,8 +48,8 @@ public class DefectsCounterImpl implements DefectsCounter {
     
     @Override
     public List<Tuple<Integer, Integer>> spreadDefectsIntoPeriodsOfTime(List<GeneralIssue> listOfIssues) {
-        if (listOfIssues == null) {
-            throw new NullPointerException("listOfIssues is null.");
+        if (listOfIssues == null || listOfIssues.isEmpty()) {
+            throw new NullPointerException("listOfIssues is null or empty.");
         }
         if (startOfTesting == null) {
             startOfTesting = getDateFromMidNight(listOfIssues.get(0).getCreatedAt());
@@ -83,8 +84,7 @@ public class DefectsCounterImpl implements DefectsCounter {
             List<GeneralIssue> listOfIssues) {
         Date startOfTestingPeriod = startOfTesting;
         Date endOfTestingPeriod = addSpecificTimeToDate(startOfTesting);
-        
-        
+
         List<Tuple<Integer, Integer>> countedList = new ArrayList<>();
         int periodsCounter = 1;
         int defectsCounter = 0;
@@ -159,5 +159,4 @@ public class DefectsCounterImpl implements DefectsCounter {
         c.add(typeOfTimeToAdd, howManyToAdd);
         return c.getTime(); 
     }    
-
 }

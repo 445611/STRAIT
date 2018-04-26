@@ -1,7 +1,8 @@
 package fi.muni.cz.reliability.tool.utils.output;
 
 import fi.muni.cz.reliability.tool.dataprovider.utils.UrlParser;
-import fi.muni.cz.reliability.tool.dataprovider.utils.UrlParserGitHub;
+import fi.muni.cz.reliability.tool.dataprovider.utils.GitHubUrlParser;
+import fi.muni.cz.reliability.tool.dataprovider.utils.ParsedUrlData;
 import fi.muni.cz.reliability.tool.utils.Tuple;
 import fi.muni.cz.reliability.tool.utils.exception.UtilsException;
 import java.io.BufferedWriter;
@@ -11,9 +12,10 @@ import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
+import java.util.Set;
 
 /**
- * @author Radoslav Micko <445611@muni.cz>
+ * @author Radoslav Micko, 445611@muni.cz
  */
 public abstract class OutputWriterImpl implements OutputWriter {
 
@@ -29,10 +31,12 @@ public abstract class OutputWriterImpl implements OutputWriter {
             writeTwoStingsInFormatWithNewLine(writer, "User name = ", data.getUserName());
             writeTwoStingsInFormatWithNewLine(writer, "Repository name = ", data.getRepositoryName());
             writeTwoStingsInFormatWithNewLine(writer, "Created = ", data.getCreatedAt().toString());
-            writeTwoStingsInFormatWithNewLine(writer, "Function param. A = ", 
-                    Double.toString(data.getEvaluatedFunctionParameterA()));
-            writeTwoStingsInFormatWithNewLine(writer, "Function param. B = ", 
-                    Double.toString(data.getEvaluatedFunctionParameterB()));
+            
+            for (String key: data.getParameters().keySet()) {
+                writeTwoStingsInFormatWithNewLine(writer, "Function param. " + key + " = ", 
+                    Double.toString(data.getParameters().get(key)));
+            }
+
             writeTwoStingsInFormatWithNewLine(writer, "Model name = ", data.getModelName());
             writeTwoStingsInFormatWithNewLine(writer, "Total number of defects = ", 
                     Integer.toString(data.getTotalNumberOfDefects()));
@@ -45,14 +49,14 @@ public abstract class OutputWriterImpl implements OutputWriter {
     
     @Override
     public OutputData prepareOutputData(String url, List<Tuple<Integer, Integer>> countedTuples) {
-        UrlParser parser = new UrlParserGitHub();
-        String[] parsedUrl = parser.parseUrlAndCheck(url);
+        UrlParser parser = new GitHubUrlParser();
+        ParsedUrlData parsedUrldata = parser.parseUrlAndCheck(url);
         OutputData data = new OutputData();
         data.setCreatedAt(new Date());
-        data.setRepositoryName(parsedUrl[2]);
+        data.setRepositoryName(parsedUrldata.getRepositoryName());
         data.setTotalNumberOfDefects(countedTuples.stream().mapToInt(a -> a.getB()).sum());
         data.setUrl(url);
-        data.setUserName(parsedUrl[1]);
+        data.setUserName(parsedUrldata.getUserName());
         data.setWeeksAndDefects(countedTuples);
         return data;
     }

@@ -7,7 +7,7 @@ import java.util.List;
 import java.util.Objects;
 
 /**
- * @author Radoslav Micko <445611@muni.cz>
+ * @author Radoslav Micko, 445611@muni.cz
  */
 public class GeneralIssue implements Serializable {
     
@@ -87,6 +87,13 @@ public class GeneralIssue implements Serializable {
         this.saved = saved;
     }
 
+    /**
+     * Covert all <code>labels</code> to lower case.
+     */
+    public void allLabelsToLowerCase() {
+        labels.replaceAll(String::toLowerCase);
+    }
+    
     @Override
     public String toString() {
         return "GeneralIssue{" + "createdAt=" + createdAt 
