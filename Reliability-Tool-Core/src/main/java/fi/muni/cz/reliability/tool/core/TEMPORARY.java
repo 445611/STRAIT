@@ -4,7 +4,7 @@ import fi.muni.cz.reliability.tool.dataprovider.DataProvider;
 import fi.muni.cz.reliability.tool.dataprovider.GeneralIssue;
 import fi.muni.cz.reliability.tool.dataprovider.GitHubDataProvider;
 import fi.muni.cz.reliability.tool.dataprovider.authenticationdata.AuthenticationDataProvider;
-import fi.muni.cz.reliability.tool.dataprovider.authenticationdata.AuthenticationDataProviderGitHub;
+import fi.muni.cz.reliability.tool.dataprovider.authenticationdata.GitHubAuthenticationDataProvider;
 import fi.muni.cz.reliability.tool.models.GOModel;
 import fi.muni.cz.reliability.tool.models.Model;
 import fi.muni.cz.reliability.tool.utils.modeldata.DefectsCounter;
@@ -20,6 +20,7 @@ import java.util.List;
 import fi.muni.cz.reliability.tool.utils.config.FilteringConfiguration;
 import fi.muni.cz.reliability.tool.utils.output.OutputWriterDefectsForPeriods;
 import fi.muni.cz.reliability.tool.utils.output.OutputWriterTotaDefects;
+import org.eclipse.egit.github.core.client.GitHubClient;
 
 /**
  * @author Radoslav Micko <445611@muni.cz>
@@ -30,6 +31,7 @@ public class TEMPORARY {
     //public static final String URL = "https://github.com/beetbox/beets/issues";
     //public static final String URL = "https://github.com/spring-projects/spring-boot/issues";
     public static final String URL = "https://github.com/google/guava";
+    public static String authFileName = "git_hub_authentication_file.properties";
     
     /**
      * @param args the command line arguments
@@ -38,9 +40,9 @@ public class TEMPORARY {
         
         //ApplicationContext context = new ClassPathXmlApplicationContext("beans.xml");
         
-        AuthenticationDataProvider authProvider = new AuthenticationDataProviderGitHub();
-        List<String> authData = authProvider.getAuthenticationDataFromFile();
-        DataProvider dataProvider = new GitHubDataProvider(authData.get(0), authData.get(1), authData.get(2));
+        AuthenticationDataProvider authProvider = new GitHubAuthenticationDataProvider();
+        List<String> authData = authProvider.getAuthenticationData(authFileName);
+        DataProvider dataProvider = new GitHubDataProvider(new GitHubClient().);
         
         
         //dataProvider.setOAuthToken("07d185523c583404fb7aabe851d6c715e5352dc9");

@@ -12,5 +12,5 @@ public interface AuthenticationDataProvider {
      * 
      * @return List of authentication data. List={Name, Password, OAuthToken}
      */
-    List<String> getAuthenticationDataFromFile();
+    List<String> getAuthenticationData();
 }
