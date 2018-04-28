@@ -2,7 +2,7 @@ package fi.muni.cz.reliability.tool.dataprovider;
 
 import fi.muni.cz.reliability.tool.dataprovider.mapping.BeanMapping;
 import fi.muni.cz.reliability.tool.dataprovider.exception.AuthenticationException;
-import fi.muni.cz.reliability.tool.dataprovider.mapping.GitHubBeanMappingImpl;
+import fi.muni.cz.reliability.tool.dataprovider.mapping.GitHubMapping;
 import fi.muni.cz.reliability.tool.dataprovider.utils.GitHubUrlParser;
 import fi.muni.cz.reliability.tool.dataprovider.utils.ParsedUrlData;
 import fi.muni.cz.reliability.tool.dataprovider.utils.UrlParser;
@@ -24,6 +24,8 @@ import org.eclipse.egit.github.core.service.IssueService;
  */
 public class GitHubDataProvider implements DataProvider {
     
+    private static final String MAPPING_FILE = "github_dozer_mapping.xml";
+    
     private final BeanMapping beanMapping; 
     private final IssueService issueService;
     
@@ -34,12 +36,11 @@ public class GitHubDataProvider implements DataProvider {
      */
     public GitHubDataProvider(GitHubClient client) {
         issueService = new IssueService(client);
-        beanMapping = new GitHubBeanMappingImpl(); 
+        beanMapping = new GitHubMapping(MAPPING_FILE); 
     }
 
     @Override
     public List<GeneralIssue> getIssuesByUrl(String urlString) {
-
             UrlParser parser = new GitHubUrlParser();
             ParsedUrlData parsedUrlData = parser.parseUrlAndCheck(urlString);
             return getIssuesByOwnerRepoName(parsedUrlData.getUserName(),
@@ -57,20 +58,46 @@ public class GitHubDataProvider implements DataProvider {
     private List<GeneralIssue> getIssuesByOwnerRepoName(String owner, String repositoryName) {
         List<GeneralIssue> generalIssueList = new ArrayList<>();
         try {
-            Map<String, String> filderdata = new HashMap<String, String>();
-            filderdata.put(IssueService.FILTER_STATE, IssueService.STATE_CLOSED);
-            List<Issue> issueList = issueService.getIssues(owner, repositoryName, filderdata);
-            generalIssueList = beanMapping.mapTo(issueList, GeneralIssue.class);
+            generalIssueList = getAllGeneralIssues(owner, repositoryName);
         } catch (RequestException ex) {
-            Logger.getLogger(GitHubDataProvider.class.getName())
-                    .log(Level.SEVERE, "Error while getting repository by Owner and Repository name.", ex);
+            log(Level.SEVERE, "Error while getting repository by Owner and Repository name.", ex);
             throw new AuthenticationException("Bad credenrials set. "
                     + "Wrong name or password in authentication file.", ex);
         } catch (IOException ex) {
-            Logger.getLogger(GitHubDataProvider.class.getName())
-                    .log(Level.SEVERE, "Error while getting repository by Owner and Repository name.", ex);
+            log(Level.SEVERE, "Error while getting repository by Owner and Repository name.", ex);
         }
         Collections.reverse(generalIssueList);
         return generalIssueList;
+    }
+    
+    private List<GeneralIssue> getAllGeneralIssues(String owner, String repositoryName) throws IOException {
+        return beanMapping.mapTo(getClosedAndOpenedIssues(owner, repositoryName), GeneralIssue.class);
+    }
+    
+    private List<Issue> getClosedAndOpenedIssues(String owner, String repositoryName) throws IOException {
+        List<Issue> allIssues = new ArrayList<>();
+        allIssues.addAll(issueService.getIssues(owner, repositoryName, getFilterForClosedIssues()));
+        allIssues.addAll(issueService.getIssues(owner, repositoryName, getFilterForOpenedIssues()));
+        allIssues.sort((a, b) -> b.getCreatedAt().compareTo(a.getCreatedAt()));
+        return allIssues;
+    }
+    
+    private Map<String, String> getFilterForClosedIssues() {
+        Map<String, String> filter = new HashMap<>();
+        filter.put(IssueService.FILTER_STATE, IssueService.STATE_CLOSED);
+        return filter;
+    }
+    
+    
+    private Map<String, String> getFilterForOpenedIssues() {
+        Map<String, String> filter = new HashMap<>();
+        filter.put(IssueService.FILTER_STATE, IssueService.STATE_OPEN);
+        return filter;
+    }
+    
+    
+    private void log(Level level, String message, Exception ex) {
+        Logger.getLogger(GitHubDataProvider.class.getName())
+                    .log(level, message, ex);
     }
 }

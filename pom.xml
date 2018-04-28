@@ -10,7 +10,7 @@
         <module>Reliability-Tool-DataProvider</module>
         <module>Reliability-Tool-Models</module>
         <module>Reliability-Tool-Core</module>
-        <module>Reliability-Tool-Utils</module>
+        <module>Reliability-Tool-DataProcessing</module>
     </modules>
     
     <build>

@@ -1,10 +1,11 @@
 package fi.muni.cz.reliability.tool.models;
 
+import fi.muni.cz.reliability.tool.dataprocessing.issuesprocessing.Tuple;
 import fi.muni.cz.reliability.tool.models.leastsquaresolver.Function;
 import fi.muni.cz.reliability.tool.models.leastsquaresolver.GOFunction;
 import fi.muni.cz.reliability.tool.models.leastsquaresolver.LeastSquaresOptimization;
 import fi.muni.cz.reliability.tool.models.leastsquaresolver.LeastSquaresOptimizationImpl;
-import fi.muni.cz.reliability.tool.utils.Tuple;
+
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;

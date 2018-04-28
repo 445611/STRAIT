@@ -12,7 +12,7 @@
     <dependencies>
         <dependency>
             <groupId>${project.groupId}</groupId>
-            <artifactId>Reliability-Tool-Utils</artifactId>
+            <artifactId>Reliability-Tool-DataProcessing</artifactId>
             <version>${project.version}</version>
         </dependency>
         <dependency>

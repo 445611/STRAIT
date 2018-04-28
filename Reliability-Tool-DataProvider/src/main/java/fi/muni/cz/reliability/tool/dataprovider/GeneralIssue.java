@@ -5,24 +5,60 @@ import java.io.Serializable;
 import java.util.Date;
 import java.util.List;
 import java.util.Objects;
+import javax.persistence.Column;
+import javax.persistence.ElementCollection;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.Lob;
+import javax.persistence.Table;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
+import javax.validation.constraints.NotNull;
 
 /**
  * @author Radoslav Micko, 445611@muni.cz
  */
+@Entity
+@Table(name = "GENERALISSUE")
 public class GeneralIssue implements Serializable {
     
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
+    @Temporal(TemporalType.TIMESTAMP)
     private Date saved;
     
+    @Temporal(TemporalType.TIMESTAMP)
     private Date createdAt;
+    @Temporal(TemporalType.TIMESTAMP)
     private Date closedAt;
+    @Temporal(TemporalType.TIMESTAMP)
     private Date updatedAt;
     
+    @Column(columnDefinition="clob")
+    @Lob
     private String body;
+    @Column(name = "IssueState")
     private String state;
+    
+    @ElementCollection
     private List<String> labels;
 
     
+    private Long snapshotid;
+    
+    public Long getSnapshotid() {
+        return snapshotid;
+    }
+    
+    @NotNull
+    @Column(name = "snapshot_id")
+    public void setSnapshotid(Long snapshotid) {
+        this.snapshotid = snapshotid;
+    }
+
     public long getId() {
         return id;
     }

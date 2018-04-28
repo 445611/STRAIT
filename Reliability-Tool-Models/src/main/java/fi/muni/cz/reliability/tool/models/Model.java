@@ -1,6 +1,6 @@
 package fi.muni.cz.reliability.tool.models;
 
-import fi.muni.cz.reliability.tool.utils.Tuple;
+import fi.muni.cz.reliability.tool.dataprocessing.issuesprocessing.Tuple;
 import java.util.List;
 import java.util.Map;
 

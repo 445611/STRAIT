@@ -1,6 +1,7 @@
 package fi.muni.cz.reliability.tool.models.leastsquaresolver;
 
-import fi.muni.cz.reliability.tool.utils.Tuple;
+
+import fi.muni.cz.reliability.tool.dataprocessing.issuesprocessing.Tuple;
 import java.util.List;
 
 /**

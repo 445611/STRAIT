@@ -6,24 +6,35 @@
         <artifactId>Reliability-Tool</artifactId>
         <version>1.0-SNAPSHOT</version>
     </parent>
-    <artifactId>Reliability-Tool-Core</artifactId>
-    <name>Reliability Tool Core</name>
+    <artifactId>Reliability-Tool-DataProcessing</artifactId>
+    <name>Reliability Tool Data Processing</name>
     <packaging>jar</packaging>
+    
     <dependencies>
         <dependency>
-            <groupId>445611</groupId>
+            <groupId>org.orangepalantir</groupId>
+            <artifactId>leastsquares</artifactId>
+            <version>1.0.0</version>
+        </dependency>
+        <dependency>
+            <groupId>${project.groupId}</groupId>
             <artifactId>Reliability-Tool-DataProvider</artifactId>
-            <version>1.0-SNAPSHOT</version>
-        </dependency>
-        <dependency>
-            <groupId>${project.groupId}</groupId>
-            <artifactId>Reliability-Tool-DataProcessing</artifactId>
             <version>${project.version}</version>
         </dependency>
         <dependency>
-            <groupId>${project.groupId}</groupId>
-            <artifactId>Reliability-Tool-Models</artifactId>
-            <version>${project.version}</version>
+            <groupId>org.hibernate</groupId>
+            <artifactId>hibernate-entitymanager</artifactId>
+            <version>4.3.1.Final</version>
+        </dependency>
+        <dependency>
+            <groupId>org.hibernate.javax.persistence</groupId>
+            <artifactId>hibernate-jpa-2.1-api</artifactId>
+            <version>1.0.0.Final</version>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.derby</groupId>
+            <artifactId>derby</artifactId>
+            <version>10.14.1.0</version>
         </dependency>
     </dependencies>
     <properties>
