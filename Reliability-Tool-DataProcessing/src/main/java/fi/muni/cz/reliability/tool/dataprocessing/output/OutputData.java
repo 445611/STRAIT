@@ -1,11 +1,11 @@
 package fi.muni.cz.reliability.tool.dataprocessing.output;
 
-import fi.muni.cz.reliability.tool.dataprocessing.issuesprocessing.Tuple;
 import java.io.Serializable;
 import java.util.Date;
 import java.util.List;
 import java.util.Map;
 import java.util.Objects;
+import org.apache.commons.math3.util.Pair;
 
 /**
  * @author Radoslav Micko, 445611@muni.cz
@@ -17,7 +17,7 @@ public class OutputData implements Serializable {
     private String repositoryName;
     private Date createdAt;
     private int totalNumberOfDefects;
-    private List<Tuple<Integer, Integer>> weeksAndDefects;
+    private List<Pair<Integer, Integer>> weeksAndDefects;
     private Map<String, Double> parameters;
     private String modelName;
     
@@ -80,11 +80,11 @@ public class OutputData implements Serializable {
         this.url = url;
     }
 
-    public List<Tuple<Integer, Integer>> getWeeksAndDefects() {
+    public List<Pair<Integer, Integer>> getWeeksAndDefects() {
         return weeksAndDefects;
     }
 
-    public void setWeeksAndDefects(List<Tuple<Integer, Integer>> weeksAndDefects) {
+    public void setWeeksAndDefects(List<Pair<Integer, Integer>> weeksAndDefects) {
         this.weeksAndDefects = weeksAndDefects;
     }
 

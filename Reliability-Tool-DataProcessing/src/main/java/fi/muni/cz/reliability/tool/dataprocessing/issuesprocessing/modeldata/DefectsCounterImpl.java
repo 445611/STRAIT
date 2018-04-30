@@ -2,13 +2,13 @@ package fi.muni.cz.reliability.tool.dataprocessing.issuesprocessing.modeldata;
 
 
 import fi.muni.cz.reliability.tool.dataprovider.GeneralIssue;
-import fi.muni.cz.reliability.tool.dataprocessing.issuesprocessing.Tuple;
 import fi.muni.cz.reliability.tool.dataprocessing.exception.DataProcessingException;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.Iterator;
 import java.util.List;
+import org.apache.commons.math3.util.Pair;
 
 /**
  * @author Radoslav Micko, 445611@muni.cz
@@ -47,7 +47,7 @@ public class DefectsCounterImpl implements DefectsCounter {
     }
     
     @Override
-    public List<Tuple<Integer, Integer>> spreadDefectsIntoPeriodsOfTime(List<GeneralIssue> listOfIssues) {
+    public List<Pair<Integer, Integer>> spreadDefectsIntoPeriodsOfTime(List<GeneralIssue> listOfIssues) {
         if (listOfIssues == null || listOfIssues.isEmpty()) {
             throw new NullPointerException("listOfIssues is null or empty.");
         }
@@ -61,31 +61,31 @@ public class DefectsCounterImpl implements DefectsCounter {
     }      
     
     @Override
-    public List<Tuple<Integer, Integer>> countTotalDefectsForPeriodsOfTime(
-            List<Tuple<Integer, Integer>> spreadedDefects) {
+    public List<Pair<Integer, Integer>> countTotalDefectsForPeriodsOfTime(
+            List<Pair<Integer, Integer>> spreadedDefects) {
         Integer totalNumber = 0;
-        List<Tuple<Integer, Integer>> listOfTotalDefects = new ArrayList<>();
-        for (Tuple<Integer, Integer> tuple: spreadedDefects) {
-            totalNumber = totalNumber + tuple.getB();
-            listOfTotalDefects.add(new Tuple(tuple.getA(), totalNumber));
+        List<Pair<Integer, Integer>> listOfTotalDefects = new ArrayList<>();
+        for (Pair<Integer, Integer> pair: spreadedDefects) {
+            totalNumber = totalNumber + pair.getSecond();
+            listOfTotalDefects.add(new Pair(pair.getFirst(), totalNumber));
         }
         return listOfTotalDefects;
     }
     
     /**
-     * Get list of Tuple of week and number of defects.
+     * Get list of Pair of week and number of defects.
      * @param startDate Date to starts counting weeks
      * @param listOfIssues List to iterate over
-     * @return List of Tuples 
+     * @return List of Pairs 
      * 
      * @throw UtilsException when there are no issues in testing period
      */
-    private List<Tuple<Integer, Integer>> sortingIssuesIntoTimePeriods(
+    private List<Pair<Integer, Integer>> sortingIssuesIntoTimePeriods(
             List<GeneralIssue> listOfIssues) {
         Date startOfTestingPeriod = startOfTesting;
         Date endOfTestingPeriod = addSpecificTimeToDate(startOfTesting);
 
-        List<Tuple<Integer, Integer>> countedList = new ArrayList<>();
+        List<Pair<Integer, Integer>> countedList = new ArrayList<>();
         int periodsCounter = 1;
         int defectsCounter = 0;
         
@@ -102,7 +102,7 @@ public class DefectsCounterImpl implements DefectsCounter {
             }
             
             if (issue.getCreatedAt().after(endOfTestingPeriod)) {
-                countedList.add(new Tuple<>(periodsCounter, defectsCounter));
+                countedList.add(new Pair<>(periodsCounter, defectsCounter));
                 periodsCounter++;
                 defectsCounter = 0;
                 startOfTestingPeriod = endOfTestingPeriod;
@@ -116,12 +116,12 @@ public class DefectsCounterImpl implements DefectsCounter {
                 if (issuesIterator.hasNext()) {
                     issue = issuesIterator.next();
                 } else {
-                    countedList.add(new Tuple<>(periodsCounter, defectsCounter));
+                    countedList.add(new Pair<>(periodsCounter, defectsCounter));
                     startOfTestingPeriod = endOfTestingPeriod;
                     endOfTestingPeriod = addSpecificTimeToDate(endOfTestingPeriod);
                     while (endOfTestingPeriod.before(endOfTesting)) {
                         periodsCounter++;
-                        countedList.add(new Tuple<>(periodsCounter, 0));
+                        countedList.add(new Pair<>(periodsCounter, 0));
                         startOfTestingPeriod = endOfTestingPeriod;
                         endOfTestingPeriod = addSpecificTimeToDate(endOfTestingPeriod);
                     }

@@ -1,6 +1,5 @@
 package fi.muni.cz.reliability.tool.models.leastsquaresolver;
 
-import fi.muni.cz.reliability.tool.dataprocessing.issuesprocessing.Tuple;
 import fi.muni.cz.reliability.tool.models.exception.ModelException;
 import java.util.List;
 import java.util.logging.Level;
@@ -8,6 +7,7 @@ import java.util.logging.Logger;
 import org.apache.commons.math3.fitting.leastsquares.LeastSquaresBuilder;
 import org.apache.commons.math3.fitting.leastsquares.LeastSquaresOptimizer;
 import org.apache.commons.math3.fitting.leastsquares.LevenbergMarquardtOptimizer;
+import org.apache.commons.math3.util.Pair;
 
 /**
  * @author Radoslav Micko, 445611@muni.cz
@@ -18,10 +18,10 @@ public class LeastSquaresOptimizationImpl implements LeastSquaresOptimization{
     private static final int MAX_NUMBER_OF_ITERATIONS = 10000;
     
     @Override
-    public double[] optimizer(double[] startParameters, List<Tuple<Integer, Integer>> listOfData, Function function) {
+    public double[] optimizer(double[] startParameters, List<Pair<Integer, Integer>> listOfData, Function function) {
         
-        for (Tuple<Integer, Integer> tuple: listOfData) {
-            function.addPoint(tuple.getA(), tuple.getB());
+        for (Pair<Integer, Integer> pair: listOfData) {
+            function.addPoint(pair.getFirst(), pair.getSecond());
         }
         
         LeastSquaresBuilder leastSquaresBuilder = getLeastSquaresBuilder(startParameters, function);

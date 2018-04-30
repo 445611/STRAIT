@@ -1,5 +1,6 @@
 package fi.muni.cz.reliability.tool.dataprocessing.issuesprocessing.persistence;
 
+import fi.muni.cz.reliability.tool.dataprocessing.issuesprocessing.Filter;
 import fi.muni.cz.reliability.tool.dataprovider.GeneralIssue;
 import java.io.Serializable;
 import java.util.Date;
@@ -41,6 +42,8 @@ public class GeneralIssuesSnapshot implements Serializable {
     
     @ElementCollection
     private List<String> filtersRan;
+    @ElementCollection
+    private List<String> filteringWords;
     
     @OneToMany(cascade = CascadeType.MERGE)
     @JoinColumn(name = "snapshot_id")
@@ -60,6 +63,14 @@ public class GeneralIssuesSnapshot implements Serializable {
 
     public void setId(Long id) {
         this.id = id;
+    }
+
+    public List<String> getFilteringWords() {
+        return filteringWords;
+    }
+
+    public void setFilteringWords(List<String> FilteringWords) {
+        this.filteringWords = FilteringWords;
     }
 
     public int getTypeOfTimeToSplitTestInto() {

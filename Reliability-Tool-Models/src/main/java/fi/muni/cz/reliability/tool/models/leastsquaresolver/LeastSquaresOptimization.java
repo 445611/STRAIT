@@ -1,8 +1,7 @@
 package fi.muni.cz.reliability.tool.models.leastsquaresolver;
 
-
-import fi.muni.cz.reliability.tool.dataprocessing.issuesprocessing.Tuple;
 import java.util.List;
+import org.apache.commons.math3.util.Pair;
 
 /**
  * @author Radoslav Micko, 445611@muni.cz
@@ -19,5 +18,5 @@ public interface LeastSquaresOptimization {
      *                  to optimize for
      * @return  array of optimized parameters
      */
-    double[] optimizer(double[] startParameters, List<Tuple<Integer, Integer>> listOfData, Function function);
+    double[] optimizer(double[] startParameters, List<Pair<Integer, Integer>> listOfData, Function function);
 }

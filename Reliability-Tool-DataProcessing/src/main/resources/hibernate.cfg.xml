@@ -54,7 +54,7 @@ Contributor(s):
         <property name="cache.use_query_cache">true</property> 
         <property name="cache.provider_class">org.hibernate.cache.EhCacheProvider</property> -->
     <!-- Echo all executed SQL to stdout -->
-    <property name="show_sql">true</property>
+    <property name="show_sql">false</property>
     <!-- Drop and re-create the database schema on startup -->
     <property name="hbm2ddl.auto">update</property>
     <mapping class="fi.muni.cz.reliability.tool.dataprocessing.issuesprocessing.persistence.GeneralIssuesSnapshot"/>

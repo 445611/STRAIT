@@ -1,8 +1,8 @@
 package fi.muni.cz.reliability.tool.models;
 
-import fi.muni.cz.reliability.tool.dataprocessing.issuesprocessing.Tuple;
 import java.util.List;
 import java.util.Map;
+import org.apache.commons.math3.util.Pair;
 
 /**
  * Represents interface for software reliability models
@@ -14,8 +14,8 @@ public interface Model {
     /**
      * Calculate all parameters need for models functions.
      * 
-     * @param list of Tuples for models
+     * @param list of Pairs for models
      * @return double[] parameters of function
      */
-    Map<String, Double> calculateFunctionParametersOfModel(List<Tuple<Integer, Integer>> list);
+    Map<String, Double> calculateFunctionParametersOfModel(List<Pair<Integer, Integer>> list);
 }

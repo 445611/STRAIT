@@ -1,6 +1,5 @@
 package fi.muni.cz.reliability.tool.models;
 
-import fi.muni.cz.reliability.tool.dataprocessing.issuesprocessing.Tuple;
 import fi.muni.cz.reliability.tool.models.leastsquaresolver.Function;
 import fi.muni.cz.reliability.tool.models.leastsquaresolver.GOFunction;
 import fi.muni.cz.reliability.tool.models.leastsquaresolver.LeastSquaresOptimization;
@@ -9,6 +8,7 @@ import fi.muni.cz.reliability.tool.models.leastsquaresolver.LeastSquaresOptimiza
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import org.apache.commons.math3.util.Pair;
 
 /**
  * Goel-Okumoto (G-O) model
@@ -29,7 +29,7 @@ public class GOModel implements Model {
     }
     
     @Override
-    public Map<String, Double> calculateFunctionParametersOfModel(List<Tuple<Integer, Integer>> list) {
+    public Map<String, Double> calculateFunctionParametersOfModel(List<Pair<Integer, Integer>> list) {
         Function function = new GOFunction();
         LeastSquaresOptimization optimization = new LeastSquaresOptimizationImpl();
         return getMapWithParameters(optimization.optimizer(startParameters, list, function));
