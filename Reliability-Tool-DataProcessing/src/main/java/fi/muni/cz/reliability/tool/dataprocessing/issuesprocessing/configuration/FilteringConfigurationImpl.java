@@ -44,16 +44,13 @@ public class FilteringConfigurationImpl implements FilteringConfiguration {
         try (BufferedReader reader = new BufferedReader(new FileReader(file))) {
             String line = reader.readLine();
             if (line == null || line.isEmpty()) {
-                Logger.getLogger(FilterByLabel.class.getName()).log(Level.CONFIG,
-                    "File " + FILTERING_CONFIG_FILE + " is empty.");
+                log(Level.CONFIG, "File " + FILTERING_CONFIG_FILE + " is empty.");
                 return new ArrayList<>();
             }
             String[] words = line.split(SPLITTER);
             return new ArrayList<>(Arrays.asList(words));
         } catch (IOException ex) {
-            Logger.getLogger(FilterByLabel.class.getName()).log(Level.SEVERE,
-                    "Error loading " + FILTERING_CONFIG_FILE 
-                            + " file from resources.", ex);
+            log(Level.SEVERE, "Error loading " + FILTERING_CONFIG_FILE + " file from resources.", ex);
             throw new DataProcessingException("Error loading " + FILTERING_CONFIG_FILE
                     + " file from resources.", ex);
         } 
@@ -74,4 +71,15 @@ public class FilteringConfigurationImpl implements FilteringConfiguration {
         return new File(getClass().getClassLoader()
                 .getResource(FILTERING_CONFIG_FILE).getFile());
     }
+    
+    private void log(Level level, String message, Exception ex) {
+        Logger.getLogger(FilterByLabel.class.getName())
+                    .log(level, message, ex);
+    }
+    
+    private void log(Level level, String message) {
+        Logger.getLogger(FilterByLabel.class.getName())
+                    .log(level, message);
+    }
+    
 }

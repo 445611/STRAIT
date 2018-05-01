@@ -20,17 +20,14 @@ public class LeastSquaresOptimizationImpl implements LeastSquaresOptimization{
     @Override
     public double[] optimizer(double[] startParameters, List<Pair<Integer, Integer>> listOfData, Function function) {
         
-        for (Pair<Integer, Integer> pair: listOfData) {
-            function.addPoint(pair.getFirst(), pair.getSecond());
-        }
+        addAllPointsToFunction(listOfData, function);
         
         LeastSquaresBuilder leastSquaresBuilder = getLeastSquaresBuilder(startParameters, function);
         LevenbergMarquardtOptimizer levenbergMarquardtOptimizer = new LevenbergMarquardtOptimizer();
         
         try {
             LeastSquaresOptimizer.Optimum lsoo = levenbergMarquardtOptimizer.optimize(leastSquaresBuilder.build());
-            
-            
+
             //-----------------------------------------------------------------
             final double[] optimalValues = lsoo.getPoint().toArray();
             System.out.println("A: " + optimalValues[0]);
@@ -38,8 +35,7 @@ public class LeastSquaresOptimizationImpl implements LeastSquaresOptimization{
             System.out.println("Iteration number: "+lsoo.getIterations());
             System.out.println("Evaluation number: "+lsoo.getEvaluations());
             //-----------------------------------------------------------------
-            
-            
+
             return optimalValues;
         } catch (Exception ex)  {
             Logger.getLogger(LeastSquaresOptimizationImpl.class.getName())
@@ -47,12 +43,17 @@ public class LeastSquaresOptimizationImpl implements LeastSquaresOptimization{
             throw new ModelException("Error while optimizing parameters of function.", ex);
         }
     }
+
+    private void addAllPointsToFunction(List<Pair<Integer, Integer>> listOfData, Function function) {
+        for (Pair<Integer, Integer> pair: listOfData) {
+            function.addPoint(pair.getFirst(), pair.getSecond());
+        }
+    }
     
     private LeastSquaresBuilder getLeastSquaresBuilder(double[] startParameters, Function function) {
         LeastSquaresBuilder leastSquaresBuilder = new LeastSquaresBuilder();
         leastSquaresBuilder.model(function.getMultivariateVectorFunction(), 
                 function.getMultivariateMatrixFunction());
-        
         leastSquaresBuilder.target(function.calculateTarget());
         leastSquaresBuilder.start(startParameters);
         leastSquaresBuilder.maxEvaluations(MAX_NUMBER_OF_EVALUATIONS);

@@ -3,8 +3,6 @@ package fi.muni.cz.reliability.tool.dataprocessing.issuesprocessing.reproducer;
 import fi.muni.cz.reliability.tool.dataprocessing.issuesprocessing.Filter;
 import fi.muni.cz.reliability.tool.dataprocessing.issuesprocessing.FilterByLabel;
 import fi.muni.cz.reliability.tool.dataprocessing.issuesprocessing.FilterOutOpened;
-import fi.muni.cz.reliability.tool.dataprocessing.issuesprocessing.configuration.FilteringConfiguration;
-import fi.muni.cz.reliability.tool.dataprocessing.issuesprocessing.configuration.FilteringConfigurationImpl;
 import fi.muni.cz.reliability.tool.dataprocessing.issuesprocessing.modeldata.DefectsCounter;
 import fi.muni.cz.reliability.tool.dataprocessing.issuesprocessing.modeldata.DefectsCounterImpl;
 import fi.muni.cz.reliability.tool.dataprovider.GeneralIssue;
@@ -44,6 +42,5 @@ public class DataReproducer {
         Map<String, Double> params = model.calculateFunctionParametersOfModel(countedWeeksWithTotal);
         
         return params;
-    }
-    
+    }   
 }
