@@ -66,7 +66,6 @@ public class GitHubDataProvider implements DataProvider {
         } catch (IOException ex) {
             log(Level.SEVERE, "Error while getting repository by Owner and Repository name.", ex);
         }
-        Collections.reverse(generalIssueList);
         return generalIssueList;
     }
     
@@ -78,7 +77,7 @@ public class GitHubDataProvider implements DataProvider {
         List<Issue> allIssues = new ArrayList<>();
         allIssues.addAll(issueService.getIssues(owner, repositoryName, getFilterForClosedIssues()));
         allIssues.addAll(issueService.getIssues(owner, repositoryName, getFilterForOpenedIssues()));
-        allIssues.sort((a, b) -> b.getCreatedAt().compareTo(a.getCreatedAt()));
+        allIssues.sort((a, b) -> a.getCreatedAt().compareTo(b.getCreatedAt()));
         return allIssues;
     }
     

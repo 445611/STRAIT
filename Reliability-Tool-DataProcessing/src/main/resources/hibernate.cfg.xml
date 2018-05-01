@@ -45,17 +45,8 @@ Contributor(s):
     <property name="connection.url">jdbc:derby:IssuesDB;create=true</property>
     <property name="connection.username">tool</property>
     <property name="connection.password">tool123</property>
-    <!-- JDBC connection pool (use the built-in) -->
-    <!--<property name="connection.pool_size">1</property>-->
-    <!-- SQL dialect -->
     <property name="dialect">org.hibernate.dialect.DerbyTenSevenDialect</property>
-    <!-- Second-level cache  -->
-    <!--         <property name="cache.use_second_level_cache">true</property>
-        <property name="cache.use_query_cache">true</property> 
-        <property name="cache.provider_class">org.hibernate.cache.EhCacheProvider</property> -->
-    <!-- Echo all executed SQL to stdout -->
     <property name="show_sql">false</property>
-    <!-- Drop and re-create the database schema on startup -->
     <property name="hbm2ddl.auto">update</property>
     <mapping class="fi.muni.cz.reliability.tool.dataprocessing.issuesprocessing.persistence.GeneralIssuesSnapshot"/>
     <mapping class="fi.muni.cz.reliability.tool.dataprovider.GeneralIssue"/>

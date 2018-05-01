@@ -5,8 +5,6 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
-
-
 /**
  * Filtering list of {@link fi.muni.cz.reliability.tool.dataprovider.GeneralIssue GeneralIssue}
  * by labels

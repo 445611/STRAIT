@@ -8,7 +8,7 @@ import fi.muni.cz.reliability.tool.dataprocessing.issuesprocessing.configuration
 import fi.muni.cz.reliability.tool.dataprocessing.issuesprocessing.modeldata.DefectsCounter;
 import fi.muni.cz.reliability.tool.dataprocessing.issuesprocessing.modeldata.DefectsCounterImpl;
 import fi.muni.cz.reliability.tool.dataprovider.GeneralIssue;
-import fi.muni.cz.reliability.tool.dataprocessing.issuesprocessing.persistence.GeneralIssuesSnapshot;
+import fi.muni.cz.reliability.tool.dataprocessing.persistence.GeneralIssuesSnapshot;
 import fi.muni.cz.reliability.tool.models.GOModel;
 import fi.muni.cz.reliability.tool.models.Model;
 

@@ -1,4 +1,4 @@
-package fi.muni.cz.reliability.tool.dataprocessing.issuesprocessing.persistence;
+package fi.muni.cz.reliability.tool.dataprocessing.persistence;
 
 import fi.muni.cz.reliability.tool.dataprocessing.issuesprocessing.Filter;
 import fi.muni.cz.reliability.tool.dataprovider.GeneralIssue;

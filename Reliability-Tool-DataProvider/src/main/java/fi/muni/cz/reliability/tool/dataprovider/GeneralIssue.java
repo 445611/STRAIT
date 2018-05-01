@@ -46,15 +46,14 @@ public class GeneralIssue implements Serializable {
     @ElementCollection
     private List<String> labels;
 
-    
+    @NotNull
+    @Column(name = "snapshot_id")
     private Long snapshotid;
     
     public Long getSnapshotid() {
         return snapshotid;
     }
     
-    @NotNull
-    @Column(name = "snapshot_id")
     public void setSnapshotid(Long snapshotid) {
         this.snapshotid = snapshotid;
     }
