@@ -48,7 +48,7 @@ Contributor(s):
     <property name="dialect">org.hibernate.dialect.DerbyTenSevenDialect</property>
     <property name="show_sql">false</property>
     <property name="hbm2ddl.auto">update</property>
-    <mapping class="fi.muni.cz.reliability.tool.dataprocessing.issuesprocessing.persistence.GeneralIssuesSnapshot"/>
+    <mapping class="fi.muni.cz.reliability.tool.dataprocessing.persistence.GeneralIssuesSnapshot"/>
     <mapping class="fi.muni.cz.reliability.tool.dataprovider.GeneralIssue"/>
     </session-factory>
 </hibernate-configuration>

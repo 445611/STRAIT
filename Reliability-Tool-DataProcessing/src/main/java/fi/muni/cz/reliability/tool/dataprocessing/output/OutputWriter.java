@@ -1,7 +1,5 @@
 package fi.muni.cz.reliability.tool.dataprocessing.output;
 
-import java.io.BufferedWriter;
-import java.io.IOException;
 import java.util.List;
 import org.apache.commons.math3.util.Pair;
 
@@ -34,6 +32,6 @@ public interface OutputWriter {
      * @param listOfPairsData data to write
      * @throws IOException if occures problem while writing to file
      */
-    void writeListOfDefects(BufferedWriter writer, 
-            List<Pair<Integer, Integer>> listOfPairsData) throws IOException;
+    //void writeListOfDefects(BufferedWriter writer, 
+    //        List<Pair<Integer, Integer>> listOfPairsData) throws IOException;
 }

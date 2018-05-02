@@ -1,6 +1,5 @@
 package fi.muni.cz.reliability.tool.core;
 
-import com.sun.org.apache.regexp.internal.REProgram;
 import fi.muni.cz.reliability.tool.dataprovider.DataProvider;
 import fi.muni.cz.reliability.tool.dataprovider.GeneralIssue;
 import fi.muni.cz.reliability.tool.dataprovider.GitHubDataProvider;
@@ -17,8 +16,7 @@ import fi.muni.cz.reliability.tool.dataprocessing.output.OutputData;
 import java.util.Calendar;
 import java.util.List;
 import fi.muni.cz.reliability.tool.dataprocessing.issuesprocessing.configuration.FilteringConfiguration;
-import fi.muni.cz.reliability.tool.dataprocessing.output.OutputWriterDefectsForPeriods;
-import fi.muni.cz.reliability.tool.dataprocessing.output.OutputWriterTotaDefects;
+
 
 import fi.muni.cz.reliability.tool.dataprocessing.issuesprocessing.Filter;
 import fi.muni.cz.reliability.tool.dataprocessing.issuesprocessing.FilterByLabel;
@@ -27,6 +25,7 @@ import fi.muni.cz.reliability.tool.dataprocessing.issuesprocessing.FilterOutOpen
 import fi.muni.cz.reliability.tool.dataprocessing.persistence.GeneralIssuesSnapshot;
 import fi.muni.cz.reliability.tool.dataprocessing.persistence.GeneralIssuesSnapshotDaoImpl;
 import fi.muni.cz.reliability.tool.dataprocessing.issuesprocessing.reproducer.DataReproducer;
+import fi.muni.cz.reliability.tool.dataprocessing.output.HtmlOutputWriter;
 import fi.muni.cz.reliability.tool.dataprovider.utils.GitHubUrlParser;
 import fi.muni.cz.reliability.tool.dataprovider.utils.ParsedUrlData;
 import fi.muni.cz.reliability.tool.dataprovider.utils.UrlParser;
@@ -124,11 +123,10 @@ public class TEMPORARY {
         
         DataReproducer reproducer = new DataReproducer();
         Map<String, Double> reproducedParams = reproducer.getReproducedData(snapshot);
-//System.out.println(params[0]+" ; "+ params[1]);
+        //System.out.println(params[0]+" ; "+ params[1]);
         
         
-        /*OutputWriter writer = new OutputWriterTotaDefects();
-        OutputWriter writerWithPeriods = new OutputWriterDefectsForPeriods();
+        OutputWriter writer = new HtmlOutputWriter();
         
         int totalDefects = countedWeeksWithTotal.get(countedWeeksWithTotal.size() - 1).getSecond();
         OutputData prepareOutputData = writer.prepareOutputData(URL, countedWeeksWithTotal);
@@ -136,10 +134,10 @@ public class TEMPORARY {
         prepareOutputData.setParameters(params);
         prepareOutputData.setModelName("Goel-Okemura model");
         
-        writer.writeOutputDataToFile(prepareOutputData, "TotalDefects");
+        writer.writeOutputDataToFile(prepareOutputData, "TestHTML");
         
-        prepareOutputData.setWeeksAndDefects(countedWeeks);
-        writerWithPeriods.writeOutputDataToFile(prepareOutputData, "DefectsInWeeks");*/
+        //prepareOutputData.setWeeksAndDefects(countedWeeks);
+        //writerWithPeriods.writeOutputDataToFile(prepareOutputData, "DefectsInWeeks");
         System.exit(0);
     }
 

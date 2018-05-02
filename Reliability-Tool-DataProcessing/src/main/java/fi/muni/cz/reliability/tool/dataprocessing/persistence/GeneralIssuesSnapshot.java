@@ -1,6 +1,5 @@
 package fi.muni.cz.reliability.tool.dataprocessing.persistence;
 
-import fi.muni.cz.reliability.tool.dataprocessing.issuesprocessing.Filter;
 import fi.muni.cz.reliability.tool.dataprovider.GeneralIssue;
 import java.io.Serializable;
 import java.util.Date;
@@ -69,8 +68,8 @@ public class GeneralIssuesSnapshot implements Serializable {
         return filteringWords;
     }
 
-    public void setFilteringWords(List<String> FilteringWords) {
-        this.filteringWords = FilteringWords;
+    public void setFilteringWords(List<String> filteringWords) {
+        this.filteringWords = filteringWords;
     }
 
     public int getTypeOfTimeToSplitTestInto() {

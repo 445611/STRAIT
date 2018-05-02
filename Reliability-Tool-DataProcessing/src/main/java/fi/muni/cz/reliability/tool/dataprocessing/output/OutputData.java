@@ -18,18 +18,18 @@ public class OutputData implements Serializable {
     private Date createdAt;
     private int totalNumberOfDefects;
     private List<Pair<Integer, Integer>> weeksAndDefects;
-    private Map<String, Double> parameters;
+    private Map<String, Double> modelParameters;
     private String modelName;
     
     //TODO
     //Some kind of calculated data from model
 
     public Map<String, Double> getParameters() {
-        return parameters;
+        return modelParameters;
     }
 
     public void setParameters(Map<String, Double> parameters) {
-        this.parameters = parameters;
+        this.modelParameters = parameters;
     }
 
     public String getModelName() {
