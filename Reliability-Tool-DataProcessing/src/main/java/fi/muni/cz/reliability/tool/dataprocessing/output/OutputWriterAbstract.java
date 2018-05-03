@@ -8,6 +8,7 @@ import freemarker.template.Configuration;
 import freemarker.template.TemplateExceptionHandler;
 import java.io.File;
 import java.io.IOException;
+import java.net.URL;
 import java.util.Date;
 import java.util.List;
 import org.apache.commons.math3.util.Pair;
@@ -17,18 +18,21 @@ import org.apache.commons.math3.util.Pair;
  */
 public abstract class OutputWriterAbstract implements OutputWriter {
 
-    private static final String HTML_TEMPLATE_ONE = "html_template_one";
-    private final Configuration configuration;
-     
+    private static final String HTML_TEMPLATE_ONE = "template_one.ftlh";
+    protected final Configuration configuration;
+    
+    /**
+     * Constructor that create freemark template configuration.
+     */
     public OutputWriterAbstract() {
         configuration = getConfiguration();
     }
 
     @Override
-    public abstract void writeOutputDataToFile(String url, List<Pair<Integer, Integer>> listOfPairsData, 
-            String fileName);
+    public abstract void writeOutputDataToFile(OutputData outputData, String fileName);
 
-    protected OutputData prepareOutputData(String url, List<Pair<Integer, Integer>> listOfPairsData) {
+    @Override
+    public OutputData prepareOutputData(String url, List<Pair<Integer, Integer>> listOfPairsData) {
         UrlParser parser = new GitHubUrlParser();
         ParsedUrlData parsedUrldata = parser.parseUrlAndCheck(url);
         OutputData data = new OutputData();
@@ -44,7 +48,7 @@ public abstract class OutputWriterAbstract implements OutputWriter {
     private Configuration getConfiguration() {
         Configuration cfg = new Configuration(Configuration.VERSION_2_3_28);
         try {
-            cfg.setDirectoryForTemplateLoading(getHtmlTemplate());
+            cfg.setDirectoryForTemplateLoading(getHtmlTemplateFile());
         } catch (IOException ex) {
             throw new DataProcessingException("No such html template.", ex);
         }
@@ -55,8 +59,7 @@ public abstract class OutputWriterAbstract implements OutputWriter {
         return cfg;
     }
     
-    private File getHtmlTemplate() {
-        return new File(getClass().getClassLoader()
-                .getResource(HTML_TEMPLATE_ONE).getFile());
+    private File getHtmlTemplateFile() {
+        return new File(getClass().getClassLoader().getResource("templates").getFile());
     }
 }

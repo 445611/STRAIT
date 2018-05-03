@@ -101,17 +101,13 @@ public class TEMPORARY {
         snapshot.setUrl(URL);
         snapshot.setUserName(parsedUrldata.getUserName());
         
-        GeneralIssuesSnapshotDaoImpl dao = new GeneralIssuesSnapshotDaoImpl();
-        //dao.save(snapshot);
-        //List<GeneralIssuesSnapshot> fromDB = dao.getAllSnapshots(); 
-        //for (GeneralIssuesSnapshot snap: fromDB) {
-        //    System.out.println(snap.getListOfGeneralIssues().size());
-        //}
-        //System.out.println(issuesFilterByLabel.toString());
-        
-        //fromDB.get(0).setUrl("CHANGED");
-        //System.out.println("CHANGED");
-        //dao.save(new GeneralIssuesSnapshot());
+        //GeneralIssuesSnapshotDaoImpl dao = new GeneralIssuesSnapshotDaoImpl();
+        /*dao.save(snapshot);
+        List<GeneralIssuesSnapshot> fromDB = dao.getAllSnapshots(); 
+        for (GeneralIssuesSnapshot snap: fromDB) {
+            System.out.println(snap.getListOfGeneralIssues().size());
+        }*/
+        System.out.println(issuesFilterByLabel.toString());
         DefectsCounter counter = new DefectsCounterImpl(Calendar.HOUR_OF_DAY, 1, null, null);
         List<Pair<Integer, Integer>> countedWeeks = counter.spreadDefectsIntoPeriodsOfTime(list2);
         List<Pair<Integer, Integer>> countedWeeksWithTotal = counter.countTotalDefectsForPeriodsOfTime(countedWeeks);

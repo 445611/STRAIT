@@ -1,0 +1,14 @@
+<html>
+<head>
+  <title>Welcome!</title>
+</head>
+<body>
+  <h1>URL = ${data.url}</h1>
+  <#list parameters as key, value> 
+    ${key} = ${value} 
+  </#list>
+  ${parameters["a"]}
+  <p>Our latest product:
+  <a href="${data.url}">${data.repositoryName}</a>!
+</body>
+</html>
