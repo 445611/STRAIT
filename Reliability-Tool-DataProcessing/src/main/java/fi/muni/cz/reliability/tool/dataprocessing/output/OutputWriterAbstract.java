@@ -1,9 +1,13 @@
 package fi.muni.cz.reliability.tool.dataprocessing.output;
 
+import fi.muni.cz.reliability.tool.dataprocessing.exception.DataProcessingException;
 import fi.muni.cz.reliability.tool.dataprovider.utils.GitHubUrlParser;
 import fi.muni.cz.reliability.tool.dataprovider.utils.ParsedUrlData;
 import fi.muni.cz.reliability.tool.dataprovider.utils.UrlParser;
 import freemarker.template.Configuration;
+import freemarker.template.TemplateExceptionHandler;
+import java.io.File;
+import java.io.IOException;
 import java.util.Date;
 import java.util.List;
 import org.apache.commons.math3.util.Pair;
@@ -13,7 +17,16 @@ import org.apache.commons.math3.util.Pair;
  */
 public abstract class OutputWriterAbstract implements OutputWriter {
 
-    public abstract void writeOutputDataToFile(String url, List<Pair<Integer, Integer>> listOfPairsData, String fileName);
+    private static final String HTML_TEMPLATE_ONE = "html_template_one";
+    private final Configuration configuration;
+     
+    public OutputWriterAbstract() {
+        configuration = getConfiguration();
+    }
+
+    @Override
+    public abstract void writeOutputDataToFile(String url, List<Pair<Integer, Integer>> listOfPairsData, 
+            String fileName);
 
     protected OutputData prepareOutputData(String url, List<Pair<Integer, Integer>> listOfPairsData) {
         UrlParser parser = new GitHubUrlParser();
@@ -28,5 +41,22 @@ public abstract class OutputWriterAbstract implements OutputWriter {
         return data;
     }
     
-    //private Configuration 
+    private Configuration getConfiguration() {
+        Configuration cfg = new Configuration(Configuration.VERSION_2_3_28);
+        try {
+            cfg.setDirectoryForTemplateLoading(getHtmlTemplate());
+        } catch (IOException ex) {
+            throw new DataProcessingException("No such html template.", ex);
+        }
+        cfg.setDefaultEncoding("UTF-8");
+        cfg.setTemplateExceptionHandler(TemplateExceptionHandler.RETHROW_HANDLER);
+        cfg.setLogTemplateExceptions(false);
+        cfg.setWrapUncheckedExceptions(true);
+        return cfg;
+    }
+    
+    private File getHtmlTemplate() {
+        return new File(getClass().getClassLoader()
+                .getResource(HTML_TEMPLATE_ONE).getFile());
+    }
 }
