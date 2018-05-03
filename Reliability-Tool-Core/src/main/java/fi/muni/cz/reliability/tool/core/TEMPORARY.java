@@ -102,11 +102,11 @@ public class TEMPORARY {
         snapshot.setUserName(parsedUrldata.getUserName());
         
         GeneralIssuesSnapshotDaoImpl dao = new GeneralIssuesSnapshotDaoImpl();
-        dao.save(snapshot);
-        List<GeneralIssuesSnapshot> fromDB = dao.getAllSnapshots(); 
-        for (GeneralIssuesSnapshot snap: fromDB) {
-            System.out.println(snap.getListOfGeneralIssues().size());
-        }
+        //dao.save(snapshot);
+        //List<GeneralIssuesSnapshot> fromDB = dao.getAllSnapshots(); 
+        //for (GeneralIssuesSnapshot snap: fromDB) {
+        //    System.out.println(snap.getListOfGeneralIssues().size());
+        //}
         //System.out.println(issuesFilterByLabel.toString());
         
         //fromDB.get(0).setUrl("CHANGED");
