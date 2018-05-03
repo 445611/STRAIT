@@ -1,4 +1,4 @@
-k DB- keď púštame výpočet pre rovnaké REPO naraz je to OK
+﻿k DB- keď púštame výpočet pre rovnaké REPO naraz je to OK
 ale ak budeme chciet spustit výpočet pre rovnaké REPO niekedy neskôr 
 budeme musieť tak či tak dávať request aby sme overili či nepribudli nové ISSUES 
 alebo sa nezmenil stav Issues, ktoré už máme uložené
@@ -16,3 +16,7 @@ alebo sa nezmenil stav Issues, ktoré už máme uložené
 ! Prerob authoriyacny subor na .properties
 
 https://stackoverflow.com/questions/17592139/trend-lines-regression-curve-fitting-java-library
+
+XSL - http://www.programming-free.com/2012/12/create-charts-in-excel-using-java.html
+HTML - https://freemarker.apache.org/docs/pgui_quickstart.html
+C3 - http://c3js.org/gettingstarted.html
