@@ -8,7 +8,6 @@ import freemarker.template.Configuration;
 import freemarker.template.TemplateExceptionHandler;
 import java.io.File;
 import java.io.IOException;
-import java.net.URL;
 import java.util.Date;
 import java.util.List;
 import org.apache.commons.math3.util.Pair;

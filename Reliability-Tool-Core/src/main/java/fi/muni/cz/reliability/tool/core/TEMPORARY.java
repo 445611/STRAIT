@@ -23,7 +23,6 @@ import fi.muni.cz.reliability.tool.dataprocessing.issuesprocessing.FilterByLabel
 import fi.muni.cz.reliability.tool.dataprocessing.issuesprocessing.FilterOutOpened;
 
 import fi.muni.cz.reliability.tool.dataprocessing.persistence.GeneralIssuesSnapshot;
-import fi.muni.cz.reliability.tool.dataprocessing.persistence.GeneralIssuesSnapshotDaoImpl;
 import fi.muni.cz.reliability.tool.dataprocessing.issuesprocessing.reproducer.DataReproducer;
 import fi.muni.cz.reliability.tool.dataprocessing.output.HtmlOutputWriter;
 import fi.muni.cz.reliability.tool.dataprovider.utils.GitHubUrlParser;
