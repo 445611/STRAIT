@@ -28,6 +28,7 @@ import fi.muni.cz.reliability.tool.dataprocessing.output.HtmlOutputWriter;
 import fi.muni.cz.reliability.tool.dataprovider.utils.GitHubUrlParser;
 import fi.muni.cz.reliability.tool.dataprovider.utils.ParsedUrlData;
 import fi.muni.cz.reliability.tool.dataprovider.utils.UrlParser;
+import fi.muni.cz.reliability.tool.models.ModelOutputData;
 import java.util.Arrays;
 import java.util.Date;
 import java.util.Map;
@@ -41,8 +42,8 @@ public class TEMPORARY {
     //public static final String URL = "https://github.com/eclipse/sumo/";
     //public static final String URL = "https://github.com/beetbox/beets";
     //public static final String URL = "https://github.com/spring-projects/spring-boot/issues";
-    //public static final String URL = "https://github.com/google/guava";
-    public static final String URL = "https://github.com/445611/PB071/";
+    public static final String URL = "https://github.com/google/guava";
+    //public static final String URL = "https://github.com/445611/PB071/";
     
     public static final String AUTH_FILE_NAME = "git_hub_authentication_file.properties";
     
@@ -114,7 +115,7 @@ public class TEMPORARY {
         
         
         Model model = new GOModel(new double[]{1,1});
-        Map<String, Double> params = model.calculateFunctionParametersOfModel(countedWeeksWithTotal);
+        ModelOutputData modelData = model.calculateFunctionParametersOfModel(countedWeeksWithTotal);
         
         DataReproducer reproducer = new DataReproducer();
         Map<String, Double> reproducedParams = reproducer.getReproducedData(snapshot);
@@ -126,7 +127,8 @@ public class TEMPORARY {
         int totalDefects = countedWeeksWithTotal.get(countedWeeksWithTotal.size() - 1).getSecond();
         OutputData prepareOutputData = writer.prepareOutputData(URL, countedWeeksWithTotal);
         prepareOutputData.setTotalNumberOfDefects(totalDefects);
-        prepareOutputData.setParameters(params);
+        prepareOutputData.setParameters(modelData.getFunctionParameters());
+        prepareOutputData.setModelData(modelData);
         prepareOutputData.setModelName("Goel-Okemura model");
         
         writer.writeOutputDataToFile(prepareOutputData, "TestHTML");

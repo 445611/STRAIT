@@ -39,7 +39,8 @@ public class DataReproducer {
         List<Pair<Integer, Integer>> countedWeeksWithTotal = counter.countTotalDefectsForPeriodsOfTime(countedWeeks);
         
         Model model = new GOModel(new double[]{1,1});
-        Map<String, Double> params = model.calculateFunctionParametersOfModel(countedWeeksWithTotal);
+        Map<String, Double> params = model.calculateFunctionParametersOfModel(countedWeeksWithTotal)
+                .getFunctionParameters();
         
         return params;
     }   

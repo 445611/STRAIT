@@ -6,8 +6,10 @@ import freemarker.template.MalformedTemplateNameException;
 import freemarker.template.Template;
 import freemarker.template.TemplateException;
 import java.io.BufferedWriter;
-import java.io.FileWriter;
+import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.OutputStreamWriter;
+import java.nio.charset.StandardCharsets;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.logging.Level;
@@ -27,7 +29,9 @@ public class HtmlOutputWriter extends OutputWriterAbstract {
             Map<String, Object> root = new HashMap<>();
             root.put("data", outputData);
             root.put("parameters", outputData.getParameters());
-        try (BufferedWriter writer = new BufferedWriter(new FileWriter(fileName + ".html"))) {
+            root.put("modelData", outputData.getModelData());
+        try (BufferedWriter writer = new BufferedWriter(new OutputStreamWriter(
+                new FileOutputStream(fileName + ".html"), StandardCharsets.UTF_8));) {
             temp.process(root, writer);
         } catch (IOException ex) {
             throw new DataProcessingException("Error occured during writing to file.", ex);

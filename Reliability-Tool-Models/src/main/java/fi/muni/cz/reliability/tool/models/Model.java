@@ -1,7 +1,6 @@
 package fi.muni.cz.reliability.tool.models;
 
 import java.util.List;
-import java.util.Map;
 import org.apache.commons.math3.util.Pair;
 
 /**
@@ -17,5 +16,5 @@ public interface Model {
      * @param list of Pairs for models
      * @return double[] parameters of function
      */
-    Map<String, Double> calculateFunctionParametersOfModel(List<Pair<Integer, Integer>> list);
+    ModelOutputData calculateFunctionParametersOfModel(List<Pair<Integer, Integer>> list);
 }

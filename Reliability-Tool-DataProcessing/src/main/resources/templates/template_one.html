@@ -1,14 +1,88 @@
-<html>
+<html lang="sk">
 <head>
-  <title>Welcome!</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>HTML Výstup</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/c3/0.5.4/c3.css" rel="stylesheet">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/d3/4.13.0/d3.min.js" charset="utf-8"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/c3/0.5.4/c3.min.js"></script>
+    
+    <style>
+    .navbar {
+      margin-bottom: 0;
+      border-radius: 0;
+    }
+    
+    .row.content {height: 100%;}
+    
+    html ,body {
+        height: 100%;
+    }
+    
+    .sidenav {
+      /*top:0px;
+      bottom:0px;
+      left:0px;
+      right:0px;*/
+      /*padding-top: 100%;*/
+      background-color: #f1f1f1;
+      height: 100%;
+    }
+    
+    /*.footer {
+        background-color: #555;
+        color: white;
+        position: relative;
+        bottom: 0;
+        height: 60px;
+        clear:both;
+        padding-top:20px;
+    }*/
+    
+    </style>
 </head>
 <body>
-  <h1>URL = ${data.url}</h1>
-  <#list parameters as key, value> 
-    ${key} = ${value} 
-  </#list>
-  ${parameters["a"]}
-  <p>Our latest product:
-  <a href="${data.url}">${data.repositoryName}</a>!
+    <div class="container-fluid text-center">    
+        <div class="row content">
+            <div class="col-sm-2 sidenav">
+                
+            </div>
+            <div class="col-sm-8 text-left"> 
+                
+                <h1>URL = ${data.url}</h1>
+                <#list parameters as key, value> 
+                  ${key} = ${value}<br>
+                </#list>
+                ${parameters["a"]}
+                <p>Repository:
+                <a href="${data.url}">${data.repositoryName}</a>
+                
+                <div id="chart"></div>
+
+                <script>
+                var chart = c3.generate({
+                    bindto: '#chart',
+                    data: {
+                      columns: [
+                        ['Reálne chyby',  <#list data.weeksAndDefects as pair> 
+                        ${pair.getSecond()},
+                        </#list>],
+                        ['Odhadované chyby', <#list modelData.estimatedIssues as pair> 
+                        ${pair.getSecond()},
+                        </#list>]
+                      ]
+                    }
+                });
+                </script>
+            </div>
+            <div class="col-sm-2 sidenav">
+                    modeData
+            </div>
+        </div>
+    </div>     
 </body>
 </html>

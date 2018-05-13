@@ -1,5 +1,6 @@
 package fi.muni.cz.reliability.tool.dataprocessing.output;
 
+import fi.muni.cz.reliability.tool.models.ModelOutputData;
 import java.io.Serializable;
 import java.util.Date;
 import java.util.List;
@@ -20,9 +21,18 @@ public class OutputData implements Serializable {
     private List<Pair<Integer, Integer>> weeksAndDefects;
     private Map<String, Double> modelParameters;
     private String modelName;
+    private ModelOutputData modelData;
     
     //TODO
     //Some kind of calculated data from model
+
+    public ModelOutputData getModelData() {
+        return modelData;
+    }
+
+    public void setModelData(ModelOutputData modelData) {
+        this.modelData = modelData;
+    }
 
     public Map<String, Double> getParameters() {
         return modelParameters;
