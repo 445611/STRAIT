@@ -40,9 +40,9 @@ import org.apache.commons.math3.util.Pair;
 public class TEMPORARY {
     
     //public static final String URL = "https://github.com/eclipse/sumo/";
-    //public static final String URL = "https://github.com/beetbox/beets";
+    public static final String URL = "https://github.com/beetbox/beets";
     //public static final String URL = "https://github.com/spring-projects/spring-boot/issues";
-    public static final String URL = "https://github.com/google/guava";
+    //public static final String URL = "https://github.com/google/guava";
     //public static final String URL = "https://github.com/445611/PB071/";
     
     public static final String AUTH_FILE_NAME = "git_hub_authentication_file.properties";
@@ -108,7 +108,7 @@ public class TEMPORARY {
             System.out.println(snap.getListOfGeneralIssues().size());
         }*/
         System.out.println(issuesFilterByLabel.toString());
-        DefectsCounter counter = new DefectsCounterImpl(Calendar.HOUR_OF_DAY, 1, null, null);
+        DefectsCounter counter = new DefectsCounterImpl(Calendar.WEEK_OF_MONTH, 1, null, null);
         List<Pair<Integer, Integer>> countedWeeks = counter.spreadDefectsIntoPeriodsOfTime(list2);
         List<Pair<Integer, Integer>> countedWeeksWithTotal = counter.countTotalDefectsForPeriodsOfTime(countedWeeks);
         

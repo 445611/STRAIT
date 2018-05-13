@@ -68,12 +68,8 @@
                     bindto: '#chart',
                     data: {
                       columns: [
-                        ['Reálne chyby',  <#list data.weeksAndDefects as pair> 
-                        ${pair.getSecond()},
-                        </#list>],
-                        ['Odhadované chyby', <#list modelData.estimatedIssues as pair> 
-                        ${pair.getSecond()},
-                        </#list>]
+                        ['Reálne chyby', <#list data.weeksAndDefects as pair>${pair.getSecond()},</#list>],
+                        ['Odhadované chyby', <#list modelData.estimatedIssues as pair>${pair.getSecond()},</#list>]
                       ]
                     }
                 });
