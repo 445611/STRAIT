@@ -11,7 +11,7 @@ import java.util.List;
  * 
  * @author Radoslav Micko, 445611@muni.cz
  */
-public class FilterOutOpened implements Filter, Serializable {
+public class FilterClosed implements Filter, Serializable {
 
     @Override
     public List<GeneralIssue> filter(List<GeneralIssue> list) {
@@ -26,8 +26,6 @@ public class FilterOutOpened implements Filter, Serializable {
 
     @Override
     public String toString() {
-        return "FilterOutOpened";
+        return "FilterClosed";
     }
-    
-    
 }

@@ -21,11 +21,20 @@ public class OutputData implements Serializable {
     private List<Pair<Integer, Integer>> weeksAndDefects;
     private Map<String, Double> modelParameters;
     private String modelName;
+    private String modelFunction;
     private ModelOutputData modelData;
     
     //TODO
     //Some kind of calculated data from model
 
+    public String getModelFunction() {
+        return modelFunction;
+    }
+
+    public void setModelFunction(String modelFunction) {
+        this.modelFunction = modelFunction;
+    }
+    
     public ModelOutputData getModelData() {
         return modelData;
     }

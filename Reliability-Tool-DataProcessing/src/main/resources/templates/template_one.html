@@ -52,14 +52,26 @@
                 
             </div>
             <div class="col-sm-8 text-left"> 
-                
-                <h1>URL = ${data.url}</h1>
-                <#list parameters as key, value> 
-                  ${key} = ${value}<br>
-                </#list>
-                ${parameters["a"]}
-                <p>Repository:
-                <a href="${data.url}">${data.repositoryName}</a>
+                <center><h1>Software reliability</h1></center>
+                <p>
+                    URL = <a href="${data.url}">${data.url}</a><br>
+                    This is estimation of issues occurance for  <a href="${data.url}">${data.repositoryName}</a> of user ${data.userName}.<br>
+                </p>
+                <p>
+                    For estimation was used <b>${data.modelName}</b>.<br>
+                    Estimated at <b>${data.createdAt?datetime}</b>.
+                </p>
+                <p>
+                    Real total defects in repository = ${data.totalNumberOfDefects}
+                </p>
+                <p>
+                    Model function:<br>
+                    ${data.modelFunction}<br>
+                    Estimated parameters:<br>
+                    <#list parameters as key, value> 
+                      ${key} = ${value} ,
+                    </#list>
+                </p>
                 
                 <div id="chart"></div>
 
@@ -68,15 +80,15 @@
                     bindto: '#chart',
                     data: {
                       columns: [
-                        ['Reálne chyby', <#list data.weeksAndDefects as pair>${pair.getSecond()},</#list>],
-                        ['Odhadované chyby', <#list modelData.estimatedIssues as pair>${pair.getSecond()},</#list>]
+                        ['Real issues', <#list data.weeksAndDefects as pair>${pair.getSecond()},</#list>],
+                        ['Estimated issues', <#list modelData.estimatedIssues as pair>${pair.getSecond()},</#list>]
                       ]
                     }
                 });
                 </script>
             </div>
             <div class="col-sm-2 sidenav">
-                    modeData
+            
             </div>
         </div>
     </div>     

@@ -15,4 +15,9 @@ public class LabelsToLowerCase implements IssuesProcessor {
         } 
         return list;
     }
+
+    @Override
+    public String toString() {
+        return "LabelsToLowerCase";
+    }
 }

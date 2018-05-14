@@ -20,7 +20,7 @@ import fi.muni.cz.reliability.tool.dataprocessing.issuesprocessing.configuration
 
 import fi.muni.cz.reliability.tool.dataprocessing.issuesprocessing.Filter;
 import fi.muni.cz.reliability.tool.dataprocessing.issuesprocessing.FilterByLabel;
-import fi.muni.cz.reliability.tool.dataprocessing.issuesprocessing.FilterOutOpened;
+import fi.muni.cz.reliability.tool.dataprocessing.issuesprocessing.FilterClosed;
 
 import fi.muni.cz.reliability.tool.dataprocessing.persistence.GeneralIssuesSnapshot;
 import fi.muni.cz.reliability.tool.dataprocessing.issuesprocessing.reproducer.DataReproducer;
@@ -40,10 +40,10 @@ import org.apache.commons.math3.util.Pair;
 public class TEMPORARY {
     
     //public static final String URL = "https://github.com/eclipse/sumo/";
-    public static final String URL = "https://github.com/beetbox/beets";
+    //public static final String URL = "https://github.com/beetbox/beets";
     //public static final String URL = "https://github.com/spring-projects/spring-boot/issues";
     //public static final String URL = "https://github.com/google/guava";
-    //public static final String URL = "https://github.com/445611/PB071/";
+    public static final String URL = "https://github.com/445611/PB071/";
     
     public static final String AUTH_FILE_NAME = "git_hub_authentication_file.properties";
     
@@ -80,7 +80,7 @@ public class TEMPORARY {
         List<String> filteringWords = setup.loadFilteringWordsFromFile();
         Filter issuesFilterByLabel = new FilterByLabel(filteringWords);
         List<GeneralIssue> list2 = issuesFilterByLabel.filter(list1);
-        Filter issuesFilterClosed = new FilterOutOpened();
+        Filter issuesFilterClosed = new FilterClosed();
         list2 = issuesFilterClosed.filter(list2);
         Calendar cal1 = Calendar.getInstance();
         cal1.set(2008, 1, 1);
@@ -115,6 +115,9 @@ public class TEMPORARY {
         
         
         Model model = new GOModel(new double[]{1,1});
+        System.out.println(model.getTextFormOfTheFunction());
+        
+        
         ModelOutputData modelData = model.calculateFunctionParametersOfModel(countedWeeksWithTotal);
         
         DataReproducer reproducer = new DataReproducer();
@@ -130,7 +133,7 @@ public class TEMPORARY {
         prepareOutputData.setParameters(modelData.getFunctionParameters());
         prepareOutputData.setModelData(modelData);
         prepareOutputData.setModelName("Goel-Okemura model");
-        
+        prepareOutputData.setModelFunction(model.getTextFormOfTheFunction());
         writer.writeOutputDataToFile(prepareOutputData, "TestHTML");
         
         //prepareOutputData.setWeeksAndDefects(countedWeeks);

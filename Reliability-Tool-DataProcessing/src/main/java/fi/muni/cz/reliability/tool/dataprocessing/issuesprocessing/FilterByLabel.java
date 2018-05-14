@@ -76,6 +76,6 @@ public class FilterByLabel implements Filter, Serializable {
 
     @Override
     public String toString() {
-        return "FilterByLabel";
+        return "FilterByLabel with filtering words: " + filteringWords;
     }
 }

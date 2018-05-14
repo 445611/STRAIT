@@ -5,6 +5,8 @@ import java.util.Map;
 import org.apache.commons.math3.util.Pair;
 
 /**
+ * Represents output data of models.
+ * 
  * @author Radoslav Micko, 445611@muni.cz
  */
 public class ModelOutputData {

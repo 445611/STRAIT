@@ -4,6 +4,8 @@ import fi.muni.cz.reliability.tool.models.leastsquaresolver.Function;
 import fi.muni.cz.reliability.tool.models.leastsquaresolver.GOFunction;
 import fi.muni.cz.reliability.tool.models.leastsquaresolver.LeastSquaresOptimization;
 import fi.muni.cz.reliability.tool.models.leastsquaresolver.LeastSquaresOptimizationImpl;
+import java.awt.font.TextAttribute;
+import java.text.AttributedString;
 import java.util.ArrayList;
 
 import java.util.HashMap;
@@ -54,5 +56,12 @@ public class GOModel implements Model {
             listOfEstimatedIssues.add(new Pair<>(pair.getFirst(), roundedEstimation));
         }
         return listOfEstimatedIssues;
+    }
+
+    @Override
+    public String getTextFormOfTheFunction() {
+        AttributedString as = new AttributedString("-b*t");
+        as.addAttribute(TextAttribute.SUPERSCRIPT, TextAttribute.SUPERSCRIPT_SUPER, 0, 3);
+        return "f(t) = a * (1 - e" + "<html><sup>-b*t</sup></html>" + ")";
     }
 }

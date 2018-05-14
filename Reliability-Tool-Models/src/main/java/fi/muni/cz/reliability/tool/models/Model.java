@@ -17,4 +17,11 @@ public interface Model {
      * @return double[] parameters of function
      */
     ModelOutputData calculateFunctionParametersOfModel(List<Pair<Integer, Integer>> list);
+    
+    /**
+     * Get text form of the model function.
+     * 
+     * @return String form
+     */
+    String getTextFormOfTheFunction();
 }

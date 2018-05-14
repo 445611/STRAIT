@@ -2,7 +2,7 @@ package fi.muni.cz.reliability.tool.dataprocessing.issuesprocessing.reproducer;
 
 import fi.muni.cz.reliability.tool.dataprocessing.issuesprocessing.Filter;
 import fi.muni.cz.reliability.tool.dataprocessing.issuesprocessing.FilterByLabel;
-import fi.muni.cz.reliability.tool.dataprocessing.issuesprocessing.FilterOutOpened;
+import fi.muni.cz.reliability.tool.dataprocessing.issuesprocessing.FilterClosed;
 import fi.muni.cz.reliability.tool.dataprocessing.issuesprocessing.modeldata.DefectsCounter;
 import fi.muni.cz.reliability.tool.dataprocessing.issuesprocessing.modeldata.DefectsCounterImpl;
 import fi.muni.cz.reliability.tool.dataprovider.GeneralIssue;
@@ -27,7 +27,7 @@ public class DataReproducer {
     public Map<String, Double> getReproducedData(GeneralIssuesSnapshot snapshot) {
         Filter issuesFilterByLabel = new FilterByLabel(snapshot.getFilteringWords());
         List<GeneralIssue> filtered = issuesFilterByLabel.filter(snapshot.getListOfGeneralIssues());
-        Filter issuesFilterClosed = new FilterOutOpened();
+        Filter issuesFilterClosed = new FilterClosed();
         filtered = issuesFilterClosed.filter(filtered);
         
         
