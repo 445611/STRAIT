@@ -13,26 +13,17 @@ public interface OutputWriter {
      * 
      * @param outputData data to write 
      * @param fileName name of file
+     * @throw   DataProcessingException if there occures any probelm with parsing template
+     *          or writing to file.
      */
     void writeOutputDataToFile(OutputData outputData, String fileName);
     
     /**
      * Prepare attributes in <code>OutputData</code>
      * 
-     * @param url of repositry
-     * @param listOfPairsData Pair data 
-     * @return OutputData prepared with all attributes
+     * @param   url of repositry
+     * @param   listOfPairsData Pair data 
+     * @return  OutputData prepared with all attributes 
      */
     OutputData prepareOutputData(String url, List<Pair<Integer, Integer>> listOfPairsData);
-    
-    
-    /**
-     * Write list of Pair in correct foramt
-     * 
-     * @param writer BufferedWriter to use
-     * @param listOfPairsData data to write
-     * @throws IOException if occures problem while writing to file
-     */
-    //void writeListOfDefects(BufferedWriter writer, 
-    //        List<Pair<Integer, Integer>> listOfPairsData) throws IOException;
 }

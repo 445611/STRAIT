@@ -24,25 +24,10 @@
     }
     
     .sidenav {
-      /*top:0px;
-      bottom:0px;
-      left:0px;
-      right:0px;*/
-      /*padding-top: 100%;*/
+      
       background-color: #f1f1f1;
       height: 100%;
     }
-    
-    /*.footer {
-        background-color: #555;
-        color: white;
-        position: relative;
-        bottom: 0;
-        height: 60px;
-        clear:both;
-        padding-top:20px;
-    }*/
-    
     </style>
 </head>
 <body>
@@ -52,7 +37,7 @@
                 
             </div>
             <div class="col-sm-8 text-left"> 
-                <center><h1>Software reliability</h1></center>
+                <center><h1>Software reliability tool estimation</h1></center>
                 <p>
                     URL = <a href="${data.url}">${data.url}</a><br>
                     This is estimation of issues occurance for  <a href="${data.url}">${data.repositoryName}</a> of user ${data.userName}.<br>
@@ -62,14 +47,16 @@
                     Estimated at <b>${data.createdAt?datetime}</b>.
                 </p>
                 <p>
-                    Real total defects in repository = ${data.totalNumberOfDefects}
+                    Real total defects in repository = ${data.totalNumberOfDefects}<br>
+                    Start of testing <b>${data.createdAt?datetime}</b>.<br>
+                    End of testing <b>${data.createdAt?datetime}</b>.
                 </p>
                 <p>
                     Model function:<br>
                     ${data.modelFunction}<br>
                     Estimated parameters:<br>
-                    <#list parameters as key, value> 
-                      ${key} = ${value} ,
+                    <#list data.modelParameters as key, value> 
+                      ${key} = ${value}<br>
                     </#list>
                 </p>
                 
@@ -81,7 +68,7 @@
                     data: {
                       columns: [
                         ['Real issues', <#list data.weeksAndDefects as pair>${pair.getSecond()},</#list>],
-                        ['Estimated issues', <#list modelData.estimatedIssues as pair>${pair.getSecond()},</#list>]
+                        ['Estimated issues', <#list data.modelData.estimatedIssues as pair>${pair.getSecond()},</#list>]
                       ]
                     }
                 });

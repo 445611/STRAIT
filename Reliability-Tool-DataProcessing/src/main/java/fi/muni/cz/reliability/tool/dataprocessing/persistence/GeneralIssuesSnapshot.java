@@ -27,6 +27,7 @@ public class GeneralIssuesSnapshot implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
+    
     /**
      * From {@link java.util.Calendar Calendar} static properties.
      */
@@ -41,8 +42,6 @@ public class GeneralIssuesSnapshot implements Serializable {
     
     @ElementCollection
     private List<String> filtersRan;
-    @ElementCollection
-    private List<String> filteringWords;
     
     @OneToMany(cascade = CascadeType.MERGE)
     @JoinColumn(name = "snapshot_id")
@@ -62,14 +61,6 @@ public class GeneralIssuesSnapshot implements Serializable {
 
     public void setId(Long id) {
         this.id = id;
-    }
-
-    public List<String> getFilteringWords() {
-        return filteringWords;
-    }
-
-    public void setFilteringWords(List<String> filteringWords) {
-        this.filteringWords = filteringWords;
     }
 
     public int getTypeOfTimeToSplitTestInto() {

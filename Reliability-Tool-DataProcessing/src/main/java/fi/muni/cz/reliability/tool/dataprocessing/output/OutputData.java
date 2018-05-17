@@ -18,15 +18,32 @@ public class OutputData implements Serializable {
     private String repositoryName;
     private Date createdAt;
     private int totalNumberOfDefects;
+    private Date startOfTesting;
+    private Date endOfTesting;
     private List<Pair<Integer, Integer>> weeksAndDefects;
+    
+    
     private Map<String, Double> modelParameters;
     private String modelName;
     private String modelFunction;
     private ModelOutputData modelData;
-    
-    //TODO
-    //Some kind of calculated data from model
 
+    public Date getStartOfTesting() {
+        return startOfTesting;
+    }
+
+    public void setStartOfTesting(Date startOfTesting) {
+        this.startOfTesting = startOfTesting;
+    }
+
+    public Date getEndOfTesting() {
+        return endOfTesting;
+    }
+
+    public void setEndOfTesting(Date endOfTesting) {
+        this.endOfTesting = endOfTesting;
+    }
+    
     public String getModelFunction() {
         return modelFunction;
     }
@@ -43,11 +60,11 @@ public class OutputData implements Serializable {
         this.modelData = modelData;
     }
 
-    public Map<String, Double> getParameters() {
+    public Map<String, Double> getModelParameters() {
         return modelParameters;
     }
 
-    public void setParameters(Map<String, Double> parameters) {
+    public void setModelParameters(Map<String, Double> parameters) {
         this.modelParameters = parameters;
     }
 

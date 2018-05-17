@@ -55,6 +55,12 @@ public class GOModel implements Model {
             Integer roundedEstimation = (int) estimation;
             listOfEstimatedIssues.add(new Pair<>(pair.getFirst(), roundedEstimation));
         }
+        int last = list.get(list.size() - 1).getFirst();
+        for (int i = last + 1; i < last + 100; i++) {
+            double estimation = a * (1 - Math.exp(- b * i));
+            Integer roundedEstimation = (int) estimation;
+            listOfEstimatedIssues.add(new Pair<>(i, roundedEstimation));
+        }
         return listOfEstimatedIssues;
     }
 
@@ -63,5 +69,10 @@ public class GOModel implements Model {
         AttributedString as = new AttributedString("-b*t");
         as.addAttribute(TextAttribute.SUPERSCRIPT, TextAttribute.SUPERSCRIPT_SUPER, 0, 3);
         return "f(t) = a * (1 - e" + "<html><sup>-b*t</sup></html>" + ")";
+    }
+    
+    @Override
+    public String toString() {
+        return "Goel-Okemura model";
     }
 }

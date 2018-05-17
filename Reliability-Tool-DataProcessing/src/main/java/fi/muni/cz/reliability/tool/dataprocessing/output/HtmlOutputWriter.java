@@ -21,32 +21,44 @@ import java.util.logging.Logger;
  */
 public class HtmlOutputWriter extends OutputWriterAbstract {
 
+    private static final String TEMPLATE = "template_one.html";
+    
     @Override
     public void writeOutputDataToFile(OutputData outputData, String fileName) {
-        try {
-            Template temp = configuration.getTemplate("template_one.html");
-            
-            Map<String, Object> root = new HashMap<>();
-            root.put("data", outputData);
-            root.put("parameters", outputData.getParameters());
-            root.put("modelData", outputData.getModelData());
+        Map<String, Object> root = new HashMap<>();
+        root.put("data", outputData);
+        writeTemplateToFile(root, fileName);
+    }
+    
+    private void writeTemplateToFile(Map<String, Object> root, String fileName) {
+        Template template = getTemplateFromConfiguration();
         try (BufferedWriter writer = new BufferedWriter(new OutputStreamWriter(
-                new FileOutputStream(fileName + ".html"), StandardCharsets.UTF_8));) {
-            temp.process(root, writer);
+            new FileOutputStream(fileName + ".html"), StandardCharsets.UTF_8));) {
+            template.process(root, writer);
         } catch (IOException ex) {
-            throw new DataProcessingException("Error occured during writing to file.", ex);
+            logAndThrowException(Level.SEVERE, "Error occured during writing to file.", ex);
         } catch (TemplateException ex) {
-            throw new DataProcessingException("Template error.", ex);
+            logAndThrowException(Level.SEVERE, "Template error.", ex);
         }
-            
+    }
+    
+    private Template getTemplateFromConfiguration() {
+        Template template = null;
+        try {
+            template = configuration.getTemplate(TEMPLATE);
         } catch (MalformedTemplateNameException ex) {
-            Logger.getLogger(HtmlOutputWriter.class.getName()).log(Level.SEVERE, null, ex);
+            logAndThrowException(Level.SEVERE, "Incorrect Template name.", ex);
         } catch (ParseException ex) {
-            Logger.getLogger(HtmlOutputWriter.class.getName()).log(Level.SEVERE, null, ex);
+            logAndThrowException(Level.SEVERE, "Template syntaxe error.", ex);
         } catch (IOException ex) {
-            Logger.getLogger(HtmlOutputWriter.class.getName()).log(Level.SEVERE, null, ex);
+            logAndThrowException(Level.SEVERE, "Template error.", ex);
         }
-        
-        
+        return template;
+    }
+    
+    private void logAndThrowException(Level level, String message, Exception ex) {
+        Logger.getLogger(HtmlOutputWriter.class.getName())
+                    .log(level, message, ex);
+        throw new DataProcessingException(message, ex);
     }
 }

@@ -17,7 +17,6 @@ import org.apache.commons.math3.util.Pair;
  */
 public abstract class OutputWriterAbstract implements OutputWriter {
 
-    private static final String HTML_TEMPLATE_ONE = "template_one.ftlh";
     protected final Configuration configuration;
     
     /**
@@ -37,7 +36,7 @@ public abstract class OutputWriterAbstract implements OutputWriter {
         OutputData data = new OutputData();
         data.setCreatedAt(new Date());
         data.setRepositoryName(parsedUrldata.getRepositoryName());
-        data.setTotalNumberOfDefects(listOfPairsData.stream().mapToInt(a -> a.getSecond()).sum());
+        data.setTotalNumberOfDefects(listOfPairsData.get(listOfPairsData.size() - 1).getSecond());
         data.setUrl(url);
         data.setUserName(parsedUrldata.getUserName());
         data.setWeeksAndDefects(listOfPairsData);
