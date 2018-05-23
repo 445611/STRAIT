@@ -37,32 +37,31 @@
                 
             </div>
             <div class="col-sm-8 text-left"> 
-                <center><h1>${data.repositoryName}</h1></center>
+                <center><h1>PB071</h1></center>
                 <p>
-                    URL = <a href="${data.url}">${data.url}</a><br>
-                    This is estimation of issues occurance for  <a href="${data.url}">${data.repositoryName}</a> of user ${data.userName}.<br>
+                    URL = <a href="https://github.com/445611/PB071/">https://github.com/445611/PB071/</a><br>
+                    This is estimation of issues occurance for  <a href="https://github.com/445611/PB071/">PB071</a> of user 445611.<br>
                 </p>
                 <p>
-                    For estimation was used <b>${data.modelName}</b>.<br>
-                    Estimated at <b>${data.createdAt?datetime}</b>.
+                    For estimation was used <b>Goel-Okemura model</b>.<br>
+                    Estimated at <b>23.5.2018 13:34:47</b>.
                 </p>
                 <p>
-                    Real total defects in repository = ${data.totalNumberOfDefects}<br>
-                    Start of testing <b>${data.startOfTesting?datetime}</b>.<br>
-                    End of testing <b>${data.endOfTesting?datetime}</b>.
+                    Real total defects in repository = 1<br>
+                    Start of testing <b>27.4.2018 22:09:26</b>.<br>
+                    End of testing <b>23.5.2018 13:34:47</b>.
                 </p>
                 <p>
                     Model function:<br>
-                    ${data.modelFunction}<br>
+                    f(t) = a * (1 - e<html><sup>-b*t</sup></html>)<br>
                     Estimated parameters:<br>
-                    <#list data.modelParameters as key, value> 
-                      ${key} = ${value}<br>
-                    </#list>
+                      a = 1<br>
+                      b = 37,476<br>
                 </p>
                 <p>
-                    Chi-Square = ${data.modelData.chiSquareValue}<br>
-                    Chi-Square dôležitostný level = ${data.modelData.chiSquareSignificance}<br>
-                    Chi-Square potvrdenie nultej hypotézy = ${data.modelData.chiSquareHypothesisConformation?string('Áno', 'Nie')}<br>
+                    Chi-Square = 0<br>
+                    Chi-Square dôležitostný level = 1<br>
+                    Chi-Square potvrdenie nultej hypotézy = Nie<br>
                 </p>
                 <div id="chart"></div>
 
@@ -71,8 +70,8 @@
                     bindto: '#chart',
                     data: {
                       columns: [
-                        ['Real issues', <#list data.weeksAndDefects as pair>${pair.getSecond()?c},</#list>],
-                        ['Estimated issues', <#list data.modelData.estimatedIssues as pair>${pair.getSecond()?c},</#list>]
+                        ['Real issues', 1,1,1,],
+                        ['Estimated issues', 1,1,1,]
                       ]
                     }
                 });

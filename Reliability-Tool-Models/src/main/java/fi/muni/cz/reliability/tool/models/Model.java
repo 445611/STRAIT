@@ -14,9 +14,10 @@ public interface Model {
      * Calculate all parameters need for models functions.
      * 
      * @param list of Pairs for models
+     * @param howMuchToPredict how many time periods of issues occurance predict to future
      * @return double[] parameters of function
      */
-    ModelOutputData calculateFunctionParametersOfModel(List<Pair<Integer, Integer>> list);
+    ModelOutputData calculateModelData(List<Pair<Integer, Integer>> list, double howMuchToPredict);
     
     /**
      * Get text form of the model function.

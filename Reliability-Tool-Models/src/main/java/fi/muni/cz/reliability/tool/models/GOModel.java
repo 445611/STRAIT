@@ -1,5 +1,6 @@
 package fi.muni.cz.reliability.tool.models;
 
+import fi.muni.cz.reliability.tool.models.goodnessoffit.GoodnessOfFit;
 import fi.muni.cz.reliability.tool.models.leastsquaresolver.Function;
 import fi.muni.cz.reliability.tool.models.leastsquaresolver.GOFunction;
 import fi.muni.cz.reliability.tool.models.leastsquaresolver.LeastSquaresOptimization;
@@ -32,12 +33,29 @@ public class GOModel implements Model {
     }
     
     @Override
-    public ModelOutputData calculateFunctionParametersOfModel(List<Pair<Integer, Integer>> list) {
+    public ModelOutputData calculateModelData(List<Pair<Integer, Integer>> list, 
+            double howMuchToPredict) {
         Function function = new GOFunction();
         LeastSquaresOptimization optimization = new LeastSquaresOptimizationImpl();
         double[] params = optimization.optimizer(startParameters, list, function);
-        return new ModelOutputData(getMapWithParameters(params), 
-                getEstimatedIssuesByFunction(list, params[0], params[1]));
+        ModelOutputData outputData = new ModelOutputData(getMapWithParameters(params), 
+                getEstimatedIssuesByFunction(list, params[0], params[1], howMuchToPredict));
+        return calculateModelGoodnessOfFitIntoOutputData(list, outputData);
+    }
+    
+    private ModelOutputData calculateModelGoodnessOfFitIntoOutputData(List<Pair<Integer, Integer>> list, 
+            ModelOutputData outputData) {
+        GoodnessOfFit test = new GoodnessOfFit(
+                getEstimatedIssuesByFunction(
+                        list, 
+                        outputData.getFunctionParameters().get("a"), 
+                        outputData.getFunctionParameters().get("b"), 
+                        0),
+                list);
+        outputData.setChiSquareValue(test.getChiSquareValue());
+        outputData.setChiSquareSignificance(test.getChiSquareSignificance());
+        outputData.setChiSquareHypothesisConformation(test.getChiSquareHypothesisConformation(0.05));
+        return outputData;
     }
     
     private Map<String, Double> getMapWithParameters(double[] params) {
@@ -48,7 +66,7 @@ public class GOModel implements Model {
     }
     
     private List<Pair<Integer, Integer>> getEstimatedIssuesByFunction(List<Pair<Integer, Integer>> list,
-            double a, double b) {
+            double a, double b, double howMuchToPredict) {
         List<Pair<Integer, Integer>> listOfEstimatedIssues = new ArrayList<>();
         for (Pair<Integer, Integer> pair: list) {
             double estimation = a * (1 - Math.exp(- b * pair.getFirst()));
@@ -56,7 +74,7 @@ public class GOModel implements Model {
             listOfEstimatedIssues.add(new Pair<>(pair.getFirst(), roundedEstimation));
         }
         int last = list.get(list.size() - 1).getFirst();
-        for (int i = last + 1; i < last + 100; i++) {
+        for (int i = last + 1; i < last + howMuchToPredict; i++) {
             double estimation = a * (1 - Math.exp(- b * i));
             Integer roundedEstimation = (int) estimation;
             listOfEstimatedIssues.add(new Pair<>(i, roundedEstimation));
@@ -66,8 +84,6 @@ public class GOModel implements Model {
 
     @Override
     public String getTextFormOfTheFunction() {
-        AttributedString as = new AttributedString("-b*t");
-        as.addAttribute(TextAttribute.SUPERSCRIPT, TextAttribute.SUPERSCRIPT_SUPER, 0, 3);
         return "f(t) = a * (1 - e" + "<html><sup>-b*t</sup></html>" + ")";
     }
     

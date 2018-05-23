@@ -28,6 +28,8 @@ import fi.muni.cz.reliability.tool.dataprovider.utils.GitHubUrlParser;
 import fi.muni.cz.reliability.tool.dataprovider.utils.ParsedUrlData;
 import fi.muni.cz.reliability.tool.dataprovider.utils.UrlParser;
 import fi.muni.cz.reliability.tool.models.ModelOutputData;
+import fi.muni.cz.reliability.tool.models.goodnessoffit.GoodnessOfFit;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Date;
 import org.apache.commons.math3.util.Pair;
@@ -37,11 +39,11 @@ import org.apache.commons.math3.util.Pair;
  */
 public class TEMPORARY {
     
-    //public static final String URL = "https://github.com/eclipse/sumo/";
-    public static final String URL = "https://github.com/beetbox/beets";
-    //public static final String URL = "https://github.com/spring-projects/spring-boot/issues";
-    //public static final String URL = "https://github.com/google/guava";
-    //public static final String URL = "https://github.com/445611/PB071/";
+    /*TRUE ALL*///public static final String URL = "https://github.com/eclipse/sumo/";
+    /*0.0001 false*///public static final String URL = "https://github.com/beetbox/beets";
+    /*never false*/public static final String URL = "https://github.com/spring-projects/spring-boot";
+    /*0.05 false*///public static final String URL = "https://github.com/google/guava";
+    /*false all*///public static final String URL = "https://github.com/445611/PB071/";
     
     public static final String AUTH_FILE_NAME = "git_hub_authentication_file.properties";
     
@@ -49,7 +51,7 @@ public class TEMPORARY {
      * @param args the command line arguments
      */
     public static void main(String[] args) {
-
+        
         GitHubAuthenticationDataProvider authProvider = new GitHubAuthenticationDataProvider(AUTH_FILE_NAME);
         DataProvider dataProvider = new GitHubDataProvider(authProvider.getGitHubClientWithCreditials());
         
@@ -82,6 +84,7 @@ public class TEMPORARY {
         snapshot.setUrl(URL);
         snapshot.setUserName(parsedUrldata.getUserName());
         
+        //----------------------------Database-----------------------------------------
         /*GeneralIssuesSnapshotDaoImpl dao = new GeneralIssuesSnapshotDaoImpl();
         dao.save(snapshot);
         List<GeneralIssuesSnapshot> fromDB = dao.getAllSnapshots(); 
@@ -89,6 +92,7 @@ public class TEMPORARY {
             System.out.println(snap.getListOfGeneralIssues().size());
         }
         System.out.println(fromDB.get(fromDB.size() - 1).getFiltersRan());*/
+        //------------------------------------------------------------------------------
         System.out.println(issuesFilterByLabel.toString());
         
         Date startOfTesting = null;
@@ -107,7 +111,7 @@ public class TEMPORARY {
         System.out.println(model.getTextFormOfTheFunction());
         
         
-        ModelOutputData modelData = model.calculateFunctionParametersOfModel(countedWeeksWithTotal);
+        ModelOutputData modelData = model.calculateModelData(countedWeeksWithTotal, 0);
         
         //System.out.println(params[0]+" ; "+ params[1]);
         
@@ -123,13 +127,16 @@ public class TEMPORARY {
         prepareOutputData.setModelData(modelData);
         prepareOutputData.setModelName(model.toString());
         prepareOutputData.setModelFunction(model.getTextFormOfTheFunction());
+        prepareOutputData.setStartOfTesting(startOfTesting == null ? filteredList.get(0).getCreatedAt() : startOfTesting);
+        prepareOutputData.setEndOfTesting(endOfTesting == null ? new Date() : endOfTesting);
         //-------------------------------------------------------------------------
         
+        //-------------------------------Goodness of fit---------------------------
         
+        //------------------------------------------------------------------------        
+                
+                
         writer.writeOutputDataToFile(prepareOutputData, "TestHTML");
-        
-        //prepareOutputData.setWeeksAndDefects(countedWeeks);
-        //writerWithPeriods.writeOutputDataToFile(prepareOutputData, "DefectsInWeeks");
         System.exit(0);
     }
 

@@ -13,7 +13,10 @@ public class ModelOutputData {
     
     private Map<String, Double> functionParameters;
     private List<Pair<Integer, Integer>> estimatedIssues;
-
+    private double chiSquareValue;
+    private double chiSquareSignificance;
+    private boolean chiSquareHypothesisConformation;
+    
     /**
      * Default constructor.
      * @param functionParameters estimated parameters
@@ -22,6 +25,30 @@ public class ModelOutputData {
     public ModelOutputData(Map<String, Double> functionParameters, List<Pair<Integer, Integer>> estimatedIssues) {
         this.functionParameters = functionParameters;
         this.estimatedIssues = estimatedIssues;
+    }
+
+    public double getChiSquareValue() {
+        return chiSquareValue;
+    }
+
+    public void setChiSquareValue(double chiSquareValue) {
+        this.chiSquareValue = chiSquareValue;
+    }
+
+    public double getChiSquareSignificance() {
+        return chiSquareSignificance;
+    }
+
+    public void setChiSquareSignificance(double chiSquareSignificance) {
+        this.chiSquareSignificance = chiSquareSignificance;
+    }
+
+    public boolean isChiSquareHypothesisConformation() {
+        return chiSquareHypothesisConformation;
+    }
+
+    public void setChiSquareHypothesisConformation(boolean chiSquareHypothesisConformation) {
+        this.chiSquareHypothesisConformation = chiSquareHypothesisConformation;
     }
 
     public Map<String, Double> getFunctionParameters() {

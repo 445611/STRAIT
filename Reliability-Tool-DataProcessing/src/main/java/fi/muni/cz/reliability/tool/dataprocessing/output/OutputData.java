@@ -22,7 +22,6 @@ public class OutputData implements Serializable {
     private Date endOfTesting;
     private List<Pair<Integer, Integer>> weeksAndDefects;
     
-    
     private Map<String, Double> modelParameters;
     private String modelName;
     private String modelFunction;
@@ -43,7 +42,7 @@ public class OutputData implements Serializable {
     public void setEndOfTesting(Date endOfTesting) {
         this.endOfTesting = endOfTesting;
     }
-    
+
     public String getModelFunction() {
         return modelFunction;
     }
