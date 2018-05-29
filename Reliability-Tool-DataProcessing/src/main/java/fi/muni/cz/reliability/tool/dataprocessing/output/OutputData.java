@@ -1,6 +1,5 @@
 package fi.muni.cz.reliability.tool.dataprocessing.output;
 
-import fi.muni.cz.reliability.tool.models.ModelOutputData;
 import java.io.Serializable;
 import java.util.Date;
 import java.util.List;
@@ -21,12 +20,47 @@ public class OutputData implements Serializable {
     private Date startOfTesting;
     private Date endOfTesting;
     private List<Pair<Integer, Integer>> weeksAndDefects;
+    private List<Pair<Integer, Integer>> timeBetweenDefects;
     
     private Map<String, Double> modelParameters;
+    private List<Pair<Integer, Integer>> estimatedIssuesPrediction;
+    private Map<String, String> goodnessOfFit;
+    private double trend;
     private String modelName;
     private String modelFunction;
-    private ModelOutputData modelData;
 
+    public List<Pair<Integer, Integer>> getTimeBetweenDefects() {
+        return timeBetweenDefects;
+    }
+
+    public void setTimeBetweenDefects(List<Pair<Integer, Integer>> timeBetweenDefects) {
+        this.timeBetweenDefects = timeBetweenDefects;
+    }
+
+    public double getTrend() {
+        return trend;
+    }
+
+    public void setTrend(double trend) {
+        this.trend = trend;
+    }
+
+    public List<Pair<Integer, Integer>> getEstimatedIssuesPrediction() {
+        return estimatedIssuesPrediction;
+    }
+
+    public void setEstimatedIssuesPrediction(List<Pair<Integer, Integer>> estimatedIssuesPrediction) {
+        this.estimatedIssuesPrediction = estimatedIssuesPrediction;
+    }
+
+    public Map<String, String> getGoodnessOfFit() {
+        return goodnessOfFit;
+    }
+
+    public void setGoodnessOfFit(Map<String, String> goodnessOfFit) {
+        this.goodnessOfFit = goodnessOfFit;
+    }
+   
     public Date getStartOfTesting() {
         return startOfTesting;
     }
@@ -51,14 +85,6 @@ public class OutputData implements Serializable {
         this.modelFunction = modelFunction;
     }
     
-    public ModelOutputData getModelData() {
-        return modelData;
-    }
-
-    public void setModelData(ModelOutputData modelData) {
-        this.modelData = modelData;
-    }
-
     public Map<String, Double> getModelParameters() {
         return modelParameters;
     }

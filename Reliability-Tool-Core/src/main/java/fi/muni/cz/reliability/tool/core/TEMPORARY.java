@@ -6,8 +6,7 @@ import fi.muni.cz.reliability.tool.dataprovider.GitHubDataProvider;
 import fi.muni.cz.reliability.tool.dataprovider.authenticationdata.GitHubAuthenticationDataProvider;
 import fi.muni.cz.reliability.tool.models.GOModel;
 import fi.muni.cz.reliability.tool.models.Model;
-import fi.muni.cz.reliability.tool.dataprocessing.issuesprocessing.modeldata.DefectsCounter;
-import fi.muni.cz.reliability.tool.dataprocessing.issuesprocessing.modeldata.DefectsCounterImpl;
+import fi.muni.cz.reliability.tool.dataprocessing.issuesprocessing.modeldata.CumulativeIssuesCounter;
 
 import fi.muni.cz.reliability.tool.dataprocessing.output.OutputWriter;
 
@@ -21,18 +20,24 @@ import fi.muni.cz.reliability.tool.dataprocessing.issuesprocessing.configuration
 import fi.muni.cz.reliability.tool.dataprocessing.issuesprocessing.Filter;
 import fi.muni.cz.reliability.tool.dataprocessing.issuesprocessing.FilterByLabel;
 import fi.muni.cz.reliability.tool.dataprocessing.issuesprocessing.FilterClosed;
+import fi.muni.cz.reliability.tool.dataprocessing.issuesprocessing.modeldata.IntervalIssuesCounter;
 
 import fi.muni.cz.reliability.tool.dataprocessing.persistence.GeneralIssuesSnapshot;
 import fi.muni.cz.reliability.tool.dataprocessing.output.HtmlOutputWriter;
+import fi.muni.cz.reliability.tool.dataprocessing.output.TEMPORARYWriter;
 import fi.muni.cz.reliability.tool.dataprovider.utils.GitHubUrlParser;
 import fi.muni.cz.reliability.tool.dataprovider.utils.ParsedUrlData;
 import fi.muni.cz.reliability.tool.dataprovider.utils.UrlParser;
-import fi.muni.cz.reliability.tool.models.ModelOutputData;
-import fi.muni.cz.reliability.tool.models.goodnessoffit.GoodnessOfFit;
-import java.util.ArrayList;
+import fi.muni.cz.reliability.tool.models.goodnessoffit.ChiSquareGoodnessOfFitTest;
+import fi.muni.cz.reliability.tool.models.goodnessoffit.GoodnessOfFitTest;
+import fi.muni.cz.reliability.tool.models.goodnessoffit.LaplaceTrendTest;
+import fi.muni.cz.reliability.tool.models.goodnessoffit.TrendTest;
 import java.util.Arrays;
 import java.util.Date;
 import org.apache.commons.math3.util.Pair;
+import fi.muni.cz.reliability.tool.dataprocessing.issuesprocessing.modeldata.IssuesCounter;
+import fi.muni.cz.reliability.tool.dataprocessing.issuesprocessing.modeldata.TimeBetweenIssuesCounter;
+import fi.muni.cz.reliability.tool.dataprovider.TEMPORARYFileDataProvider;
 
 /**
  * @author Radoslav Micko, 445611@muni.cz
@@ -41,21 +46,40 @@ public class TEMPORARY {
     
     /*TRUE ALL*///public static final String URL = "https://github.com/eclipse/sumo/";
     /*0.0001 false*///public static final String URL = "https://github.com/beetbox/beets";
-    /*never false*/public static final String URL = "https://github.com/spring-projects/spring-boot";
+    /*never false*///public static final String URL = "https://github.com/spring-projects/spring-boot";
     /*0.05 false*///public static final String URL = "https://github.com/google/guava";
     /*false all*///public static final String URL = "https://github.com/445611/PB071/";
+    //public static final String url = "https://github.com/google/error-prone";
+    //public static final String URL = "https://github.com/ambv/black";
+    //public static final String URL = "https://github.com/facebook/react";
+    //public static final String URL = "https://github.com/angular/angular";
     
     public static final String AUTH_FILE_NAME = "git_hub_authentication_file.properties";
+    
+    
     
     /**
      * @param args the command line arguments
      */
     public static void main(String[] args) {
+        //run("https://github.com/eclipse/sumo/");
+        //run("https://github.com/beetbox/beets");
+        //run("https://github.com/spring-projects/spring-boot");
+        //run("https://github.com/google/guava");
+        //run("https://github.com/google/error-prone");
+        //run("https://github.com/ambv/black");
+        //run("https://github.com/facebook/react");
+        //run("https://github.com/angular/angular");
+        run("https://github.com/445611/PB071");
+        System.exit(0);
+    }
+    
+    public static void run(String url) {
         
         GitHubAuthenticationDataProvider authProvider = new GitHubAuthenticationDataProvider(AUTH_FILE_NAME);
         DataProvider dataProvider = new GitHubDataProvider(authProvider.getGitHubClientWithCreditials());
         
-        List<GeneralIssue> list1 = dataProvider.getIssuesByUrl(URL);
+        List<GeneralIssue> list1 = dataProvider.getIssuesByUrl(url);
 
         FilteringConfiguration setup = new FilteringConfigurationImpl();
         //setup.addWordToConfigFile("sumo");
@@ -69,7 +93,7 @@ public class TEMPORARY {
         Calendar cal2 = Calendar.getInstance();
         cal2.set(2020, 1, 1);
         
-        Model model = new GOModel(new double[]{1,1});
+        
         
         GeneralIssuesSnapshot snapshot = new GeneralIssuesSnapshot();
         snapshot.setCreatedAt(new Date());
@@ -77,11 +101,11 @@ public class TEMPORARY {
         snapshot.setTypeOfTimeToSplitTestInto(Calendar.HOUR_OF_DAY);
         snapshot.setFiltersRan(Arrays.asList(issuesFilterByLabel.toString(), issuesFilterClosed.toString()));
         snapshot.setListOfGeneralIssues(filteredList);
-        snapshot.setModelName(model.toString());
+        
         UrlParser parser = new GitHubUrlParser();
-        ParsedUrlData parsedUrldata = parser.parseUrlAndCheck(URL);
+        ParsedUrlData parsedUrldata = parser.parseUrlAndCheck(url);
         snapshot.setRepositoryName(parsedUrldata.getRepositoryName());
-        snapshot.setUrl(URL);
+        snapshot.setUrl(url);
         snapshot.setUserName(parsedUrldata.getUserName());
         
         //----------------------------Database-----------------------------------------
@@ -100,34 +124,51 @@ public class TEMPORARY {
         snapshot.setStartOfTesting(startOfTesting == null ? filteredList.get(0).getCreatedAt() : startOfTesting);
         snapshot.setEndOfTesting(endOfTesting == null ? new Date() : endOfTesting);
         
-        DefectsCounter counter = new DefectsCounterImpl(Calendar.WEEK_OF_MONTH, 1, 
+        IssuesCounter counter = new IntervalIssuesCounter(Calendar.WEEK_OF_MONTH, 1, 
                 startOfTesting, endOfTesting);
-        List<Pair<Integer, Integer>> countedWeeks = counter.spreadDefectsIntoPeriodsOfTime(filteredList);
-        List<Pair<Integer, Integer>> countedWeeksWithTotal = counter.countTotalDefectsForPeriodsOfTime(countedWeeks);
+        List<Pair<Integer, Integer>> countedWeeks = counter.prepareIssuesDataForModel(filteredList);
+        IssuesCounter cumulativeCounter = new CumulativeIssuesCounter(Calendar.WEEK_OF_MONTH, 1, 
+                startOfTesting, endOfTesting);
+        List<Pair<Integer, Integer>> countedWeeksWithTotal = cumulativeCounter.prepareIssuesDataForModel(filteredList);
         
+        IssuesCounter timeBetween = new TimeBetweenIssuesCounter();
+        List<Pair<Integer, Integer>> timeBetweenList = timeBetween.prepareIssuesDataForModel(filteredList);
+        //TEMPORARYWriter.write(timeBetweenList);
         
-        
+        //--------------------ADDED-------------------------
+        TrendTest trendTest = new LaplaceTrendTest();
+        GoodnessOfFitTest goodnessOfFitTest = new ChiSquareGoodnessOfFitTest();
+        Model model = new GOModel(new double[]{1,1}, countedWeeksWithTotal, goodnessOfFitTest, trendTest);
+        snapshot.setModelName(model.toString());
+        model.estimateModelData();
+        //------------------------------------------------------
         
         System.out.println(model.getTextFormOfTheFunction());
-        
-        
-        ModelOutputData modelData = model.calculateModelData(countedWeeksWithTotal, 0);
-        
-        //System.out.println(params[0]+" ; "+ params[1]);
-        
         
         OutputWriter writer = new HtmlOutputWriter();
         
         //int totalDefects = countedWeeksWithTotal.get(countedWeeksWithTotal.size() - 1).getSecond();
-        OutputData prepareOutputData = writer.prepareOutputData(URL, countedWeeksWithTotal);
+        OutputData prepareOutputData = writer.prepareOutputData(url, countedWeeksWithTotal);
         //prepareOutputData.setTotalNumberOfDefects(totalDefects);
         
         //----------------------REQUIRED TO SET------------------------------------
-        prepareOutputData.setModelParameters(modelData.getFunctionParameters());
-        prepareOutputData.setModelData(modelData);
+        //----------------------TimeBetween----------------------------------------
+        TEMPORARYFileDataProvider prov = new TEMPORARYFileDataProvider();
+        List<Pair<Integer, Integer>> testData = prov.getIssuesByUrl(null);
+        TrendTest trendTest2 = new LaplaceTrendTest();
+        GoodnessOfFitTest goodnessOfFitTest2 = new ChiSquareGoodnessOfFitTest();
+        Model model2 = new GOModel(new double[]{1,1}, testData, goodnessOfFitTest2, trendTest2);
+        model2.estimateModelData();
+        prepareOutputData.setTimeBetweenDefects(testData);
+        prepareOutputData.setTrend(model2.getTrend());
+        //-------------------------------------------------------------------------
+        prepareOutputData.setModelParameters(model.getModelParameters());
+        prepareOutputData.setGoodnessOfFit(model.getGoodnessOfFitData());
+        prepareOutputData.setEstimatedIssuesPrediction(model.getIssuesPrediction(0));
         prepareOutputData.setModelName(model.toString());
         prepareOutputData.setModelFunction(model.getTextFormOfTheFunction());
-        prepareOutputData.setStartOfTesting(startOfTesting == null ? filteredList.get(0).getCreatedAt() : startOfTesting);
+        prepareOutputData.setStartOfTesting(startOfTesting == null ? 
+                filteredList.get(0).getCreatedAt() : startOfTesting);
         prepareOutputData.setEndOfTesting(endOfTesting == null ? new Date() : endOfTesting);
         //-------------------------------------------------------------------------
         
@@ -136,8 +177,8 @@ public class TEMPORARY {
         //------------------------------------------------------------------------        
                 
                 
-        writer.writeOutputDataToFile(prepareOutputData, "TestHTML");
-        System.exit(0);
+        writer.writeOutputDataToFile(prepareOutputData, parsedUrldata.getRepositoryName());
+        java.awt.Toolkit.getDefaultToolkit().beep();
+        
     }
-
 }

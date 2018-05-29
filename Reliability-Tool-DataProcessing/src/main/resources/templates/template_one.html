@@ -13,8 +13,8 @@
     
     <style>
     .navbar {
-      margin-bottom: 0;
-      border-radius: 0;
+        margin-bottom: 0;
+        border-radius: 0;
     }
     
     .row.content {height: 100%;}
@@ -24,9 +24,18 @@
     }
     
     .sidenav {
-      
-      background-color: #f1f1f1;
-      height: 100%;
+        background-color: #f1f1f1;
+        height: 100%;
+    }
+    
+    hr.hrstyle {
+        border: 0;
+        height: 1px;
+        background-image: linear-gradient(to right, rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.75), rgba(0, 0, 0, 0));
+    }
+    
+    .c3-circle {
+        opacity: 1 !important;
     }
     </style>
 </head>
@@ -42,6 +51,7 @@
                     URL = <a href="${data.url}">${data.url}</a><br>
                     This is estimation of issues occurance for  <a href="${data.url}">${data.repositoryName}</a> of user ${data.userName}.<br>
                 </p>
+                <hr class="hrstyle">
                 <p>
                     For estimation was used <b>${data.modelName}</b>.<br>
                     Estimated at <b>${data.createdAt?datetime}</b>.
@@ -56,24 +66,77 @@
                     ${data.modelFunction}<br>
                     Estimated parameters:<br>
                     <#list data.modelParameters as key, value> 
-                      ${key} = ${value}<br>
+                      ${key} = ${value?c}<br>
                     </#list>
                 </p>
-                <p>
-                    Chi-Square = ${data.modelData.chiSquareValue}<br>
-                    Chi-Square dôležitostný level = ${data.modelData.chiSquareSignificance}<br>
-                    Chi-Square potvrdenie nultej hypotézy = ${data.modelData.chiSquareHypothesisConformation?string('Áno', 'Nie')}<br>
-                </p>
-                <div id="chart"></div>
+                <#if data.goodnessOfFit??>
+                    <p>
+                        <#list data.goodnessOfFit as key, value> 
+                            ${key}${value}<br>
+                        </#list> 
+                    </p>              
+                </#if>
+                
+                <#if data.trend??>
+                    <p>
+                        Trend = ${data.trend?c}
+                    </p>
+                </#if>
+                <hr class="hrstyle">    
+                <center><h3>Failure occurance</h3><center>
+                <div id="chart1"></div>
+                <hr class="hrstyle">
+                <center><h3>Time between failures</h3><center>
+                <div id="chart2"></div>
 
                 <script>
-                var chart = c3.generate({
-                    bindto: '#chart',
+                var chart1 = c3.generate({
+                    bindto: '#chart1',
                     data: {
                       columns: [
                         ['Real issues', <#list data.weeksAndDefects as pair>${pair.getSecond()?c},</#list>],
-                        ['Estimated issues', <#list data.modelData.estimatedIssues as pair>${pair.getSecond()?c},</#list>]
+                        ['Estimated issues', <#list data.estimatedIssuesPrediction as pair>${pair.getSecond()?c},</#list>]
                       ]
+                    },
+                    axis: {
+                        x: {
+                            label: {
+                                text: 'Testing periods',
+                                position: 'outer-center'
+                            }
+                        },
+                        y: {
+                            label: {
+                                text: 'Total failures',
+                                position: 'outer-middle'
+                            }
+                        }
+                    }
+                });
+                var chart2 = c3.generate({
+                    bindto: '#chart2',
+                    data: {
+                      columns: [
+                        ['Time between failures', <#list data.timeBetweenDefects as pair>${pair.getSecond()?c},</#list>],
+                      ],
+                      type: 'scatter',
+                      colors: {
+                          'Time between failures': '#ff4444'
+                      }
+                    },
+                    axis: {
+                        x: {
+                            label: {
+                                text: 'Failures',
+                                position: 'outer-center'
+                            }
+                        },
+                        y: {
+                            label: {
+                                text: 'Time between failures',
+                                position: 'outer-middle'
+                            }
+                        }
                     }
                 });
                 </script>

@@ -1,8 +1,7 @@
 package fi.muni.cz.reliability.tool.dataprocessing.issuesprocessing.modeldata;
 
-
-import fi.muni.cz.reliability.tool.dataprovider.GeneralIssue;
 import fi.muni.cz.reliability.tool.dataprocessing.exception.DataProcessingException;
+import fi.muni.cz.reliability.tool.dataprovider.GeneralIssue;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
@@ -13,63 +12,51 @@ import org.apache.commons.math3.util.Pair;
 /**
  * @author Radoslav Micko, 445611@muni.cz
  */
-public class DefectsCounterImpl implements DefectsCounter {
+public class IntervalIssuesCounter implements IssuesCounter {
 
     private final int typeOfTimeToAdd;
     private final int howManyToAdd;
     private Date startOfTesting;
     private Date endOfTesting;
-    
+
     /**
      * Initialize attributes to default value.
      * Defaul value is one week.
      */
-    public DefectsCounterImpl() {
+    public IntervalIssuesCounter() {
         typeOfTimeToAdd = Calendar.WEEK_OF_MONTH;
         howManyToAdd = 1;
         this.startOfTesting = null;
         this.endOfTesting = null;
     }
-    
+
     /**
      * Initialize attributes to certain values.
-     * @param typeOfTimeToAdd type of Calendar enum
-     * @param howManyToAdd number of time parts to add 
-     * @param startOfTesting date when testing started
-     * @param endOfTesting date when testing ended
+     * @param typeOfTimeToAdd type of Calendar enum.
+     * @param howManyToAdd number of time parts to add.
+     * @param startOfTesting date when testing started.
+     * @param endOfTesting date when testing ended.
      */
-    public DefectsCounterImpl(int typeOfTimeToAdd, int howManyToAdd, 
+    public IntervalIssuesCounter(int typeOfTimeToAdd, int howManyToAdd, 
             Date startOfTesting, Date endOfTesting) {
         this.typeOfTimeToAdd = typeOfTimeToAdd;
         this.howManyToAdd = howManyToAdd;
         this.startOfTesting = startOfTesting;
         this.endOfTesting = endOfTesting;
     }
-    
+
     @Override
-    public List<Pair<Integer, Integer>> spreadDefectsIntoPeriodsOfTime(List<GeneralIssue> listOfIssues) {
-        if (listOfIssues == null || listOfIssues.isEmpty()) {
+    public List<Pair<Integer, Integer>> prepareIssuesDataForModel(List<GeneralIssue> rawIssues) {
+        if (rawIssues == null || rawIssues.isEmpty()) {
             throw new NullPointerException("listOfIssues is null or empty.");
         }
         if (startOfTesting == null) {
-            startOfTesting = getDateFromMidNight(listOfIssues.get(0).getCreatedAt());
+            startOfTesting = getDateFromMidNight(rawIssues.get(0).getCreatedAt());
         }
         if (endOfTesting == null) {
             endOfTesting = new Date();
         }
-        return sortingIssuesIntoTimePeriods(listOfIssues);
-    }      
-    
-    @Override
-    public List<Pair<Integer, Integer>> countTotalDefectsForPeriodsOfTime(
-            List<Pair<Integer, Integer>> spreadedDefects) {
-        Integer totalNumber = 0;
-        List<Pair<Integer, Integer>> listOfTotalDefects = new ArrayList<>();
-        for (Pair<Integer, Integer> pair: spreadedDefects) {
-            totalNumber = totalNumber + pair.getSecond();
-            listOfTotalDefects.add(new Pair(pair.getFirst(), totalNumber));
-        }
-        return listOfTotalDefects;
+        return sortingIssuesIntoTimePeriods(rawIssues);
     }
     
     /**
@@ -158,5 +145,5 @@ public class DefectsCounterImpl implements DefectsCounter {
         c.setTime(date);
         c.add(typeOfTimeToAdd, howManyToAdd);
         return c.getTime(); 
-    }    
+    }  
 }

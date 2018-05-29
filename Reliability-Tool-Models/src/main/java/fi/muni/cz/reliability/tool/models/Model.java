@@ -1,6 +1,7 @@
 package fi.muni.cz.reliability.tool.models;
 
 import java.util.List;
+import java.util.Map;
 import org.apache.commons.math3.util.Pair;
 
 /**
@@ -11,18 +12,45 @@ import org.apache.commons.math3.util.Pair;
 public interface Model {
     
     /**
-     * Calculate all parameters need for models functions.
+     * Calculate all parameters need for models functions and execute all data test.
      * 
-     * @param list of Pairs for models
-     * @param howMuchToPredict how many time periods of issues occurance predict to future
-     * @return double[] parameters of function
+     * @throw TrendModelException   when thare is no such trend in data.
      */
-    ModelOutputData calculateModelData(List<Pair<Integer, Integer>> list, double howMuchToPredict);
+    void estimateModelData();
+    
+    /**
+     * Get value of successfully executed trend test.
+     * 
+     * @return  value of trend.
+     */
+    double getTrend();
+
+    /**
+     * Get data of executed goodness of fit (GOF) test.
+     * 
+     * @return  Map with test output data.
+     */
+    Map<String, String> getGoodnessOfFitData();
+    
+    /**
+     * Get parameters of model.
+     * 
+     * @return  Map with parameters of model.
+     */
+    Map<String, Double> getModelParameters();
+    
+    /**
+     * Get list of expected / predicted issues occurance.
+     * 
+     * @param howMuchToPredict  How much time units predict to future.
+     * @return                  list of expected / predicted issues.
+     */
+    List<Pair<Integer, Integer>> getIssuesPrediction(double howMuchToPredict);
     
     /**
      * Get text form of the model function.
      * 
-     * @return String form
+     * @return String form.
      */
     String getTextFormOfTheFunction();
 }
