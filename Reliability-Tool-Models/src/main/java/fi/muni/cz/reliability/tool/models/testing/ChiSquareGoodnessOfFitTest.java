@@ -1,4 +1,4 @@
-package fi.muni.cz.reliability.tool.models.goodnessoffit;
+package fi.muni.cz.reliability.tool.models.testing;
 
 import java.util.ArrayList;
 import java.util.LinkedHashMap;

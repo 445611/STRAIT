@@ -1,7 +1,7 @@
 package fi.muni.cz.reliability.tool.models;
 
-import fi.muni.cz.reliability.tool.models.goodnessoffit.GoodnessOfFitTest;
-import fi.muni.cz.reliability.tool.models.goodnessoffit.TrendTest;
+import fi.muni.cz.reliability.tool.models.testing.GoodnessOfFitTest;
+import fi.muni.cz.reliability.tool.models.testing.TrendTest;
 import fi.muni.cz.reliability.tool.models.leastsquaresolver.Function;
 import fi.muni.cz.reliability.tool.models.leastsquaresolver.GOFunction;
 import fi.muni.cz.reliability.tool.models.leastsquaresolver.LeastSquaresOptimization;

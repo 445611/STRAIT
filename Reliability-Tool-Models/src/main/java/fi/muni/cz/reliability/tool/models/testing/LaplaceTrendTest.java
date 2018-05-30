@@ -1,4 +1,4 @@
-package fi.muni.cz.reliability.tool.models.goodnessoffit;
+package fi.muni.cz.reliability.tool.models.testing;
 
 import java.util.List;
 import org.apache.commons.math3.util.Pair;
@@ -17,6 +17,10 @@ public class LaplaceTrendTest implements TrendTest {
         double numerator = (sumOfDuration / totalNumberOfIssues - listOfIssues.get(listOfIssues.size() - 1).getSecond() / 2) ;
         double denumerator = listOfIssues.get(listOfIssues.size() - 1).getSecond() * Math.sqrt(1 / (12 * totalNumberOfIssues));
         double value = numerator / denumerator;
+        
+        //EVALUATION
+        //THROW TrendModelException when no trend or detoriorating trend
+        
         return value;
     }
 }
