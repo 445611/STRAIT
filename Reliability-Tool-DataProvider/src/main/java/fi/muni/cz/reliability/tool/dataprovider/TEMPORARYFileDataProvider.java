@@ -14,6 +14,11 @@ import org.apache.commons.math3.util.Pair;
  */
 public class TEMPORARYFileDataProvider {
 
+    /**
+     * sadad
+     * @param url asdada
+     * @return asdadfs
+     */
     public List<Pair<Integer, Integer>> getIssuesByUrl(String url) {
         List<Pair<Integer, Integer>> list = new LinkedList<>();
         try (InputStream stream = getClass().getClassLoader()

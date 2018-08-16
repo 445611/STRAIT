@@ -25,9 +25,18 @@ public class OutputData implements Serializable {
     private Map<String, Double> modelParameters;
     private List<Pair<Integer, Integer>> estimatedIssuesPrediction;
     private Map<String, String> goodnessOfFit;
+    private boolean existTrend;
     private double trend;
     private String modelName;
     private String modelFunction;
+
+    public boolean isExistTrend() {
+        return existTrend;
+    }
+
+    public void setExistTrend(boolean existTrend) {
+        this.existTrend = existTrend;
+    }
 
     public List<Pair<Integer, Integer>> getTimeBetweenDefects() {
         return timeBetweenDefects;

@@ -1,7 +1,6 @@
 package fi.muni.cz.reliability.tool.models;
 
 import fi.muni.cz.reliability.tool.models.testing.GoodnessOfFitTest;
-import fi.muni.cz.reliability.tool.models.testing.TrendTest;
 import fi.muni.cz.reliability.tool.models.leastsquaresolver.Function;
 import fi.muni.cz.reliability.tool.models.leastsquaresolver.GOFunction;
 import fi.muni.cz.reliability.tool.models.leastsquaresolver.LeastSquaresOptimization;
@@ -24,37 +23,27 @@ public class GOModel implements Model {
     private Map<String, Double> modelParameters;
     private final List<Pair<Integer, Integer>> listOfIssues;
     private Map<String, String> goodnessOfFit;
-    private double trend;
     
     private final GoodnessOfFitTest goodnessOfFitTest;
-    private final TrendTest trendTest;
     
     /**
      * Initialize model attributes.
      * 
-     * @param startParameters   start parameters to set.
-     * @param listOfIssues      list of issues to estimate with.
-     * @param goodnessOfFitTest Goodness of fit test to execute.
-     * @param trendTest         trend test to execute.
+     * @param startParameters       start parameters to set.
+     * @param listOfIssues          list of issues.
+     * @param goodnessOfFitTest     Goodness of fit test to execute.
      */
     public GOModel(double[] startParameters, List<Pair<Integer, Integer>> listOfIssues, 
-            GoodnessOfFitTest goodnessOfFitTest, TrendTest trendTest) {
+            GoodnessOfFitTest goodnessOfFitTest) {
         this.startParameters = startParameters;
         this.listOfIssues = listOfIssues;
         this.goodnessOfFitTest = goodnessOfFitTest;
-        this.trendTest = trendTest;
     }
     
     @Override
     public void estimateModelData() {
         calculateModelParameters();
         calculateModelGoodnessOfFit();
-        calculateTrend();
-    }
-
-    @Override
-    public double getTrend() {
-        return trend;
     }
 
     @Override
@@ -72,15 +61,11 @@ public class GOModel implements Model {
         return calculateEstimatedIssues(listOfIssues, modelParameters.get("a"), 
                 modelParameters.get("b"), howMuchToPredict);
     }
-
+    
     private void calculateModelParameters() {
         Function function = new GOFunction();
         LeastSquaresOptimization optimization = new LeastSquaresOptimizationImpl();
         setParametersToMap(optimization.optimizer(startParameters, listOfIssues, function));
-    }
-    
-    private void calculateTrend() {
-        trend = trendTest.executeTrendTest(listOfIssues);
     }
     
     private void calculateModelGoodnessOfFit() {

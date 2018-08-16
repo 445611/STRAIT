@@ -17,13 +17,6 @@ public interface Model {
      * @throw TrendModelException   when thare is no such trend in data.
      */
     void estimateModelData();
-    
-    /**
-     * Get value of successfully executed trend test.
-     * 
-     * @return  value of trend.
-     */
-    double getTrend();
 
     /**
      * Get data of executed goodness of fit (GOF) test.

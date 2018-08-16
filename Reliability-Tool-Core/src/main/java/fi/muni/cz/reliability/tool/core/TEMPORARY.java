@@ -24,7 +24,6 @@ import fi.muni.cz.reliability.tool.dataprocessing.issuesprocessing.modeldata.Int
 
 import fi.muni.cz.reliability.tool.dataprocessing.persistence.GeneralIssuesSnapshot;
 import fi.muni.cz.reliability.tool.dataprocessing.output.HtmlOutputWriter;
-import fi.muni.cz.reliability.tool.dataprocessing.output.TEMPORARYWriter;
 import fi.muni.cz.reliability.tool.dataprovider.utils.GitHubUrlParser;
 import fi.muni.cz.reliability.tool.dataprovider.utils.ParsedUrlData;
 import fi.muni.cz.reliability.tool.dataprovider.utils.UrlParser;
@@ -37,7 +36,6 @@ import java.util.Date;
 import org.apache.commons.math3.util.Pair;
 import fi.muni.cz.reliability.tool.dataprocessing.issuesprocessing.modeldata.IssuesCounter;
 import fi.muni.cz.reliability.tool.dataprocessing.issuesprocessing.modeldata.TimeBetweenIssuesCounter;
-import fi.muni.cz.reliability.tool.dataprovider.TEMPORARYFileDataProvider;
 
 /**
  * @author Radoslav Micko, 445611@muni.cz
@@ -62,18 +60,22 @@ public class TEMPORARY {
      * @param args the command line arguments
      */
     public static void main(String[] args) {
-        //run("https://github.com/eclipse/sumo/");
-        //run("https://github.com/beetbox/beets");
-        //run("https://github.com/spring-projects/spring-boot");
-        //run("https://github.com/google/guava");
-        //run("https://github.com/google/error-prone");
-        //run("https://github.com/ambv/black");
-        //run("https://github.com/facebook/react");
-        //run("https://github.com/angular/angular");
-        run("https://github.com/445611/PB071");
+        run("https://github.com/eclipse/sumo/");
+        /*run("https://github.com/beetbox/beets");
+        run("https://github.com/spring-projects/spring-boot");
+        run("https://github.com/google/guava");
+        run("https://github.com/google/error-prone");
+        run("https://github.com/ambv/black");
+        run("https://github.com/facebook/react");
+        run("https://github.com/angular/angular");
+        run("https://github.com/445611/PB071");*/
         System.exit(0);
     }
     
+    /**
+     * sdf
+     * @param url sdf
+     */
     public static void run(String url) {
         
         GitHubAuthenticationDataProvider authProvider = new GitHubAuthenticationDataProvider(AUTH_FILE_NAME);
@@ -136,9 +138,8 @@ public class TEMPORARY {
         //TEMPORARYWriter.write(timeBetweenList);
         
         //--------------------ADDED-------------------------
-        TrendTest trendTest = new LaplaceTrendTest();
         GoodnessOfFitTest goodnessOfFitTest = new ChiSquareGoodnessOfFitTest();
-        Model model = new GOModel(new double[]{1,1}, countedWeeksWithTotal, goodnessOfFitTest, trendTest);
+        Model model = new GOModel(new double[]{1,1}, countedWeeksWithTotal, goodnessOfFitTest);
         snapshot.setModelName(model.toString());
         model.estimateModelData();
         //------------------------------------------------------
@@ -153,14 +154,17 @@ public class TEMPORARY {
         
         //----------------------REQUIRED TO SET------------------------------------
         //----------------------TimeBetween----------------------------------------
-        TEMPORARYFileDataProvider prov = new TEMPORARYFileDataProvider();
+        /*TEMPORARYFileDataProvider prov = new TEMPORARYFileDataProvider();
         List<Pair<Integer, Integer>> testData = prov.getIssuesByUrl(null);
         TrendTest trendTest2 = new LaplaceTrendTest();
         GoodnessOfFitTest goodnessOfFitTest2 = new ChiSquareGoodnessOfFitTest();
-        Model model2 = new GOModel(new double[]{1,1}, testData, goodnessOfFitTest2, trendTest2);
-        model2.estimateModelData();
-        prepareOutputData.setTimeBetweenDefects(testData);
-        prepareOutputData.setTrend(model2.getTrend());
+        Model model2 = new GOModel(new double[]{1,1}, testData, goodnessOfFitTest2);
+        model2.estimateModelData();*/
+        
+        TrendTest trendTest = new LaplaceTrendTest();
+        trendTest.executeTrendTest(filteredList);
+        prepareOutputData.setTimeBetweenDefects(timeBetweenList);
+        prepareOutputData.setTrend(trendTest.getTrendValue());
         //-------------------------------------------------------------------------
         prepareOutputData.setModelParameters(model.getModelParameters());
         prepareOutputData.setGoodnessOfFit(model.getGoodnessOfFitData());

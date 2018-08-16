@@ -77,10 +77,13 @@
                     </p>              
                 </#if>
                 
-                <#if data.trend??>
+                <#if data.trend?? && data.existTrend??>
                     <p>
+                        ${data.existTrend?string("Existuje", "Neexistuje")} trend.<br>
                         Trend = ${data.trend?c}
+                        
                     </p>
+                    
                 </#if>
                 <hr class="hrstyle">    
                 <center><h3>Failure occurance</h3><center>
