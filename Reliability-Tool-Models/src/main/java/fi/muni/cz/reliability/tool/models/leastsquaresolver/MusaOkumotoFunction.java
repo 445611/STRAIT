@@ -8,7 +8,7 @@ import org.apache.commons.math3.analysis.MultivariateVectorFunction;
 /**
  * @author Radoslav Micko, 445611@muni.cz
  */
-public class GOFunction implements Function {
+public class MusaOkumotoFunction implements Function {
     
     private final List<Double> x;
     private final List<Double> y;
@@ -16,7 +16,7 @@ public class GOFunction implements Function {
     /**
      * Initialize variables.
      */
-    public GOFunction() {
+    public MusaOkumotoFunction() {
         this.x = new ArrayList<>();
         this.y = new ArrayList<>();
     }
@@ -41,7 +41,7 @@ public class GOFunction implements Function {
         return (double[] variables) -> {
             double[] values = new double[x.size()];
             for (int i = 0; i < values.length; ++i) {
-                values[i] = variables[0] *  (1 - Math.exp( - variables[1] * x.get(i)));
+                values[i] = variables[0] *  Math.log(variables[1] * x.get(i) + 1);
             }
             return values;
         };
@@ -64,10 +64,8 @@ public class GOFunction implements Function {
             private double[][] jacobian(double[] variables) {
                 double[][] jacobian = new double[x.size()][2];
                 for (int i = 0; i < jacobian.length; ++i) {
-                    //Jacobian with respect to first paramter
-                    jacobian[i][0] = 1 - Math.exp(-variables[1]*x.get(i));
-                    //Jacobian with respect to second parameter
-                    jacobian[i][1] = variables[0] * x.get(i) * Math.exp(-variables[1]*x.get(i));
+                    jacobian[i][0] = Math.log(variables[1] * x.get(i) + 1);
+                    jacobian[i][1] = variables[0] * x.get(i) / (variables[1] * x.get(i) + 1);
                 }
                 return jacobian;
             }

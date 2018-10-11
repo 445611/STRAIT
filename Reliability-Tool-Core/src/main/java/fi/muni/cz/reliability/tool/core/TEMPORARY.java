@@ -4,7 +4,7 @@ import fi.muni.cz.reliability.tool.dataprovider.DataProvider;
 import fi.muni.cz.reliability.tool.dataprovider.GeneralIssue;
 import fi.muni.cz.reliability.tool.dataprovider.GitHubDataProvider;
 import fi.muni.cz.reliability.tool.dataprovider.authenticationdata.GitHubAuthenticationDataProvider;
-import fi.muni.cz.reliability.tool.models.GOModel;
+//import fi.muni.cz.reliability.tool.models.GOModel;
 import fi.muni.cz.reliability.tool.models.Model;
 import fi.muni.cz.reliability.tool.dataprocessing.issuesprocessing.modeldata.CumulativeIssuesCounter;
 
@@ -36,6 +36,10 @@ import java.util.Date;
 import org.apache.commons.math3.util.Pair;
 import fi.muni.cz.reliability.tool.dataprocessing.issuesprocessing.modeldata.IssuesCounter;
 import fi.muni.cz.reliability.tool.dataprocessing.issuesprocessing.modeldata.TimeBetweenIssuesCounter;
+import fi.muni.cz.reliability.tool.models.GOModel;
+
+//import fi.muni.cz.reliability.tool.dataprocessing.persistence.GeneralIssuesSnapshotDaoImpl;
+
 
 /**
  * @author Radoslav Micko, 445611@muni.cz
@@ -60,15 +64,16 @@ public class TEMPORARY {
      * @param args the command line arguments
      */
     public static void main(String[] args) {
-        run("https://github.com/eclipse/sumo/");
-        /*run("https://github.com/beetbox/beets");
-        run("https://github.com/spring-projects/spring-boot");
-        run("https://github.com/google/guava");
-        run("https://github.com/google/error-prone");
+        //run("https://github.com/spring-projects/spring-boot");
+        //run("https://github.com/eclipse/sumo/");
+        //run("https://github.com/angular/angular");
+        
+        //run("https://github.com/beetbox/beets");
+        //run("https://github.com/google/guava");
+        //run("https://github.com/google/error-prone");
         run("https://github.com/ambv/black");
-        run("https://github.com/facebook/react");
-        run("https://github.com/angular/angular");
-        run("https://github.com/445611/PB071");*/
+        //run("https://github.com/facebook/react");
+        //run("https://github.com/445611/PB071");
         System.exit(0);
     }
     
@@ -95,12 +100,12 @@ public class TEMPORARY {
         Calendar cal2 = Calendar.getInstance();
         cal2.set(2020, 1, 1);
         
-        
+        int periodicOfTesting = Calendar.WEEK_OF_MONTH;
         
         GeneralIssuesSnapshot snapshot = new GeneralIssuesSnapshot();
         snapshot.setCreatedAt(new Date());
         snapshot.setHowManyTimeUnitsToAdd(1);
-        snapshot.setTypeOfTimeToSplitTestInto(Calendar.HOUR_OF_DAY);
+        snapshot.setTypeOfTimeToSplitTestInto(periodicOfTesting);
         snapshot.setFiltersRan(Arrays.asList(issuesFilterByLabel.toString(), issuesFilterClosed.toString()));
         snapshot.setListOfGeneralIssues(filteredList);
         
@@ -112,7 +117,7 @@ public class TEMPORARY {
         
         //----------------------------Database-----------------------------------------
         /*GeneralIssuesSnapshotDaoImpl dao = new GeneralIssuesSnapshotDaoImpl();
-        dao.save(snapshot);
+        //dao.save(snapshot);
         List<GeneralIssuesSnapshot> fromDB = dao.getAllSnapshots(); 
         for (GeneralIssuesSnapshot snap: fromDB) {
             System.out.println(snap.getListOfGeneralIssues().size());
@@ -126,10 +131,10 @@ public class TEMPORARY {
         snapshot.setStartOfTesting(startOfTesting == null ? filteredList.get(0).getCreatedAt() : startOfTesting);
         snapshot.setEndOfTesting(endOfTesting == null ? new Date() : endOfTesting);
         
-        IssuesCounter counter = new IntervalIssuesCounter(Calendar.WEEK_OF_MONTH, 1, 
+        IssuesCounter counter = new IntervalIssuesCounter(periodicOfTesting, 1, 
                 startOfTesting, endOfTesting);
         List<Pair<Integer, Integer>> countedWeeks = counter.prepareIssuesDataForModel(filteredList);
-        IssuesCounter cumulativeCounter = new CumulativeIssuesCounter(Calendar.WEEK_OF_MONTH, 1, 
+        IssuesCounter cumulativeCounter = new CumulativeIssuesCounter(periodicOfTesting, 1, 
                 startOfTesting, endOfTesting);
         List<Pair<Integer, Integer>> countedWeeksWithTotal = cumulativeCounter.prepareIssuesDataForModel(filteredList);
         
@@ -165,6 +170,7 @@ public class TEMPORARY {
         trendTest.executeTrendTest(filteredList);
         prepareOutputData.setTimeBetweenDefects(timeBetweenList);
         prepareOutputData.setTrend(trendTest.getTrendValue());
+        prepareOutputData.setExistTrend(trendTest.getResult());
         //-------------------------------------------------------------------------
         prepareOutputData.setModelParameters(model.getModelParameters());
         prepareOutputData.setGoodnessOfFit(model.getGoodnessOfFitData());

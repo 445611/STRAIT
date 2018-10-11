@@ -1,23 +1,20 @@
 package fi.muni.cz.reliability.tool.models;
 
-import fi.muni.cz.reliability.tool.models.testing.GoodnessOfFitTest;
 import fi.muni.cz.reliability.tool.models.leastsquaresolver.Function;
-import fi.muni.cz.reliability.tool.models.leastsquaresolver.GOFunction;
 import fi.muni.cz.reliability.tool.models.leastsquaresolver.LeastSquaresOptimization;
 import fi.muni.cz.reliability.tool.models.leastsquaresolver.LeastSquaresOptimizationImpl;
+import fi.muni.cz.reliability.tool.models.leastsquaresolver.MusaOkumotoFunction;
+import fi.muni.cz.reliability.tool.models.testing.GoodnessOfFitTest;
 import java.util.ArrayList;
-
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import org.apache.commons.math3.util.Pair;
 
 /**
- * Goel-Okumoto (G-O) model
- * 
  * @author Radoslav Micko, 445611@muni.cz
  */
-public class GOModel implements Model {
+public class MusaOkumotoModel implements Model {
 
     private final double[] startParameters;
     private Map<String, Double> modelParameters;
@@ -25,6 +22,9 @@ public class GOModel implements Model {
     private Map<String, String> goodnessOfFit;
     
     private final GoodnessOfFitTest goodnessOfFitTest;
+
+    private final String firstParameter = "α";
+    private final String secondParameter = "β";
     
     /**
      * Initialize model attributes.
@@ -33,13 +33,13 @@ public class GOModel implements Model {
      * @param listOfIssues          list of issues.
      * @param goodnessOfFitTest     Goodness of fit test to execute.
      */
-    public GOModel(double[] startParameters, List<Pair<Integer, Integer>> listOfIssues, 
+    public MusaOkumotoModel(double[] startParameters, List<Pair<Integer, Integer>> listOfIssues, 
             GoodnessOfFitTest goodnessOfFitTest) {
         this.startParameters = startParameters;
         this.listOfIssues = listOfIssues;
         this.goodnessOfFitTest = goodnessOfFitTest;
     }
-    
+
     @Override
     public void estimateModelData() {
         calculateModelParameters();
@@ -58,12 +58,12 @@ public class GOModel implements Model {
 
     @Override
     public List<Pair<Integer, Integer>> getIssuesPrediction(double howMuchToPredict) {
-        return calculateEstimatedIssues(listOfIssues, modelParameters.get("a"), 
-                modelParameters.get("b"), howMuchToPredict);
+        return calculateEstimatedIssues(listOfIssues, modelParameters.get(firstParameter), 
+                modelParameters.get(secondParameter), howMuchToPredict);
     }
     
     private void calculateModelParameters() {
-        Function function = new GOFunction();
+        Function function = new MusaOkumotoFunction();
         LeastSquaresOptimization optimization = new LeastSquaresOptimizationImpl();
         setParametersToMap(optimization.optimizer(startParameters, listOfIssues, function));
     }
@@ -71,16 +71,16 @@ public class GOModel implements Model {
     private void calculateModelGoodnessOfFit() {
         goodnessOfFit = goodnessOfFitTest.executeGoodnessOfFitTest(calculateEstimatedIssues(
                         listOfIssues, 
-                        modelParameters.get("a"), 
-                        modelParameters.get("b"), 
+                        modelParameters.get(firstParameter), 
+                        modelParameters.get(secondParameter), 
                         0),
                 listOfIssues);
     }
     
     private void setParametersToMap(double[] params) {
         Map<String, Double> map = new HashMap<>();
-        map.put("a", params[0]);
-        map.put("b", params[1]);
+        map.put(firstParameter, params[0]);
+        map.put(secondParameter, params[1]);
         modelParameters = map;
     }
     
@@ -88,27 +88,27 @@ public class GOModel implements Model {
             double a, double b, double howMuchToPredict) {
         List<Pair<Integer, Integer>> listOfEstimatedIssues = new ArrayList<>();
         for (Pair<Integer, Integer> pair: list) {
-            double estimation = a * (1 - Math.exp(- b * pair.getFirst()));
+            double estimation = a * Math.log(b * pair.getFirst() + 1);
             Integer roundedEstimation = (int) estimation;
             listOfEstimatedIssues.add(new Pair<>(pair.getFirst(), 
                     roundedEstimation == 0 ? 1 : roundedEstimation));
         }
         int last = list.get(list.size() - 1).getFirst();
         for (int i = last + 1; i < last + howMuchToPredict; i++) {
-            double estimation = a * (1 - Math.exp(- b * i));
+            double estimation = a * Math.log(b * i + 1);
             Integer roundedEstimation = (int) estimation;
             listOfEstimatedIssues.add(new Pair<>(i, roundedEstimation));
         }
         return listOfEstimatedIssues;
     }
-
+    
     @Override
     public String getTextFormOfTheFunction() {
-        return "μ(t) = a * (1 - e" + "<html><sup>-b*t</sup></html>" + ")";
+        return "μ(t) = α * ln(β * t + 1)";
     }
     
     @Override
     public String toString() {
-        return "Goel-Okemura model";
+        return "Musa-Okumoto model";
     }
 }
