@@ -18,8 +18,10 @@ import fi.muni.cz.reliability.tool.dataprovider.DataProvider;
 import fi.muni.cz.reliability.tool.dataprovider.GeneralIssue;
 import fi.muni.cz.reliability.tool.dataprovider.GitHubDataProvider;
 import fi.muni.cz.reliability.tool.dataprovider.authenticationdata.GitHubAuthenticationDataProvider;
+import fi.muni.cz.reliability.tool.models.DuaneModelImpl;
 import fi.muni.cz.reliability.tool.models.GOModel;
 import fi.muni.cz.reliability.tool.models.Model;
+import fi.muni.cz.reliability.tool.models.MusaOkumotoModelImpl;
 import fi.muni.cz.reliability.tool.models.testing.ChiSquareGoodnessOfFitTest;
 import fi.muni.cz.reliability.tool.models.testing.GoodnessOfFitTest;
 import fi.muni.cz.reliability.tool.models.testing.LaplaceTrendTest;
@@ -136,8 +138,9 @@ public class Core {
         
         // MODEL
         GoodnessOfFitTest goodnessOfFitTest = new ChiSquareGoodnessOfFitTest();
-        Model model = new GOModel(new double[]{1,1}, countedWeeksWithTotal, goodnessOfFitTest);
+        //Model model = new GOModel(new double[]{1,1}, countedWeeksWithTotal, goodnessOfFitTest);
         //Model model = new MusaOkumotoModelImpl(new double[]{1,1}, countedWeeksWithTotal, goodnessOfFitTest);
+        Model model = new DuaneModelImpl(new double[]{1,1}, countedWeeksWithTotal, goodnessOfFitTest);
         model.estimateModelData();
         TrendTest trendTest = new LaplaceTrendTest();
         trendTest.executeTrendTest(filteredList);
@@ -153,13 +156,14 @@ public class Core {
         prepareOutputData.setExistTrend(trendTest.getResult());
         prepareOutputData.setModelParameters(model.getModelParameters());
         prepareOutputData.setGoodnessOfFit(model.getGoodnessOfFitData());
-        prepareOutputData.setEstimatedIssuesPrediction(model.getIssuesPrediction(10));
+        prepareOutputData.setEstimatedIssuesPrediction(model.getIssuesPrediction(0));
         prepareOutputData.setModelName(model.toString());
         prepareOutputData.setModelFunction(model.getTextFormOfTheFunction());
         prepareOutputData.setStartOfTesting(startOfTesting == null ? 
                 filteredList.get(0).getCreatedAt() : startOfTesting);
         prepareOutputData.setEndOfTesting(endOfTesting == null ? new Date() : endOfTesting);
-        writer.writeOutputDataToFile(prepareOutputData, parser.getParsedUrlData().getRepositoryName());
+        writer.writeOutputDataToFile(prepareOutputData, parser.getParsedUrlData().getRepositoryName() 
+                + " - " + model.toString());
         // OUTPUT
         
         java.awt.Toolkit.getDefaultToolkit().beep();

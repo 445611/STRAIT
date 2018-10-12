@@ -36,6 +36,7 @@ import java.util.Date;
 import org.apache.commons.math3.util.Pair;
 import fi.muni.cz.reliability.tool.dataprocessing.issuesprocessing.modeldata.IssuesCounter;
 import fi.muni.cz.reliability.tool.dataprocessing.issuesprocessing.modeldata.TimeBetweenIssuesCounter;
+import fi.muni.cz.reliability.tool.models.DuaneModelImpl;
 import fi.muni.cz.reliability.tool.models.GOModel;
 
 //import fi.muni.cz.reliability.tool.dataprocessing.persistence.GeneralIssuesSnapshotDaoImpl;
@@ -68,12 +69,12 @@ public class TEMPORARY {
         //run("https://github.com/eclipse/sumo/");
         //run("https://github.com/angular/angular");
         
-        //run("https://github.com/beetbox/beets");
-        //run("https://github.com/google/guava");
-        //run("https://github.com/google/error-prone");
+        run("https://github.com/beetbox/beets");
+        run("https://github.com/google/guava");
+        run("https://github.com/google/error-prone");
         run("https://github.com/ambv/black");
-        //run("https://github.com/facebook/react");
-        //run("https://github.com/445611/PB071");
+        run("https://github.com/facebook/react");
+        run("https://github.com/445611/PB071");
         System.exit(0);
     }
     
@@ -144,7 +145,7 @@ public class TEMPORARY {
         
         //--------------------ADDED-------------------------
         GoodnessOfFitTest goodnessOfFitTest = new ChiSquareGoodnessOfFitTest();
-        Model model = new GOModel(new double[]{1,1}, countedWeeksWithTotal, goodnessOfFitTest);
+        Model model = new DuaneModelImpl(new double[]{1,1}, countedWeeksWithTotal, goodnessOfFitTest);
         snapshot.setModelName(model.toString());
         model.estimateModelData();
         //------------------------------------------------------
@@ -187,7 +188,8 @@ public class TEMPORARY {
         //------------------------------------------------------------------------        
                 
                 
-        writer.writeOutputDataToFile(prepareOutputData, parsedUrldata.getRepositoryName());
+        writer.writeOutputDataToFile(prepareOutputData, parsedUrldata.getRepositoryName() 
+                + " - " + model.toString());
         java.awt.Toolkit.getDefaultToolkit().beep();
         
     }

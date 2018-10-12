@@ -46,49 +46,44 @@
                 
             </div>
             <div class="col-sm-8 text-left"> 
-                <center><h1>${data.repositoryName}</h1></center>
+                <center><h1>PB071</h1></center>
                 <p>
-                    URL = <a href="${data.url}">${data.url}</a><br>
-                    This is estimation of issues occurance for  <a href="${data.url}">${data.repositoryName}</a> of user ${data.userName}.<br>
+                    URL = <a href="https://github.com/445611/PB071">https://github.com/445611/PB071</a><br>
+                    This is estimation of issues occurance for  <a href="https://github.com/445611/PB071">PB071</a> of user 445611.<br>
                 </p>
                 <hr class="hrstyle">
                 <font size="4"><b>Info:</b></font>
                 <p>
-                    Estimated at <b>${data.createdAt?datetime}</b>.
+                    Estimated at <b>12.10.2018 12:10:02</b>.
                 </p>
                 <p>
-                    Real total defects in repository = ${data.totalNumberOfDefects}<br>
-                    Start of testing <b>${data.startOfTesting?datetime}</b>.<br>
-                    End of testing <b>${data.endOfTesting?datetime}</b>.
+                    Real total defects in repository = 3<br>
+                    Start of testing <b>27.4.2018 22:09:26</b>.<br>
+                    End of testing <b>12.10.2018 12:10:02</b>.
                 </p>
                 <font size="4"><b>Model:</b></font>
                 <p> 
-                    For estimation was used <b>${data.modelName}</b>.<br>
+                    For estimation was used <b>Duane model</b>.<br>
                     Model function:<br>
-                    ${data.modelFunction}<br>
+                    μ(t) = α * t<html><sup>β</sup></html><br>
                     Estimated parameters:<br>
-                    <#list data.modelParameters as key, value> 
-                      ${key} = ${value?c}<br>
-                    </#list>
+                      α = 2.1756142035321<br>
+                      β = 0.120789296536238<br>
                 </p>
-                <#if data.goodnessOfFit??>
                     <font size="4"><b>Goodness of fit:</b></font>   
                     <p>
-                        <#list data.goodnessOfFit as key, value> 
-                            ${key}${value}<br>
-                        </#list> 
+                            Chi-Square = 5.181818181818186<br>
+                            Chi-Square significance level = 99.99609070304103%<br>
+                            Chi-Square null hypothesis rejection = ACCEPT<br>
                     </p>              
-                </#if>
                 
-                <#if data.trend?? && data.existTrend??>
                     <font size="4"><b>Trend test:</b></font>  
                     <p>
-                        ${data.existTrend?string("Existuje", "Neexistuje")} trend.<br>
-                        Trend = ${data.trend?c}
+                        Neexistuje trend.<br>
+                        Trend = 216652.2
                         
                     </p>
                     
-                </#if>
                 <hr class="hrstyle">    
                 <center><h3>Failure occurance</h3><center>
                 <div id="chart1"></div>
@@ -101,8 +96,8 @@
                     bindto: '#chart1',
                     data: {
                       columns: [
-                        ['Real issues', <#list data.weeksAndDefects as pair>${pair.getSecond()?c},</#list>],
-                        ['Estimated issues', <#list data.estimatedIssuesPrediction as pair>${pair.getSecond()?c},</#list>]
+                        ['Real issues', 1,1,1,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,],
+                        ['Estimated issues', 2,2,2,2,2,2,2,2,2,2,2,2,2,2,3,3,3,3,3,3,3,3,3,3,]
                       ]
                     },
                     axis: {
@@ -124,7 +119,7 @@
                     bindto: '#chart2',
                     data: {
                       columns: [
-                        ['Time between failures', <#list data.timeBetweenDefects as pair>${pair.getSecond()?c},</#list>],
+                        ['Time between failures', 0,2166532,20,],
                       ],
                       type: 'scatter',
                       colors: {
