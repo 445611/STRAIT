@@ -16,6 +16,7 @@ public class OutputData implements Serializable {
     private String userName;
     private String repositoryName;
     private Date createdAt;
+    private int initialNumberOfIssues;
     private int totalNumberOfDefects;
     private Date startOfTesting;
     private Date endOfTesting;
@@ -29,7 +30,35 @@ public class OutputData implements Serializable {
     private double trend;
     private String modelName;
     private String modelFunction;
+    private List<String> filtersUsed;
+    private List<String> processorsUsed;
 
+    public int getInitialNumberOfIssues() {
+        return initialNumberOfIssues;
+    }
+
+    public void setInitialNumberOfIssues(int initialNumberOfIssues) {
+        this.initialNumberOfIssues = initialNumberOfIssues;
+    }
+
+    public List<String> getFiltersUsed() {
+        return filtersUsed;
+    }
+
+    public void setFiltersUsed(List<String> filtersUsed) {
+        this.filtersUsed = filtersUsed;
+    }
+
+    public List<String> getProcessorsUsed() {
+        return processorsUsed;
+    }
+
+    public void setProcessorsUsed(List<String> processorsUsed) {
+        this.processorsUsed = processorsUsed;
+    }
+    
+    
+    
     public boolean isExistTrend() {
         return existTrend;
     }

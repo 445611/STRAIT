@@ -6,7 +6,7 @@ import java.util.List;
 /**
  * @author Radoslav Micko, 445611@muni.cz
  */
-public class LabelsToLowerCase implements IssuesProcessor {
+public class LabelsToLowerCaseProcessor implements IssuesProcessor {
     
     @Override
     public List<GeneralIssue> process(List<GeneralIssue> list) {
@@ -16,6 +16,11 @@ public class LabelsToLowerCase implements IssuesProcessor {
         return list;
     }
 
+    @Override
+    public String infoAboutFilter() {
+        return "LabelsToLowerCaseProcessor used to lowercase all lables of issues.";
+    }
+    
     @Override
     public String toString() {
         return "LabelsToLowerCase";

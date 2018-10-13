@@ -18,4 +18,11 @@ public interface Filter {
      * @return {@link java.util.List List} filtered list
      */
     List<GeneralIssue> filter(List<GeneralIssue> list);
+    
+    /**
+     * Information about filter used with atributes.
+     * 
+     * @return String info
+     */
+    String infoAboutFilter();
 }

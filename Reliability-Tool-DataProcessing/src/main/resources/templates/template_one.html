@@ -57,9 +57,29 @@
                     Estimated at <b>${data.createdAt?datetime}</b>.
                 </p>
                 <p>
-                    Real total defects in repository = ${data.totalNumberOfDefects}<br>
+                    Initial number of total defects = ${data.initialNumberOfIssues}<br>
+                    Total defects in repository after processing and filtering = ${data.totalNumberOfDefects}<br>
                     Start of testing <b>${data.startOfTesting?datetime}</b>.<br>
                     End of testing <b>${data.endOfTesting?datetime}</b>.
+                </p>
+                <font size="4"><b>Filters and Processors:</b></font>
+                <p> 
+                Filters:<br>
+                    <p style="margin-left: 20">
+                    <#list data.filtersUsed as value> 
+                        ${value}<br>
+                    </#list>
+                    </p>
+                    Processors:<br>
+                    <p style="margin-left: 20">
+                    <#if data.processorsUsed?size != 0>
+                        <#list data.processorsUsed as value> 
+                            ${value}<br>
+                        </#list>
+                    <#else>
+                        None
+                    </#if>
+                    </p>
                 </p>
                 <font size="4"><b>Model:</b></font>
                 <p> 
@@ -83,7 +103,7 @@
                 <#if data.trend?? && data.existTrend??>
                     <font size="4"><b>Trend test:</b></font>  
                     <p>
-                        ${data.existTrend?string("Existuje", "Neexistuje")} trend.<br>
+                        Trend ${data.existTrend?string("exists", "does not exist")} .<br>
                         Trend = ${data.trend?c}
                         
                     </p>

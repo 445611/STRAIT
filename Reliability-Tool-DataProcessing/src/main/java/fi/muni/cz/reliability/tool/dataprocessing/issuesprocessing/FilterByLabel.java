@@ -70,12 +70,17 @@ public class FilterByLabel implements Filter, Serializable {
      * @return List
      */
     private List<GeneralIssue> allLabelsToLowerCase(List<GeneralIssue> list) {
-        IssuesProcessor toLowerCaseProcessor = new LabelsToLowerCase();
+        IssuesProcessor toLowerCaseProcessor = new LabelsToLowerCaseProcessor();
         return toLowerCaseProcessor.process(list);
     }
 
     @Override
+    public String infoAboutFilter() {
+        return "FilterByLabel used, with filtering world: " + filteringWords;
+    }
+
+    @Override
     public String toString() {
-        return "FilterByLabel with filtering words: " + filteringWords;
+        return "FilterByLabel" + filteringWords;
     }
 }

@@ -156,12 +156,18 @@ public class Core {
         prepareOutputData.setExistTrend(trendTest.getResult());
         prepareOutputData.setModelParameters(model.getModelParameters());
         prepareOutputData.setGoodnessOfFit(model.getGoodnessOfFitData());
-        prepareOutputData.setEstimatedIssuesPrediction(model.getIssuesPrediction(0));
+        prepareOutputData.setEstimatedIssuesPrediction(model.getIssuesPrediction(parser.getPredictionLength()));
         prepareOutputData.setModelName(model.toString());
         prepareOutputData.setModelFunction(model.getTextFormOfTheFunction());
         prepareOutputData.setStartOfTesting(startOfTesting == null ? 
                 filteredList.get(0).getCreatedAt() : startOfTesting);
         prepareOutputData.setEndOfTesting(endOfTesting == null ? new Date() : endOfTesting);
+        
+        prepareOutputData.setInitialNumberOfIssues(listOfInitialIssues.size());
+        prepareOutputData.setFiltersUsed(Arrays.asList(issuesFilterByLabel.infoAboutFilter(), 
+                issuesFilterClosed.infoAboutFilter()));
+        prepareOutputData.setProcessorsUsed(Arrays.asList());
+        
         writer.writeOutputDataToFile(prepareOutputData, parser.getParsedUrlData().getRepositoryName() 
                 + " - " + model.toString());
         // OUTPUT

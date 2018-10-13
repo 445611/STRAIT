@@ -18,4 +18,11 @@ public interface IssuesProcessor {
      * @return List processed list
      */
     List<GeneralIssue> process(List<GeneralIssue> list);
+    
+    /**
+     * Information about filter used with atributes.
+     * 
+     * @return String info
+     */
+    String infoAboutFilter();
 }

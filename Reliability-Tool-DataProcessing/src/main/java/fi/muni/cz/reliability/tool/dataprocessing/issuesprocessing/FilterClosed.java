@@ -25,6 +25,11 @@ public class FilterClosed implements Filter, Serializable {
     }
 
     @Override
+    public String infoAboutFilter() {
+        return "FilterClosed used to filter out opened issues.";
+    }
+    
+    @Override
     public String toString() {
         return "FilterClosed";
     }
