@@ -1,58 +1,56 @@
-<html lang="sk">
+<html>
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>HTML Výstup</title>
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <title>HTML Output</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
 
     <link href="https://cdnjs.cloudflare.com/ajax/libs/c3/0.5.4/c3.css" rel="stylesheet">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/d3/4.13.0/d3.min.js" charset="utf-8"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/c3/0.5.4/c3.min.js"></script>
     
     <style>
-    .navbar {
-        margin-bottom: 0;
-        border-radius: 0;
-    }
-    
-    .row.content {height: 100%;}
-    
-    html ,body {
-        height: 100%;
-    }
-    
-    .sidenav {
-        background-color: #f1f1f1;
-        height: 100%;
-    }
-    
-    hr.hrstyle {
-        border: 0;
-        height: 1px;
-        background-image: linear-gradient(to right, rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.75), rgba(0, 0, 0, 0));
-    }
-    
-    .c3-circle {
-        opacity: 1 !important;
-    }
+        .row{
+            background-color: #def2f1;
+        }
+        
+        .sidenav {
+            background-color: #3aafa9;
+        }
+        
+        h3,h1{
+           font-weight: bold; 
+        }
+        
+        body {
+            height: 100%;
+        }
+
+        hr.hrstyle {
+            border: 0;
+            height: 1px;
+            background-image: linear-gradient(to right, rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.75), rgba(0, 0, 0, 0));
+        }
+
+        .c3-circle {
+            opacity: 1 !important;
+        }
     </style>
 </head>
 <body>
-    <div class="container-fluid text-center">    
-        <div class="row content">
-            <div class="col-sm-2 sidenav">
-                
-            </div>
-            <div class="col-sm-8 text-left"> 
+    <div class="container-fluid">    
+        <div class="row text-left">
+            <div class="col-sm-2 sidenav"></div>
+            <div class="col-sm-8"> 
                 <center><h1>${data.repositoryName}</h1></center>
                 <p>
                     URL = <a href="${data.url}">${data.url}</a><br>
                     This is estimation of issues occurance for  <a href="${data.url}">${data.repositoryName}</a> of user ${data.userName}.<br>
                 </p>
                 <hr class="hrstyle">
-                <font size="4"><b>Info:</b></font>
+                <h3>Info:</h3>
                 <p>
                     Estimated at <b>${data.createdAt?datetime}</b>.
                 </p>
@@ -62,7 +60,7 @@
                     Start of testing <b>${data.startOfTesting?datetime}</b>.<br>
                     End of testing <b>${data.endOfTesting?datetime}</b>.
                 </p>
-                <font size="4"><b>Filters and Processors:</b></font>
+                <h3>Filters and Processors:</h3>
                 <p> 
                 Filters:<br>
                     <p style="margin-left: 20">
@@ -81,9 +79,28 @@
                     </#if>
                     </p>
                 </p>
-                <font size="4"><b>Model:</b></font>
+                <#if data.goodnessOfFit??>
+                    <h3>Goodness of fit:</h3>
+                    <p>
+                        <#list data.goodnessOfFit as key, value> 
+                            ${key}${value}<br>
+                        </#list> 
+                    </p>              
+                </#if>
+                <#if data.trend?? && data.existTrend??>
+                    <h3>Trend test:</h3>
+                    <p>
+                        Trend ${data.existTrend?string("exists", "does not exist")} .<br>
+                        Trend = ${data.trend?c}
+                    </p>
+                </#if>
+                <hr class="hrstyle"> 
+                <center><h3>Time between failures</h3></center>
+                <div id="chart2"></div>
+                <hr class="hrstyle"> 
+                <center>
+                <h3>${data.modelName}</h3>
                 <p> 
-                    For estimation was used <b>${data.modelName}</b>.<br>
                     Model function:<br>
                     ${data.modelFunction}<br>
                     Estimated parameters:<br>
@@ -91,87 +108,63 @@
                       ${key} = ${value?c}<br>
                     </#list>
                 </p>
-                <#if data.goodnessOfFit??>
-                    <font size="4"><b>Goodness of fit:</b></font>   
-                    <p>
-                        <#list data.goodnessOfFit as key, value> 
-                            ${key}${value}<br>
-                        </#list> 
-                    </p>              
-                </#if>
-                
-                <#if data.trend?? && data.existTrend??>
-                    <font size="4"><b>Trend test:</b></font>  
-                    <p>
-                        Trend ${data.existTrend?string("exists", "does not exist")} .<br>
-                        Trend = ${data.trend?c}
-                        
-                    </p>
-                    
-                </#if>
-                <hr class="hrstyle">    
-                <center><h3>Failure occurance</h3><center>
-                <div id="chart1"></div>
                 <hr class="hrstyle">
-                <center><h3>Time between failures</h3><center>
-                <div id="chart2"></div>
-
-                <script>
-                var chart1 = c3.generate({
-                    bindto: '#chart1',
-                    data: {
-                      columns: [
-                        ['Real issues', <#list data.weeksAndDefects as pair>${pair.getSecond()?c},</#list>],
-                        ['Estimated issues', <#list data.estimatedIssuesPrediction as pair>${pair.getSecond()?c},</#list>]
-                      ]
-                    },
-                    axis: {
-                        x: {
-                            label: {
-                                text: 'Testing periods',
-                                position: 'outer-center'
-                            }
-                        },
-                        y: {
-                            label: {
-                                text: 'Total failures',
-                                position: 'outer-middle'
-                            }
-                        }
-                    }
-                });
-                var chart2 = c3.generate({
-                    bindto: '#chart2',
-                    data: {
-                      columns: [
-                        ['Time between failures', <#list data.timeBetweenDefects as pair>${pair.getSecond()?c},</#list>],
-                      ],
-                      type: 'scatter',
-                      colors: {
-                          'Time between failures': '#ff4444'
-                      }
-                    },
-                    axis: {
-                        x: {
-                            label: {
-                                text: 'Failures',
-                                position: 'outer-center'
-                            }
-                        },
-                        y: {
-                            label: {
-                                text: 'Time between failures',
-                                position: 'outer-middle'
-                            }
-                        }
-                    }
-                });
-                </script>
+                <center><h3>Failure occurance</h3></center>
+                <div id="chart1"></div>
             </div>
-            <div class="col-sm-2 sidenav">
-            
-            </div>
+            <div class="col-sm-2 sidenav"></div>
         </div>
-    </div>     
+    </div>
+    <script>
+        var chart1 = c3.generate({
+            bindto: '#chart1',
+            data: {
+              columns: [
+                ['Real issues', <#list data.weeksAndDefects as pair>${pair.getSecond()?c},</#list>],
+                ['Estimated issues', <#list data.estimatedIssuesPrediction as pair>${pair.getSecond()?c},</#list>]
+              ]
+            },
+            axis: {
+                x: {
+                    label: {
+                        text: 'Testing periods',
+                        position: 'outer-center'
+                    }
+                },
+                y: {
+                    label: {
+                        text: 'Total failures',
+                        position: 'outer-middle'
+                    }
+                }
+            }
+        });
+        var chart2 = c3.generate({
+            bindto: '#chart2',
+            data: {
+              columns: [
+                ['Time between failures', <#list data.timeBetweenDefects as pair>${pair.getSecond()?c},</#list>],
+              ],
+              type: 'scatter',
+              colors: {
+                  'Time between failures': '#ff4444'
+              }
+            },
+            axis: {
+                x: {
+                    label: {
+                        text: 'Failures',
+                        position: 'outer-center'
+                    }
+                },
+                y: {
+                    label: {
+                        text: 'Time between failures',
+                        position: 'outer-middle'
+                    }
+                }
+            }
+        });
+    </script>
 </body>
 </html>

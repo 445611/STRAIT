@@ -13,7 +13,7 @@ import org.apache.commons.math3.util.Pair;
 public abstract class OutputWriterAbstract implements OutputWriter {
 
     @Override
-    public abstract void writeOutputDataToFile(OutputData outputData, String fileName);
+    public abstract void writeOutputDataToFile(List<OutputData> outputData, String fileName);
 
     @Override
     public OutputData prepareOutputData(String url, List<Pair<Integer, Integer>> listOfPairsData) {

@@ -16,7 +16,7 @@ public interface OutputWriter {
      * @throw   DataProcessingException if there occures any probelm with parsing template
      *          or writing to file.
      */
-    void writeOutputDataToFile(OutputData outputData, String fileName);
+    void writeOutputDataToFile(List<OutputData> outputData, String fileName);
     
     /**
      * Prepare attributes in <code>OutputData</code>

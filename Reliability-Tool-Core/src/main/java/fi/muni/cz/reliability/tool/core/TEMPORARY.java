@@ -37,7 +37,6 @@ import org.apache.commons.math3.util.Pair;
 import fi.muni.cz.reliability.tool.dataprocessing.issuesprocessing.modeldata.IssuesCounter;
 import fi.muni.cz.reliability.tool.dataprocessing.issuesprocessing.modeldata.TimeBetweenIssuesCounter;
 import fi.muni.cz.reliability.tool.models.DuaneModelImpl;
-import fi.muni.cz.reliability.tool.models.GOModel;
 
 //import fi.muni.cz.reliability.tool.dataprocessing.persistence.GeneralIssuesSnapshotDaoImpl;
 
@@ -188,7 +187,7 @@ public class TEMPORARY {
         //------------------------------------------------------------------------        
                 
                 
-        writer.writeOutputDataToFile(prepareOutputData, parsedUrldata.getRepositoryName() 
+        writer.writeOutputDataToFile(Arrays.asList(prepareOutputData), parsedUrldata.getRepositoryName() 
                 + " - " + model.toString());
         java.awt.Toolkit.getDefaultToolkit().beep();
         

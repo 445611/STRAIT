@@ -138,10 +138,12 @@ public class Core {
         
         // MODEL
         GoodnessOfFitTest goodnessOfFitTest = new ChiSquareGoodnessOfFitTest();
-        //Model model = new GOModel(new double[]{1,1}, countedWeeksWithTotal, goodnessOfFitTest);
-        //Model model = new MusaOkumotoModelImpl(new double[]{1,1}, countedWeeksWithTotal, goodnessOfFitTest);
-        Model model = new DuaneModelImpl(new double[]{1,1}, countedWeeksWithTotal, goodnessOfFitTest);
-        model.estimateModelData();
+        Model goModel = new GOModel(new double[]{1,1}, countedWeeksWithTotal, goodnessOfFitTest);
+        Model moModel = new MusaOkumotoModelImpl(new double[]{1,1}, countedWeeksWithTotal, goodnessOfFitTest);
+        Model duaneModel = new DuaneModelImpl(new double[]{1,1}, countedWeeksWithTotal, goodnessOfFitTest);
+        duaneModel.estimateModelData();
+        goModel.estimateModelData();
+        moModel.estimateModelData();
         TrendTest trendTest = new LaplaceTrendTest();
         trendTest.executeTrendTest(filteredList);
         // MODEL
@@ -149,16 +151,32 @@ public class Core {
         // OUTPUT
         OutputWriter writer = new HtmlOutputWriter();
         
+        OutputData goData = new OutputData();
+        goData.setModelName(goModel.toString());
+        goData.setModelFunction(goModel.getTextFormOfTheFunction());
+        goData.setModelParameters(goModel.getModelParameters());
+        goData.setGoodnessOfFit(goModel.getGoodnessOfFitData());
+        goData.setEstimatedIssuesPrediction(goModel.getIssuesPrediction(parser.getPredictionLength()));
+        goData.setWeeksAndDefects(countedWeeksWithTotal);
+        
+        OutputData moData = new OutputData();
+        moData.setModelName(moModel.toString());
+        moData.setModelFunction(moModel.getTextFormOfTheFunction());
+        moData.setModelParameters(moModel.getModelParameters());
+        moData.setGoodnessOfFit(moModel.getGoodnessOfFitData());
+        moData.setEstimatedIssuesPrediction(moModel.getIssuesPrediction(parser.getPredictionLength()));
+        moData.setWeeksAndDefects(countedWeeksWithTotal);
+        
         OutputData prepareOutputData = writer.prepareOutputData(parser.getParsedUrlData().getUrl().toString(), 
                 countedWeeksWithTotal);
         prepareOutputData.setTimeBetweenDefects(timeBetweenList);
         prepareOutputData.setTrend(trendTest.getTrendValue());
         prepareOutputData.setExistTrend(trendTest.getResult());
-        prepareOutputData.setModelParameters(model.getModelParameters());
-        prepareOutputData.setGoodnessOfFit(model.getGoodnessOfFitData());
-        prepareOutputData.setEstimatedIssuesPrediction(model.getIssuesPrediction(parser.getPredictionLength()));
-        prepareOutputData.setModelName(model.toString());
-        prepareOutputData.setModelFunction(model.getTextFormOfTheFunction());
+        prepareOutputData.setModelParameters(duaneModel.getModelParameters());
+        prepareOutputData.setGoodnessOfFit(duaneModel.getGoodnessOfFitData());
+        prepareOutputData.setEstimatedIssuesPrediction(duaneModel.getIssuesPrediction(parser.getPredictionLength()));
+        prepareOutputData.setModelName(duaneModel.toString());
+        prepareOutputData.setModelFunction(duaneModel.getTextFormOfTheFunction());
         prepareOutputData.setStartOfTesting(startOfTesting == null ? 
                 filteredList.get(0).getCreatedAt() : startOfTesting);
         prepareOutputData.setEndOfTesting(endOfTesting == null ? new Date() : endOfTesting);
@@ -168,8 +186,8 @@ public class Core {
                 issuesFilterClosed.infoAboutFilter()));
         prepareOutputData.setProcessorsUsed(Arrays.asList());
         
-        writer.writeOutputDataToFile(prepareOutputData, parser.getParsedUrlData().getRepositoryName() 
-                + " - " + model.toString());
+        writer.writeOutputDataToFile(Arrays.asList(prepareOutputData, goData, moData), parser.getParsedUrlData().getRepositoryName() 
+                + " - Models comparison");
         // OUTPUT
         
         java.awt.Toolkit.getDefaultToolkit().beep();

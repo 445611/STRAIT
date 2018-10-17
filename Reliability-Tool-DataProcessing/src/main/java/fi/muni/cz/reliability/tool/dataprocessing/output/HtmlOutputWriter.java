@@ -14,17 +14,18 @@ import java.io.IOException;
 import java.io.OutputStreamWriter;
 import java.nio.charset.StandardCharsets;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
 /**
-
  * @author Radoslav Micko, 445611@muni.cz
  */
 public class HtmlOutputWriter extends OutputWriterAbstract {
 
-    private static final String TEMPLATE = "template_one.html";
+    private static final String TEMPLATE_ONE = "template_one.html";
+    private static final String TEMPLATE_TWO = "template_two.html";
     private final Configuration configuration;
     
     /**
@@ -35,16 +36,25 @@ public class HtmlOutputWriter extends OutputWriterAbstract {
     }
     
     @Override
-    public void writeOutputDataToFile(OutputData outputData, String fileName) {
+    public void writeOutputDataToFile(List<OutputData> outputData, String fileName) {
         Map<String, Object> root = new HashMap<>();
-        root.put("data", outputData);
+        if (outputData.size() == 1) {
+            root.put("data", outputData.get(0));
+        } else {
+            root.put("dataList", outputData);
+        }
         writeTemplateToFile(root, fileName);
     }
     
     private void writeTemplateToFile(Map<String, Object> root, String fileName) {
         try (BufferedWriter writer = new BufferedWriter(new OutputStreamWriter(
             new FileOutputStream(fileName + ".html"), StandardCharsets.UTF_8));) {
-            Template template = getTemplateFromConfiguration();
+            Template template;
+            if (root.get("data") != null) {
+                template = getTemplateFromConfiguration(TEMPLATE_ONE);
+            } else {
+                template = getTemplateFromConfiguration(TEMPLATE_TWO);
+            }
             template.process(root, writer);
         } catch (IOException ex) {
             logAndThrowException("Error occured during writing to file.", ex);
@@ -53,9 +63,9 @@ public class HtmlOutputWriter extends OutputWriterAbstract {
         }
     }
     
-    private Template getTemplateFromConfiguration() 
+    private Template getTemplateFromConfiguration(String templateName) 
             throws MalformedTemplateNameException, ParseException, IOException {
-        return configuration.getTemplate(TEMPLATE);
+        return configuration.getTemplate(templateName);
     }
     
     private void logAndThrowException(String message, Exception ex) {
