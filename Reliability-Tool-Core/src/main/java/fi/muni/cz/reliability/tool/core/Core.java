@@ -100,7 +100,7 @@ public class Core {
         
         List<GeneralIssue> listOfInitialIssues = dataProvider.
                 getIssuesByUrl(parser.getParsedUrlData().getUrl().toString());
-        
+
         // FILTERS
         FilteringConfiguration setup = new FilteringConfigurationImpl();
         List<String> filteringWords = setup.loadFilteringWordsFromFile();
@@ -158,7 +158,8 @@ public class Core {
         Model moModel = new MusaOkumotoModelImpl(new double[]{1,1}, countedWeeksWithTotal, goodnessOfFitTest);
         Model duaneModel = new DuaneModelImpl(new double[]{1,1}, countedWeeksWithTotal, goodnessOfFitTest);
         Model goSShapedModel = new GOSShapedModelImpl(new double[]{1,1}, countedWeeksWithTotal, goodnessOfFitTest);
-        Model hdModel = new HossainDahiyaModelImpl(new double[]{70,1,1}, countedWeeksWithTotal, goodnessOfFitTest);
+        Model hdModel = new HossainDahiyaModelImpl(new double[]{countedWeeksWithTotal
+                .get(countedWeeksWithTotal.size() - 1).getSecond(),1,1}, countedWeeksWithTotal, goodnessOfFitTest);
         hdModel.estimateModelData();
         duaneModel.estimateModelData();
         goModel.estimateModelData();
