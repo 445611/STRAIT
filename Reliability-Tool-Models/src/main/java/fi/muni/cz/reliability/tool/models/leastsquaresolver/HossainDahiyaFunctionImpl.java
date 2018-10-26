@@ -50,33 +50,19 @@ public class HossainDahiyaFunctionImpl extends FunctionAbstract {
     protected double getJacobianWithRespectToFirstParamFunction(double[] variables, int index) {
         double nominator = (Math.exp(variables[1]*x.get(index)) - 1);
         double denominator = (Math.exp(variables[1]*x.get(index)) + variables[2]);
-        /*if (Double.isNaN(nominator / denominator) || Double.isInfinite(nominator / denominator)) {
-            return Double.MAX_VALUE;
-        }*/
         return nominator / denominator;
     }
 
     @Override
     protected double getJacobianWithRespectToSecondParamFunction(double[] variables, int index) {
         double nominator = variables[0] * (variables[2] + 1) * x.get(index) * Math.exp(variables[1]*x.get(index));
-        double denominator = (Math.exp(variables[1]*x.get(index)) + variables[2]) * (Math.exp(variables[1]*x.get(index)) + variables[2]);
-        /*if (Double.isNaN(nominator / denominator) || Double.isInfinite(nominator / denominator)) {
-            return Double.MAX_VALUE;
-        }*/
+        double denominator = Math.pow(Math.exp(variables[1]*x.get(index)) + variables[2], 2);
         return nominator / denominator;
-
-        /*return (variables[0] *(variables[2] + 1) * x.get(index) * Math.exp(variables[1]*x.get(index))) 
-                / Math.pow(Math.exp((variables[1]*x.get(index)) + variables[2]), 2);*/
     }
     
     private double getJacobianWithRespectToThirdParamFunction(double[] variables, int index) {
         double nominator = variables[0] * (Math.exp(variables[1]*x.get(index)) - 1);
-        double denominator = (Math.exp(variables[1]*x.get(index)) + variables[2]) * (Math.exp(variables[1]*x.get(index)) + variables[2]);
-        /*if (Double.isNaN(- nominator / denominator) || Double.isInfinite(- nominator / denominator)) {
-            return Double.MAX_VALUE;
-        }*/
+        double denominator = Math.pow(Math.exp(variables[1]*x.get(index)) + variables[2], 2); 
         return (- nominator / denominator );
-        /*return - (variables[0] * (Math.exp(variables[1]*x.get(index)) - 1)) 
-                / Math.pow(Math.exp((variables[1]*x.get(index)) + variables[2]), 2);*/
     }
 }

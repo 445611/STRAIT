@@ -12,6 +12,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Lob;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
@@ -49,6 +50,27 @@ public class GeneralIssue implements Serializable {
     @NotNull
     @Column(name = "snapshot_id")
     private Long snapshotid;
+    
+    @ManyToOne
+    private GeneralUser generalUser;
+    @ManyToOne
+    private GeneralMilestone generalMilestone;
+
+    public GeneralMilestone getGeneralMilestone() {
+        return generalMilestone;
+    }
+
+    public void setGeneralMilestone(GeneralMilestone generalMilestone) {
+        this.generalMilestone = generalMilestone;
+    }
+    
+    public GeneralUser getGeneralUser() {
+        return generalUser;
+    }
+
+    public void setGeneralUser(GeneralUser generalUser) {
+        this.generalUser = generalUser;
+    }
     
     public Long getSnapshotid() {
         return snapshotid;
@@ -148,7 +170,7 @@ public class GeneralIssue implements Serializable {
         if (obj == null) {
             return false;
         }
-        if (obj instanceof GeneralIssue) {
+        if (!(obj instanceof GeneralIssue)) {
             return false;
         }
         final GeneralIssue other = (GeneralIssue) obj;

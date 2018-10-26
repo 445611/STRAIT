@@ -174,7 +174,7 @@ public class GeneralIssuesSnapshot implements Serializable {
         if (obj == null) {
             return false;
         }
-        if (obj instanceof GeneralIssuesSnapshot) {
+        if (!(obj instanceof GeneralIssuesSnapshot)) {
             return false;
         }
         final GeneralIssuesSnapshot other = (GeneralIssuesSnapshot) obj;

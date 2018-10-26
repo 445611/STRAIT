@@ -12,5 +12,21 @@
             <a-hint>org.eclipse.egit.github.core.Label</a-hint>
             <b-hint>java.lang.String</b-hint>
         </field>
+        <field>
+            <a>user</a>
+            <b>generalUser</b>
+        </field>
+        <field>
+            <a>milestone</a>
+            <b>generalMilestone</b>
+        </field>
+    </mapping>
+    <mapping>
+        <class-a>org.eclipse.egit.github.core.User</class-a>
+        <class-b>fi.muni.cz.reliability.tool.dataprovider.GeneralUser</class-b>
+        <field>
+            <a>login</a>
+            <b>name</b>
+        </field>
     </mapping>
 </mappings>
