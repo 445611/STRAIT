@@ -1,5 +1,6 @@
 package fi.muni.cz.reliability.tool.dataprocessing.persistence;
 
+import fi.muni.cz.reliability.tool.dataprocessing.exception.DataProcessingException;
 import java.util.List;
 
 import org.hibernate.Query;
@@ -18,12 +19,36 @@ public class GeneralIssuesSnapshotDaoImpl implements GeneralIssuesSnapshotDao {
     private Session session;
     
     /**
-     * TODO
+     * Initialize session factory.
      */
     public GeneralIssuesSnapshotDaoImpl() {
         getSessionFactory();
     }
 
+    @Override
+    public List<GeneralIssuesSnapshot> getAllSnapshotsForUserAndRepository(String user, String repository) {
+        beginTransaction();
+        Query query = session.createQuery("FROM GeneralIssuesSnapshot "
+                + "WHERE userName = ? AND repositoryName = ?");
+        List<GeneralIssuesSnapshot> result = query.setString(0, user).setString(1, repository).list();
+        endTransaction();
+        return result;
+    }
+
+    @Override
+    public GeneralIssuesSnapshot getSnapshotByName(String name) throws DataProcessingException {
+        beginTransaction();
+        Query query = session.createQuery("FROM GeneralIssuesSnapshot WHERE snapshotName = ?");
+        List<GeneralIssuesSnapshot> result = query.setString(0, name).list();
+        if (result.isEmpty()) {
+            endTransaction();
+            throw new DataProcessingException("No '" + name + "' snapshot found.");
+        }
+        GeneralIssuesSnapshot snapshot = (GeneralIssuesSnapshot) result.get(0);
+        endTransaction();
+        return snapshot;
+    }
+    
     @Override
     public void save(GeneralIssuesSnapshot snapshot) {
         beginTransaction();

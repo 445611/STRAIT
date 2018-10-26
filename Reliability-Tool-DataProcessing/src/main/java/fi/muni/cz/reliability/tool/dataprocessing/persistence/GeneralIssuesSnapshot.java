@@ -50,6 +50,7 @@ public class GeneralIssuesSnapshot implements Serializable {
     private String url;
     private String userName;
     private String repositoryName;
+    private String snapshotName;
     
     @Temporal(TemporalType.TIMESTAMP)
     private Date createdAt;
@@ -105,6 +106,14 @@ public class GeneralIssuesSnapshot implements Serializable {
 
     public List<GeneralIssue> getListOfGeneralIssues() {
         return listOfGeneralIssues;
+    }
+
+    public String getSnapshotName() {
+        return snapshotName;
+    }
+
+    public void setSnapshotName(String snapshotName) {
+        this.snapshotName = snapshotName;
     }
 
     public void setListOfGeneralIssues(List<GeneralIssue> listOfGeneralIssues) {
@@ -190,7 +199,7 @@ public class GeneralIssuesSnapshot implements Serializable {
 
     @Override
     public String toString() {
-        return "GeneralIssuesSnapShot{" + "url=" + url + ", userName=" + userName 
+        return snapshotName + "{url=" + url + ", userName=" + userName 
                 + ", repositoryName=" + repositoryName + ", createdAt=" 
                 + createdAt + ", modelName=" + modelName + ", List = " + listOfGeneralIssues + '}';
     }

@@ -30,9 +30,18 @@ public class OutputData implements Serializable {
     private double trend;
     private String modelName;
     private String modelFunction;
+    private String testingPeriodsUnit;
     private List<String> filtersUsed;
     private List<String> processorsUsed;
 
+    public String getTestingPeriodsUnit() {
+        return testingPeriodsUnit;
+    }
+
+    public void setTestingPeriodsUnit(String testPeriodUnit) {
+        this.testingPeriodsUnit = testPeriodUnit;
+    }
+    
     public int getInitialNumberOfIssues() {
         return initialNumberOfIssues;
     }

@@ -4,6 +4,7 @@ import fi.muni.cz.reliability.tool.models.exception.ModelException;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import org.apache.commons.math3.fitting.leastsquares.GaussNewtonOptimizer;
 import org.apache.commons.math3.fitting.leastsquares.LeastSquaresBuilder;
 import org.apache.commons.math3.fitting.leastsquares.LeastSquaresOptimizer;
 import org.apache.commons.math3.fitting.leastsquares.LevenbergMarquardtOptimizer;
@@ -27,13 +28,13 @@ public class LeastSquaresOptimizationImpl implements LeastSquaresOptimization{
         
         try {
             LeastSquaresOptimizer.Optimum lsoo = levenbergMarquardtOptimizer.optimize(leastSquaresBuilder.build());
-
+            
             //-----------------------------------------------------------------
             final double[] optimalValues = lsoo.getPoint().toArray();
-            System.out.println("A: " + optimalValues[0]);
+            /*System.out.println("A: " + optimalValues[0]);
             System.out.println("B: " + optimalValues[1]);
             System.out.println("Iteration number: "+lsoo.getIterations());
-            System.out.println("Evaluation number: "+lsoo.getEvaluations());
+            System.out.println("Evaluation number: "+lsoo.getEvaluations());*/
             //-----------------------------------------------------------------
 
             return optimalValues;

@@ -10,16 +10,20 @@ import fi.muni.cz.reliability.tool.dataprocessing.issuesprocessing.modeldata.Cum
 import fi.muni.cz.reliability.tool.dataprocessing.issuesprocessing.modeldata.IntervalIssuesCounter;
 import fi.muni.cz.reliability.tool.dataprocessing.issuesprocessing.modeldata.IssuesCounter;
 import fi.muni.cz.reliability.tool.dataprocessing.issuesprocessing.modeldata.TimeBetweenIssuesCounter;
+import fi.muni.cz.reliability.tool.dataprocessing.output.CsvFileWriter;
 import fi.muni.cz.reliability.tool.dataprocessing.output.HtmlOutputWriter;
 import fi.muni.cz.reliability.tool.dataprocessing.output.OutputData;
 import fi.muni.cz.reliability.tool.dataprocessing.output.OutputWriter;
 import fi.muni.cz.reliability.tool.dataprocessing.persistence.GeneralIssuesSnapshot;
+import fi.muni.cz.reliability.tool.dataprocessing.persistence.GeneralIssuesSnapshotDaoImpl;
 import fi.muni.cz.reliability.tool.dataprovider.DataProvider;
 import fi.muni.cz.reliability.tool.dataprovider.GeneralIssue;
 import fi.muni.cz.reliability.tool.dataprovider.GitHubDataProvider;
 import fi.muni.cz.reliability.tool.dataprovider.authenticationdata.GitHubAuthenticationDataProvider;
 import fi.muni.cz.reliability.tool.models.DuaneModelImpl;
-import fi.muni.cz.reliability.tool.models.GOModel;
+import fi.muni.cz.reliability.tool.models.GOModelImpl;
+import fi.muni.cz.reliability.tool.models.GOSShapedModelImpl;
+import fi.muni.cz.reliability.tool.models.HossainDahiyaModelImpl;
 import fi.muni.cz.reliability.tool.models.Model;
 import fi.muni.cz.reliability.tool.models.MusaOkumotoModelImpl;
 import fi.muni.cz.reliability.tool.models.testing.ChiSquareGoodnessOfFitTest;
@@ -37,8 +41,8 @@ import org.apache.commons.math3.util.Pair;
  */
 public class Core {
 
-    public static final String AUTH_FILE_NAME = "git_hub_authentication_file.properties";
-    
+    private static final String AUTH_FILE_NAME = "git_hub_authentication_file.properties";
+    private static final String CSV_FILE_SUFFIX = "csv";
     /**
      * @param args the command line arguments
      */
@@ -62,23 +66,34 @@ public class Core {
         } catch (InvalidInputException e) {
             throw new IllegalArgumentException("Invalid input.\n"
                     + "Expected arguments:\n"
-                    + "URL of github.com repository.\n"
+                    + "+ URL of github.com repository.\n"
+                    + "+ Evaluate / Save data / List snapshots flag, -eval / -save / -list, respectively.\n"
+                    + "- Number of time periods to predict.\n"
                     + "\n"
-                    + "Predisction sign\n"
-                    + "     -p\n"
+                    + "(+ Required argumnet, - optional argument)\n"
+                    + "e.g.: www.github.com/ambv/black -eval 10\n"
                     + "\n"
-                    + "Number of time periods to predict\n"
                     + "Errors:\n"
                     + e.causes());
         }
-        doAnalysis(parser);
+        if (parser.isEvaluate()) {
+            System.out.println("Analyzing");
+            doAnalysis(parser); 
+        } else if (parser.isSave()) {
+            System.out.println("Saving");
+            doSave(parser);
+        } else if (parser.isList() || parser.isListAll()) {
+            doList(parser);
+        }
+        System.out.println("Done!");
+        System.exit(0);
     }
     
     /**
      * Analysis.
      * @param parser with data.
      */
-    public static void doAnalysis(ArgsParser parser) {
+    private static void doAnalysis(ArgsParser parser) {
         
         GitHubAuthenticationDataProvider authProvider = new GitHubAuthenticationDataProvider(AUTH_FILE_NAME);
         DataProvider dataProvider = new GitHubDataProvider(authProvider.getGitHubClientWithCreditials());
@@ -98,6 +113,7 @@ public class Core {
         int periodicOfTesting = Calendar.WEEK_OF_MONTH;
         Date startOfTesting = null;
         Date endOfTesting = null;
+        String testingPeriodsUnit = "week";
         
         // SNAPSHOT
         GeneralIssuesSnapshot snapshot = new GeneralIssuesSnapshot();
@@ -138,18 +154,40 @@ public class Core {
         
         // MODEL
         GoodnessOfFitTest goodnessOfFitTest = new ChiSquareGoodnessOfFitTest();
-        Model goModel = new GOModel(new double[]{1,1}, countedWeeksWithTotal, goodnessOfFitTest);
+        Model goModel = new GOModelImpl(new double[]{1,1}, countedWeeksWithTotal, goodnessOfFitTest);
         Model moModel = new MusaOkumotoModelImpl(new double[]{1,1}, countedWeeksWithTotal, goodnessOfFitTest);
         Model duaneModel = new DuaneModelImpl(new double[]{1,1}, countedWeeksWithTotal, goodnessOfFitTest);
+        Model goSShapedModel = new GOSShapedModelImpl(new double[]{1,1}, countedWeeksWithTotal, goodnessOfFitTest);
+        Model hdModel = new HossainDahiyaModelImpl(new double[]{70,1,1}, countedWeeksWithTotal, goodnessOfFitTest);
+        hdModel.estimateModelData();
         duaneModel.estimateModelData();
         goModel.estimateModelData();
         moModel.estimateModelData();
+        goSShapedModel.estimateModelData();
         TrendTest trendTest = new LaplaceTrendTest();
         trendTest.executeTrendTest(filteredList);
         // MODEL
         
         // OUTPUT
         OutputWriter writer = new HtmlOutputWriter();
+        
+        OutputData hdData = new OutputData();
+        hdData.setModelName(hdModel.toString());
+        hdData.setModelFunction(hdModel.getTextFormOfTheFunction());
+        hdData.setModelParameters(hdModel.getModelParameters());
+        hdData.setGoodnessOfFit(hdModel.getGoodnessOfFitData());
+        hdData.setEstimatedIssuesPrediction(hdModel.getIssuesPrediction(parser.getPredictionLength()));
+        hdData.setWeeksAndDefects(countedWeeksWithTotal);
+        hdData.setTestingPeriodsUnit(testingPeriodsUnit);
+        
+        OutputData goSShapedData = new OutputData();
+        goSShapedData.setModelName(goSShapedModel.toString());
+        goSShapedData.setModelFunction(goSShapedModel.getTextFormOfTheFunction());
+        goSShapedData.setModelParameters(goSShapedModel.getModelParameters());
+        goSShapedData.setGoodnessOfFit(goSShapedModel.getGoodnessOfFitData());
+        goSShapedData.setEstimatedIssuesPrediction(goSShapedModel.getIssuesPrediction(parser.getPredictionLength()));
+        goSShapedData.setWeeksAndDefects(countedWeeksWithTotal);
+        goSShapedData.setTestingPeriodsUnit(testingPeriodsUnit);
         
         OutputData goData = new OutputData();
         goData.setModelName(goModel.toString());
@@ -158,6 +196,7 @@ public class Core {
         goData.setGoodnessOfFit(goModel.getGoodnessOfFitData());
         goData.setEstimatedIssuesPrediction(goModel.getIssuesPrediction(parser.getPredictionLength()));
         goData.setWeeksAndDefects(countedWeeksWithTotal);
+        goData.setTestingPeriodsUnit(testingPeriodsUnit);
         
         OutputData moData = new OutputData();
         moData.setModelName(moModel.toString());
@@ -166,6 +205,7 @@ public class Core {
         moData.setGoodnessOfFit(moModel.getGoodnessOfFitData());
         moData.setEstimatedIssuesPrediction(moModel.getIssuesPrediction(parser.getPredictionLength()));
         moData.setWeeksAndDefects(countedWeeksWithTotal);
+        moData.setTestingPeriodsUnit(testingPeriodsUnit);
         
         OutputData prepareOutputData = writer.prepareOutputData(parser.getParsedUrlData().getUrl().toString(), 
                 countedWeeksWithTotal);
@@ -185,11 +225,65 @@ public class Core {
         prepareOutputData.setFiltersUsed(Arrays.asList(issuesFilterByLabel.infoAboutFilter(), 
                 issuesFilterClosed.infoAboutFilter()));
         prepareOutputData.setProcessorsUsed(Arrays.asList());
+        prepareOutputData.setTestingPeriodsUnit(testingPeriodsUnit);
         
-        writer.writeOutputDataToFile(Arrays.asList(prepareOutputData, goData, moData), parser.getParsedUrlData().getRepositoryName() 
+        writer.writeOutputDataToFile(Arrays.asList(prepareOutputData, goData, moData, goSShapedData, hdData), 
+                parser.getParsedUrlData().getRepositoryName() 
                 + " - Models comparison");
+        writer.writeOutputDataToFile(Arrays.asList(prepareOutputData), 
+                parser.getParsedUrlData().getRepositoryName() 
+                + " - " + prepareOutputData.getModelName());
         // OUTPUT
         
         java.awt.Toolkit.getDefaultToolkit().beep();
+    }
+
+    private static void doSave(ArgsParser parser) {
+        
+        
+        GitHubAuthenticationDataProvider authProvider = new GitHubAuthenticationDataProvider(AUTH_FILE_NAME);
+        DataProvider dataProvider = new GitHubDataProvider(authProvider.getGitHubClientWithCreditials());
+        
+        List<GeneralIssue> listOfInitialIssues = dataProvider.
+                getIssuesByUrl(parser.getParsedUrlData().getUrl().toString());
+        
+        // FILTERS
+        FilteringConfiguration setup = new FilteringConfigurationImpl();
+        List<String> filteringWords = setup.loadFilteringWordsFromFile();
+        Filter issuesFilterByLabel = new FilterByLabel(filteringWords);
+        List<GeneralIssue> filteredList = issuesFilterByLabel.filter(listOfInitialIssues);
+        Filter issuesFilterClosed = new FilterClosed();
+        filteredList = issuesFilterClosed.filter(filteredList);
+        
+        CsvFileWriter.writeCsvFile(filteredList, parser.getParsedUrlData().getRepositoryName() + "." + CSV_FILE_SUFFIX);
+    }
+
+    private static void doList(ArgsParser parser) {
+        if (parser.isListAll()) {
+            listAllSnapshots();
+        } else if (parser.isList()) {
+            listAllSnapshotsForUrl(parser);
+        }
+    }
+    
+    private static void listAllSnapshots() {
+        GeneralIssuesSnapshotDaoImpl dao = new GeneralIssuesSnapshotDaoImpl();
+        List<GeneralIssuesSnapshot> listFromDB = dao.getAllSnapshots(); 
+        for (GeneralIssuesSnapshot snap: listFromDB) {
+            System.out.println(snap);
+        }
+    }
+    
+    private static void listAllSnapshotsForUrl(ArgsParser parser) {
+        GeneralIssuesSnapshotDaoImpl dao = new GeneralIssuesSnapshotDaoImpl();
+        List<GeneralIssuesSnapshot> listFromDB = dao.getAllSnapshotsForUserAndRepository(
+                parser.getParsedUrlData().getUserName(), parser.getParsedUrlData().getRepositoryName()); 
+        if (listFromDB.isEmpty()) {
+            System.out.println("No snapshots for: " + parser.getParsedUrlData().getUrl().toString());
+        } else {
+            for (GeneralIssuesSnapshot snap: listFromDB) {
+                System.out.println(snap);
+            }
+        }
     }
 }

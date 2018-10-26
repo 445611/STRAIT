@@ -8,23 +8,23 @@ import org.apache.commons.math3.analysis.MultivariateVectorFunction;
 /**
  * @author Radoslav Micko, 445611@muni.cz
  */
-public class GOFunction implements Function {
+public abstract class FunctionAbstract implements Function {
     
-    private final List<Double> x;
-    private final List<Double> y;
+    protected final List<Double> x;
+    protected final List<Double> y;
 
     /**
      * Initialize variables.
      */
-    public GOFunction() {
+    public FunctionAbstract() {
         this.x = new ArrayList<>();
         this.y = new ArrayList<>();
     }
-    
+
     @Override
     public void addPoint(double xin, double yin) {
-        this.x.add(xin);
-        this.y.add(yin);
+        x.add(xin);
+        y.add(yin);
     }
     
     @Override
@@ -41,7 +41,7 @@ public class GOFunction implements Function {
         return (double[] variables) -> {
             double[] values = new double[x.size()];
             for (int i = 0; i < values.length; ++i) {
-                values[i] = variables[0] *  (1 - Math.exp( - variables[1] * x.get(i)));
+                values[i] = getVectorFunction(variables, i);
             }
             return values;
         };
@@ -64,13 +64,38 @@ public class GOFunction implements Function {
             private double[][] jacobian(double[] variables) {
                 double[][] jacobian = new double[x.size()][2];
                 for (int i = 0; i < jacobian.length; ++i) {
-                    //Jacobian with respect to first paramter
-                    jacobian[i][0] = 1 - Math.exp(-variables[1]*x.get(i));
-                    //Jacobian with respect to second parameter
-                    jacobian[i][1] = variables[0] * x.get(i) * Math.exp(-variables[1]*x.get(i));
+                    jacobian[i][0] = getJacobianWithRespectToFirstParamFunction(variables, i);
+                    jacobian[i][1] = getJacobianWithRespectToSecondParamFunction(variables, i);
                 }
                 return jacobian;
             }
         };
     }
+
+    /**
+     * Get value for i-th element of function.
+     * 
+     * @param variables for fuction
+     * @param index     index of element
+     * @return          value of function
+     */
+    protected abstract double getVectorFunction(double[] variables, int index);
+    
+    /**
+     * Jacobian with respect to first paramter.
+     * 
+     * @param variables function variables.
+     * @param index     index of element.
+     * @return          value of jacobian.
+     */
+    protected abstract double getJacobianWithRespectToFirstParamFunction(double[] variables, int index);
+    
+    /**
+     * Jacobian with respect to second parameter
+     * 
+     * @param variables function variables.
+     * @param index     index of element.
+     * @return          value of jacobian.
+     */
+    protected abstract double getJacobianWithRespectToSecondParamFunction(double[] variables, int index);
 }

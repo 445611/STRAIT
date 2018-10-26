@@ -76,7 +76,7 @@ public class FilterByLabel implements Filter, Serializable {
 
     @Override
     public String infoAboutFilter() {
-        return "FilterByLabel used, with filtering world: " + filteringWords;
+        return "FilterByLabel used, with filtering words: " + filteringWords;
     }
 
     @Override

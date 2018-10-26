@@ -1,9 +1,8 @@
 package fi.muni.cz.reliability.tool.models;
 
 import fi.muni.cz.reliability.tool.models.leastsquaresolver.Function;
-import fi.muni.cz.reliability.tool.models.leastsquaresolver.MusaOkumotoFunction;
+import fi.muni.cz.reliability.tool.models.leastsquaresolver.MusaOkumotoFunctionImpl;
 import fi.muni.cz.reliability.tool.models.testing.GoodnessOfFitTest;
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -30,28 +29,14 @@ public class MusaOkumotoModelImpl extends AbstractModel {
     }
     
     @Override
-    protected List<Pair<Integer, Integer>> calculateEstimatedIssuesOccurance(double howMuchToPredict) {
-        List<Pair<Integer, Integer>> listOfEstimatedIssues = new ArrayList<>();
-        for (Pair<Integer, Integer> pair: listOfIssues) {
-            double estimation = modelParameters.get(firstParameter) * 
-                    Math.log(modelParameters.get(secondParameter) * pair.getFirst() + 1);
-            Integer roundedEstimation = (int) estimation;
-            listOfEstimatedIssues.add(new Pair<>(pair.getFirst(), 
-                    roundedEstimation == 0 ? 1 : roundedEstimation));
-        }
-        int last = listOfIssues.get(listOfIssues.size() - 1).getFirst();
-        for (int i = last + 1; i < last + howMuchToPredict; i++) {
-            double estimation = modelParameters.get(firstParameter) * 
-                    Math.log(modelParameters.get(secondParameter) * i + 1);
-            Integer roundedEstimation = (int) estimation;
-            listOfEstimatedIssues.add(new Pair<>(i, roundedEstimation));
-        }
-        return listOfEstimatedIssues;
+    protected double getFunctionValue(Integer testPeriod) {
+        return modelParameters.get(firstParameter) *
+                Math.log(modelParameters.get(secondParameter) * testPeriod + 1);        
     }
     
     @Override
     protected  Function getModelFunction() {
-        return new MusaOkumotoFunction();
+        return new MusaOkumotoFunctionImpl();
     }
     
     @Override

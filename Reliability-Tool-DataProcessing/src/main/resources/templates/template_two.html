@@ -18,6 +18,10 @@
                 background-color: #def2f1;
             }
             
+            .container-fluid{
+		background-color: #def2f1;
+            }
+            
             .container{
                 background-color: #def2f1;
             }
@@ -107,13 +111,13 @@
                     <hr class="hrstyle">
                     <center><h3>Time between failures</h3></center>
                     <div id="chart0"></div>
+                    <hr class="hrstyle">
                 </div>
                 <div class="col-sm-2 sidenav"></div>
             </div>
         </div>
-        <div class="container testimonial-group">
-            <hr class="hrstyle">
-            <center><h3>Models</h3></center>
+        <div class="container-fluid testimonial-group">
+            <center><h3>Comparison of ${dataList?size} models:</h3></center>
             <div class="row text-center flex-nowrap">
                 <#assign i = 1>
                 <#list dataList as outputData>
@@ -165,7 +169,7 @@
                     },
                     y: {
                         label: {
-                            text: 'Time between failures',
+                            text: 'Time between failures (s)',
                             position: 'outer-middle'
                         }
                     }
@@ -184,7 +188,7 @@
                     axis: {
                         x: {
                             label: {
-                                text: 'Testing periods',
+                                text: 'Testing periods (${outputData.testingPeriodsUnit})',
                                 position: 'outer-center'
                             }
                         },
