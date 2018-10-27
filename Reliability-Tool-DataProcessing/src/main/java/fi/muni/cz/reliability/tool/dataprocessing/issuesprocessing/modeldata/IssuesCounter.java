@@ -11,6 +11,13 @@ import org.apache.commons.math3.util.Pair;
  */
 public interface IssuesCounter {
     
+    String SECONDS = "Seconds";
+    String MINUTES = "Minutes";
+    String HOURS = "Hours";
+    String DAYS = "Days";
+    String WEEKS = "Weeks";
+    String YEARS = "Years";
+    
     /**
      * Prepare issues data for model.
      * 
@@ -18,5 +25,4 @@ public interface IssuesCounter {
      * @return          List of counted pairs.
      */
     List<Pair<Integer, Integer>> prepareIssuesDataForModel(List<GeneralIssue> rawIssues);
-    
 }

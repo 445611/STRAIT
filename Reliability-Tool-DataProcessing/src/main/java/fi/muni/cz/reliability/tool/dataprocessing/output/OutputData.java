@@ -22,6 +22,7 @@ public class OutputData implements Serializable {
     private Date endOfTesting;
     private List<Pair<Integer, Integer>> weeksAndDefects;
     private List<Pair<Integer, Integer>> timeBetweenDefects;
+    private String timeBetweenDefectsUnit;
     
     private Map<String, Double> modelParameters;
     private List<Pair<Integer, Integer>> estimatedIssuesPrediction;
@@ -34,6 +35,14 @@ public class OutputData implements Serializable {
     private List<String> filtersUsed;
     private List<String> processorsUsed;
 
+    public String getTimeBetweenDefectsUnit() {
+        return timeBetweenDefectsUnit;
+    }
+
+    public void setTimeBetweenDefectsUnit(String timeBetweenDefectsUnit) {
+        this.timeBetweenDefectsUnit = timeBetweenDefectsUnit;
+    }
+    
     public String getTestingPeriodsUnit() {
         return testingPeriodsUnit;
     }

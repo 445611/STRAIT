@@ -100,12 +100,12 @@ public class TEMPORARY {
         Calendar cal2 = Calendar.getInstance();
         cal2.set(2020, 1, 1);
         
-        int periodicOfTesting = Calendar.WEEK_OF_MONTH;
+        String periodicOfTesting = IssuesCounter.WEEKS;
         
         GeneralIssuesSnapshot snapshot = new GeneralIssuesSnapshot();
         snapshot.setCreatedAt(new Date());
         snapshot.setHowManyTimeUnitsToAdd(1);
-        snapshot.setTypeOfTimeToSplitTestInto(periodicOfTesting);
+        //snapshot.setTypeOfTimeToSplitTestInto(periodicOfTesting);
         snapshot.setFiltersRan(Arrays.asList(issuesFilterByLabel.toString(), issuesFilterClosed.toString()));
         snapshot.setListOfGeneralIssues(filteredList);
         
@@ -138,7 +138,7 @@ public class TEMPORARY {
                 startOfTesting, endOfTesting);
         List<Pair<Integer, Integer>> countedWeeksWithTotal = cumulativeCounter.prepareIssuesDataForModel(filteredList);
         
-        IssuesCounter timeBetween = new TimeBetweenIssuesCounter();
+        IssuesCounter timeBetween = new TimeBetweenIssuesCounter(periodicOfTesting);
         List<Pair<Integer, Integer>> timeBetweenList = timeBetween.prepareIssuesDataForModel(filteredList);
         //TEMPORARYWriter.write(timeBetweenList);
         
@@ -166,7 +166,7 @@ public class TEMPORARY {
         Model model2 = new GOModel(new double[]{1,1}, testData, goodnessOfFitTest2);
         model2.estimateModelData();*/
         
-        TrendTest trendTest = new LaplaceTrendTest();
+        TrendTest trendTest = new LaplaceTrendTest(IssuesCounter.DAYS);
         trendTest.executeTrendTest(filteredList);
         prepareOutputData.setTimeBetweenDefects(timeBetweenList);
         prepareOutputData.setTrend(trendTest.getTrendValue());

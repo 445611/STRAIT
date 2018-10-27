@@ -13,11 +13,16 @@ public class LaplaceTrendTest implements TrendTest {
     
     private double trend;
     private final double criticalValue = -1.645;
+    private final String TIME_UNIT;
+
+    public LaplaceTrendTest(String timeUnit) {
+        this.TIME_UNIT = timeUnit;
+    }
     
     @Override
     public void executeTrendTest(List<GeneralIssue> listOfGeneralIssues) {
         
-        IssuesCounter timeBetweenCounter = new TimeBetweenIssuesCounter();
+        IssuesCounter timeBetweenCounter = new TimeBetweenIssuesCounter(TIME_UNIT);
         List<Pair<Integer, Integer>> timeBetweenIssues = timeBetweenCounter
                 .prepareIssuesDataForModel(listOfGeneralIssues);
         double totalNumberOfIssues = timeBetweenIssues.size();

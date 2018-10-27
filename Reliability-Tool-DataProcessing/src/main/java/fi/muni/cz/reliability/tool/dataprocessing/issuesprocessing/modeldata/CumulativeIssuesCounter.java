@@ -13,7 +13,7 @@ import org.apache.commons.math3.util.Pair;
  */
 public class CumulativeIssuesCounter implements IssuesCounter {
 
-    private final int typeOfTimeToAdd;
+    private final String typeOfTimeToAdd;
     private final int howManyToAdd;
     private final Date startOfTesting;
     private final Date endOfTesting;
@@ -23,7 +23,7 @@ public class CumulativeIssuesCounter implements IssuesCounter {
      * Defaul value is one week.
      */
     public CumulativeIssuesCounter() {
-        typeOfTimeToAdd = Calendar.WEEK_OF_MONTH;
+        typeOfTimeToAdd = WEEKS;
         howManyToAdd = 1;
         this.startOfTesting = null;
         this.endOfTesting = null;
@@ -36,7 +36,7 @@ public class CumulativeIssuesCounter implements IssuesCounter {
      * @param startOfTesting date when testing started
      * @param endOfTesting date when testing ended
      */
-    public CumulativeIssuesCounter(int typeOfTimeToAdd, int howManyToAdd, 
+    public CumulativeIssuesCounter(String typeOfTimeToAdd, int howManyToAdd, 
             Date startOfTesting, Date endOfTesting) {
         this.typeOfTimeToAdd = typeOfTimeToAdd;
         this.howManyToAdd = howManyToAdd;

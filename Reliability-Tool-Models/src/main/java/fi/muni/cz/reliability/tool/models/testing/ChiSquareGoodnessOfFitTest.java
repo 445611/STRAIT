@@ -15,7 +15,7 @@ public class ChiSquareGoodnessOfFitTest implements GoodnessOfFitTest {
     private final ChiSquareTest test;
     private double[] expected;
     private long[] observed;
-    private final double alpha = 0.0001;
+    private final double alpha = 0.05;
     
     /**
      * Default contructor to initialize attributes.

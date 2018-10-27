@@ -14,6 +14,7 @@ import fi.muni.cz.reliability.tool.dataprocessing.output.CsvFileWriter;
 import fi.muni.cz.reliability.tool.dataprocessing.output.HtmlOutputWriter;
 import fi.muni.cz.reliability.tool.dataprocessing.output.OutputData;
 import fi.muni.cz.reliability.tool.dataprocessing.output.OutputWriter;
+import fi.muni.cz.reliability.tool.dataprocessing.output.TEMPORARYWriter;
 import fi.muni.cz.reliability.tool.dataprocessing.persistence.GeneralIssuesSnapshot;
 import fi.muni.cz.reliability.tool.dataprocessing.persistence.GeneralIssuesSnapshotDaoImpl;
 import fi.muni.cz.reliability.tool.dataprovider.DataProvider;
@@ -101,6 +102,9 @@ public class Core {
         List<GeneralIssue> listOfInitialIssues = dataProvider.
                 getIssuesByUrl(parser.getParsedUrlData().getUrl().toString());
 
+        
+        //model <- nls(yvalues ~ b1*(1 - exp(-b2*xvalues))/(1 + b3*exp(-b2*xvalues)),start = list(b1 = 70,b2 = 1,b3 = 1), lower = list(b1 = 0,b2 = 0, b3 = 0), algorithm = "port")
+        //model <- nls(yvalues ~ a*(1 - (1 + b*xvalues)*exp(-b*xvalues)),start = list(a = 70,b = 1), lower = list(a = 0,b = 0), algorithm = "port")
         // FILTERS
         FilteringConfiguration setup = new FilteringConfigurationImpl();
         List<String> filteringWords = setup.loadFilteringWordsFromFile();
@@ -110,16 +114,15 @@ public class Core {
         filteredList = issuesFilterClosed.filter(filteredList);
         // FILTERS
         
-        int periodicOfTesting = Calendar.WEEK_OF_MONTH;
+        String periodicOfTesting = IssuesCounter.WEEKS;
         Date startOfTesting = null;
         Date endOfTesting = null;
-        String testingPeriodsUnit = "week";
         
         // SNAPSHOT
         GeneralIssuesSnapshot snapshot = new GeneralIssuesSnapshot();
         snapshot.setCreatedAt(new Date());
         snapshot.setHowManyTimeUnitsToAdd(1);
-        snapshot.setTypeOfTimeToSplitTestInto(periodicOfTesting);
+        //snapshot.setTypeOfTimeToSplitTestInto(periodicOfTesting);
         snapshot.setFiltersRan(Arrays.asList(issuesFilterByLabel.toString(), issuesFilterClosed.toString()));
         snapshot.setListOfGeneralIssues(filteredList);
         snapshot.setRepositoryName(parser.getParsedUrlData().getRepositoryName());
@@ -147,10 +150,13 @@ public class Core {
         IssuesCounter cumulativeCounter = new CumulativeIssuesCounter(periodicOfTesting, 1, 
                 startOfTesting, endOfTesting);
         List<Pair<Integer, Integer>> countedWeeksWithTotal = cumulativeCounter.prepareIssuesDataForModel(filteredList);
-        
-        IssuesCounter timeBetween = new TimeBetweenIssuesCounter();
+        String timeUnit = IssuesCounter.HOURS;
+        IssuesCounter timeBetween = new TimeBetweenIssuesCounter(timeUnit);
         List<Pair<Integer, Integer>> timeBetweenList = timeBetween.prepareIssuesDataForModel(filteredList);
         // COUNTERS
+        
+        //TEMP
+        TEMPORARYWriter.write(timeBetweenList);
         
         // MODEL
         GoodnessOfFitTest goodnessOfFitTest = new ChiSquareGoodnessOfFitTest();
@@ -165,7 +171,7 @@ public class Core {
         goModel.estimateModelData();
         moModel.estimateModelData();
         goSShapedModel.estimateModelData();
-        TrendTest trendTest = new LaplaceTrendTest();
+        TrendTest trendTest = new LaplaceTrendTest(periodicOfTesting);
         trendTest.executeTrendTest(filteredList);
         // MODEL
         
@@ -179,7 +185,7 @@ public class Core {
         hdData.setGoodnessOfFit(hdModel.getGoodnessOfFitData());
         hdData.setEstimatedIssuesPrediction(hdModel.getIssuesPrediction(parser.getPredictionLength()));
         hdData.setWeeksAndDefects(countedWeeksWithTotal);
-        hdData.setTestingPeriodsUnit(testingPeriodsUnit);
+        hdData.setTestingPeriodsUnit(periodicOfTesting);
         
         OutputData goSShapedData = new OutputData();
         goSShapedData.setModelName(goSShapedModel.toString());
@@ -188,7 +194,7 @@ public class Core {
         goSShapedData.setGoodnessOfFit(goSShapedModel.getGoodnessOfFitData());
         goSShapedData.setEstimatedIssuesPrediction(goSShapedModel.getIssuesPrediction(parser.getPredictionLength()));
         goSShapedData.setWeeksAndDefects(countedWeeksWithTotal);
-        goSShapedData.setTestingPeriodsUnit(testingPeriodsUnit);
+        goSShapedData.setTestingPeriodsUnit(periodicOfTesting);
         
         OutputData goData = new OutputData();
         goData.setModelName(goModel.toString());
@@ -197,7 +203,7 @@ public class Core {
         goData.setGoodnessOfFit(goModel.getGoodnessOfFitData());
         goData.setEstimatedIssuesPrediction(goModel.getIssuesPrediction(parser.getPredictionLength()));
         goData.setWeeksAndDefects(countedWeeksWithTotal);
-        goData.setTestingPeriodsUnit(testingPeriodsUnit);
+        goData.setTestingPeriodsUnit(periodicOfTesting);
         
         OutputData moData = new OutputData();
         moData.setModelName(moModel.toString());
@@ -206,7 +212,7 @@ public class Core {
         moData.setGoodnessOfFit(moModel.getGoodnessOfFitData());
         moData.setEstimatedIssuesPrediction(moModel.getIssuesPrediction(parser.getPredictionLength()));
         moData.setWeeksAndDefects(countedWeeksWithTotal);
-        moData.setTestingPeriodsUnit(testingPeriodsUnit);
+        moData.setTestingPeriodsUnit(periodicOfTesting);
         
         OutputData prepareOutputData = writer.prepareOutputData(parser.getParsedUrlData().getUrl().toString(), 
                 countedWeeksWithTotal);
@@ -226,7 +232,8 @@ public class Core {
         prepareOutputData.setFiltersUsed(Arrays.asList(issuesFilterByLabel.infoAboutFilter(), 
                 issuesFilterClosed.infoAboutFilter()));
         prepareOutputData.setProcessorsUsed(Arrays.asList());
-        prepareOutputData.setTestingPeriodsUnit(testingPeriodsUnit);
+        prepareOutputData.setTestingPeriodsUnit(periodicOfTesting);
+        prepareOutputData.setTimeBetweenDefectsUnit(timeUnit);
         
         writer.writeOutputDataToFile(Arrays.asList(prepareOutputData, goData, moData, goSShapedData, hdData), 
                 parser.getParsedUrlData().getRepositoryName() 

@@ -24,13 +24,17 @@ public class TEMPORARYWriter {
             double last = list.get(list.size() - 1).getFirst();
             String split = "    ";
             int i = 0;
-            writer.write("Weeks");
+            writer.write("Hours");
             writer.newLine();
             for (Pair<Integer, Integer> pair: list) {
-                writer.write(pair.getFirst() + split + pair.getSecond() +
+                /*writer.write(pair.getFirst() + split + pair.getSecond() +
                         split + last + split + 1.0 + split + i + split + 1.0 + split + 1);
                 writer.newLine();
-                i++;
+                i++;*/
+                writer.write(pair.getFirst() + split + pair.getSecond() +
+                        split + 1 );//last + split + 1.0 + split + i + split + 1.0 + split + 1);
+                writer.newLine();
+                //i++;
             }
         } catch (IOException ex) {
 

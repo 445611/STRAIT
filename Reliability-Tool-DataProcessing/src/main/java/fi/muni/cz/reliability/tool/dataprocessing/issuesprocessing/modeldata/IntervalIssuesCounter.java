@@ -14,7 +14,7 @@ import org.apache.commons.math3.util.Pair;
  */
 public class IntervalIssuesCounter implements IssuesCounter {
 
-    private final int typeOfTimeToAdd;
+    private final String typeOfTimeToAdd;
     private final int howManyToAdd;
     private Date startOfTesting;
     private Date endOfTesting;
@@ -24,7 +24,7 @@ public class IntervalIssuesCounter implements IssuesCounter {
      * Defaul value is one week.
      */
     public IntervalIssuesCounter() {
-        typeOfTimeToAdd = Calendar.WEEK_OF_MONTH;
+        typeOfTimeToAdd = WEEKS;
         howManyToAdd = 1;
         this.startOfTesting = null;
         this.endOfTesting = null;
@@ -37,7 +37,7 @@ public class IntervalIssuesCounter implements IssuesCounter {
      * @param startOfTesting date when testing started.
      * @param endOfTesting date when testing ended.
      */
-    public IntervalIssuesCounter(int typeOfTimeToAdd, int howManyToAdd, 
+    public IntervalIssuesCounter(String typeOfTimeToAdd, int howManyToAdd, 
             Date startOfTesting, Date endOfTesting) {
         this.typeOfTimeToAdd = typeOfTimeToAdd;
         this.howManyToAdd = howManyToAdd;
@@ -143,7 +143,26 @@ public class IntervalIssuesCounter implements IssuesCounter {
     private Date addSpecificTimeToDate(Date date) {
         Calendar c = Calendar.getInstance();
         c.setTime(date);
-        c.add(typeOfTimeToAdd, howManyToAdd);
+        switch (typeOfTimeToAdd) {
+            case SECONDS:
+                    c.add(Calendar.SECOND, howManyToAdd);
+                    break;
+                case MINUTES:
+                    c.add(Calendar.MINUTE, howManyToAdd);
+                    break;
+                case HOURS:
+                    c.add(Calendar.HOUR, howManyToAdd);
+                    break;
+                case DAYS:
+                    c.add(Calendar.DAY_OF_MONTH, howManyToAdd);
+                    break;
+                case WEEKS:
+                    c.add(Calendar.WEEK_OF_MONTH, howManyToAdd);
+                    break;
+                case YEARS:
+                    c.add(Calendar.YEAR, howManyToAdd);
+                    break;
+        }
         return c.getTime(); 
     }  
 }
