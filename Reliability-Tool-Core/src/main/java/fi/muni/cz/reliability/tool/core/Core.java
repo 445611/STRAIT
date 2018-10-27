@@ -176,7 +176,7 @@ public class Core {
         // MODEL
         
         // OUTPUT
-        OutputWriter writer = new HtmlOutputWriter();
+        OutputWriter writer = new HtmlOutputWriter(false);
         
         OutputData hdData = new OutputData();
         hdData.setModelName(hdModel.toString());

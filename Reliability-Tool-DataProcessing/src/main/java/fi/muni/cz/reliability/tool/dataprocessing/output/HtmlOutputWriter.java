@@ -26,13 +26,17 @@ public class HtmlOutputWriter extends OutputWriterAbstract {
 
     private static final String TEMPLATE_ONE = "template_one.html";
     private static final String TEMPLATE_TWO = "template_two.html";
+    private static final String TEMPLATE_THREE = "template_three.html";
     private final Configuration configuration;
-    
+    private final boolean multipleGraphs;
     /**
      * Constructor that create freemark template configuration.
+     * 
+     * @param multipleGraphs    True if want to have multiple graphs for models.
      */
-    public HtmlOutputWriter() {
+    public HtmlOutputWriter(boolean multipleGraphs) {
         configuration = getConfiguration();
+        this.multipleGraphs = multipleGraphs;
     }
     
     @Override
@@ -52,8 +56,10 @@ public class HtmlOutputWriter extends OutputWriterAbstract {
             Template template;
             if (root.get("data") != null) {
                 template = getTemplateFromConfiguration(TEMPLATE_ONE);
-            } else {
+            } else if (multipleGraphs){
                 template = getTemplateFromConfiguration(TEMPLATE_TWO);
+            } else {
+                template = getTemplateFromConfiguration(TEMPLATE_THREE);
             }
             template.process(root, writer);
         } catch (IOException ex) {

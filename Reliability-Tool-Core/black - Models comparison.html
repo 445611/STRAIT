@@ -73,13 +73,13 @@
                     <hr class="hrstyle">
                     <h3>Info:</h3>
                     <p>
-                        Estimated at <b>27.10.2018 23:58:07</b>.
+                        Estimated at <b>28.10.2018 0:41:40</b>.
                     </p>
                     <p>
                         Initial number of total defects = 587<br>
                         Total defects in repository after processing and filtering = 73<br>
                         Start of testing <b>14.3.2018 21:02:27</b>.<br>
-                        End of testing <b>27.10.2018 23:58:07</b>.
+                        End of testing <b>28.10.2018 0:41:40</b>.
                     </p>
                     <h3>Filters and Processors:</h3>
                     <p> 
@@ -110,7 +110,7 @@
         <div class="container-fluid testimonial-group">
             <center><h3>Comparison of 5 models:</h3></center>
             <div class="row text-center flex-nowrap">
-                    <div class="col-sm-8 col-md-6 col-lg-6">
+                    <div class="col-sm-6 col-md-6 col-lg-4">
                             <h3>Duane model</h3>
                             <p> 
                                 Model function:<br>
@@ -125,12 +125,8 @@
                                         Chi-Square significance level = 95.58626639615863%<br>
                                         Chi-Square null hypothesis rejection = ACCEPT<br>
                                 </p>              
-                            <hr class="hrstyle">    
-                            <center><h3>Failure occurance</h3></center>
-                            <div id="chart1"></div>
-
                     </div>
-                    <div class="col-sm-8 col-md-6 col-lg-6">
+                    <div class="col-sm-6 col-md-6 col-lg-4">
                             <h3>Goel-Okemura model</h3>
                             <p> 
                                 Model function:<br>
@@ -145,12 +141,8 @@
                                         Chi-Square significance level = 99.99983446885973%<br>
                                         Chi-Square null hypothesis rejection = ACCEPT<br>
                                 </p>              
-                            <hr class="hrstyle">    
-                            <center><h3>Failure occurance</h3></center>
-                            <div id="chart2"></div>
-
                     </div>
-                    <div class="col-sm-8 col-md-6 col-lg-6">
+                    <div class="col-sm-6 col-md-6 col-lg-4">
                             <h3>Musa-Okumoto model</h3>
                             <p> 
                                 Model function:<br>
@@ -165,12 +157,8 @@
                                         Chi-Square significance level = 99.99999885842797%<br>
                                         Chi-Square null hypothesis rejection = ACCEPT<br>
                                 </p>              
-                            <hr class="hrstyle">    
-                            <center><h3>Failure occurance</h3></center>
-                            <div id="chart3"></div>
-
                     </div>
-                    <div class="col-sm-8 col-md-6 col-lg-6">
+                    <div class="col-sm-6 col-md-6 col-lg-4">
                             <h3>Goel-Okemura S-Shaped model</h3>
                             <p> 
                                 Model function:<br>
@@ -185,12 +173,8 @@
                                         Chi-Square significance level = 9.369711930773406E-5%<br>
                                         Chi-Square null hypothesis rejection = REJECT<br>
                                 </p>              
-                            <hr class="hrstyle">    
-                            <center><h3>Failure occurance</h3></center>
-                            <div id="chart4"></div>
-
                     </div>
-                    <div class="col-sm-8 col-md-6 col-lg-6">
+                    <div class="col-sm-6 col-md-6 col-lg-4">
                             <h3>Hossain-Dahiya model</h3>
                             <p> 
                                 Model function:<br>
@@ -206,13 +190,20 @@
                                         Chi-Square significance level = 99.99999679633981%<br>
                                         Chi-Square null hypothesis rejection = ACCEPT<br>
                                 </p>              
-                            <hr class="hrstyle">    
-                            <center><h3>Failure occurance</h3></center>
-                            <div id="chart5"></div>
-
                     </div>
             </div>
-        </div>  
+        </div>
+        <div class="container-fluid">    
+            <div class="row">
+                <div class="col">
+                    <hr class="hrstyle">    
+                    <center><h3>Failure occurance</h3></center>
+                    <div id="chart1"></div>
+                </div>
+            </div>
+        </div>
+        
+        
         <script>
             var chart0 = c3.generate({
                 bindto: '#chart0',
@@ -240,121 +231,36 @@
                     }
                 }
             });        
-                var chart1 = c3.generate({
-                    bindto: '#chart1',
-                    data: {
-                      columns: [
-                        ['Real issues', 11,24,25,30,36,39,42,44,44,51,54,55,62,62,64,66,68,68,69,70,70,71,72,72,72,73,73,73,73,73,73,73,],
-                        ['Estimated issues', 24,31,35,39,42,45,47,49,51,53,55,56,58,59,61,62,64,65,66,67,68,69,70,71,72,73,74,75,76,77,78,79,]
-                      ]
+            var chart1 = c3.generate({
+                bindto: '#chart1',
+                size: {
+                        height: 500
+                },
+                data: {
+                  columns: [
+                    ['Real issues', 11,24,25,30,36,39,42,44,44,51,54,55,62,62,64,66,68,68,69,70,70,71,72,72,72,73,73,73,73,73,73,73,],
+                        ['Duane model', 24,31,35,39,42,45,47,49,51,53,55,56,58,59,61,62,64,65,66,67,68,69,70,71,72,73,74,75,76,77,78,79,],
+                        ['Goel-Okemura model', 8,16,22,28,34,38,43,46,50,52,55,57,59,61,63,64,65,67,68,68,69,70,71,71,72,72,72,73,73,73,73,74,],
+                        ['Musa-Okumoto model', 12,21,27,32,36,40,43,46,49,51,53,55,57,58,60,61,63,64,65,67,68,69,70,71,72,73,74,75,75,76,77,78,],
+                        ['Goel-Okemura S-Shaped model', 2,8,15,22,29,36,42,47,51,55,58,61,63,64,66,67,68,68,69,69,70,70,70,70,70,70,71,71,71,71,71,71,],
+                        ['Hossain-Dahiya model', 9,17,23,29,34,39,43,46,50,52,55,57,59,61,62,64,65,66,67,68,69,70,70,71,72,72,73,73,73,74,74,74,],
+                  ]
+                },
+                axis: {
+                    x: {
+                        label: {
+                            text: 'Testing periods (Weeks)',
+                            position: 'outer-center'
+                        }
                     },
-                    axis: {
-                        x: {
-                            label: {
-                                text: 'Testing periods (Weeks)',
-                                position: 'outer-center'
-                            }
-                        },
-                        y: {
-                            label: {
-                                text: 'Total failures',
-                                position: 'outer-middle'
-                            }
+                    y: {
+                        label: {
+                            text: 'Total failures',
+                            position: 'outer-middle'
                         }
                     }
-                });
-                var chart2 = c3.generate({
-                    bindto: '#chart2',
-                    data: {
-                      columns: [
-                        ['Real issues', 11,24,25,30,36,39,42,44,44,51,54,55,62,62,64,66,68,68,69,70,70,71,72,72,72,73,73,73,73,73,73,73,],
-                        ['Estimated issues', 8,16,22,28,34,38,43,46,50,52,55,57,59,61,63,64,65,67,68,68,69,70,71,71,72,72,72,73,73,73,73,74,]
-                      ]
-                    },
-                    axis: {
-                        x: {
-                            label: {
-                                text: 'Testing periods (Weeks)',
-                                position: 'outer-center'
-                            }
-                        },
-                        y: {
-                            label: {
-                                text: 'Total failures',
-                                position: 'outer-middle'
-                            }
-                        }
-                    }
-                });
-                var chart3 = c3.generate({
-                    bindto: '#chart3',
-                    data: {
-                      columns: [
-                        ['Real issues', 11,24,25,30,36,39,42,44,44,51,54,55,62,62,64,66,68,68,69,70,70,71,72,72,72,73,73,73,73,73,73,73,],
-                        ['Estimated issues', 12,21,27,32,36,40,43,46,49,51,53,55,57,58,60,61,63,64,65,67,68,69,70,71,72,73,74,75,75,76,77,78,]
-                      ]
-                    },
-                    axis: {
-                        x: {
-                            label: {
-                                text: 'Testing periods (Weeks)',
-                                position: 'outer-center'
-                            }
-                        },
-                        y: {
-                            label: {
-                                text: 'Total failures',
-                                position: 'outer-middle'
-                            }
-                        }
-                    }
-                });
-                var chart4 = c3.generate({
-                    bindto: '#chart4',
-                    data: {
-                      columns: [
-                        ['Real issues', 11,24,25,30,36,39,42,44,44,51,54,55,62,62,64,66,68,68,69,70,70,71,72,72,72,73,73,73,73,73,73,73,],
-                        ['Estimated issues', 2,8,15,22,29,36,42,47,51,55,58,61,63,64,66,67,68,68,69,69,70,70,70,70,70,70,71,71,71,71,71,71,]
-                      ]
-                    },
-                    axis: {
-                        x: {
-                            label: {
-                                text: 'Testing periods (Weeks)',
-                                position: 'outer-center'
-                            }
-                        },
-                        y: {
-                            label: {
-                                text: 'Total failures',
-                                position: 'outer-middle'
-                            }
-                        }
-                    }
-                });
-                var chart5 = c3.generate({
-                    bindto: '#chart5',
-                    data: {
-                      columns: [
-                        ['Real issues', 11,24,25,30,36,39,42,44,44,51,54,55,62,62,64,66,68,68,69,70,70,71,72,72,72,73,73,73,73,73,73,73,],
-                        ['Estimated issues', 9,17,23,29,34,39,43,46,50,52,55,57,59,61,62,64,65,66,67,68,69,70,70,71,72,72,73,73,73,74,74,74,]
-                      ]
-                    },
-                    axis: {
-                        x: {
-                            label: {
-                                text: 'Testing periods (Weeks)',
-                                position: 'outer-center'
-                            }
-                        },
-                        y: {
-                            label: {
-                                text: 'Total failures',
-                                position: 'outer-middle'
-                            }
-                        }
-                    }
-                });
+                }
+            });   
         </script>
     </body>
 </html>

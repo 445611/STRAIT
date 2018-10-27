@@ -121,7 +121,7 @@
             <div class="row text-center flex-nowrap">
                 <#assign i = 1>
                 <#list dataList as outputData>
-                    <div class="col-sm-8 col-md-6 col-lg-6">
+                    <div class="col-sm-6 col-md-6 col-lg-4">
                             <h3>${outputData.modelName}</h3>
                             <p> 
                                 Model function:<br>
@@ -139,21 +139,28 @@
                                     </#list> 
                                 </p>              
                             </#if>
-                            <hr class="hrstyle">    
-                            <center><h3>Failure occurance</h3></center>
-                            <div id="chart${i}"></div>
-
                     </div>
                 <#assign i++>
                 </#list>
             </div>
-        </div>  
+        </div>
+        <div class="container-fluid">    
+            <div class="row">
+                <div class="col">
+                    <hr class="hrstyle">    
+                    <center><h3>Failure occurance</h3></center>
+                    <div id="chart1"></div>
+                </div>
+            </div>
+        </div>
+        
+        
         <script>
             var chart0 = c3.generate({
                 bindto: '#chart0',
                 data: {
                   columns: [
-                    ['Time between failures', <#list dataList[0].timeBetweenDefects as pair>${pair.getSecond()?c},</#list>]
+                    ['Time between failures', <#list dataList[0].timeBetweenDefects as pair>${pair.getSecond()?c},</#list>],
                   ],
                   type: 'scatter',
                   colors: {
@@ -175,33 +182,34 @@
                     }
                 }
             });        
-            <#assign i = 1>
-            <#list dataList as outputData>
-                var chart${i} = c3.generate({
-                    bindto: '#chart${i}',
-                    data: {
-                      columns: [
-                        ['Real issues', <#list outputData.weeksAndDefects as pair>${pair.getSecond()?c},</#list>],
-                        ['Estimated issues', <#list outputData.estimatedIssuesPrediction as pair>${pair.getSecond()?c},</#list>]
-                      ]
+            var chart1 = c3.generate({
+                bindto: '#chart1',
+                size: {
+                        height: 500
+                },
+                data: {
+                  columns: [
+                    ['Real issues', <#list dataList[0].weeksAndDefects as pair>${pair.getSecond()?c},</#list>],
+                    <#list dataList as outputData>
+                        ['${outputData.modelName}', <#list outputData.estimatedIssuesPrediction as pair>${pair.getSecond()?c},</#list>],
+                    </#list>   
+                  ]
+                },
+                axis: {
+                    x: {
+                        label: {
+                            text: 'Testing periods (${dataList[0].testingPeriodsUnit})',
+                            position: 'outer-center'
+                        }
                     },
-                    axis: {
-                        x: {
-                            label: {
-                                text: 'Testing periods (${outputData.testingPeriodsUnit})',
-                                position: 'outer-center'
-                            }
-                        },
-                        y: {
-                            label: {
-                                text: 'Total failures',
-                                position: 'outer-middle'
-                            }
+                    y: {
+                        label: {
+                            text: 'Total failures',
+                            position: 'outer-middle'
                         }
                     }
-                });
-            <#assign i++>
-            </#list>       
+                }
+            });   
         </script>
     </body>
 </html>

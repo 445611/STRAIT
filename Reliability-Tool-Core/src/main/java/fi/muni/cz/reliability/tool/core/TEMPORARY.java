@@ -151,7 +151,7 @@ public class TEMPORARY {
         
         System.out.println(model.getTextFormOfTheFunction());
         
-        OutputWriter writer = new HtmlOutputWriter();
+        OutputWriter writer = new HtmlOutputWriter(true);
         
         //int totalDefects = countedWeeksWithTotal.get(countedWeeksWithTotal.size() - 1).getSecond();
         OutputData prepareOutputData = writer.prepareOutputData(url, countedWeeksWithTotal);
