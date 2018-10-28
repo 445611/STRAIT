@@ -51,8 +51,11 @@ public class HtmlOutputWriter extends OutputWriterAbstract {
     }
     
     private void writeTemplateToFile(Map<String, Object> root, String fileName) {
+        
+        File file = new File("./output/" + fileName + ".html");
+        file.getParentFile().mkdirs();
         try (BufferedWriter writer = new BufferedWriter(new OutputStreamWriter(
-            new FileOutputStream(fileName + ".html"), StandardCharsets.UTF_8));) {
+            new FileOutputStream(file), StandardCharsets.UTF_8));) {
             Template template;
             if (root.get("data") != null) {
                 template = getTemplateFromConfiguration(TEMPLATE_ONE);

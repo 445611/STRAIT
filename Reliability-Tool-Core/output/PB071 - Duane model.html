@@ -1,0 +1,158 @@
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>HTML Output</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/c3/0.5.4/c3.css" rel="stylesheet">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/d3/4.13.0/d3.min.js" charset="utf-8"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/c3/0.5.4/c3.min.js"></script>
+    
+    <style>
+        .row{
+            background-color: #def2f1;
+        }
+        
+        .sidenav {
+            background-color: #3aafa9;
+        }
+        
+        h3,h1{
+           font-weight: bold; 
+        }
+        
+        body {
+            height: 100%;
+        }
+
+        hr.hrstyle {
+            border: 0;
+            height: 1px;
+            background-image: linear-gradient(to right, rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.75), rgba(0, 0, 0, 0));
+        }
+
+        .c3-circle {
+            opacity: 1 !important;
+        }
+    </style>
+</head>
+<body>
+    <div class="container-fluid">    
+        <div class="row text-left">
+            <div class="col-sm-2 sidenav"></div>
+            <div class="col-sm-8"> 
+                <center><h1>PB071</h1></center>
+                <p>
+                    URL = <a href="https://github.com/445611/PB071">https://github.com/445611/PB071</a><br>
+                    This is estimation of issues occurance for  <a href="https://github.com/445611/PB071">PB071</a> of user 445611.<br>
+                </p>
+                <hr class="hrstyle">
+                <h3>Info:</h3>
+                <p>
+                    Estimated at <b>28.10.2018 22:53:52</b>.
+                </p>
+                <p>
+                    Initial number of total defects = 6<br>
+                    Total defects in repository after processing and filtering = 3<br>
+                    Start of testing <b>27.4.2018 22:09:26</b>.<br>
+                    End of testing <b>28.10.2018 22:53:52</b>.
+                </p>
+                <h3>Filters and Processors:</h3>
+                <p> 
+                Filters:<br>
+                    <p style="margin-left: 20">
+                        FilterByLabel used, with filtering words: [bug, error, fail, fault, defect]<br>
+                        FilterClosed used to filter out opened issues.<br>
+                    </p>
+                    Processors:<br>
+                    <p style="margin-left: 20">
+                        None
+                    </p>
+                </p>
+                    <h3>Goodness of fit:</h3>
+                    <p>
+                            Chi-Square = 5.437500000000004<br>
+                            Chi-Square significance level = 99.99870689963439%<br>
+                            Chi-Square null hypothesis rejection = ACCEPT<br>
+                    </p>              
+                    <h3>Trend test:</h3>
+                    <p>
+                        Trend does not exist .<br>
+                        Trend = INF
+                    </p>
+                <hr class="hrstyle"> 
+                <center><h3>Time between failures</h3></center>
+                <div id="chart2"></div>
+                <hr class="hrstyle"> 
+                <center>
+                <h3>Duane model</h3>
+                <p> 
+                    Model function:<br>
+                    μ(t) = α * t<html><sup>β</sup></html><br>
+                    Estimated parameters:<br>
+                      α = 2.2907415781796323<br>
+                      β = 0.0973484040863418<br>
+                </p>
+                <hr class="hrstyle">
+                <center><h3>Failure occurance</h3></center>
+                <div id="chart1"></div>
+            </div>
+            <div class="col-sm-2 sidenav"></div>
+        </div>
+    </div>
+    <script>
+        var chart1 = c3.generate({
+            bindto: '#chart1',
+            data: {
+              columns: [
+                ['Real issues', 1,1,1,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,],
+                ['Estimated issues', 2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,3,3,3,3,3,3,3,3,3,3,3,]
+              ]
+            },
+            axis: {
+                x: {
+                    label: {
+                        text: 'Testing periods (Weeks)',
+                        position: 'outer-center'
+                    }
+                },
+                y: {
+                    label: {
+                        text: 'Total failures',
+                        position: 'outer-middle'
+                    }
+                }
+            }
+        });
+        var chart2 = c3.generate({
+            bindto: '#chart2',
+            data: {
+              columns: [
+                ['Time between failures', 0,601,0,],
+              ],
+              type: 'scatter',
+              colors: {
+                  'Time between failures': '#ff4444'
+              }
+            },
+            axis: {
+                x: {
+                    label: {
+                        text: 'Failures',
+                        position: 'outer-center'
+                    }
+                },
+                y: {
+                    label: {
+                        text: 'Time between failures (Hours)',
+                        position: 'outer-middle'
+                    }
+                }
+            }
+        });
+    </script>
+</body>
+</html>

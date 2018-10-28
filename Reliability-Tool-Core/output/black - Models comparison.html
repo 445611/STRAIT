@@ -1,0 +1,272 @@
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <title>HTML Output</title>
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+
+        <link href="https://cdnjs.cloudflare.com/ajax/libs/c3/0.5.4/c3.css" rel="stylesheet">
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/d3/4.13.0/d3.min.js" charset="utf-8"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/c3/0.5.4/c3.min.js"></script>
+
+        <style>
+            .row.content {height: 100%;}
+            
+			.borders {
+				border-left: 1px solid #ddd;
+				border-right: 1px solid #ddd;
+				margin: -1px;
+			}
+			
+            .row{
+                background-color: #def2f1;
+            }
+            
+            .container-fluid{
+		background-color: #def2f1;
+            }
+            
+            .container{
+                background-color: #def2f1;
+            }
+            
+            html ,body {
+                height: 100%;
+                background-color: #3aafa9;
+            }
+
+            .testimonial-group > .row {
+                overflow-x: auto;
+                white-space: nowrap;
+            }
+            
+            h3,h1{
+                font-weight: bold; 
+            }
+            
+            .testimonial-group > .row > .col-sm-8 {
+                display: inline-block;
+                float: none;
+            }
+            
+            .sidenav {
+                background-color: #3aafa9;
+            }
+
+            hr.hrstyle {
+                border: 0;
+                height: 1px;
+                background-image: linear-gradient(to right, rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.75), rgba(0, 0, 0, 0));
+            }
+
+            .c3-circle {
+                opacity: 1 !important;
+            }
+        </style>
+    </head>
+    <body>
+        <div class="container-fluid">    
+            <div class="row text-left">
+                <div class="col-sm-2 sidenav"></div>
+                <div class="col-sm-8 text-left"> 
+                    <center><h1>black</h1></center>
+                    <p>
+                        URL = <a href="https://github.com/ambv/black">https://github.com/ambv/black</a><br>
+                        This is estimation of issues occurance for  <a href="https://github.com/ambv/black">black</a> of user ambv.<br>
+                    </p>
+                    <hr class="hrstyle">
+                    <h3>Info:</h3>
+                    <p>
+                        Estimated at <b>28.10.2018 22:48:57</b>.
+                    </p>
+                    <p>
+                        Initial number of total defects = 587<br>
+                        Total defects in repository after processing and filtering = 73<br>
+                        Start of testing <b>14.3.2018 21:02:27</b>.<br>
+                        End of testing <b>28.10.2018 22:48:57</b>.
+                    </p>
+                    <h3>Filters and Processors:</h3>
+                    <p> 
+                    Filters:<br>
+                        <p style="margin-left: 20">
+                            FilterByLabel used, with filtering words: [bug, error, fail, fault, defect]<br>
+                            FilterClosed used to filter out opened issues.<br>
+                        </p>
+                        Processors:<br>
+                        <p style="margin-left: 20">
+                            None
+                        </p>
+                    </p>
+                        <h3>Trend test:</h3> 
+                        <p>
+                            Trend exists .<br>
+                            Trend = -13.176878878789976
+
+                        </p>
+                    <hr class="hrstyle">
+                    <center><h3>Time between failures</h3></center>
+                    <div id="chart0"></div>
+                    <hr class="hrstyle">
+                </div>
+                <div class="col-sm-2 sidenav"></div>
+            </div>
+        </div>
+        <div class="container-fluid testimonial-group">
+            <center><h3>Comparison of 5 models:</h3></center>
+            <div class="row text-center flex-nowrap">
+                    <div class="col-sm-6 col-md-6 col-lg-4 borders">
+                            <h3>Duane model</h3>
+                            <p> 
+                                Model function:<br>
+                                μ(t) = α * t<html><sup>β</sup></html><br>
+                                Estimated parameters:<br>
+                                  α = 24.714786296521197<br>
+                                  β = 0.3362369093957591<br>
+                            </p>
+                            <h3>Goodness of fit:</h3> 
+                                <p>
+                                        Chi-Square = 18.79961423935136<br>
+                                        Chi-Square significance level = 95.81680773359781%<br>
+                                        Chi-Square null hypothesis rejection = ACCEPT<br>
+                                </p>              
+                    </div>
+                    <div class="col-sm-6 col-md-6 col-lg-4 borders">
+                            <h3>Goel-Okemura model</h3>
+                            <p> 
+                                Model function:<br>
+                                μ(t) = a * (1 - e<html><sup>-b*t</sup></html>)<br>
+                                Estimated parameters:<br>
+                                  a = 75.79931902014852<br>
+                                  b = 0.1201326566679972<br>
+                            </p>
+                            <h3>Goodness of fit:</h3> 
+                                <p>
+                                        Chi-Square = 6.8947392397809795<br>
+                                        Chi-Square significance level = 99.99983446885973%<br>
+                                        Chi-Square null hypothesis rejection = ACCEPT<br>
+                                </p>              
+                    </div>
+                    <div class="col-sm-6 col-md-6 col-lg-4 borders">
+                            <h3>Musa-Okumoto model</h3>
+                            <p> 
+                                Model function:<br>
+                                μ(t) = α * ln(β * t + 1)<br>
+                                Estimated parameters:<br>
+                                  α = 25.141122406740333<br>
+                                  β = 0.670984298443023<br>
+                            </p>
+                            <h3>Goodness of fit:</h3> 
+                                <p>
+                                        Chi-Square = 4.6802473382738405<br>
+                                        Chi-Square significance level = 99.99999885842797%<br>
+                                        Chi-Square null hypothesis rejection = ACCEPT<br>
+                                </p>              
+                    </div>
+                    <div class="col-sm-6 col-md-6 col-lg-4 borders">
+                            <h3>Goel-Okemura S-Shaped model</h3>
+                            <p> 
+                                Model function:<br>
+                                μ(t) = a * (1 - (1 + b*t) * e<html><sup>-b*t</sup></html>)<br>
+                                Estimated parameters:<br>
+                                  a = 71.29617503027464<br>
+                                  b = 0.2858534096776118<br>
+                            </p>
+                            <h3>Goodness of fit:</h3> 
+                                <p>
+                                        Chi-Square = 83.8382671077818<br>
+                                        Chi-Square significance level = 9.369711930773406E-5%<br>
+                                        Chi-Square null hypothesis rejection = REJECT<br>
+                                </p>              
+                    </div>
+                    <div class="col-sm-6 col-md-6 col-lg-4 borders">
+                            <h3>Hossain-Dahiya model</h3>
+                            <p> 
+                                Model function:<br>
+                                μ(t) = a * (1 - e<html><sup>-b*t</sup></html>) / (1 + c*e<html><sup>-b*t</sup></html>)<br>
+                                Estimated parameters:<br>
+                                  a = 77.663213812043<br>
+                                  b = 0.0934721006593575<br>
+                                  c = -0.2737672618235332<br>
+                            </p>
+                            <h3>Goodness of fit:</h3> 
+                                <p>
+                                        Chi-Square = 5.059737590212839<br>
+                                        Chi-Square significance level = 99.99999679633981%<br>
+                                        Chi-Square null hypothesis rejection = ACCEPT<br>
+                                </p>              
+                    </div>
+            </div>
+        </div>
+        <div class="container-fluid">    
+            <div class="row">
+                <div class="col">
+                    <hr class="hrstyle">    
+                    <center><h3>Failure occurance</h3></center>
+                    <div id="chart1"></div>
+                </div>
+            </div>
+        </div>
+        
+        
+        <script>
+            var chart0 = c3.generate({
+                bindto: '#chart0',
+                data: {
+                  columns: [
+                    ['Time between failures', 0,0,0,12,0,0,0,11,0,30,35,60,5,3,0,8,14,0,1,0,4,42,19,34,100,96,32,0,71,48,35,1,71,11,3,44,14,72,31,106,15,89,30,131,215,44,6,17,9,18,0,120,53,35,125,67,18,32,22,11,0,34,244,0,185,43,112,104,332,102,276,293,474,],
+                  ],
+                  type: 'scatter',
+                  colors: {
+                      'Time between failures': '#ff4444'
+                  }
+                },
+                axis: {
+                    x: {
+                        label: {
+                            text: 'Failures',
+                            position: 'outer-center'
+                        }
+                    },
+                    y: {
+                        label: {
+                            text: 'Time between failures (Hours)',
+                            position: 'outer-middle'
+                        }
+                    }
+                }
+            });        
+            var chart1 = c3.generate({
+                bindto: '#chart1',
+                size: {
+                        height: 500
+                },
+                data: {
+                  columns: [
+                    ['Real issues', 11,24,25,30,36,39,42,44,44,51,54,55,62,62,64,66,68,68,69,70,70,71,72,72,72,73,73,73,73,73,73,73,],
+                        ['Duane model', 24,31,35,39,42,45,47,49,51,53,55,56,58,60,61,62,64,65,66,67,68,69,70,71,72,73,74,75,76,77,78,79,],
+                        ['Goel-Okemura model', 8,16,22,28,34,38,43,46,50,52,55,57,59,61,63,64,65,67,68,68,69,70,71,71,72,72,72,73,73,73,73,74,],
+                        ['Musa-Okumoto model', 12,21,27,32,36,40,43,46,49,51,53,55,57,58,60,61,63,64,65,67,68,69,70,71,72,73,74,75,75,76,77,78,],
+                        ['Goel-Okemura S-Shaped model', 2,8,15,22,29,36,42,47,51,55,58,61,63,64,66,67,68,68,69,69,70,70,70,70,70,70,71,71,71,71,71,71,],
+                        ['Hossain-Dahiya model', 9,17,23,29,34,39,43,46,50,52,55,57,59,61,62,64,65,66,67,68,69,70,70,71,72,72,73,73,73,74,74,74,],
+                  ]
+                },
+                axis: {
+                    x: {
+                        label: {
+                            text: 'Testing periods (Weeks)',
+                            position: 'outer-center'
+                        }
+                    },
+                    y: {
+                        label: {
+                            text: 'Total failures',
+                            position: 'outer-middle'
+                        }
+                    }
+                }
+            });   
+        </script>
+    </body>
+</html>

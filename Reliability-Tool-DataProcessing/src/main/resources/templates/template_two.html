@@ -14,6 +14,12 @@
         <style>
             .row.content {height: 100%;}
             
+            .borders {
+                border-left: 1px solid #ddd;
+                border-right: 1px solid #ddd;
+                margin: -1px;
+            }
+            
             .row{
                 background-color: #def2f1;
             }
@@ -121,7 +127,7 @@
             <div class="row text-center flex-nowrap">
                 <#assign i = 1>
                 <#list dataList as outputData>
-                    <div class="col-sm-8 col-md-6 col-lg-6">
+                    <div class="col-sm-8 col-md-6 col-lg-6 borders">
                             <h3>${outputData.modelName}</h3>
                             <p> 
                                 Model function:<br>
