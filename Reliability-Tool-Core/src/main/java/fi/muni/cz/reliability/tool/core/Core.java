@@ -32,7 +32,6 @@ import fi.muni.cz.reliability.tool.models.testing.GoodnessOfFitTest;
 import fi.muni.cz.reliability.tool.models.testing.LaplaceTrendTest;
 import fi.muni.cz.reliability.tool.models.testing.TrendTest;
 import java.util.Arrays;
-import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 import org.apache.commons.math3.util.Pair;
@@ -101,10 +100,10 @@ public class Core {
         
         List<GeneralIssue> listOfInitialIssues = dataProvider.
                 getIssuesByUrl(parser.getParsedUrlData().getUrl().toString());
-
-        
-        //model <- nls(yvalues ~ b1*(1 - exp(-b2*xvalues))/(1 + b3*exp(-b2*xvalues)),start = list(b1 = 70,b2 = 1,b3 = 1), lower = list(b1 = 0,b2 = 0, b3 = 0), algorithm = "port")
-        //model <- nls(yvalues ~ a*(1 - (1 + b*xvalues)*exp(-b*xvalues)),start = list(a = 70,b = 1), lower = list(a = 0,b = 0), algorithm = "port")
+        //model <- nls(yvalues ~ b1*(1 - exp(-b2*xvalues))/(1 + b3*exp(-b2*xvalues)),
+        //start = list(b1 = 70,b2 = 1,b3 = 1), lower = list(b1 = 0,b2 = 0, b3 = 0), algorithm = "port")
+        //model <- nls(yvalues ~ a*(1 - (1 + b*xvalues)*exp(-b*xvalues)),
+        //start = list(a = 70,b = 1), lower = list(a = 0,b = 0), algorithm = "port")
         // FILTERS
         FilteringConfiguration setup = new FilteringConfigurationImpl();
         List<String> filteringWords = setup.loadFilteringWordsFromFile();
@@ -160,12 +159,11 @@ public class Core {
         
         // MODEL
         GoodnessOfFitTest goodnessOfFitTest = new ChiSquareGoodnessOfFitTest();
-        Model goModel = new GOModelImpl(new double[]{1,1}, countedWeeksWithTotal, goodnessOfFitTest);
-        Model moModel = new MusaOkumotoModelImpl(new double[]{1,1}, countedWeeksWithTotal, goodnessOfFitTest);
-        Model duaneModel = new DuaneModelImpl(new double[]{1,1}, countedWeeksWithTotal, goodnessOfFitTest);
-        Model goSShapedModel = new GOSShapedModelImpl(new double[]{1,1}, countedWeeksWithTotal, goodnessOfFitTest);
-        Model hdModel = new HossainDahiyaModelImpl(new double[]{countedWeeksWithTotal
-                .get(countedWeeksWithTotal.size() - 1).getSecond(),1,1}, countedWeeksWithTotal, goodnessOfFitTest);
+        Model goModel = new GOModelImpl(countedWeeksWithTotal, goodnessOfFitTest);
+        Model moModel = new MusaOkumotoModelImpl(countedWeeksWithTotal, goodnessOfFitTest);
+        Model duaneModel = new DuaneModelImpl(countedWeeksWithTotal, goodnessOfFitTest);
+        Model goSShapedModel = new GOSShapedModelImpl(countedWeeksWithTotal, goodnessOfFitTest);
+        Model hdModel = new HossainDahiyaModelImpl(countedWeeksWithTotal, goodnessOfFitTest);
         hdModel.estimateModelData();
         duaneModel.estimateModelData();
         goModel.estimateModelData();

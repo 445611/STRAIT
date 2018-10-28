@@ -162,6 +162,8 @@ public class IntervalIssuesCounter implements IssuesCounter {
                 case YEARS:
                     c.add(Calendar.YEAR, howManyToAdd);
                     break;
+                default:
+                    c.add(Calendar.WEEK_OF_MONTH, howManyToAdd);
         }
         return c.getTime(); 
     }  

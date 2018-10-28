@@ -144,7 +144,7 @@ public class TEMPORARY {
         
         //--------------------ADDED-------------------------
         GoodnessOfFitTest goodnessOfFitTest = new ChiSquareGoodnessOfFitTest();
-        Model model = new DuaneModelImpl(new double[]{1,1}, countedWeeksWithTotal, goodnessOfFitTest);
+        Model model = new DuaneModelImpl(countedWeeksWithTotal, goodnessOfFitTest);
         snapshot.setModelName(model.toString());
         model.estimateModelData();
         //------------------------------------------------------

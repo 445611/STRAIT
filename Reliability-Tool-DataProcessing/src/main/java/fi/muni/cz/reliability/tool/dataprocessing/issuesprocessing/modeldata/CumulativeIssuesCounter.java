@@ -3,7 +3,6 @@ package fi.muni.cz.reliability.tool.dataprocessing.issuesprocessing.modeldata;
 
 import fi.muni.cz.reliability.tool.dataprovider.GeneralIssue;
 import java.util.ArrayList;
-import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 import org.apache.commons.math3.util.Pair;

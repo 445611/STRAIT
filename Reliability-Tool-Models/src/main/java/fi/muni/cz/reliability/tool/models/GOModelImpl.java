@@ -19,13 +19,16 @@ public class GOModelImpl extends AbstractModel {
     /**
      * Initialize model attributes.
      * 
-     * @param startParameters       start parameters to set.
      * @param listOfIssues          list of issues.
      * @param goodnessOfFitTest     Goodness of fit test to execute.
      */
-    public GOModelImpl(double[] startParameters, List<Pair<Integer, Integer>> listOfIssues, 
-            GoodnessOfFitTest goodnessOfFitTest) {
-        super(startParameters, listOfIssues, goodnessOfFitTest);
+    public GOModelImpl(List<Pair<Integer, Integer>> listOfIssues, GoodnessOfFitTest goodnessOfFitTest) {
+        super(listOfIssues, goodnessOfFitTest);
+    }
+    
+    @Override
+    protected double[] getInitialParametersValue() {
+        return new double[]{listOfIssues.get(listOfIssues.size() - 1).getSecond(), 1};
     }
     
     @Override

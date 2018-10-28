@@ -14,7 +14,6 @@ import org.apache.commons.math3.util.Pair;
  */
 public abstract class AbstractModel implements Model {
 
-    protected final double[] startParameters;
     protected Map<String, Double> modelParameters;
     protected final List<Pair<Integer, Integer>> listOfIssues;
     protected Map<String, String> goodnessOfFit;
@@ -24,13 +23,11 @@ public abstract class AbstractModel implements Model {
     /**
      * Initialize model attributes.
      * 
-     * @param startParameters       start parameters to set.
      * @param listOfIssues          list of issues.
      * @param goodnessOfFitTest     Goodness of fit test to execute.
      */
-    public AbstractModel(double[] startParameters, List<Pair<Integer, Integer>> listOfIssues, 
+    public AbstractModel(List<Pair<Integer, Integer>> listOfIssues, 
             GoodnessOfFitTest goodnessOfFitTest) {
-        this.startParameters = startParameters;
         this.listOfIssues = listOfIssues;
         this.goodnessOfFitTest = goodnessOfFitTest;
     }
@@ -49,7 +46,7 @@ public abstract class AbstractModel implements Model {
     private void calculateModelParameters() {
         Function function = getModelFunction();
         LeastSquaresOptimization optimization = new LeastSquaresOptimizationImpl();
-        setParametersToMap(optimization.optimizer(startParameters, listOfIssues, function));
+        setParametersToMap(optimization.optimizer(getInitialParametersValue(), listOfIssues, function));
     }
     
     private void calculateModelGoodnessOfFit() {
@@ -78,6 +75,13 @@ public abstract class AbstractModel implements Model {
         }
         return listOfEstimatedIssues;
     }
+    
+    /**
+     * Get initial estimation of model parameters.
+     * 
+     * @return initial parameters.
+     */
+    protected abstract double[] getInitialParametersValue();
     
     /**
      * Get function value fo testPeriod. 
