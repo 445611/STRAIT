@@ -51,7 +51,9 @@ public class HtmlOutputWriter extends OutputWriterAbstract {
     }
     
     private void writeTemplateToFile(Map<String, Object> root, String fileName) {
-        
+        if (root.get("data") == null) {
+            fileName = fileName + " - Models comparison";
+        }
         File file = new File("./output/" + fileName + ".html");
         file.getParentFile().mkdirs();
         try (BufferedWriter writer = new BufferedWriter(new OutputStreamWriter(

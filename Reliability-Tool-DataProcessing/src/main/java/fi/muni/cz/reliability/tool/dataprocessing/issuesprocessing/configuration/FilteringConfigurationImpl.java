@@ -81,5 +81,4 @@ public class FilteringConfigurationImpl implements FilteringConfiguration {
         Logger.getLogger(FilterByLabel.class.getName())
                     .log(level, message);
     }
-    
 }

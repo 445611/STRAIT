@@ -13,7 +13,6 @@ import org.apache.commons.math3.util.Pair;
 public class CumulativeIssuesCounter implements IssuesCounter {
 
     private final String typeOfTimeToAdd;
-    private final int howManyToAdd;
     private final Date startOfTesting;
     private final Date endOfTesting;
     
@@ -23,7 +22,6 @@ public class CumulativeIssuesCounter implements IssuesCounter {
      */
     public CumulativeIssuesCounter() {
         typeOfTimeToAdd = WEEKS;
-        howManyToAdd = 1;
         this.startOfTesting = null;
         this.endOfTesting = null;
     }
@@ -31,14 +29,12 @@ public class CumulativeIssuesCounter implements IssuesCounter {
     /**
      * Initialize attributes to certain values.
      * @param typeOfTimeToAdd type of Calendar enum
-     * @param howManyToAdd number of time parts to add 
      * @param startOfTesting date when testing started
      * @param endOfTesting date when testing ended
      */
-    public CumulativeIssuesCounter(String typeOfTimeToAdd, int howManyToAdd, 
+    public CumulativeIssuesCounter(String typeOfTimeToAdd, 
             Date startOfTesting, Date endOfTesting) {
         this.typeOfTimeToAdd = typeOfTimeToAdd;
-        this.howManyToAdd = howManyToAdd;
         this.startOfTesting = startOfTesting;
         this.endOfTesting = endOfTesting;
     }
@@ -57,7 +53,7 @@ public class CumulativeIssuesCounter implements IssuesCounter {
     }
     
     private List<Pair<Integer, Integer>> getIntervalIssues(List<GeneralIssue> listOfIssues) {
-         IssuesCounter counter = new IntervalIssuesCounter(typeOfTimeToAdd, howManyToAdd, 
+         IssuesCounter counter = new IntervalIssuesCounter(typeOfTimeToAdd, 
                 startOfTesting, endOfTesting);
          return counter.prepareIssuesDataForModel(listOfIssues);
     }

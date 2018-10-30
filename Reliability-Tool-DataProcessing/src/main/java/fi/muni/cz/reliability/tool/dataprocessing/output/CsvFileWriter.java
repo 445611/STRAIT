@@ -9,20 +9,16 @@ import java.util.List;
 /**
  * @author Radoslav Micko, 445611@muni.cz
  */
-public class CsvFileWriter {
+public class CsvFileWriter implements IssuesWriter {
+    private static final String CSV_FILE_SUFFIX = ".csv";
     private static final String COMMA_DELIMITER = "\t";
     private static final String NEW_LINE_SEPARATOR = "\n";
 
     private static final String FILE_HEADER = "Created at\tClosed at\tUpdated at\tSaved at\tState\tLabels";
 
-    /**
-     * Create .csv file with data.
-     * 
-     * @param list      data to save.
-     * @param fileName  name of file to save into.
-     */
-    public static void writeCsvFile(List<GeneralIssue> list, String fileName) {
-        try (FileWriter fileWriter = new FileWriter(fileName)){
+    @Override
+    public void writeToFile(List<GeneralIssue> list, String fileName) {
+        try (FileWriter fileWriter = new FileWriter(fileName + CSV_FILE_SUFFIX)){
                 fileWriter.append(FILE_HEADER);
                 fileWriter.append(NEW_LINE_SEPARATOR);
                 for (GeneralIssue issue : list) {

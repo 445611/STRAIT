@@ -1,35 +1,46 @@
 package fi.muni.cz.reliability.tool.core;
 
 import fi.muni.cz.reliability.tool.core.exception.InvalidInputException;
-import fi.muni.cz.reliability.tool.dataprovider.exception.DataProviderException;
-import fi.muni.cz.reliability.tool.dataprovider.utils.GitHubUrlParser;
-import fi.muni.cz.reliability.tool.dataprovider.utils.ParsedUrlData;
-import fi.muni.cz.reliability.tool.dataprovider.utils.UrlParser;
-import java.net.MalformedURLException;
-import java.net.URL;
+import java.io.BufferedReader;
+import java.io.FileInputStream;
+import java.io.IOException;
+import java.io.InputStreamReader;
 import java.util.ArrayList;
 import java.util.List;
+import org.apache.commons.cli.CommandLine;
+import org.apache.commons.cli.CommandLineParser;
+import org.apache.commons.cli.DefaultParser;
+import org.apache.commons.cli.HelpFormatter;
+import org.apache.commons.cli.Option;
+import org.apache.commons.cli.OptionGroup;
+import org.apache.commons.cli.Options;
+import org.apache.commons.cli.ParseException;
 
 /**
  * @author Radoslav Micko, 445611@muni.cz
  */
 public class ArgsParser {
-
-    private static final String GITHUB_HOST_NAME = "github.com";
     
-    private static final String EVALUATION_FLAG = "-eval";
-    private boolean evaluate = false;
+    //Initial Mandatory options
+    public static final String OPT_URL = "url";
+    public static final String OPT_SNAPSHOT_NAME = "sn";
+    public static final String OPT_LIST_ALL_SNAPSHOTS = "asl";
     
-    private static final String LIST_FLAG = "-list";
-    private boolean list = false;
-    private boolean listAll = false;
+    //Rest of Mandatory options
+    public static final String OPT_LIST_SNAPSHOTS = "sl";
+    public static final String OPT_SAVE = "s";
+    public static final String OPT_EVALUATE = "e";
+    public static final String OPT_PREDICT = "p";
+    public static final String OPT_FILTER_LABELS = "fl";
+    public static final String OPT_FILTER_CLOSED = "fc";
+    public static final String OPT_MODELS = "ms";
+    public static final String OPT_HTML = "html";
     
-    private static final String SAVE_FLAG = "-save";
-    private boolean save = false;
+    //Configuraton file option
+    private static final String FLAG_CONFIG_FILE = "-cf";
     
-    private ParsedUrlData parsedUrlData;
-    private int predictionLength = 0;
-    private String snapshotName;
+    private static CommandLine cmdl;
+    private static Options options;
     
     /**
      * Parse and check input arguments.
@@ -39,121 +50,104 @@ public class ArgsParser {
      */
     public void parse(String[] args) throws InvalidInputException {
         List<String> errors = new ArrayList<>();
-        switch (args.length) {
-            case 0:
-                errors.add("Missing URL and Main flag.");
-                break;
-            case 1:
-                readListAllFlag(args[0], errors);
-                break;
-            case 2:
-                readUrlAndMainFlag(args, errors);
-                break;
-            case 3:
-                readUrlAndMainFlag(args, errors);
-                readPredictionLength(args[2], errors);
-                break;
-            default:
-                errors.add("Wrong input parameters.");
+        getConfiguratedOptions();
+        if (checkToReadFromConfigFile(args, errors)) {
+            cmdl = parseArgumentsFromConfigFile(args[1], options, errors);
+        } else {
+            cmdl = parseArgumentsFromCommandLine(args, options, errors);
         }
+
         if (!errors.isEmpty()) {
+            HelpFormatter formatter = new HelpFormatter();
+            formatter.printHelp("Help:", options);
             throw new InvalidInputException(errors);
         }
     }
-    
-    private void readListAllFlag(String flag, List<String> errors) {
-        if (flag.equals(LIST_FLAG)) {
-            listAll = true;
-        } else {
-            errors.add("No '" + flag + "' flag allowed.");
+   
+    private CommandLine parseArgumentsFromConfigFile(String path, Options options, List<String> errors) {
+        try (BufferedReader reader = new BufferedReader(new InputStreamReader(new FileInputStream(path)))) {
+            String[] args = reader.readLine().split(" ");
+            return parseArgumentsFromCommandLine(args, options, errors);
+        } catch (IOException ex) {
+            errors.add(ex.getMessage());
         }
-    }
-    
-    private void readUrlAndMainFlag(String[] args, List<String> errors) {
-        readUrlOrSnapshotName(args[0], errors);
-        readMainFlag(args[1], errors);
+        return null;
     }
 
-    private void readMainFlag(String flag, List<String> errors) {
-        switch (flag) {
-            case EVALUATION_FLAG:
-                evaluate = true;
-                break;
-            case LIST_FLAG:
-                if (snapshotName != null) {
-                    errors.add("Flag '" + flag + "' not allowed.");
-                } else {
-                    list = true;
-                }
-                break;
-            case SAVE_FLAG:
-                save = true;
-                break;
-            default:
-                errors.add("Flag '" + flag + "' not allowed.");
-        }
-    }
-    
-    private void readUrlOrSnapshotName(String arg, List<String> errors) {
+    private CommandLine parseArgumentsFromCommandLine(String[] args, Options options, List<String> errors) {
         try {
-            URL url = new URL(arg);
-            parseUrlByHostName(url.getHost(), arg, errors);
-        } catch (DataProviderException | MalformedURLException ex) {
-            snapshotName = arg;
+            CommandLineParser parser = new DefaultParser();
+            CommandLine cmd = parser.parse(options, args);
+            return cmd;
+        } catch (ParseException ex) {
+            errors.add(ex.getMessage());
         }
-    }
-
-    private void parseUrlByHostName(String hostName, String url, List<String> errors) {
-        switch (hostName) {
-            case GITHUB_HOST_NAME:
-                UrlParser parser = new GitHubUrlParser();
-                parsedUrlData = parser.parseUrlAndCheck(url);
-                break;
-            default:
-                errors.add("'" + hostName + "' repositories not supported.");
-        }
+        return null;
     }
     
-    private void readPredictionLength(String arg, List<String> errors) {
-        if (list || listAll) {
-            errors.add("Input for length of prediction '" + arg + "' is not allowed with '-list' flag.");
+    private boolean checkToReadFromConfigFile(String[] args, List<String> errors) {
+        if (args.length < 1) {
+            errors.add("Missing arguments.");
+            return false;
+        } else if (args[0].equals(FLAG_CONFIG_FILE)) {
+            return true;
         } else {
-            int length;
-        try {
-            length = Integer.parseInt(arg);
-        } catch (NumberFormatException e) {
-            errors.add("Input for length of prediction '" + arg + "' is not a number.");
-            return;
-        }
-        predictionLength = length;
+            return false;
         }
     }
-
-    public boolean isListAll() {
-        return listAll;
-    }
-
-    public ParsedUrlData getParsedUrlData() {
-        return parsedUrlData;
-    }
-
-    public boolean isList() {
-        return list;
-    }
     
-    public String getSnapshotName() {
-        return snapshotName;
-    }
-    
-    public int getPredictionLength() {
-        return predictionLength;
+    private void getConfiguratedOptions() {
+        options = new Options();
+        
+        OptionGroup mandatoryOptionGroup = new OptionGroup();
+        Option option = Option.builder(OPT_URL).hasArg().argName("URL of repository").build();
+        mandatoryOptionGroup.addOption(option);
+        option = Option.builder(OPT_SNAPSHOT_NAME).longOpt("snapshotName").hasArg().argName("Name of snapshot").build();
+        mandatoryOptionGroup.addOption(option);
+        option = Option.builder(OPT_LIST_ALL_SNAPSHOTS).longOpt("allSnapshotsList").build();
+        mandatoryOptionGroup.addOption(option);
+        mandatoryOptionGroup.isRequired();
+        options.addOptionGroup(mandatoryOptionGroup);
+        
+        mandatoryOptionGroup = new OptionGroup();
+        option = Option.builder(OPT_LIST_SNAPSHOTS).longOpt("snapshotsList").build();
+        mandatoryOptionGroup.addOption(option);
+        option = Option.builder(OPT_SAVE).longOpt("save").optionalArg(true).hasArg().argName("Format of data").
+                desc("Save repository data to file with specified format.").build();
+        mandatoryOptionGroup.addOption(option);
+        option = Option.builder(OPT_EVALUATE).longOpt("evaluate").hasArg().argName("New name")
+                .desc("Evaluate repository data and save to new snapshot with name.").build();
+        mandatoryOptionGroup.addOption(option);
+        options.addOptionGroup(mandatoryOptionGroup);
+        
+        option = Option.builder(OPT_PREDICT).longOpt("predict").type(Number.class).hasArg().argName("Number").
+                desc("Number of test periods to predict.").build();
+        options.addOption(option);
+        option = Option.builder(OPT_FILTER_LABELS).longOpt("filterLabel").optionalArg(true)
+                .hasArgs().argName("Filtering labels").desc("Filter by specified labels.").build();
+        options.addOption(option);
+        option = Option.builder(OPT_FILTER_CLOSED).longOpt("filterClosed").desc("Filter closed.").build();
+        options.addOption(option);
+        option = Option.builder(OPT_MODELS).longOpt("models").hasArgs().argName("Model name").
+                desc("Models to evaluate.").build();
+        options.addOption(option);
+        option = Option.builder(OPT_HTML).desc("Output as HTML file.").build();
+        options.addOption(option);
     }
 
-    public boolean isEvaluate() {
-        return evaluate;
+    /**
+     * Parsed command line.
+     * @return CommandLine
+     */
+    public CommandLine getCmdl() {
+        return cmdl;
     }
 
-    public boolean isSave() {
-        return save;
+    /**
+     * Configured options.
+     * @return Options
+     */
+    public  Options getOptions() {
+        return options;
     }
 }

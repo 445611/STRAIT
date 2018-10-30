@@ -35,6 +35,33 @@ public class OutputData implements Serializable {
     private List<String> filtersUsed;
     private List<String> processorsUsed;
 
+    public OutputData() {
+    }
+    
+    private OutputData(OutputDataBuilder builder) {
+        this.url = builder.url;
+        this.userName = builder.userName;
+        this.repositoryName = builder.repositoryName;
+        this.createdAt = builder.createdAt;
+        this.initialNumberOfIssues = builder.initialNumberOfIssues;
+        this.totalNumberOfDefects = builder.totalNumberOfDefects;
+        this.startOfTesting = builder.startOfTesting;
+        this.endOfTesting = builder.endOfTesting;
+        this.weeksAndDefects = builder.weeksAndDefects;
+        this.timeBetweenDefects = builder.timeBetweenDefects;
+        this.timeBetweenDefectsUnit = builder.timeBetweenDefectsUnit;
+        this.modelParameters = builder.modelParameters;
+        this.estimatedIssuesPrediction = builder.estimatedIssuesPrediction;
+        this.goodnessOfFit = builder.goodnessOfFit;
+        this.existTrend = builder.existTrend;
+        this.trend = builder.trend;
+        this.modelName = builder.modelName;
+        this.modelFunction = builder.modelFunction;
+        this.testingPeriodsUnit = builder.testingPeriodsUnit;
+        this.filtersUsed = builder.filtersUsed;
+        this.processorsUsed = builder.processorsUsed;
+    }
+
     public String getTimeBetweenDefectsUnit() {
         return timeBetweenDefectsUnit;
     }
@@ -74,8 +101,6 @@ public class OutputData implements Serializable {
     public void setProcessorsUsed(List<String> processorsUsed) {
         this.processorsUsed = processorsUsed;
     }
-    
-    
     
     public boolean isExistTrend() {
         return existTrend;
@@ -240,5 +265,139 @@ public class OutputData implements Serializable {
                 + userName + ", repositoryName=" + repositoryName 
                 + ", createdAt=" + createdAt + ", totalNumberOfDefects=" 
                 + totalNumberOfDefects + '}';
+    }
+    
+    public static class OutputDataBuilder {
+        private String url;
+        private String userName;
+        private String repositoryName;
+        private Date createdAt;
+        private int initialNumberOfIssues;
+        private int totalNumberOfDefects;
+        private Date startOfTesting;
+        private Date endOfTesting;
+        private List<Pair<Integer, Integer>> weeksAndDefects;
+        private List<Pair<Integer, Integer>> timeBetweenDefects;
+        private String timeBetweenDefectsUnit;
+
+        private Map<String, Double> modelParameters;
+        private List<Pair<Integer, Integer>> estimatedIssuesPrediction;
+        private Map<String, String> goodnessOfFit;
+        private boolean existTrend;
+        private double trend;
+        private String modelName;
+        private String modelFunction;
+        private String testingPeriodsUnit;
+        private List<String> filtersUsed;
+        private List<String> processorsUsed;
+
+        public OutputDataBuilder setUrl(String url) {
+            this.url = url;
+            return this;
+        }
+
+        public OutputDataBuilder setUserName(String userName) {
+            this.userName = userName;
+            return this;
+        }
+
+        public OutputDataBuilder setRepositoryName(String repositoryName) {
+            this.repositoryName = repositoryName;
+            return this;
+        }
+
+        public OutputDataBuilder setCreatedAt(Date createdAt) {
+            this.createdAt = createdAt;
+            return this;
+        }
+
+        public OutputDataBuilder setInitialNumberOfIssues(int initialNumberOfIssues) {
+            this.initialNumberOfIssues = initialNumberOfIssues;
+            return this;
+        }
+
+        public OutputDataBuilder setTotalNumberOfDefects(int totalNumberOfDefects) {
+            this.totalNumberOfDefects = totalNumberOfDefects;
+            return this;
+        }
+
+        public OutputDataBuilder setStartOfTesting(Date startOfTesting) {
+            this.startOfTesting = startOfTesting;
+            return this;
+        }
+
+        public OutputDataBuilder setEndOfTesting(Date endOfTesting) {
+            this.endOfTesting = endOfTesting;
+            return this;
+        }
+
+        public OutputDataBuilder setWeeksAndDefects(List<Pair<Integer, Integer>> weeksAndDefects) {
+            this.weeksAndDefects = weeksAndDefects;
+            return this;
+        }
+
+        public OutputDataBuilder setTimeBetweenDefects(List<Pair<Integer, Integer>> timeBetweenDefects) {
+            this.timeBetweenDefects = timeBetweenDefects;
+            return this;
+        }
+
+        public OutputDataBuilder setTimeBetweenDefectsUnit(String timeBetweenDefectsUnit) {
+            this.timeBetweenDefectsUnit = timeBetweenDefectsUnit;
+            return this;
+        }
+
+        public OutputDataBuilder setModelParameters(Map<String, Double> modelParameters) {
+            this.modelParameters = modelParameters;
+            return this;
+        }
+
+        public OutputDataBuilder setEstimatedIssuesPrediction(List<Pair<Integer, Integer>> estimatedIssuesPrediction) {
+            this.estimatedIssuesPrediction = estimatedIssuesPrediction;
+            return this;
+        }
+
+        public OutputDataBuilder setGoodnessOfFit(Map<String, String> goodnessOfFit) {
+            this.goodnessOfFit = goodnessOfFit;
+            return this;
+        }
+
+        public OutputDataBuilder setExistTrend(boolean existTrend) {
+            this.existTrend = existTrend;
+            return this;
+        }
+
+        public OutputDataBuilder setTrend(double trend) {
+            this.trend = trend;
+            return this;
+        }
+
+        public OutputDataBuilder setModelName(String modelName) {
+            this.modelName = modelName;
+            return this;
+        }
+
+        public OutputDataBuilder setModelFunction(String modelFunction) {
+            this.modelFunction = modelFunction;
+            return this;
+        }
+
+        public OutputDataBuilder setTestingPeriodsUnit(String testingPeriodsUnit) {
+            this.testingPeriodsUnit = testingPeriodsUnit;
+            return this;
+        }
+
+        public OutputDataBuilder setFiltersUsed(List<String> filtersUsed) {
+            this.filtersUsed = filtersUsed;
+            return this;
+        }
+
+        public OutputDataBuilder setProcessorsUsed(List<String> processorsUsed) {
+            this.processorsUsed = processorsUsed;
+            return this;
+        }
+        
+        public OutputData build() {
+            return new OutputData(this);
+        }
     }
 }

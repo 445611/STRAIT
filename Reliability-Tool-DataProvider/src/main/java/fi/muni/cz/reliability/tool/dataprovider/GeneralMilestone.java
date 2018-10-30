@@ -1,61 +1,18 @@
 package fi.muni.cz.reliability.tool.dataprovider;
 
-import java.io.Serializable;
 import java.util.Date;
-import java.util.List;
 import java.util.Objects;
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.Lob;
-import javax.persistence.OneToMany;
-import javax.persistence.Table;
-import javax.persistence.Temporal;
-import javax.persistence.TemporalType;
 
 /**
  * @author Radoslav Micko, 445611@muni.cz
  */
-@Entity
-@Table(name = "GENERALMILESTONE")
-public class GeneralMilestone implements Serializable {
+public class GeneralMilestone {
 
-    @OneToMany(mappedBy = "generalMilestone")
-    private List<GeneralIssue> generalIssues;
-
-    @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    private Long id;
-
-    @Temporal(TemporalType.TIMESTAMP)
     private Date createdAt;
-    @Temporal(TemporalType.TIMESTAMP)
     private Date dueOn;
-    
-    @Column(columnDefinition="clob")
-    @Lob
     private String description;
-    @Column(name = "MilestoneState")
     private String state;
     private String title;
-    
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
-
-    public List<GeneralIssue> getGeneralIssues() {
-        return generalIssues;
-    }
-
-    public void setGeneralIssues(List<GeneralIssue> generalIssues) {
-        this.generalIssues = generalIssues;
-    }
 
     public Date getCreatedAt() {
         return createdAt;

@@ -16,6 +16,8 @@ import org.eclipse.egit.github.core.client.GitHubClient;
  */
 public class GitHubAuthenticationDataProvider {
     
+    private static final String AUTH_FILE_NAME = "git_hub_authentication_file.properties";
+    
     private static final String NAME_ELEMENT_TAG = "name";
     private static final String PASSWORD_ELEMENT_TAG = "password";
     private static final String TOKEN_ELEMENT_TAG = "token";
@@ -28,12 +30,10 @@ public class GitHubAuthenticationDataProvider {
     /**
      * Constructor that runs <code>loadAuthenticationToClient</code> and 
      * <code>parseDataFromFile</code>.
-     * 
-     * @param nameOfFile name of file with authentication data
      */
-    public GitHubAuthenticationDataProvider(String nameOfFile) {
+    public GitHubAuthenticationDataProvider() {
         this.gitHubClient = new GitHubClient();
-        parseDataFromFile(nameOfFile);
+        parseDataFromAuthenticationFile();
         loadAuthenticationToClient();
     }
 
@@ -97,14 +97,13 @@ public class GitHubAuthenticationDataProvider {
     /**
      * Parse data from authentication file
      * 
-     * @param nameOfFile name of authentication data file
      * @return List of authentication data. List={Name, Password, OAuthToken}
      * @throw AuthenticationFileErrorException if there occures problem while loading file
      */
-    private void parseDataFromFile(String nameOfFile) {
+    private void parseDataFromAuthenticationFile() {
         Properties properties = new Properties();
         try (InputStream stream = getClass().getClassLoader()
-                .getResourceAsStream(nameOfFile)) {
+                .getResourceAsStream(AUTH_FILE_NAME)) {
             properties.load(stream);
             userName = properties.getProperty(NAME_ELEMENT_TAG);
             password = properties.getProperty(PASSWORD_ELEMENT_TAG);
@@ -112,9 +111,9 @@ public class GitHubAuthenticationDataProvider {
         } catch (IOException ex) {
             Logger.getLogger(GitHubDataProvider.class.getName())
                     .log(Level.SEVERE, "Error while getting data from " + 
-                            nameOfFile, ex);
+                            AUTH_FILE_NAME, ex);
             throw new AuthenticationFileErrorException("Error while getting data from " + 
-                            nameOfFile, ex);
+                            AUTH_FILE_NAME, ex);
         }   
     }
 }

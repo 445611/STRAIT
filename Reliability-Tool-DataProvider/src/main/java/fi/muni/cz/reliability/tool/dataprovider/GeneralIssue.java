@@ -16,6 +16,7 @@ import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
+import javax.persistence.Transient;
 import javax.validation.constraints.NotNull;
 
 /**
@@ -51,9 +52,9 @@ public class GeneralIssue implements Serializable {
     @Column(name = "snapshot_id")
     private Long snapshotid;
     
-    @ManyToOne
+    @Transient 
     private GeneralUser generalUser;
-    @ManyToOne
+    @Transient 
     private GeneralMilestone generalMilestone;
 
     public GeneralMilestone getGeneralMilestone() {

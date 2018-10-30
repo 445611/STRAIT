@@ -15,7 +15,6 @@ import org.apache.commons.math3.util.Pair;
 public class IntervalIssuesCounter implements IssuesCounter {
 
     private final String typeOfTimeToAdd;
-    private final int howManyToAdd;
     private Date startOfTesting;
     private Date endOfTesting;
 
@@ -25,7 +24,6 @@ public class IntervalIssuesCounter implements IssuesCounter {
      */
     public IntervalIssuesCounter() {
         typeOfTimeToAdd = WEEKS;
-        howManyToAdd = 1;
         this.startOfTesting = null;
         this.endOfTesting = null;
     }
@@ -33,14 +31,12 @@ public class IntervalIssuesCounter implements IssuesCounter {
     /**
      * Initialize attributes to certain values.
      * @param typeOfTimeToAdd type of Calendar enum.
-     * @param howManyToAdd number of time parts to add.
      * @param startOfTesting date when testing started.
      * @param endOfTesting date when testing ended.
      */
-    public IntervalIssuesCounter(String typeOfTimeToAdd, int howManyToAdd, 
+    public IntervalIssuesCounter(String typeOfTimeToAdd, 
             Date startOfTesting, Date endOfTesting) {
         this.typeOfTimeToAdd = typeOfTimeToAdd;
-        this.howManyToAdd = howManyToAdd;
         this.startOfTesting = startOfTesting;
         this.endOfTesting = endOfTesting;
     }
@@ -80,7 +76,7 @@ public class IntervalIssuesCounter implements IssuesCounter {
         GeneralIssue issue = issuesIterator.next();
         while (endOfTestingPeriod.before(endOfTesting)) {
             
-            if (issue.getCreatedAt().before(startOfTestingPeriod)) {
+            if (!issue.getCreatedAt().after(startOfTestingPeriod)) {
                 if (issuesIterator.hasNext()) {
                     issue = issuesIterator.next();
                     continue;
@@ -88,7 +84,7 @@ public class IntervalIssuesCounter implements IssuesCounter {
                 throw new DataProcessingException("No issues in testing period.");
             }
             
-            if (issue.getCreatedAt().after(endOfTestingPeriod)) {
+            if (!issue.getCreatedAt().before(endOfTestingPeriod)) {
                 countedList.add(new Pair<>(periodsCounter, defectsCounter));
                 periodsCounter++;
                 defectsCounter = 0;
@@ -145,25 +141,25 @@ public class IntervalIssuesCounter implements IssuesCounter {
         c.setTime(date);
         switch (typeOfTimeToAdd) {
             case SECONDS:
-                    c.add(Calendar.SECOND, howManyToAdd);
+                    c.add(Calendar.SECOND, 1);
                     break;
                 case MINUTES:
-                    c.add(Calendar.MINUTE, howManyToAdd);
+                    c.add(Calendar.MINUTE, 1);
                     break;
                 case HOURS:
-                    c.add(Calendar.HOUR, howManyToAdd);
+                    c.add(Calendar.HOUR, 1);
                     break;
                 case DAYS:
-                    c.add(Calendar.DAY_OF_MONTH, howManyToAdd);
+                    c.add(Calendar.DAY_OF_MONTH, 1);
                     break;
                 case WEEKS:
-                    c.add(Calendar.WEEK_OF_MONTH, howManyToAdd);
+                    c.add(Calendar.WEEK_OF_MONTH, 1);
                     break;
                 case YEARS:
-                    c.add(Calendar.YEAR, howManyToAdd);
+                    c.add(Calendar.YEAR, 1);
                     break;
                 default:
-                    c.add(Calendar.WEEK_OF_MONTH, howManyToAdd);
+                    c.add(Calendar.WEEK_OF_MONTH, 1);
         }
         return c.getTime(); 
     }  
