@@ -25,7 +25,6 @@ public abstract class OutputWriterAbstract implements OutputWriter {
         data.setTotalNumberOfDefects(listOfPairsData.get(listOfPairsData.size() - 1).getSecond());
         data.setUrl(url);
         data.setUserName(parsedUrldata.getUserName());
-        data.setWeeksAndDefects(listOfPairsData);
         return data;
     }
 }

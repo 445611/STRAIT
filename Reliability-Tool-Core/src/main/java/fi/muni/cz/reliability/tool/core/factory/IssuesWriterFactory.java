@@ -12,6 +12,12 @@ public class IssuesWriterFactory {
     
     private static final String CSV = "csv";
     
+    /**
+     * Get IssueWriter for CommandLine argument.
+     * 
+     * @param cmdl  parsed CommandLine.
+     * @return IssuesWriter
+     */
     public static IssuesWriter getIssuesWriter(CommandLine cmdl) {
         if (cmdl.getOptionValue(ArgsParser.OPT_SAVE) == null) {
             return new CsvFileWriter();

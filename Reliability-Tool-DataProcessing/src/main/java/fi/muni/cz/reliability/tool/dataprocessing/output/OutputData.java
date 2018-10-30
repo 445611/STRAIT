@@ -20,7 +20,7 @@ public class OutputData implements Serializable {
     private int totalNumberOfDefects;
     private Date startOfTesting;
     private Date endOfTesting;
-    private List<Pair<Integer, Integer>> weeksAndDefects;
+    private List<Pair<Integer, Integer>> cumulativeDefects;
     private List<Pair<Integer, Integer>> timeBetweenDefects;
     private String timeBetweenDefectsUnit;
     
@@ -35,6 +35,9 @@ public class OutputData implements Serializable {
     private List<String> filtersUsed;
     private List<String> processorsUsed;
 
+    /**
+     * Default constructor.
+     */
     public OutputData() {
     }
     
@@ -47,7 +50,7 @@ public class OutputData implements Serializable {
         this.totalNumberOfDefects = builder.totalNumberOfDefects;
         this.startOfTesting = builder.startOfTesting;
         this.endOfTesting = builder.endOfTesting;
-        this.weeksAndDefects = builder.weeksAndDefects;
+        this.cumulativeDefects = builder.cumulativeDefects;
         this.timeBetweenDefects = builder.timeBetweenDefects;
         this.timeBetweenDefectsUnit = builder.timeBetweenDefectsUnit;
         this.modelParameters = builder.modelParameters;
@@ -222,12 +225,12 @@ public class OutputData implements Serializable {
         this.url = url;
     }
 
-    public List<Pair<Integer, Integer>> getWeeksAndDefects() {
-        return weeksAndDefects;
+    public List<Pair<Integer, Integer>> getCumulativeDefects() {
+        return cumulativeDefects;
     }
 
-    public void setWeeksAndDefects(List<Pair<Integer, Integer>> weeksAndDefects) {
-        this.weeksAndDefects = weeksAndDefects;
+    public void setCumulativeDefects(List<Pair<Integer, Integer>> cumulativeDefects) {
+        this.cumulativeDefects = cumulativeDefects;
     }
 
     @Override
@@ -267,6 +270,9 @@ public class OutputData implements Serializable {
                 + totalNumberOfDefects + '}';
     }
     
+    /**
+     * Builder.
+     */
     public static class OutputDataBuilder {
         private String url;
         private String userName;
@@ -276,7 +282,7 @@ public class OutputData implements Serializable {
         private int totalNumberOfDefects;
         private Date startOfTesting;
         private Date endOfTesting;
-        private List<Pair<Integer, Integer>> weeksAndDefects;
+        private List<Pair<Integer, Integer>> cumulativeDefects;
         private List<Pair<Integer, Integer>> timeBetweenDefects;
         private String timeBetweenDefectsUnit;
 
@@ -291,111 +297,242 @@ public class OutputData implements Serializable {
         private List<String> filtersUsed;
         private List<String> processorsUsed;
 
+        /**
+         * Set url of repository.
+         * 
+         * @param url url of repository.
+         * @return this builder, to allow method chaining.
+         */
         public OutputDataBuilder setUrl(String url) {
             this.url = url;
             return this;
         }
 
+        /**
+         * Set user name of repository.
+         * 
+         * @param userName url of repository.
+         * @return this builder, to allow method chaining.
+         */
         public OutputDataBuilder setUserName(String userName) {
             this.userName = userName;
             return this;
         }
 
+        /**
+         * Set repository name.
+         * 
+         * @param repositoryName url of repository.
+         * @return this builder, to allow method chaining.
+         */
         public OutputDataBuilder setRepositoryName(String repositoryName) {
             this.repositoryName = repositoryName;
             return this;
         }
 
+        /**
+         * Set date when data was created.
+         * 
+         * @param createdAt date.
+         * @return this builder, to allow method chaining.
+         */
         public OutputDataBuilder setCreatedAt(Date createdAt) {
             this.createdAt = createdAt;
             return this;
         }
 
+        /**
+         * Set initial number of issues.
+         * 
+         * @param initialNumberOfIssues initial number.
+         * @return this builder, to allow method chaining.
+         */
         public OutputDataBuilder setInitialNumberOfIssues(int initialNumberOfIssues) {
             this.initialNumberOfIssues = initialNumberOfIssues;
             return this;
         }
 
+        /**
+         * Set total number of defects.
+         * 
+         * @param totalNumberOfDefects total number.
+         * @return this builder, to allow method chaining.
+         */
         public OutputDataBuilder setTotalNumberOfDefects(int totalNumberOfDefects) {
             this.totalNumberOfDefects = totalNumberOfDefects;
             return this;
         }
 
+        /**
+         * Set date of start of testing.
+         * 
+         * @param startOfTesting date.
+         * @return this builder, to allow method chaining.
+         */
         public OutputDataBuilder setStartOfTesting(Date startOfTesting) {
             this.startOfTesting = startOfTesting;
             return this;
         }
 
+        /**
+         * Set date of end of testing.
+         * 
+         * @param endOfTesting date.
+         * @return this builder, to allow method chaining.
+         */
         public OutputDataBuilder setEndOfTesting(Date endOfTesting) {
             this.endOfTesting = endOfTesting;
             return this;
         }
 
-        public OutputDataBuilder setWeeksAndDefects(List<Pair<Integer, Integer>> weeksAndDefects) {
-            this.weeksAndDefects = weeksAndDefects;
+        /**
+         * Set cumulative defects.
+         * 
+         * @param cumulativeDefects calculated cumulative data.
+         * @return this builder, to allow method chaining.
+         */
+        public OutputDataBuilder setCumulativeDefects(List<Pair<Integer, Integer>> cumulativeDefects) {
+            this.cumulativeDefects = cumulativeDefects;
             return this;
         }
 
+        /**
+         * Set calculated time between defects.
+         * 
+         * @param timeBetweenDefects calculated time between defects.
+         * @return this builder, to allow method chaining.
+         */
         public OutputDataBuilder setTimeBetweenDefects(List<Pair<Integer, Integer>> timeBetweenDefects) {
             this.timeBetweenDefects = timeBetweenDefects;
             return this;
         }
 
+        /**
+         * Set time unit between defects.
+         * 
+         * @param timeBetweenDefectsUnit time unit.
+         * @return this builder, to allow method chaining.
+         */
         public OutputDataBuilder setTimeBetweenDefectsUnit(String timeBetweenDefectsUnit) {
             this.timeBetweenDefectsUnit = timeBetweenDefectsUnit;
             return this;
         }
 
+        /**
+         * Set model parameters.
+         * 
+         * @param modelParameters model parameters.
+         * @return this builder, to allow method chaining.
+         */
         public OutputDataBuilder setModelParameters(Map<String, Double> modelParameters) {
             this.modelParameters = modelParameters;
             return this;
         }
 
+        /**
+         * Set estimated ssues prediction.
+         * 
+         * @param estimatedIssuesPrediction estimated issues prediction.
+         * @return this builder, to allow method chaining.
+         */
         public OutputDataBuilder setEstimatedIssuesPrediction(List<Pair<Integer, Integer>> estimatedIssuesPrediction) {
             this.estimatedIssuesPrediction = estimatedIssuesPrediction;
             return this;
         }
 
+        /**
+         * Set goodness of fit data.
+         * 
+         * @param goodnessOfFit goodness of fit data.
+         * @return this builder, to allow method chaining.
+         */
         public OutputDataBuilder setGoodnessOfFit(Map<String, String> goodnessOfFit) {
             this.goodnessOfFit = goodnessOfFit;
             return this;
         }
 
+        /**
+         * Set if exists trend.
+         * 
+         * @param existTrend true if exist trend, false otherwise.
+         * @return this builder, to allow method chaining.
+         */
         public OutputDataBuilder setExistTrend(boolean existTrend) {
             this.existTrend = existTrend;
             return this;
         }
 
+        /**
+         * Set trend value.
+         * 
+         * @param trend trend value.
+         * @return this builder, to allow method chaining.
+         */
         public OutputDataBuilder setTrend(double trend) {
             this.trend = trend;
             return this;
         }
 
+        /**
+         * Set name of mode.
+         * 
+         * @param modelName model name.
+         * @return this builder, to allow method chaining.
+         */
         public OutputDataBuilder setModelName(String modelName) {
             this.modelName = modelName;
             return this;
         }
 
+        /**
+         * Set model function.
+         * 
+         * @param modelFunction model function.
+         * @return this builder, to allow method chaining.
+         */
         public OutputDataBuilder setModelFunction(String modelFunction) {
             this.modelFunction = modelFunction;
             return this;
         }
 
+        /**
+         * Set testing periods unit.
+         * 
+         * @param testingPeriodsUnit testing periods unit.
+         * @return this builder, to allow method chaining.
+         */
         public OutputDataBuilder setTestingPeriodsUnit(String testingPeriodsUnit) {
             this.testingPeriodsUnit = testingPeriodsUnit;
             return this;
         }
 
+        /**
+         * Set filters used.
+         * 
+         * @param filtersUsed list of filters used.
+         * @return this builder, to allow method chaining.
+         */
         public OutputDataBuilder setFiltersUsed(List<String> filtersUsed) {
             this.filtersUsed = filtersUsed;
             return this;
         }
 
+        /**
+         * Set processors used.
+         * 
+         * @param processorsUsed list of processors used.
+         * @return this builder, to allow method chaining.
+         */
         public OutputDataBuilder setProcessorsUsed(List<String> processorsUsed) {
             this.processorsUsed = processorsUsed;
             return this;
         }
         
+        /**
+         * Constructs an OutputData with the values declared by this OutputData.OutputDataBuilder
+         * 
+         * @return the new OutputData.
+         */
         public OutputData build() {
             return new OutputData(this);
         }

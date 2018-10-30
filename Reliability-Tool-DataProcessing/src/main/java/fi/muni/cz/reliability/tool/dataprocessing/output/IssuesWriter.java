@@ -14,5 +14,5 @@ public interface IssuesWriter {
      * @param list      GeneralIssue to write.
      * @param fileName  name of file.
      */
-    public void writeToFile(List<GeneralIssue> list, String fileName);
+    void writeToFile(List<GeneralIssue> list, String fileName);
 }

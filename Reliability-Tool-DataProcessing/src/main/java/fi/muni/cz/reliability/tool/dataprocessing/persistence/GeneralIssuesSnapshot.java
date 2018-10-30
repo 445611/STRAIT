@@ -7,7 +7,6 @@ import java.util.List;
 import java.util.Objects;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
-import javax.persistence.ElementCollection;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -29,18 +28,6 @@ public class GeneralIssuesSnapshot implements Serializable {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
     
-    private String periodicOfTesting;
-    private int howManyTimeUnitsToAdd;
-    
-    @Temporal(TemporalType.TIMESTAMP)
-    private Date startOfTesting;
-    
-    @Temporal(TemporalType.TIMESTAMP)
-    private Date endOfTesting;
-    
-    @ElementCollection
-    private List<String> filtersRan;
-    
     @OneToMany(cascade = CascadeType.MERGE)
     @JoinColumn(name = "snapshot_id")
     private List<GeneralIssue> listOfGeneralIssues;
@@ -55,14 +42,13 @@ public class GeneralIssuesSnapshot implements Serializable {
     @Temporal(TemporalType.TIMESTAMP)
     private Date createdAt;
 
+    /**
+     * Default constructor.
+     */
     public GeneralIssuesSnapshot() {
     }
 
     private GeneralIssuesSnapshot(GeneralIssuesSnapshotBuilder builder) {
-        this.periodicOfTesting = builder.periodicOfTesting;
-        this.startOfTesting = builder.startOfTesting;
-        this.endOfTesting = builder.endOfTesting;
-        this.filtersRan = builder.filtersRan;
         this.listOfGeneralIssues = builder.listOfGeneralIssues;
         this.url = builder.url;
         this.userName = builder.userName;
@@ -77,46 +63,6 @@ public class GeneralIssuesSnapshot implements Serializable {
 
     public void setId(Long id) {
         this.id = id;
-    }
-
-    public String getTypeOfTimeToSplitTestInto() {
-        return periodicOfTesting;
-    }
-
-    public void setTypeOfTimeToSplitTestInto(String typeOfTimeToSplitTestInto) {
-        this.periodicOfTesting = typeOfTimeToSplitTestInto;
-    }
-
-    public int getHowManyTimeUnitsToAdd() {
-        return howManyTimeUnitsToAdd;
-    }
-
-    public void setHowManyTimeUnitsToAdd(int howManyTimeUnitsToAdd) {
-        this.howManyTimeUnitsToAdd = howManyTimeUnitsToAdd;
-    }
-
-    public Date getStartOfTesting() {
-        return startOfTesting;
-    }
-
-    public void setStartOfTesting(Date startOfTesting) {
-        this.startOfTesting = startOfTesting;
-    }
-
-    public Date getEndOfTesting() {
-        return endOfTesting;
-    }
-
-    public void setEndOfTesting(Date endOfTesting) {
-        this.endOfTesting = endOfTesting;
-    }
-
-    public List<String> getFiltersRan() {
-        return filtersRan;
-    }
-
-    public void setFiltersRan(List<String> filtersRan) {
-        this.filtersRan = filtersRan;
     }
 
     public List<GeneralIssue> getListOfGeneralIssues() {
@@ -205,14 +151,13 @@ public class GeneralIssuesSnapshot implements Serializable {
     public String toString() {
         return snapshotName + "{url=" + url + ", userName=" + userName 
                 + ", repositoryName=" + repositoryName + ", createdAt=" 
-                + createdAt + ", List = " + listOfGeneralIssues + '}';
+                + createdAt + ", ListOfIssues = " + listOfGeneralIssues + '}';
     }
     
+    /**
+     * Builder.
+     */
     public static class GeneralIssuesSnapshotBuilder {
-        private String periodicOfTesting;
-        private Date startOfTesting;
-        private Date endOfTesting;
-        private List<String> filtersRan;
         private List<GeneralIssue> listOfGeneralIssues;
         private String url;
         private String userName;
@@ -220,56 +165,78 @@ public class GeneralIssuesSnapshot implements Serializable {
         private String snapshotName;
         private Date createdAt;
 
-        public GeneralIssuesSnapshotBuilder setTypeOfTimeToSplitTestInto(String periodicOfTesting) {
-            this.periodicOfTesting = periodicOfTesting;
-            return this;
-        }
-
-        public GeneralIssuesSnapshotBuilder setStartOfTesting(Date startOfTesting) {
-            this.startOfTesting = startOfTesting;
-            return this;
-        }
-
-        public GeneralIssuesSnapshotBuilder setEndOfTesting(Date endOfTesting) {
-            this.endOfTesting = endOfTesting;
-            return this;
-        }
-
-        public GeneralIssuesSnapshotBuilder setFiltersRan(List<String> filtersRan) {
-            this.filtersRan = filtersRan;
-            return this;
-        }
-
+        /**
+         * Set list of general isues.
+         * 
+         * @param listOfGeneralIssues list of general issues.
+         * @return this builder, to allow method chaining.
+         */
         public GeneralIssuesSnapshotBuilder setListOfGeneralIssues(List<GeneralIssue> listOfGeneralIssues) {
             this.listOfGeneralIssues = listOfGeneralIssues;
             return this;
         }
 
+        /**
+         * Set url.
+         * 
+         * @param url url.
+         * @return this builder, to allow method chaining.
+         */
         public GeneralIssuesSnapshotBuilder setUrl(String url) {
             this.url = url;
             return this;
         }
 
+        /**
+         * Set user name.
+         * 
+         * @param userName user name.
+         * @return this builder, to allow method chaining.
+         */
         public GeneralIssuesSnapshotBuilder setUserName(String userName) {
             this.userName = userName;
             return this;
         }
 
+        /**
+         * Set repository name.
+         * 
+         * @param repositoryName repository name.
+         * @return this builder, to allow method chaining.
+         */
         public GeneralIssuesSnapshotBuilder setRepositoryName(String repositoryName) {
             this.repositoryName = repositoryName;
             return this;
         }
 
+        /**
+         * Set snapshot name.
+         * 
+         * @param snapshotName snapshot name.
+         * @return this builder, to allow method chaining.
+         */
         public GeneralIssuesSnapshotBuilder setSnapshotName(String snapshotName) {
             this.snapshotName = snapshotName;
             return this;
         }
 
+        /**
+         * Set date when snapshot was created.
+         * 
+         * @param createdAt date.
+         * @return this builder, to allow method chaining.
+         */
         public GeneralIssuesSnapshotBuilder setCreatedAt(Date createdAt) {
             this.createdAt = createdAt;
             return this;
         }
         
+        /**
+         * Constructs an GeneralIssuesSnapshot with the values declared by 
+         * this GeneralIssuesSnapshot.GeneralIssuesSnapshotBuilder
+         * 
+         * @return the new GeneralIssuesSnapshot.
+         */
         public GeneralIssuesSnapshot build() {
             return new GeneralIssuesSnapshot(this);
         } 

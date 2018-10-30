@@ -20,7 +20,15 @@ public class ModelFactory {
     public static final String  MUSA_OKUMOTO = "mo";
     public static final String  DUANE = "du";
     public static final String  HOSSAIN_DAHIYA = "hd";
-    
+
+    /**
+     * Get Model for string value.
+     * 
+     * @param countedWeeksWithTotal cumulative data.
+     * @param goodnessOfFitTest     goodnes-of-fit.
+     * @param modulArg              represnetation of model.
+     * @return Model
+     */
     public static Model getIssuesWriter(List<Pair<Integer, Integer>> countedWeeksWithTotal,
             GoodnessOfFitTest goodnessOfFitTest, String modulArg) {
         switch (modulArg) {

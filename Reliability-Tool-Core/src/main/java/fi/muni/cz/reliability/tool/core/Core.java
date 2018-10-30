@@ -4,15 +4,10 @@ import fi.muni.cz.reliability.tool.core.exception.InvalidInputException;
 import fi.muni.cz.reliability.tool.core.factory.FilterFactory;
 import fi.muni.cz.reliability.tool.core.factory.IssuesWriterFactory;
 import fi.muni.cz.reliability.tool.core.factory.ModelFactory;
-import fi.muni.cz.reliability.tool.dataprocessing.issuesprocessing.Filter;
-import fi.muni.cz.reliability.tool.dataprocessing.issuesprocessing.FilterByLabel;
-import fi.muni.cz.reliability.tool.dataprocessing.issuesprocessing.FilterClosed;
+import fi.muni.cz.reliability.tool.core.factory.OutputWriterFactory;
 import fi.muni.cz.reliability.tool.dataprocessing.issuesprocessing.modeldata.CumulativeIssuesCounter;
-import fi.muni.cz.reliability.tool.dataprocessing.issuesprocessing.modeldata.IntervalIssuesCounter;
 import fi.muni.cz.reliability.tool.dataprocessing.issuesprocessing.modeldata.IssuesCounter;
 import fi.muni.cz.reliability.tool.dataprocessing.issuesprocessing.modeldata.TimeBetweenIssuesCounter;
-import fi.muni.cz.reliability.tool.dataprocessing.output.CsvFileWriter;
-import fi.muni.cz.reliability.tool.dataprocessing.output.HtmlOutputWriter;
 import fi.muni.cz.reliability.tool.dataprocessing.output.OutputData;
 import fi.muni.cz.reliability.tool.dataprocessing.output.OutputWriter;
 import fi.muni.cz.reliability.tool.dataprocessing.persistence.GeneralIssuesSnapshot;
@@ -24,23 +19,15 @@ import fi.muni.cz.reliability.tool.dataprovider.authenticationdata.GitHubAuthent
 import fi.muni.cz.reliability.tool.dataprovider.utils.GitHubUrlParser;
 import fi.muni.cz.reliability.tool.dataprovider.utils.ParsedUrlData;
 import fi.muni.cz.reliability.tool.dataprovider.utils.UrlParser;
-import fi.muni.cz.reliability.tool.models.DuaneModelImpl;
-import fi.muni.cz.reliability.tool.models.GOModelImpl;
-import fi.muni.cz.reliability.tool.models.GOSShapedModelImpl;
-import fi.muni.cz.reliability.tool.models.HossainDahiyaModelImpl;
 import fi.muni.cz.reliability.tool.models.Model;
-import fi.muni.cz.reliability.tool.models.MusaOkumotoModelImpl;
 import fi.muni.cz.reliability.tool.models.testing.ChiSquareGoodnessOfFitTest;
 import fi.muni.cz.reliability.tool.models.testing.GoodnessOfFitTest;
 import fi.muni.cz.reliability.tool.models.testing.LaplaceTrendTest;
 import fi.muni.cz.reliability.tool.models.testing.TrendTest;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Date;
 import java.util.List;
-import org.apache.commons.cli.CommandLine;
 import org.apache.commons.cli.HelpFormatter;
-import org.apache.commons.cli.Options;
 import org.apache.commons.math3.util.Pair;
 
 /**
@@ -49,7 +36,8 @@ import org.apache.commons.math3.util.Pair;
 public class Core {
 
     private static ArgsParser parser;
-    private static final DataProvider DATA_PROVIDER = new GitHubDataProvider(new GitHubAuthenticationDataProvider().getGitHubClientWithCreditials());
+    private static final DataProvider DATA_PROVIDER = 
+            new GitHubDataProvider(new GitHubAuthenticationDataProvider().getGitHubClientWithCreditials());
     private static ParsedUrlData parsedUrlData;
     
     /**
@@ -65,78 +53,104 @@ public class Core {
         }
     }
     
-    /**
-     * Run method.
-     * @param args as input
-     */
-    public static void run(String[] args) {
+    private static void run(String[] args) {
         System.out.println("Working...");
         
         if (parser.getCmdl().hasOption(ArgsParser.OPT_LIST_ALL_SNAPSHOTS)) {
             doListAllSnapshots();
+        } else if (parser.getCmdl().hasOption(ArgsParser.OPT_HELP)) {
+            printHelp();
         } else if (parser.getCmdl().hasOption(ArgsParser.OPT_URL) && 
                 parser.getCmdl().hasOption(ArgsParser.OPT_SAVE)) {
-            checkUrl();
-            doSaveToFile();
+            checkUrl(parser.getCmdl().getOptionValue(ArgsParser.OPT_URL));
+            doSaveToFileFromUrl();
+            System.out.println("Saved to file.");
         } else if (parser.getCmdl().hasOption(ArgsParser.OPT_URL) && 
                 parser.getCmdl().hasOption(ArgsParser.OPT_LIST_SNAPSHOTS)) {
-            checkUrl();
-            doListSnapshots();
+            checkUrl(parser.getCmdl().getOptionValue(ArgsParser.OPT_URL));
+            doListSnapshotsForUrl();
         } else if (parser.getCmdl().hasOption(ArgsParser.OPT_URL) && 
                 parser.getCmdl().hasOption(ArgsParser.OPT_EVALUATE)) {
-            checkUrl();
-            doEvaluate();
+            checkUrl(parser.getCmdl().getOptionValue(ArgsParser.OPT_URL));
+            doEvaluateForUrl();
+            System.out.println("Evaluated to file.");
+        } else if (parser.getCmdl().hasOption(ArgsParser.OPT_SNAPSHOT_NAME) &&
+                parser.getCmdl().hasOption(ArgsParser.OPT_SAVE)) {
+            doSaveToFileFromSnapshot();
+            System.out.println("Saved.");
+        } else if (parser.getCmdl().hasOption(ArgsParser.OPT_SNAPSHOT_NAME) &&
+                parser.getCmdl().hasOption(ArgsParser.OPT_EVALUATE)) {
+            doEvaluateForSnapshot();
+            System.out.println("Evaluated.");
+        } else if (parser.getCmdl().hasOption(ArgsParser.OPT_SNAPSHOT_NAME) &&
+                parser.getCmdl().hasOption(ArgsParser.OPT_LIST_SNAPSHOTS)) {
+            System.out.println("Can't combine '-sn' with '-sl'.");
+            printHelp();
+        } else {
+            System.out.println("Missing argument: '-e' / '-s' /'-sl'");
+             printHelp();
         }
         
         System.out.println("Done!");
         System.exit(0);
     }
     
-    /**
-     * Evaluate.
-     * @param parser with data.
-     */
-    private static void doEvaluate() {
-        List<GeneralIssue> listOfGeneralIssues = DATA_PROVIDER.
-                getIssuesByUrl(parsedUrlData.getUrl().toString());
+    private static void  doEvaluateForUrl() {
+        List<GeneralIssue> listOfGeneralIssues = DATA_PROVIDER.getIssuesByUrl(parsedUrlData.getUrl().toString());
+        if (!parser.getCmdl().hasOption(ArgsParser.OPT_NAME)) {
+            System.out.println("Must set '-name' <Name>.");
+            printHelp();
+            System.exit(0);
+        }
+        try {
+            GeneralIssuesSnapshot snapshot = new GeneralIssuesSnapshot.GeneralIssuesSnapshotBuilder()
+                .setCreatedAt(new Date())
+                .setListOfGeneralIssues(listOfGeneralIssues)
+                .setRepositoryName(parsedUrlData.getRepositoryName())
+                .setUrl(parsedUrlData.getUrl().toString())
+                .setUserName(parsedUrlData.getUserName())
+                .setSnapshotName(parser.getCmdl().getOptionValue(ArgsParser.OPT_NAME))
+                .build();
+            GeneralIssuesSnapshotDaoImpl dao = new GeneralIssuesSnapshotDaoImpl();
+            dao.save(snapshot); 
+        } catch (Exception ex) {
+            System.out.println("-e <New name> should be unique name. '" + 
+                    parser.getCmdl().getOptionValue(ArgsParser.OPT_EVALUATE) + "' already exists.");
+            System.exit(0);
+        }
+        doEvaluate(DATA_PROVIDER.getIssuesByUrl(parsedUrlData.getUrl().toString()));
+    }
+    
+    private static void doEvaluateForSnapshot() {
+        GeneralIssuesSnapshotDaoImpl dao = new GeneralIssuesSnapshotDaoImpl();
+        GeneralIssuesSnapshot snapshot = dao.getSnapshotByName(parser.getCmdl()
+                .getOptionValue(ArgsParser.OPT_SNAPSHOT_NAME));
+        checkUrl(snapshot.getUrl());
+        doEvaluate(snapshot.getListOfGeneralIssues());
+    }
+    
+    private static void doEvaluate(List<GeneralIssue> listOfGeneralIssues) {
         int initialNumberOfIssues = listOfGeneralIssues.size();
         //model <- nls(yvalues ~ b1*(1 - exp(-b2*xvalues))/(1 + b3*exp(-b2*xvalues)),
         //start = list(b1 = 70,b2 = 1,b3 = 1), lower = list(b1 = 0,b2 = 0, b3 = 0), algorithm = "port")
         //model <- nls(yvalues ~ a*(1 - (1 + b*xvalues)*exp(-b*xvalues)),
         //start = list(a = 70,b = 1), lower = list(a = 0,b = 0), algorithm = "port")
         
-        FilterFactory.runFilters(listOfGeneralIssues, parser.getCmdl());
+        List<GeneralIssue> filteredList = FilterFactory.runFilters(listOfGeneralIssues, parser.getCmdl());
 
         String periodicOfTesting = IssuesCounter.WEEKS;
-        Date startOfTesting = listOfGeneralIssues.get(0).getCreatedAt();
+        Date startOfTesting = filteredList.get(0).getCreatedAt();
         Date endOfTesting = new Date();
         
-        GeneralIssuesSnapshot snapshot = new GeneralIssuesSnapshot.GeneralIssuesSnapshotBuilder()
-                .setCreatedAt(new Date())
-                .setTypeOfTimeToSplitTestInto(periodicOfTesting)
-                .setFiltersRan(FilterFactory.getFiltersRanAsList(parser.getCmdl()))
-                .setListOfGeneralIssues(listOfGeneralIssues)
-                .setRepositoryName(parsedUrlData.getRepositoryName())
-                .setUrl(parsedUrlData.getUrl().toString())
-                .setUserName(parsedUrlData.getUserName())
-                .setStartOfTesting(startOfTesting)
-                .setEndOfTesting(endOfTesting)
-                .setSnapshotName(parser.getCmdl().getOptionValue(ArgsParser.OPT_EVALUATE))
-                .build();
         // SNAPSHOT
-        
-        // DATABASE
-        //GeneralIssuesSnapshotDaoImpl dao = new GeneralIssuesSnapshotDaoImpl();
-        //dao.save(snapshot);
-        // DATABASE
 
         // COUNTERS
         IssuesCounter cumulativeCounter = new CumulativeIssuesCounter(periodicOfTesting, startOfTesting, endOfTesting);
-        List<Pair<Integer, Integer>> countedWeeksWithTotal = cumulativeCounter.prepareIssuesDataForModel(listOfGeneralIssues);
+        List<Pair<Integer, Integer>> countedWeeksWithTotal = cumulativeCounter.prepareIssuesDataForModel(filteredList);
         
         String timeBetweenIssuesUnit = IssuesCounter.HOURS;
         IssuesCounter timeBetween = new TimeBetweenIssuesCounter(timeBetweenIssuesUnit);
-        List<Pair<Integer, Integer>> timeBetweenList = timeBetween.prepareIssuesDataForModel(listOfGeneralIssues);
+        List<Pair<Integer, Integer>> timeBetweenList = timeBetween.prepareIssuesDataForModel(filteredList);
         // COUNTERS
         
         //TEMP
@@ -151,7 +165,8 @@ public class Core {
                 models.add(ModelFactory.getIssuesWriter(countedWeeksWithTotal, goodnessOfFitTest, modelArg));
             }
         } else {
-            models.add(ModelFactory.getIssuesWriter(countedWeeksWithTotal, goodnessOfFitTest, ModelFactory.GOEL_OKUMOTO));
+            models.add(ModelFactory.
+                    getIssuesWriter(countedWeeksWithTotal, goodnessOfFitTest, ModelFactory.GOEL_OKUMOTO));
         }
         
         
@@ -169,7 +184,7 @@ public class Core {
         moModel.estimateModelData();
         goSShapedModel.estimateModelData();*/
         TrendTest trendTest = new LaplaceTrendTest(timeBetweenIssuesUnit);
-        trendTest.executeTrendTest(listOfGeneralIssues);
+        trendTest.executeTrendTest(filteredList);
         // MODEL
         
         int howMuchToPredict;
@@ -190,7 +205,7 @@ public class Core {
                     .setUrl(parsedUrlData.getUrl().toString())
                     .setUserName(parsedUrlData.getUserName())
                     .setTotalNumberOfDefects(countedWeeksWithTotal.get(countedWeeksWithTotal.size() - 1).getSecond())
-                    .setWeeksAndDefects(countedWeeksWithTotal)
+                    .setCumulativeDefects(countedWeeksWithTotal)
                     .setTimeBetweenDefects(timeBetweenList)
                     .setTrend(trendTest.getTrendValue())
                     .setExistTrend(trendTest.getResult())
@@ -208,20 +223,28 @@ public class Core {
                     .setTimeBetweenDefectsUnit(timeBetweenIssuesUnit).build();
             outputDataList.add(outputData);
         }
-        // OUTPUT
-        OutputWriter writer = new HtmlOutputWriter(false);
         
+        // OUTPUT 
+        OutputWriter writer = OutputWriterFactory.getIssuesWriter(parser.getCmdl());
         writer.writeOutputDataToFile(outputDataList, parsedUrlData.getRepositoryName());
         
         java.awt.Toolkit.getDefaultToolkit().beep();
     }
 
-    private static void doSaveToFile() {
+    private static void doSaveToFileFromUrl() {
         List<GeneralIssue> listOfInitialIssues = DATA_PROVIDER.
                 getIssuesByUrl(parser.getCmdl().getOptionValue(ArgsParser.OPT_URL));
-        
+        doSaveToFile(listOfInitialIssues);
+    }
+    
+    private static void doSaveToFileFromSnapshot() {
+        GeneralIssuesSnapshotDaoImpl dao = new GeneralIssuesSnapshotDaoImpl();
+        doSaveToFile(dao.getSnapshotByName(
+                parser.getCmdl().getOptionValue(ArgsParser.OPT_SNAPSHOT_NAME)).getListOfGeneralIssues());
+    }
+    
+    private static void doSaveToFile(List<GeneralIssue> listOfInitialIssues) {
         FilterFactory.runFilters(listOfInitialIssues, parser.getCmdl());
-
         IssuesWriterFactory.getIssuesWriter(parser.getCmdl())
                 .writeToFile(listOfInitialIssues, parsedUrlData.getRepositoryName());
     }
@@ -232,19 +255,6 @@ public class Core {
         for (GeneralIssuesSnapshot snap: listFromDB) {
             System.out.println(snap);
         }
-    }
-    
-    private static void listAllSnapshotsForUrl(ArgsParser parser) {
-        /*GeneralIssuesSnapshotDaoImpl dao = new GeneralIssuesSnapshotDaoImpl();
-        List<GeneralIssuesSnapshot> listFromDB = dao.getAllSnapshotsForUserAndRepository(
-                parser.getParsedUrlData().getUserName(), parser.getParsedUrlData().getRepositoryName()); 
-        if (listFromDB.isEmpty()) {
-            System.out.println("No snapshots for: " + parser.getParsedUrlData().getUrl().toString());
-        } else {
-            for (GeneralIssuesSnapshot snap: listFromDB) {
-                System.out.println(snap);
-            }
-        }*/
     }
     
     private static void printHelp(){
@@ -261,12 +271,12 @@ public class Core {
         }
     }
 
-    private static void checkUrl() {
+    private static void checkUrl(String url) {
         UrlParser urlParser = new GitHubUrlParser();
-        parsedUrlData = urlParser.parseUrlAndCheck(parser.getCmdl().getOptionValue(ArgsParser.OPT_URL));
+        parsedUrlData = urlParser.parseUrlAndCheck(url);
     }
 
-    private static void doListSnapshots() {
+    private static void doListSnapshotsForUrl() {
         GeneralIssuesSnapshotDaoImpl dao = new GeneralIssuesSnapshotDaoImpl();
         List<GeneralIssuesSnapshot> listFromDB = dao.
                 getAllSnapshotsForUserAndRepository(parsedUrlData.getUserName(), 

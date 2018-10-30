@@ -25,6 +25,7 @@ public class ArgsParser {
     public static final String OPT_URL = "url";
     public static final String OPT_SNAPSHOT_NAME = "sn";
     public static final String OPT_LIST_ALL_SNAPSHOTS = "asl";
+    public static final String OPT_HELP = "h";
     
     //Rest of Mandatory options
     public static final String OPT_LIST_SNAPSHOTS = "sl";
@@ -34,7 +35,9 @@ public class ArgsParser {
     public static final String OPT_FILTER_LABELS = "fl";
     public static final String OPT_FILTER_CLOSED = "fc";
     public static final String OPT_MODELS = "ms";
-    public static final String OPT_HTML = "html";
+    public static final String OPT_OUT = "out";
+    public static final String OPT_GRAPH_MULTIPLE = "gm";
+    public static final String OPT_NAME = "name";
     
     //Configuraton file option
     private static final String FLAG_CONFIG_FILE = "-cf";
@@ -89,11 +92,8 @@ public class ArgsParser {
         if (args.length < 1) {
             errors.add("Missing arguments.");
             return false;
-        } else if (args[0].equals(FLAG_CONFIG_FILE)) {
-            return true;
-        } else {
-            return false;
         }
+        return args[0].equals(FLAG_CONFIG_FILE);
     }
     
     private void getConfiguratedOptions() {
@@ -106,6 +106,8 @@ public class ArgsParser {
         mandatoryOptionGroup.addOption(option);
         option = Option.builder(OPT_LIST_ALL_SNAPSHOTS).longOpt("allSnapshotsList").build();
         mandatoryOptionGroup.addOption(option);
+        option = Option.builder(OPT_HELP).longOpt("help").build();
+        mandatoryOptionGroup.addOption(option);
         mandatoryOptionGroup.isRequired();
         options.addOptionGroup(mandatoryOptionGroup);
         
@@ -115,13 +117,16 @@ public class ArgsParser {
         option = Option.builder(OPT_SAVE).longOpt("save").optionalArg(true).hasArg().argName("Format of data").
                 desc("Save repository data to file with specified format.").build();
         mandatoryOptionGroup.addOption(option);
-        option = Option.builder(OPT_EVALUATE).longOpt("evaluate").hasArg().argName("New name")
+        option = Option.builder(OPT_EVALUATE).longOpt("evaluate")
                 .desc("Evaluate repository data and save to new snapshot with name.").build();
         mandatoryOptionGroup.addOption(option);
         options.addOptionGroup(mandatoryOptionGroup);
         
         option = Option.builder(OPT_PREDICT).longOpt("predict").type(Number.class).hasArg().argName("Number").
                 desc("Number of test periods to predict.").build();
+        options.addOption(option);
+        option = Option.builder(OPT_NAME).hasArg().argName("Name").
+                desc("Name of new snapshot.").build();
         options.addOption(option);
         option = Option.builder(OPT_FILTER_LABELS).longOpt("filterLabel").optionalArg(true)
                 .hasArgs().argName("Filtering labels").desc("Filter by specified labels.").build();
@@ -131,7 +136,10 @@ public class ArgsParser {
         option = Option.builder(OPT_MODELS).longOpt("models").hasArgs().argName("Model name").
                 desc("Models to evaluate.").build();
         options.addOption(option);
-        option = Option.builder(OPT_HTML).desc("Output as HTML file.").build();
+        option = Option.builder(OPT_GRAPH_MULTIPLE).longOpt("graphMultiple")
+                .desc("Data show in multiple graphs.").build();
+        options.addOption(option);
+        option = Option.builder(OPT_OUT).hasArg().desc("Output type.").build();
         options.addOption(option);
     }
 

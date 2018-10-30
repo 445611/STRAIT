@@ -91,9 +91,13 @@
                     <p> 
                     Filters:<br>
                         <p style="margin-left: 20">
-                        <#list dataList[0].filtersUsed as value> 
-                            ${value}<br>
-                        </#list>
+                            <#if dataList[0].filtersUsed?size != 0>
+                                <#list dataList[0].filtersUsed as value> 
+                                    ${value}<br>
+                                </#list>
+                            <#else>
+                                None
+                            </#if>
                         </p>
                         Processors:<br>
                         <p style="margin-left: 20">
@@ -195,7 +199,7 @@
                 },
                 data: {
                   columns: [
-                    ['Real issues', <#list dataList[0].weeksAndDefects as pair>${pair.getSecond()?c},</#list>],
+                    ['Real issues', <#list dataList[0].cumulativeDefects as pair>${pair.getSecond()?c},</#list>],
                     <#list dataList as outputData>
                         ['${outputData.modelName}', <#list outputData.estimatedIssuesPrediction as pair>${pair.getSecond()?c},</#list>],
                     </#list>   

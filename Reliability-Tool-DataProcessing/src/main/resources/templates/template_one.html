@@ -64,9 +64,13 @@
                 <p> 
                 Filters:<br>
                     <p style="margin-left: 20">
-                    <#list data.filtersUsed as value> 
-                        ${value}<br>
-                    </#list>
+                        <#if data.filtersUsed?size != 0>
+                            <#list data.filtersUsed as value> 
+                                ${value}<br>
+                            </#list>
+                        <#else>
+                            None
+                        </#if>
                     </p>
                     Processors:<br>
                     <p style="margin-left: 20">
@@ -79,14 +83,6 @@
                     </#if>
                     </p>
                 </p>
-                <#if data.goodnessOfFit??>
-                    <h3>Goodness of fit:</h3>
-                    <p>
-                        <#list data.goodnessOfFit as key, value> 
-                            ${key}${value}<br>
-                        </#list> 
-                    </p>              
-                </#if>
                 <#if data.trend?? && data.existTrend??>
                     <h3>Trend test:</h3>
                     <p>
@@ -108,6 +104,14 @@
                       ${key} = ${value?c}<br>
                     </#list>
                 </p>
+                <#if data.goodnessOfFit??>
+                    <h3>Goodness of fit:</h3>
+                    <p>
+                        <#list data.goodnessOfFit as key, value> 
+                            ${key}${value}<br>
+                        </#list> 
+                    </p>              
+                </#if>
                 <hr class="hrstyle">
                 <center><h3>Failure occurance</h3></center>
                 <div id="chart1"></div>
@@ -120,7 +124,7 @@
             bindto: '#chart1',
             data: {
               columns: [
-                ['Real issues', <#list data.weeksAndDefects as pair>${pair.getSecond()?c},</#list>],
+                ['Real issues', <#list data.cumulativeDefects as pair>${pair.getSecond()?c},</#list>],
                 ['Estimated issues', <#list data.estimatedIssuesPrediction as pair>${pair.getSecond()?c},</#list>]
               ]
             },
