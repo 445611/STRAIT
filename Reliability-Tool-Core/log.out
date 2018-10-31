@@ -1,3 +1,9 @@
+Trying to find Dozer configuration file: dozer.properties
+Dozer configuration file not found: dozer.properties.  Using defaults for all Dozer global properties.
+Initializing Dozer. Version: 5.5.0, Thread Name: main
+Dozer JMX MBean [org.dozer.jmx:type=DozerStatisticsController] auto registered with the Platform MBean Server
+Dozer JMX MBean [org.dozer.jmx:type=DozerAdminController] auto registered with the Platform MBean Server
+Initializing a new instance of dozer bean mapper.
 HCANN000001: Hibernate Commons Annotations {4.0.4.Final}
 HHH000412: Hibernate Core {4.3.1.Final}
 HHH000206: hibernate.properties not found
@@ -20,21 +26,25 @@ HHH000396: Updating schema
 HHH000261: Table found: .TOOL.GENERALISSUE_SNAPSHOT
 HHH000037: Columns: [createdat, repositoryname, snapshotname, id, url, username]
 HHH000108: Foreign keys: []
-HHH000126: Indexes: [sql181031231350660, uk_ewyk5kdbs8swflnjuqljnhbc]
+HHH000126: Indexes: [sql181101002727630, uk_ewyk5kdbs8swflnjuqljnhbc]
 HHH000261: Table found: .TOOL.GENERALISSUE
 HHH000037: Columns: [comments, snapshot_id, htmlurl, generalmilestone_id, body, title, url, createdat, number, issuestate, id, closedat, generaluser_id, updatedat]
 HHH000108: Foreign keys: [fk_14mj63i026qaarsoe5wq6haxe, fk_smxf99imah75kgxqpb0o3lf83, fk_3cxbfejtf6qikf4jjewb4ggvk]
-HHH000126: Indexes: [sql181031231350700, sql181031231350760, sql181031231350740, sql181031231350761]
+HHH000126: Indexes: [sql181101002727720, sql181101002727730, sql181101002727750, sql181101002727660]
 HHH000261: Table found: .TOOL.GENERALISSUE_LABELS
 HHH000037: Columns: [generalissue_id, labels]
 HHH000108: Foreign keys: [fk_3tfyhvfruo7pfucba2d0pdwoj]
-HHH000126: Indexes: [sql181031231350770]
+HHH000126: Indexes: [sql181101002727760]
 HHH000261: Table found: .TOOL.GENERALMILESTONE
 HHH000037: Columns: [createdat, dueon, description, id, milestonestate, title]
 HHH000108: Foreign keys: []
-HHH000126: Indexes: [sql181031231350710]
+HHH000126: Indexes: [sql181101002727680]
 HHH000261: Table found: .TOOL.GENERALUSER
 HHH000037: Columns: [name, id, email]
 HHH000108: Foreign keys: []
-HHH000126: Indexes: [sql181031231350720]
+HHH000126: Indexes: [sql181101002727690]
 HHH000232: Schema update complete
+Using the following xml files to load custom mappings for the bean mapper instance: [github_dozer_mapping.xml]
+Trying to find xml mapping file: github_dozer_mapping.xml
+Using URL [jar:file:/C:/Users/rados/.m2/repository/445611/Reliability-Tool-DataProvider/1.0-SNAPSHOT/Reliability-Tool-DataProvider-1.0-SNAPSHOT.jar!/github_dozer_mapping.xml] to load custom xml mappings
+Successfully loaded custom xml mappings from URL: [jar:file:/C:/Users/rados/.m2/repository/445611/Reliability-Tool-DataProvider/1.0-SNAPSHOT/Reliability-Tool-DataProvider-1.0-SNAPSHOT.jar!/github_dozer_mapping.xml]

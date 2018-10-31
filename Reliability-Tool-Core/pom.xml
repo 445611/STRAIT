@@ -37,22 +37,64 @@
     </properties>
     <build>
     <plugins>
-        
-    <plugin>
-        <groupId>org.codehaus.mojo</groupId>
-        <artifactId>exec-maven-plugin</artifactId>
-        <version>1.2.1</version>
-            <executions>
-              <execution>
-                <goals>
-                  <goal>java</goal>
-                </goals>
-              </execution>
-            </executions>
+        <plugin>
+    <groupId>org.apache.maven.plugins</groupId>
+    <artifactId>maven-assembly-plugin</artifactId>
+    <executions>
+        <execution>
+            <phase>package</phase>
+            <goals>
+                <goal>single</goal>
+            </goals>
             <configuration>
-              <mainClass>fi.muni.cz.reliability.tool.core.Core</mainClass>
+                <archive>
+                <manifest>
+                    <mainClass>
+                        fi.muni.cz.reliability.tool.core.Core
+                    </mainClass>
+                </manifest>
+                </archive>
+                <descriptorRefs>
+                    <descriptorRef>jar-with-dependencies</descriptorRef>
+                </descriptorRefs>
             </configuration>
-    </plugin>
+        </execution>
+    </executions>
+</plugin>
+			<plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-dependency-plugin</artifactId>
+                <executions>
+                    <execution>
+                        <id>copy-dependencies</id>
+                        <phase>prepare-package</phase>
+                        <goals>
+                            <goal>copy-dependencies</goal>
+                        </goals>
+                        <configuration>
+                            <outputDirectory>ReliabilityTool/lib</outputDirectory>
+                            <overWriteReleases>false</overWriteReleases>
+                            <overWriteSnapshots>false</overWriteSnapshots>
+                            <overWriteIfNewer>true</overWriteIfNewer>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-jar-plugin</artifactId>
+                 <version>2.4</version>
+                <configuration>
+                 <outputDirectory>ReliabilityTool</outputDirectory>
+                    <archive>
+                        <manifest>
+                            <addClasspath>true</addClasspath>
+                            <classpathPrefix>lib</classpathPrefix>
+                            <mainClass>fi.muni.cz.reliability.tool.core.Core</mainClass>
+                        </manifest>
+                    </archive>
+                </configuration>
+            </plugin>
     </plugins>
     </build>
     

@@ -6,7 +6,6 @@ import freemarker.template.Configuration;
 import freemarker.template.MalformedTemplateNameException;
 import freemarker.template.Template;
 import freemarker.template.TemplateException;
-import freemarker.template.TemplateExceptionHandler;
 import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileOutputStream;
@@ -29,13 +28,14 @@ public class HtmlOutputWriter extends OutputWriterAbstract {
     private static final String TEMPLATE_THREE = "template_three.html";
     private final Configuration configuration;
     private final boolean multipleGraphs;
+    
     /**
      * Constructor that create freemark template configuration.
      * 
      * @param multipleGraphs    True if want to have multiple graphs for models.
      */
     public HtmlOutputWriter(boolean multipleGraphs) {
-        configuration = getConfiguration();
+        configuration = TemplateConfigurationUtil.getConfiguration();
         this.multipleGraphs = multipleGraphs;
     }
     
@@ -83,23 +83,5 @@ public class HtmlOutputWriter extends OutputWriterAbstract {
         Logger.getLogger(HtmlOutputWriter.class.getName())
                     .log(Level.SEVERE, message, ex);
         throw new DataProcessingException(message, ex);
-    }
-    
-    private Configuration getConfiguration() {
-        Configuration cfg = new Configuration(Configuration.VERSION_2_3_28);
-        try {
-            cfg.setDirectoryForTemplateLoading(getHtmlTemplateFile());
-        } catch (IOException ex) {
-            throw new DataProcessingException("No such html template.", ex);
-        }
-        cfg.setDefaultEncoding("UTF-8");
-        cfg.setTemplateExceptionHandler(TemplateExceptionHandler.RETHROW_HANDLER);
-        cfg.setLogTemplateExceptions(false);
-        cfg.setWrapUncheckedExceptions(true);
-        return cfg;
-    }
-    
-    private File getHtmlTemplateFile() {
-        return new File(getClass().getClassLoader().getResource("templates").getFile());
     }
 }
