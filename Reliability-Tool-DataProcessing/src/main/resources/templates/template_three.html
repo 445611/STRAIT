@@ -89,26 +89,22 @@
                     </p>
                     <h3>Filters and Processors:</h3>
                     <p> 
-                    Filters:<br>
-                        <p style="margin-left: 20">
+                        <b>Filters:</b><br>
                             <#if dataList[0].filtersUsed?size != 0>
                                 <#list dataList[0].filtersUsed as value> 
-                                    ${value}<br>
+                                    - ${value}<br>
                                 </#list>
                             <#else>
-                                None
+                                - None<br>
                             </#if>
-                        </p>
-                        Processors:<br>
-                        <p style="margin-left: 20">
-                        <#if dataList[0].processorsUsed?size != 0>
-                            <#list dataList[0].processorsUsed as value> 
-                                ${value}<br>
-                            </#list>
-                        <#else>
-                            None
-                        </#if>
-                        </p>
+                        <b>Processors:</b><br>
+                            <#if dataList[0].processorsUsed?size != 0>
+                                <#list dataList[0].processorsUsed as value> 
+                                    - ${value}<br>
+                                </#list>
+                            <#else>
+                                - None<br>
+                            </#if>
                     </p>
                     <#if dataList[0].trend?? && dataList[0].existTrend??>
                         <h3>Trend test:</h3> 

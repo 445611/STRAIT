@@ -1,7 +1,7 @@
 package fi.muni.cz.reliability.tool.core.factory;
 
 import fi.muni.cz.reliability.tool.core.ArgsParser;
-import fi.muni.cz.reliability.tool.dataprocessing.output.CsvFileWriter;
+import fi.muni.cz.reliability.tool.dataprocessing.output.CsvFileIssuesWriter;
 import fi.muni.cz.reliability.tool.dataprocessing.output.IssuesWriter;
 import org.apache.commons.cli.CommandLine;
 
@@ -19,15 +19,11 @@ public class IssuesWriterFactory {
      * @return IssuesWriter
      */
     public static IssuesWriter getIssuesWriter(CommandLine cmdl) {
-        if (cmdl.getOptionValue(ArgsParser.OPT_SAVE) == null) {
-            return new CsvFileWriter();
-        }
-        
         switch (cmdl.getOptionValue(ArgsParser.OPT_SAVE)) {
             case CSV:
-                return new CsvFileWriter(); 
+                return new CsvFileIssuesWriter(); 
             default:
-                return new CsvFileWriter();
+                return new CsvFileIssuesWriter();
         }
     }
 }

@@ -1,0 +1,40 @@
+HCANN000001: Hibernate Commons Annotations {4.0.4.Final}
+HHH000412: Hibernate Core {4.3.1.Final}
+HHH000206: hibernate.properties not found
+HHH000021: Bytecode provider name : javassist
+HHH000043: Configuring from resource: /hibernate.cfg.xml
+HHH000040: Configuration resource: /hibernate.cfg.xml
+HHH000223: Recognized obsolete hibernate namespace http://hibernate.sourceforge.net/. Use namespace http://www.hibernate.org/dtd/ instead. Refer to Hibernate 3.6 Migration Guide!
+HHH000041: Configured SessionFactory: null
+HHH000402: Using Hibernate built-in connection pool (not for production use!)
+HHH000401: using driver [org.apache.derby.jdbc.EmbeddedDriver] at URL [jdbc:derby:IssuesDB;create=true]
+HHH000046: Connection properties: {user=tool, password=****}
+HHH000006: Autocommit mode: false
+HHH000115: Hibernate connection pool size: 20 (min=1)
+HHH000400: Using dialect: org.hibernate.dialect.DerbyTenSevenDialect
+HHH000399: Using default transaction strategy (direct JDBC transactions)
+HHH000397: Using ASTQueryTranslatorFactory
+HHH000228: Running hbm2ddl schema update
+HHH000102: Fetching database metadata
+HHH000396: Updating schema
+HHH000261: Table found: .TOOL.GENERALISSUE_SNAPSHOT
+HHH000037: Columns: [createdat, repositoryname, snapshotname, id, url, username]
+HHH000108: Foreign keys: []
+HHH000126: Indexes: [sql181031231350660, uk_ewyk5kdbs8swflnjuqljnhbc]
+HHH000261: Table found: .TOOL.GENERALISSUE
+HHH000037: Columns: [comments, snapshot_id, htmlurl, generalmilestone_id, body, title, url, createdat, number, issuestate, id, closedat, generaluser_id, updatedat]
+HHH000108: Foreign keys: [fk_14mj63i026qaarsoe5wq6haxe, fk_smxf99imah75kgxqpb0o3lf83, fk_3cxbfejtf6qikf4jjewb4ggvk]
+HHH000126: Indexes: [sql181031231350700, sql181031231350760, sql181031231350740, sql181031231350761]
+HHH000261: Table found: .TOOL.GENERALISSUE_LABELS
+HHH000037: Columns: [generalissue_id, labels]
+HHH000108: Foreign keys: [fk_3tfyhvfruo7pfucba2d0pdwoj]
+HHH000126: Indexes: [sql181031231350770]
+HHH000261: Table found: .TOOL.GENERALMILESTONE
+HHH000037: Columns: [createdat, dueon, description, id, milestonestate, title]
+HHH000108: Foreign keys: []
+HHH000126: Indexes: [sql181031231350710]
+HHH000261: Table found: .TOOL.GENERALUSER
+HHH000037: Columns: [name, id, email]
+HHH000108: Foreign keys: []
+HHH000126: Indexes: [sql181031231350720]
+HHH000232: Schema update complete

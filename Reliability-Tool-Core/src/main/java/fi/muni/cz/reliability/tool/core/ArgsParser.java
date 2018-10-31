@@ -26,6 +26,7 @@ public class ArgsParser {
     public static final String OPT_SNAPSHOT_NAME = "sn";
     public static final String OPT_LIST_ALL_SNAPSHOTS = "asl";
     public static final String OPT_HELP = "h";
+    public static final String OPT_CONFIG_FILE = "cf";
     
     //Rest of Mandatory options
     public static final String OPT_LIST_SNAPSHOTS = "sl";
@@ -37,7 +38,7 @@ public class ArgsParser {
     public static final String OPT_MODELS = "ms";
     public static final String OPT_OUT = "out";
     public static final String OPT_GRAPH_MULTIPLE = "gm";
-    public static final String OPT_NAME = "name";
+    public static final String OPT_PERSIST_NAME = "name";
     
     //Configuraton file option
     private static final String FLAG_CONFIG_FILE = "-cf";
@@ -61,8 +62,7 @@ public class ArgsParser {
         }
 
         if (!errors.isEmpty()) {
-            HelpFormatter formatter = new HelpFormatter();
-            formatter.printHelp("Help:", options);
+            printHelper();
             throw new InvalidInputException(errors);
         }
     }
@@ -90,6 +90,7 @@ public class ArgsParser {
     
     private boolean checkToReadFromConfigFile(String[] args, List<String> errors) {
         if (args.length < 1) {
+            printHelper();
             errors.add("Missing arguments.");
             return false;
         }
@@ -100,7 +101,10 @@ public class ArgsParser {
         options = new Options();
         
         OptionGroup mandatoryOptionGroup = new OptionGroup();
-        Option option = Option.builder(OPT_URL).hasArg().argName("URL of repository").build();
+        Option option = Option.builder(OPT_CONFIG_FILE).hasArg().
+                argName("Path to file").desc("Configuration file.").build();
+        mandatoryOptionGroup.addOption(option);
+        option = Option.builder(OPT_URL).hasArg().argName("URL of repository").build();
         mandatoryOptionGroup.addOption(option);
         option = Option.builder(OPT_SNAPSHOT_NAME).longOpt("snapshotName").hasArg().argName("Name of snapshot").build();
         mandatoryOptionGroup.addOption(option);
@@ -114,19 +118,19 @@ public class ArgsParser {
         mandatoryOptionGroup = new OptionGroup();
         option = Option.builder(OPT_LIST_SNAPSHOTS).longOpt("snapshotsList").build();
         mandatoryOptionGroup.addOption(option);
-        option = Option.builder(OPT_SAVE).longOpt("save").optionalArg(true).hasArg().argName("Format of data").
+        option = Option.builder(OPT_SAVE).longOpt("save").hasArg().argName("Format of data").
                 desc("Save repository data to file with specified format.").build();
         mandatoryOptionGroup.addOption(option);
         option = Option.builder(OPT_EVALUATE).longOpt("evaluate")
-                .desc("Evaluate repository data and save to new snapshot with name.").build();
+                .desc("Evaluate repository data and persist to new snapshot with name.").build();
         mandatoryOptionGroup.addOption(option);
         options.addOptionGroup(mandatoryOptionGroup);
         
         option = Option.builder(OPT_PREDICT).longOpt("predict").type(Number.class).hasArg().argName("Number").
                 desc("Number of test periods to predict.").build();
         options.addOption(option);
-        option = Option.builder(OPT_NAME).hasArg().argName("Name").
-                desc("Name of new snapshot.").build();
+        option = Option.builder(OPT_PERSIST_NAME).hasArg().argName("Name of new snapshot").
+                desc("Name of new snapshot that will be persisted.").build();
         options.addOption(option);
         option = Option.builder(OPT_FILTER_LABELS).longOpt("filterLabel").optionalArg(true)
                 .hasArgs().argName("Filtering labels").desc("Filter by specified labels.").build();
@@ -157,5 +161,10 @@ public class ArgsParser {
      */
     public  Options getOptions() {
         return options;
+    }
+    
+    private void printHelper() {
+        HelpFormatter formatter = new HelpFormatter();
+        formatter.printHelp("Help:", options);
     }
 }

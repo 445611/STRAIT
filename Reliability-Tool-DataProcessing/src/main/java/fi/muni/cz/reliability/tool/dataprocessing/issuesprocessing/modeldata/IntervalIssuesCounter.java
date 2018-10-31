@@ -76,7 +76,7 @@ public class IntervalIssuesCounter implements IssuesCounter {
         GeneralIssue issue = issuesIterator.next();
         while (endOfTestingPeriod.before(endOfTesting)) {
             
-            if (!issue.getCreatedAt().after(startOfTestingPeriod)) {
+            if (issue.getCreatedAt().before(startOfTestingPeriod)) {
                 if (issuesIterator.hasNext()) {
                     issue = issuesIterator.next();
                     continue;
@@ -84,7 +84,7 @@ public class IntervalIssuesCounter implements IssuesCounter {
                 throw new DataProcessingException("No issues in testing period.");
             }
             
-            if (!issue.getCreatedAt().before(endOfTestingPeriod)) {
+            if (issue.getCreatedAt().after(endOfTestingPeriod)) {
                 countedList.add(new Pair<>(periodsCounter, defectsCounter));
                 periodsCounter++;
                 defectsCounter = 0;
@@ -93,8 +93,9 @@ public class IntervalIssuesCounter implements IssuesCounter {
                 continue;
             }
             
-            if (issue.getCreatedAt().after(startOfTestingPeriod) && 
-                    issue.getCreatedAt().before(endOfTestingPeriod)) {
+            if ((issue.getCreatedAt().after(startOfTestingPeriod) 
+                    && issue.getCreatedAt().before(endOfTestingPeriod)) 
+                    || issue.getCreatedAt().equals(startOfTestingPeriod)) {
                 defectsCounter++;
                 if (issuesIterator.hasNext()) {
                     issue = issuesIterator.next();

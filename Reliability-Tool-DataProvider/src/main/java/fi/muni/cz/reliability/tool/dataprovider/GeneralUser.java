@@ -1,12 +1,32 @@
 package fi.muni.cz.reliability.tool.dataprovider;
 
+import java.io.Serializable;
+import java.util.Objects;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+
 /**
  * @author Radoslav Micko, 445611@muni.cz
  */
-public class GeneralUser {
+@Entity
+public class GeneralUser implements Serializable {
+    
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    private Long id;
     
     private String name;
     private String email;
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
 
     public String getName() {
         return name;
@@ -26,7 +46,7 @@ public class GeneralUser {
     
     @Override
     public int hashCode() {
-        return email.hashCode();
+        return Objects.hash(email, name);
     }
 
     @Override
@@ -41,6 +61,9 @@ public class GeneralUser {
             return false;
         }
         final GeneralUser other = (GeneralUser) obj;
-        return email.equals(other.getEmail());
+        if (!email.equals(other.getEmail())) {
+            return false;
+        }
+        return name.equals(other.name);
     }
 }

@@ -5,6 +5,7 @@ import fi.muni.cz.reliability.tool.core.factory.FilterFactory;
 import fi.muni.cz.reliability.tool.core.factory.IssuesWriterFactory;
 import fi.muni.cz.reliability.tool.core.factory.ModelFactory;
 import fi.muni.cz.reliability.tool.core.factory.OutputWriterFactory;
+import fi.muni.cz.reliability.tool.dataprocessing.exception.DataProcessingException;
 import fi.muni.cz.reliability.tool.dataprocessing.issuesprocessing.modeldata.CumulativeIssuesCounter;
 import fi.muni.cz.reliability.tool.dataprocessing.issuesprocessing.modeldata.IssuesCounter;
 import fi.muni.cz.reliability.tool.dataprocessing.issuesprocessing.modeldata.TimeBetweenIssuesCounter;
@@ -48,8 +49,8 @@ public class Core {
             parseArgs(args);
             run(args);
         } catch (Exception e) {
-            e.printStackTrace();
-            System.exit(1);
+            System.out.println(e.getMessage());
+            System.exit(0);
         }
     }
     
@@ -84,11 +85,14 @@ public class Core {
             System.out.println("Evaluated.");
         } else if (parser.getCmdl().hasOption(ArgsParser.OPT_SNAPSHOT_NAME) &&
                 parser.getCmdl().hasOption(ArgsParser.OPT_LIST_SNAPSHOTS)) {
-            System.out.println("Can't combine '-sn' with '-sl'.");
             printHelp();
+            System.out.println("[Can't combine '-sn' with '-sl']");
+        } else if (parser.getCmdl().hasOption(ArgsParser.OPT_SNAPSHOT_NAME)) {
+            printHelp();
+            System.out.println("[Missing argument: '-e' / '-s']");
         } else {
-            System.out.println("Missing argument: '-e' / '-s' /'-sl'");
-             printHelp();
+            printHelp();
+            System.out.println("[Missing argument: '-e' / '-s' / '-sl']");
         }
         
         System.out.println("Done!");
@@ -96,29 +100,31 @@ public class Core {
     }
     
     private static void  doEvaluateForUrl() {
-        List<GeneralIssue> listOfGeneralIssues = DATA_PROVIDER.getIssuesByUrl(parsedUrlData.getUrl().toString());
-        if (!parser.getCmdl().hasOption(ArgsParser.OPT_NAME)) {
-            System.out.println("Must set '-name' <Name>.");
-            printHelp();
-            System.exit(0);
+        GeneralIssuesSnapshotDaoImpl dao = new GeneralIssuesSnapshotDaoImpl();
+        List<GeneralIssue> listOfGeneralIssues;
+        if (parser.getCmdl().hasOption(ArgsParser.OPT_PERSIST_NAME)) {
+            try {
+                dao.getSnapshotByName(parser.getCmdl().getOptionValue(ArgsParser.OPT_PERSIST_NAME));
+                System.out.println("[-name <New name> should be unique name. '" 
+                        + parser.getCmdl().getOptionValue(ArgsParser.OPT_PERSIST_NAME) + "' already exists]");
+                System.exit(0);
+            } catch (DataProcessingException ex) {
+                listOfGeneralIssues = DATA_PROVIDER.getIssuesByUrl(parsedUrlData.getUrl().toString());
+                GeneralIssuesSnapshot snapshot = new GeneralIssuesSnapshot.GeneralIssuesSnapshotBuilder()
+                    .setCreatedAt(new Date())
+                    .setListOfGeneralIssues(listOfGeneralIssues)
+                    .setRepositoryName(parsedUrlData.getRepositoryName())
+                    .setUrl(parsedUrlData.getUrl().toString())
+                    .setUserName(parsedUrlData.getUserName())
+                    .setSnapshotName(parser.getCmdl().getOptionValue(ArgsParser.OPT_PERSIST_NAME))
+                    .build();
+                dao.save(snapshot);
+                doEvaluate(listOfGeneralIssues);
+            }  
+        } else {
+            listOfGeneralIssues = DATA_PROVIDER.getIssuesByUrl(parsedUrlData.getUrl().toString());
+            doEvaluate(listOfGeneralIssues);
         }
-        try {
-            GeneralIssuesSnapshot snapshot = new GeneralIssuesSnapshot.GeneralIssuesSnapshotBuilder()
-                .setCreatedAt(new Date())
-                .setListOfGeneralIssues(listOfGeneralIssues)
-                .setRepositoryName(parsedUrlData.getRepositoryName())
-                .setUrl(parsedUrlData.getUrl().toString())
-                .setUserName(parsedUrlData.getUserName())
-                .setSnapshotName(parser.getCmdl().getOptionValue(ArgsParser.OPT_NAME))
-                .build();
-            GeneralIssuesSnapshotDaoImpl dao = new GeneralIssuesSnapshotDaoImpl();
-            dao.save(snapshot); 
-        } catch (Exception ex) {
-            System.out.println("-e <New name> should be unique name. '" + 
-                    parser.getCmdl().getOptionValue(ArgsParser.OPT_EVALUATE) + "' already exists.");
-            System.exit(0);
-        }
-        doEvaluate(DATA_PROVIDER.getIssuesByUrl(parsedUrlData.getUrl().toString()));
     }
     
     private static void doEvaluateForSnapshot() {
@@ -234,26 +240,29 @@ public class Core {
     private static void doSaveToFileFromUrl() {
         List<GeneralIssue> listOfInitialIssues = DATA_PROVIDER.
                 getIssuesByUrl(parser.getCmdl().getOptionValue(ArgsParser.OPT_URL));
-        doSaveToFile(listOfInitialIssues);
+        doSaveToFile(listOfInitialIssues, parsedUrlData.getRepositoryName());
     }
     
     private static void doSaveToFileFromSnapshot() {
         GeneralIssuesSnapshotDaoImpl dao = new GeneralIssuesSnapshotDaoImpl();
-        doSaveToFile(dao.getSnapshotByName(
-                parser.getCmdl().getOptionValue(ArgsParser.OPT_SNAPSHOT_NAME)).getListOfGeneralIssues());
+        String snapshotName = parser.getCmdl().getOptionValue(ArgsParser.OPT_SNAPSHOT_NAME);
+        doSaveToFile(dao.getSnapshotByName(snapshotName).getListOfGeneralIssues(), snapshotName);
     }
     
-    private static void doSaveToFile(List<GeneralIssue> listOfInitialIssues) {
+    private static void doSaveToFile(List<GeneralIssue> listOfInitialIssues, String fileName) {
         FilterFactory.runFilters(listOfInitialIssues, parser.getCmdl());
-        IssuesWriterFactory.getIssuesWriter(parser.getCmdl())
-                .writeToFile(listOfInitialIssues, parsedUrlData.getRepositoryName());
+        IssuesWriterFactory.getIssuesWriter(parser.getCmdl()).writeToFile(listOfInitialIssues, fileName);
     }
 
     private static void doListAllSnapshots() {
         GeneralIssuesSnapshotDaoImpl dao = new GeneralIssuesSnapshotDaoImpl();
         List<GeneralIssuesSnapshot> listFromDB = dao.getAllSnapshots(); 
-        for (GeneralIssuesSnapshot snap: listFromDB) {
-            System.out.println(snap);
+        if (listFromDB.isEmpty()) {
+            System.out.println("No snapshots in Database.");
+        } else {
+            for (GeneralIssuesSnapshot snap: listFromDB) {
+                System.out.println(snap);
+            }
         }
     }
     

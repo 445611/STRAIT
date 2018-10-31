@@ -149,9 +149,9 @@ public class GeneralIssuesSnapshot implements Serializable {
 
     @Override
     public String toString() {
-        return snapshotName + "{url=" + url + ", userName=" + userName 
+        return snapshotName + " { url=" + url + ", userName=" + userName 
                 + ", repositoryName=" + repositoryName + ", createdAt=" 
-                + createdAt + ", ListOfIssues = " + listOfGeneralIssues + '}';
+                + createdAt + ", ListOfIssues size = " + listOfGeneralIssues.size() + " }";
     }
     
     /**

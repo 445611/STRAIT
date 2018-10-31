@@ -5,6 +5,7 @@ import java.io.Serializable;
 import java.util.Date;
 import java.util.List;
 import java.util.Objects;
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.ElementCollection;
 import javax.persistence.Entity;
@@ -12,24 +13,21 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Lob;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
-import javax.persistence.Transient;
 import javax.validation.constraints.NotNull;
 
 /**
  * @author Radoslav Micko, 445611@muni.cz
  */
 @Entity
-@Table(name = "GENERALISSUE")
 public class GeneralIssue implements Serializable {
     
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
-    @Temporal(TemporalType.TIMESTAMP)
-    private Date saved;
     
     @Temporal(TemporalType.TIMESTAMP)
     private Date createdAt;
@@ -38,11 +36,18 @@ public class GeneralIssue implements Serializable {
     @Temporal(TemporalType.TIMESTAMP)
     private Date updatedAt;
     
+    private int comments;
+    private int number;
+    
     @Column(columnDefinition="clob")
     @Lob
     private String body;
     @Column(name = "IssueState")
     private String state;
+    
+    private String title;
+    private String url;
+    private String htmlUrl;
     
     @ElementCollection
     private List<String> labels;
@@ -51,11 +56,52 @@ public class GeneralIssue implements Serializable {
     @Column(name = "snapshot_id")
     private Long snapshotid;
     
-    @Transient 
+    @ManyToOne(cascade = CascadeType.ALL)
     private GeneralUser generalUser;
-    @Transient 
+    
+    @ManyToOne(cascade = CascadeType.ALL)
     private GeneralMilestone generalMilestone;
 
+    public int getComments() {
+        return comments;
+    }
+
+    public void setComments(int comments) {
+        this.comments = comments;
+    }
+
+    public int getNumber() {
+        return number;
+    }
+
+    public void setNumber(int number) {
+        this.number = number;
+    }
+
+    public String getTitle() {
+        return title;
+    }
+
+    public void setTitle(String title) {
+        this.title = title;
+    }
+
+    public String getUrl() {
+        return url;
+    }
+
+    public void setUrl(String url) {
+        this.url = url;
+    }
+
+    public String getHtmlUrl() {
+        return htmlUrl;
+    }
+
+    public void setHtmlUrl(String htmlUrl) {
+        this.htmlUrl = htmlUrl;
+    }
+    
     public GeneralMilestone getGeneralMilestone() {
         return generalMilestone;
     }
@@ -134,14 +180,6 @@ public class GeneralIssue implements Serializable {
 
     public void setLabels(List<String> labels) {
         this.labels = labels;
-    }
-
-    public Date getSaved() {
-        return saved;
-    }
-
-    public void setSaved(Date saved) {
-        this.saved = saved;
     }
 
     /**

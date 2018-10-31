@@ -49,10 +49,10 @@ public class FilterFactory {
         List<String> list = new ArrayList<>();
         if (cmdl.hasOption(ArgsParser.OPT_FILTER_LABELS)) {
             if (cmdl.getOptionValue(ArgsParser.OPT_FILTER_LABELS) == null) {   
-                list.add(new FilterByLabel(FILTERING_WORDS).toString());
+                list.add(new FilterByLabel(FILTERING_WORDS).infoAboutFilter());
             } else {
                 list.add(new FilterByLabel(
-                        Arrays.asList(cmdl.getOptionValue(ArgsParser.OPT_FILTER_LABELS))).toString());
+                        Arrays.asList(cmdl.getOptionValue(ArgsParser.OPT_FILTER_LABELS))).infoAboutFilter());
             }
         }
         if (cmdl.hasOption(ArgsParser.OPT_FILTER_CLOSED)) {

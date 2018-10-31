@@ -20,7 +20,7 @@ public class InvalidInputException extends Exception {
         super();
         this.causes = Collections.unmodifiableList(new ArrayList<>(causes));
     }
-
+    
     /**
      * @return causes of exception.
      */

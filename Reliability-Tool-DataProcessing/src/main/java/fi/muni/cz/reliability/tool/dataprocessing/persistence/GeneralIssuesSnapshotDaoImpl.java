@@ -52,6 +52,7 @@ public class GeneralIssuesSnapshotDaoImpl implements GeneralIssuesSnapshotDao {
     @Override
     public void save(GeneralIssuesSnapshot snapshot) {
         beginTransaction();
+        session.save(snapshot);
         session.merge(snapshot);
         endTransaction();
     } 
