@@ -12,11 +12,6 @@
     
     <dependencies>
         <dependency>
-            <groupId>org.orangepalantir</groupId>
-            <artifactId>leastsquares</artifactId>
-            <version>1.0.0</version>
-        </dependency>
-        <dependency>
             <groupId>${project.groupId}</groupId>
             <artifactId>Reliability-Tool-DataProvider</artifactId>
             <version>${project.version}</version>
@@ -24,7 +19,7 @@
         <dependency>
             <groupId>org.hibernate</groupId>
             <artifactId>hibernate-entitymanager</artifactId>
-            <version>4.3.1.Final</version>
+            <version>4.3.11.Final</version>
         </dependency>
         <dependency>
             <groupId>org.hibernate.javax.persistence</groupId>

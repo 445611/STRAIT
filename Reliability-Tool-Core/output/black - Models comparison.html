@@ -71,21 +71,21 @@
             <div class="row text-left">
                 <div class="col-sm-2 sidenav"></div>
                 <div class="col-sm-8 text-left"> 
-                    <center><h1>PB071</h1></center>
+                    <center><h1>black</h1></center>
                     <p>
-                        URL = <a href="https://github.com/445611/PB071">https://github.com/445611/PB071</a><br>
-                        This is estimation of issues occurance for  <a href="https://github.com/445611/PB071">PB071</a> of user 445611.<br>
+                        URL = <a href="https://github.com/ambv/black">https://github.com/ambv/black</a><br>
+                        This is estimation of issues occurance for  <a href="https://github.com/ambv/black">black</a> of user ambv.<br>
                     </p>
                     <hr class="hrstyle">
                     <h3>Info:</h3>
                     <p>
-                        Estimated at <b>2.11.2018 23:28:45</b>.
+                        Estimated at <b>2.11.2018 20:35:19</b>.
                     </p>
                     <p>
-                        Initial number of total defects = 6<br>
-                        Total defects in repository after processing and filtering = 3<br>
-                        Start of testing <b>27.4.2018 22:09:26</b>.<br>
-                        End of testing <b>2.11.2018 23:28:45</b>.
+                        Initial number of total defects = 590<br>
+                        Total defects in repository after processing and filtering = 73<br>
+                        Start of testing <b>14.3.2018 21:02:27</b>.<br>
+                        End of testing <b>2.11.2018 20:35:19</b>.
                     </p>
                     <h3>Filters and Processors:</h3>
                     <p> 
@@ -97,8 +97,8 @@
                     </p>
                         <h3>Trend test:</h3> 
                         <p>
-                            Trend does not exist .<br>
-                            Trend = INF
+                            Trend exists .<br>
+                            Trend = -11.147100652281141
 
                         </p>
                     <hr class="hrstyle">
@@ -118,13 +118,13 @@
                                 Model function:<br>
                                 μ(t) = a * (1 - e<html><sup>-b*t</sup></html>)<br>
                                 Estimated parameters:<br>
-                                  a = 3.05407053603304<br>
-                                  b = 0.3524892283728949<br>
+                                  a = 75.327957078929<br>
+                                  b = 0.1234819885963499<br>
                             </p>
                             <h3>Goodness of fit:</h3> 
                                 <p>
-                                        Chi-Square = 2.7199999999999993<br>
-                                        Chi-Square significance level = 99.99999975160664%<br>
+                                        Chi-Square = 11.784605271605137<br>
+                                        Chi-Square significance level = 99.95794666044432%<br>
                                         Chi-Square null hypothesis rejection = ACCEPT<br>
                                 </p>              
                     </div>
@@ -134,14 +134,14 @@
                                 Model function:<br>
                                 μ(t) = a * (1 - (1 + b*t) * e<html><sup>-b*t</sup></html>)<br>
                                 Estimated parameters:<br>
-                                  a = 3.030665664038263<br>
-                                  b = 0.7144148612349391<br>
+                                  a = 71.27979466469061<br>
+                                  b = 0.2895751258039105<br>
                             </p>
                             <h3>Goodness of fit:</h3> 
                                 <p>
-                                        Chi-Square = 2.2800000000000016<br>
-                                        Chi-Square significance level = 99.99999996930613%<br>
-                                        Chi-Square null hypothesis rejection = ACCEPT<br>
+                                        Chi-Square = 127.64220412803711<br>
+                                        Chi-Square significance level = 2.262634524186069E-11%<br>
+                                        Chi-Square null hypothesis rejection = REJECT<br>
                                 </p>              
                     </div>
             </div>
@@ -162,7 +162,7 @@
                 bindto: '#chart0',
                 data: {
                   columns: [
-                    ['Time between failures', 0,601,0,],
+                    ['Time between failures', 0,0,0,12,0,0,0,11,0,30,35,60,5,3,0,8,14,0,1,0,4,42,19,34,100,96,32,0,71,48,35,1,71,11,3,44,14,72,31,106,15,89,30,131,215,44,6,17,9,18,0,120,53,35,125,67,18,32,22,11,0,34,244,0,185,43,112,104,332,102,276,293,474,],
                   ],
                   type: 'scatter',
                   colors: {
@@ -191,9 +191,9 @@
                 },
                 data: {
                   columns: [
-                    ['Real issues', 1,1,1,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,],
-                        ['Goel-Okemura model', 1,1,1,2,2,2,2,2,2,2,2,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,],
-                        ['Goel-Okemura S-Shaped model', 1,1,1,2,2,2,2,2,2,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,],
+                    ['Real issues', 15,24,26,30,37,39,43,44,44,51,54,56,62,62,64,66,68,68,69,70,70,71,72,72,72,73,73,73,73,73,73,73,73,],
+                        ['Goel-Okemura model', 8,16,23,29,34,39,43,47,50,53,55,58,60,61,63,64,66,67,68,68,69,70,70,71,71,72,72,72,73,73,73,73,74,],
+                        ['Goel-Okemura S-Shaped model', 2,8,15,22,30,36,42,47,52,55,58,61,63,65,66,67,68,68,69,69,70,70,70,70,70,70,71,71,71,71,71,71,71,],
                   ]
                 },
                 axis: {

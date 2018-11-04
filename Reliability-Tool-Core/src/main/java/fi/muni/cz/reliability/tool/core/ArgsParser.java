@@ -38,7 +38,7 @@ public class ArgsParser {
     public static final String OPT_MODELS = "ms";
     public static final String OPT_OUT = "out";
     public static final String OPT_GRAPH_MULTIPLE = "gm";
-    public static final String OPT_PERSIST_NAME = "name";
+    public static final String OPT_NEW_SNAPSHOT = "ns";
     
     //Configuraton file option
     private static final String FLAG_CONFIG_FILE = "-cf";
@@ -62,11 +62,18 @@ public class ArgsParser {
         }
 
         if (!errors.isEmpty()) {
-            printHelper();
             throw new InvalidInputException(errors);
         }
     }
    
+    /**
+     * Print argument opritons.
+     */
+    public void printHelp(){
+        HelpFormatter formatter = new HelpFormatter();
+        formatter.printHelp("Help:", options);
+    }
+    
     private CommandLine parseArgumentsFromConfigFile(String path, Options options, List<String> errors) {
         try (BufferedReader reader = new BufferedReader(new InputStreamReader(new FileInputStream(path)))) {
             String[] args = reader.readLine().split(" ");
@@ -90,11 +97,14 @@ public class ArgsParser {
     
     private boolean checkToReadFromConfigFile(String[] args, List<String> errors) {
         if (args.length < 1) {
-            printHelper();
             errors.add("Missing arguments.");
             return false;
         }
-        return args[0].equals(FLAG_CONFIG_FILE);
+        if (args[0].equals(ArgsParser.FLAG_CONFIG_FILE) && args.length != 2) {
+            errors.add("Missing arguments.");
+            return false;
+        }
+        return args[0].equals(ArgsParser.FLAG_CONFIG_FILE);
     }
     
     private void getConfiguratedOptions() {
@@ -129,7 +139,7 @@ public class ArgsParser {
         option = Option.builder(OPT_PREDICT).longOpt("predict").type(Number.class).hasArg().argName("Number").
                 desc("Number of test periods to predict.").build();
         options.addOption(option);
-        option = Option.builder(OPT_PERSIST_NAME).hasArg().argName("Name of new snapshot").
+        option = Option.builder(OPT_NEW_SNAPSHOT).hasArg().argName("Name of new snapshot").
                 desc("Name of new snapshot that will be persisted.").build();
         options.addOption(option);
         option = Option.builder(OPT_FILTER_LABELS).longOpt("filterLabel").optionalArg(true)
@@ -161,10 +171,5 @@ public class ArgsParser {
      */
     public  Options getOptions() {
         return options;
-    }
-    
-    private void printHelper() {
-        HelpFormatter formatter = new HelpFormatter();
-        formatter.printHelp("Help:", options);
     }
 }

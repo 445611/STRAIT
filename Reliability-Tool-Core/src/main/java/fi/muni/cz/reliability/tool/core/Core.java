@@ -5,7 +5,6 @@ import fi.muni.cz.reliability.tool.core.factory.FilterFactory;
 import fi.muni.cz.reliability.tool.core.factory.IssuesWriterFactory;
 import fi.muni.cz.reliability.tool.core.factory.ModelFactory;
 import fi.muni.cz.reliability.tool.core.factory.OutputWriterFactory;
-import fi.muni.cz.reliability.tool.dataprocessing.exception.DataProcessingException;
 import fi.muni.cz.reliability.tool.dataprocessing.issuesprocessing.modeldata.CumulativeIssuesCounter;
 import fi.muni.cz.reliability.tool.dataprocessing.issuesprocessing.modeldata.IssuesCounter;
 import fi.muni.cz.reliability.tool.dataprocessing.issuesprocessing.modeldata.TimeBetweenIssuesCounter;
@@ -36,7 +35,7 @@ import org.apache.commons.math3.util.Pair;
  */
 public class Core {
 
-    private static ArgsParser parser;
+    private static ArgsParser parser = new ArgsParser();
     private static final DataProvider DATA_PROVIDER = 
             new GitHubDataProvider(new GitHubAuthenticationDataProvider().getGitHubClientWithCreditials());
     private static ParsedUrlData parsedUrlData;
@@ -46,12 +45,16 @@ public class Core {
      */
     public static void main(String[] args) {
         try {
-            parseArgs(args);
+            parser.parse(args);
             run(args);
+        } catch (InvalidInputException e) {
+            parser.printHelp();
+            System.out.println(e.causes());
+            //e.printStackTrace();
+            System.exit(1);
         } catch (Exception e) {
-            System.out.println(e.getMessage());
-            e.printStackTrace();
-            System.exit(0);
+            System.out.println(e.getCause());
+            System.exit(1);
         }
     }
     
@@ -61,7 +64,7 @@ public class Core {
         if (parser.getCmdl().hasOption(ArgsParser.OPT_LIST_ALL_SNAPSHOTS)) {
             doListAllSnapshots();
         } else if (parser.getCmdl().hasOption(ArgsParser.OPT_HELP)) {
-            printHelp();
+            parser.printHelp();
         } else if (parser.getCmdl().hasOption(ArgsParser.OPT_URL) && 
                 parser.getCmdl().hasOption(ArgsParser.OPT_SAVE)) {
             checkUrl(parser.getCmdl().getOptionValue(ArgsParser.OPT_URL));
@@ -86,13 +89,13 @@ public class Core {
             System.out.println("Evaluated.");
         } else if (parser.getCmdl().hasOption(ArgsParser.OPT_SNAPSHOT_NAME) &&
                 parser.getCmdl().hasOption(ArgsParser.OPT_LIST_SNAPSHOTS)) {
-            printHelp();
+            parser.printHelp();
             System.out.println("[Can't combine '-sn' with '-sl']");
         } else if (parser.getCmdl().hasOption(ArgsParser.OPT_SNAPSHOT_NAME)) {
-            printHelp();
+           parser.printHelp();
             System.out.println("[Missing argument: '-e' / '-s']");
         } else {
-            printHelp();
+            parser.printHelp();
             System.out.println("[Missing argument: '-e' / '-s' / '-sl']");
         }
         
@@ -103,13 +106,12 @@ public class Core {
     private static void  doEvaluateForUrl() {
         GeneralIssuesSnapshotDaoImpl dao = new GeneralIssuesSnapshotDaoImpl();
         List<GeneralIssue> listOfGeneralIssues;
-        if (parser.getCmdl().hasOption(ArgsParser.OPT_PERSIST_NAME)) {
-            try {
-                dao.getSnapshotByName(parser.getCmdl().getOptionValue(ArgsParser.OPT_PERSIST_NAME));
+        if (parser.getCmdl().hasOption(ArgsParser.OPT_NEW_SNAPSHOT)) {
+            if (dao.getSnapshotByName(parser.getCmdl().getOptionValue(ArgsParser.OPT_NEW_SNAPSHOT)) != null) {
                 System.out.println("[-name <New name> should be unique name. '" 
-                        + parser.getCmdl().getOptionValue(ArgsParser.OPT_PERSIST_NAME) + "' already exists]");
-                System.exit(0);
-            } catch (DataProcessingException ex) {
+                        + parser.getCmdl().getOptionValue(ArgsParser.OPT_NEW_SNAPSHOT) + "' already exists]");
+                System.exit(1);
+            } else {
                 listOfGeneralIssues = DATA_PROVIDER.getIssuesByUrl(parsedUrlData.getUrl().toString());
                 GeneralIssuesSnapshot snapshot = new GeneralIssuesSnapshot.GeneralIssuesSnapshotBuilder()
                     .setCreatedAt(new Date())
@@ -117,11 +119,11 @@ public class Core {
                     .setRepositoryName(parsedUrlData.getRepositoryName())
                     .setUrl(parsedUrlData.getUrl().toString())
                     .setUserName(parsedUrlData.getUserName())
-                    .setSnapshotName(parser.getCmdl().getOptionValue(ArgsParser.OPT_PERSIST_NAME))
+                    .setSnapshotName(parser.getCmdl().getOptionValue(ArgsParser.OPT_NEW_SNAPSHOT))
                     .build();
                 dao.save(snapshot);
                 doEvaluate(listOfGeneralIssues);
-            }  
+            }
         } else {
             listOfGeneralIssues = DATA_PROVIDER.getIssuesByUrl(parsedUrlData.getUrl().toString());
             doEvaluate(listOfGeneralIssues);
@@ -264,20 +266,6 @@ public class Core {
             for (GeneralIssuesSnapshot snap: listFromDB) {
                 System.out.println(snap);
             }
-        }
-    }
-    
-    private static void printHelp(){
-        HelpFormatter formatter = new HelpFormatter();
-        formatter.printHelp("Help:", parser.getOptions());
-    }
-    
-    private static void parseArgs(String[] args) {
-        parser = new ArgsParser();
-        try {
-            parser.parse(args);
-        } catch (InvalidInputException e) {
-            throw new IllegalArgumentException(e.causes().toString());
         }
     }
 

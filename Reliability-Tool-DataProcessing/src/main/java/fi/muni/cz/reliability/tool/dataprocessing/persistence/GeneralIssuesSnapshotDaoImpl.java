@@ -1,6 +1,5 @@
 package fi.muni.cz.reliability.tool.dataprocessing.persistence;
 
-import fi.muni.cz.reliability.tool.dataprocessing.exception.DataProcessingException;
 import java.util.List;
 
 import org.hibernate.Query;
@@ -36,15 +35,16 @@ public class GeneralIssuesSnapshotDaoImpl implements GeneralIssuesSnapshotDao {
     }
 
     @Override
-    public GeneralIssuesSnapshot getSnapshotByName(String name) throws DataProcessingException {
+    public GeneralIssuesSnapshot getSnapshotByName(String name) {
         beginTransaction();
         Query query = session.createQuery("FROM GeneralIssuesSnapshot WHERE snapshotName = ?");
         List<GeneralIssuesSnapshot> result = query.setString(0, name).list();
+        GeneralIssuesSnapshot snapshot;
         if (result.isEmpty()) {
-            endTransaction();
-            throw new DataProcessingException("No '" + name + "' snapshot found.");
+            snapshot = null;
+        } else {
+            snapshot = (GeneralIssuesSnapshot) result.get(0);
         }
-        GeneralIssuesSnapshot snapshot = (GeneralIssuesSnapshot) result.get(0);
         endTransaction();
         return snapshot;
     }
@@ -52,7 +52,6 @@ public class GeneralIssuesSnapshotDaoImpl implements GeneralIssuesSnapshotDao {
     @Override
     public void save(GeneralIssuesSnapshot snapshot) {
         beginTransaction();
-        session.save(snapshot);
         session.merge(snapshot);
         endTransaction();
     } 

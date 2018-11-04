@@ -12,6 +12,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.Lob;
 import javax.persistence.ManyToOne;
 import javax.persistence.Temporal;
@@ -55,10 +56,12 @@ public class GeneralIssue implements Serializable {
     @Column(name = "snapshot_id")
     private Long snapshotid;
     
-    @ManyToOne(cascade = CascadeType.ALL)
+    @ManyToOne(cascade = CascadeType.MERGE)
+    @JoinColumn(name="GENERALUSER_ID")
     private GeneralUser generalUser;
     
-    @ManyToOne(cascade = CascadeType.ALL)
+    @ManyToOne(cascade = CascadeType.MERGE)
+    @JoinColumn(name="GENERALMILESTONE_ID")
     private GeneralMilestone generalMilestone;
 
     public int getComments() {

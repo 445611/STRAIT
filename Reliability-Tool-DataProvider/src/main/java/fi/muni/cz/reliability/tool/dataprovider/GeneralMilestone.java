@@ -9,6 +9,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Lob;
+import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
@@ -16,10 +17,12 @@ import javax.persistence.TemporalType;
  * @author Radoslav Micko, 445611@muni.cz
  */
 @Entity
+@Table(name = "GENERALMILESTONE")
 public class GeneralMilestone implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
+    @Column(name = "GENERALMILESTONE_ID")
     private Long id;
     
     @Temporal(TemporalType.TIMESTAMP)
