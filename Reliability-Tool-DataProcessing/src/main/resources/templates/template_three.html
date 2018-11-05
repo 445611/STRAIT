@@ -106,14 +106,12 @@
                                 - None<br>
                             </#if>
                     </p>
-                    <#if dataList[0].trend?? && dataList[0].existTrend??>
-                        <h3>Trend test:</h3> 
-                        <p>
-                            Trend ${dataList[0].existTrend?string("exists", "does not exist")} .<br>
-                            Trend = ${dataList[0].trend?c}
+                    <h3>Trend test:</h3> 
+                    <p>
+                        Trend ${dataList[0].existTrend?string("exists", "does not exist")} .<br>
+                        Trend = ${dataList[0].trend?c}
 
-                        </p>
-                    </#if>
+                    </p>
                     <hr class="hrstyle">
                     <center><h3>Time between failures</h3></center>
                     <div id="chart0"></div>

@@ -97,11 +97,11 @@ public class ArgsParser {
     
     private boolean checkToReadFromConfigFile(String[] args, List<String> errors) {
         if (args.length < 1) {
-            errors.add("Missing arguments.");
+            errors.add("Missing options.");
             return false;
         }
         if (args[0].equals(ArgsParser.FLAG_CONFIG_FILE) && args.length != 2) {
-            errors.add("Missing arguments.");
+            errors.add("Missing options.");
             return false;
         }
         return args[0].equals(ArgsParser.FLAG_CONFIG_FILE);

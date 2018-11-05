@@ -5,11 +5,13 @@ import fi.muni.cz.reliability.tool.core.factory.FilterFactory;
 import fi.muni.cz.reliability.tool.core.factory.IssuesWriterFactory;
 import fi.muni.cz.reliability.tool.core.factory.ModelFactory;
 import fi.muni.cz.reliability.tool.core.factory.OutputWriterFactory;
+import fi.muni.cz.reliability.tool.core.factory.ProcessorFactory;
+import fi.muni.cz.reliability.tool.dataprocessing.issuesprocessing.Filter;
+import fi.muni.cz.reliability.tool.dataprocessing.issuesprocessing.IssuesProcessor;
 import fi.muni.cz.reliability.tool.dataprocessing.issuesprocessing.modeldata.CumulativeIssuesCounter;
 import fi.muni.cz.reliability.tool.dataprocessing.issuesprocessing.modeldata.IssuesCounter;
 import fi.muni.cz.reliability.tool.dataprocessing.issuesprocessing.modeldata.TimeBetweenIssuesCounter;
 import fi.muni.cz.reliability.tool.dataprocessing.output.OutputData;
-import fi.muni.cz.reliability.tool.dataprocessing.output.OutputWriter;
 import fi.muni.cz.reliability.tool.dataprocessing.persistence.GeneralIssuesSnapshot;
 import fi.muni.cz.reliability.tool.dataprocessing.persistence.GeneralIssuesSnapshotDaoImpl;
 import fi.muni.cz.reliability.tool.dataprovider.DataProvider;
@@ -27,7 +29,6 @@ import fi.muni.cz.reliability.tool.models.testing.TrendTest;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
-import org.apache.commons.cli.HelpFormatter;
 import org.apache.commons.math3.util.Pair;
 
 /**
@@ -35,20 +36,21 @@ import org.apache.commons.math3.util.Pair;
  */
 public class Core {
 
-    private static ArgsParser parser = new ArgsParser();
+    private static final ArgsParser PARSER = new ArgsParser();
     private static final DataProvider DATA_PROVIDER = 
             new GitHubDataProvider(new GitHubAuthenticationDataProvider().getGitHubClientWithCreditials());
     private static ParsedUrlData parsedUrlData;
+    private static final GeneralIssuesSnapshotDaoImpl DAO = new GeneralIssuesSnapshotDaoImpl();
     
     /**
      * @param args the command line arguments
      */
     public static void main(String[] args) {
         try {
-            parser.parse(args);
-            run(args);
+            PARSER.parse(args);
+            run();
         } catch (InvalidInputException e) {
-            parser.printHelp();
+            PARSER.printHelp();
             System.out.println(e.causes());
             //e.printStackTrace();
             System.exit(1);
@@ -58,156 +60,190 @@ public class Core {
         }
     }
     
-    private static void run(String[] args) {
+    private static void run() throws InvalidInputException {
         System.out.println("Working...");
         
-        if (parser.getCmdl().hasOption(ArgsParser.OPT_LIST_ALL_SNAPSHOTS)) {
+        if (PARSER.getCmdl().hasOption(ArgsParser.OPT_LIST_ALL_SNAPSHOTS)) {
             doListAllSnapshots();
-        } else if (parser.getCmdl().hasOption(ArgsParser.OPT_HELP)) {
-            parser.printHelp();
-        } else if (parser.getCmdl().hasOption(ArgsParser.OPT_URL) && 
-                parser.getCmdl().hasOption(ArgsParser.OPT_SAVE)) {
-            checkUrl(parser.getCmdl().getOptionValue(ArgsParser.OPT_URL));
+        } else if (PARSER.getCmdl().hasOption(ArgsParser.OPT_HELP)) {
+            PARSER.printHelp();
+        } else if (PARSER.getCmdl().hasOption(ArgsParser.OPT_URL) && 
+                PARSER.getCmdl().hasOption(ArgsParser.OPT_SAVE)) {
+            checkUrl(PARSER.getCmdl().getOptionValue(ArgsParser.OPT_URL));
             doSaveToFileFromUrl();
             System.out.println("Saved to file.");
-        } else if (parser.getCmdl().hasOption(ArgsParser.OPT_URL) && 
-                parser.getCmdl().hasOption(ArgsParser.OPT_LIST_SNAPSHOTS)) {
-            checkUrl(parser.getCmdl().getOptionValue(ArgsParser.OPT_URL));
+        } else if (PARSER.getCmdl().hasOption(ArgsParser.OPT_URL) && 
+                PARSER.getCmdl().hasOption(ArgsParser.OPT_LIST_SNAPSHOTS)) {
+            checkUrl(PARSER.getCmdl().getOptionValue(ArgsParser.OPT_URL));
             doListSnapshotsForUrl();
-        } else if (parser.getCmdl().hasOption(ArgsParser.OPT_URL) && 
-                parser.getCmdl().hasOption(ArgsParser.OPT_EVALUATE)) {
-            checkUrl(parser.getCmdl().getOptionValue(ArgsParser.OPT_URL));
+        } else if (PARSER.getCmdl().hasOption(ArgsParser.OPT_URL) && 
+                PARSER.getCmdl().hasOption(ArgsParser.OPT_EVALUATE)) {
+            checkUrl(PARSER.getCmdl().getOptionValue(ArgsParser.OPT_URL));
             doEvaluateForUrl();
             System.out.println("Evaluated to file.");
-        } else if (parser.getCmdl().hasOption(ArgsParser.OPT_SNAPSHOT_NAME) &&
-                parser.getCmdl().hasOption(ArgsParser.OPT_SAVE)) {
+        } else if (PARSER.getCmdl().hasOption(ArgsParser.OPT_SNAPSHOT_NAME) &&
+                PARSER.getCmdl().hasOption(ArgsParser.OPT_SAVE)) {
             doSaveToFileFromSnapshot();
             System.out.println("Saved.");
-        } else if (parser.getCmdl().hasOption(ArgsParser.OPT_SNAPSHOT_NAME) &&
-                parser.getCmdl().hasOption(ArgsParser.OPT_EVALUATE)) {
+        } else if (PARSER.getCmdl().hasOption(ArgsParser.OPT_SNAPSHOT_NAME) &&
+                PARSER.getCmdl().hasOption(ArgsParser.OPT_EVALUATE)) {
             doEvaluateForSnapshot();
             System.out.println("Evaluated.");
-        } else if (parser.getCmdl().hasOption(ArgsParser.OPT_SNAPSHOT_NAME) &&
-                parser.getCmdl().hasOption(ArgsParser.OPT_LIST_SNAPSHOTS)) {
-            parser.printHelp();
+        } else if (PARSER.getCmdl().hasOption(ArgsParser.OPT_SNAPSHOT_NAME) &&
+                PARSER.getCmdl().hasOption(ArgsParser.OPT_LIST_SNAPSHOTS)) {
+            PARSER.printHelp();
             System.out.println("[Can't combine '-sn' with '-sl']");
-        } else if (parser.getCmdl().hasOption(ArgsParser.OPT_SNAPSHOT_NAME)) {
-           parser.printHelp();
-            System.out.println("[Missing argument: '-e' / '-s']");
+        } else if (PARSER.getCmdl().hasOption(ArgsParser.OPT_SNAPSHOT_NAME)) {
+           PARSER.printHelp();
+            System.out.println("[Missing option: '-e' / '-s']");
         } else {
-            parser.printHelp();
-            System.out.println("[Missing argument: '-e' / '-s' / '-sl']");
+            PARSER.printHelp();
+            System.out.println("[Missing option: '-e' / '-s' / '-sl']");
         }
         
         System.out.println("Done!");
         System.exit(0);
     }
     
-    private static void  doEvaluateForUrl() {
-        GeneralIssuesSnapshotDaoImpl dao = new GeneralIssuesSnapshotDaoImpl();
-        List<GeneralIssue> listOfGeneralIssues;
-        if (parser.getCmdl().hasOption(ArgsParser.OPT_NEW_SNAPSHOT)) {
-            if (dao.getSnapshotByName(parser.getCmdl().getOptionValue(ArgsParser.OPT_NEW_SNAPSHOT)) != null) {
+    private static void  doEvaluateForUrl() throws InvalidInputException {
+        List<GeneralIssue> listOfGeneralIssues = null;
+        if (PARSER.getCmdl().hasOption(ArgsParser.OPT_NEW_SNAPSHOT)) {
+            if (DAO.getSnapshotByName(PARSER.getCmdl().getOptionValue(ArgsParser.OPT_NEW_SNAPSHOT)) != null) {
                 System.out.println("[-name <New name> should be unique name. '" 
-                        + parser.getCmdl().getOptionValue(ArgsParser.OPT_NEW_SNAPSHOT) + "' already exists]");
+                        + PARSER.getCmdl().getOptionValue(ArgsParser.OPT_NEW_SNAPSHOT) + "' already exists]");
                 System.exit(1);
             } else {
                 listOfGeneralIssues = DATA_PROVIDER.getIssuesByUrl(parsedUrlData.getUrl().toString());
-                GeneralIssuesSnapshot snapshot = new GeneralIssuesSnapshot.GeneralIssuesSnapshotBuilder()
+                prepareGeneralIssuesSnapshotAndSave(listOfGeneralIssues);
+            }
+        } else {
+            listOfGeneralIssues = DATA_PROVIDER.getIssuesByUrl(parsedUrlData.getUrl().toString());
+        }
+        doEvaluate(listOfGeneralIssues);
+    }
+    
+    private static void prepareGeneralIssuesSnapshotAndSave(List<GeneralIssue> listOfGeneralIssues) {
+        DAO.save(new GeneralIssuesSnapshot.GeneralIssuesSnapshotBuilder()
                     .setCreatedAt(new Date())
                     .setListOfGeneralIssues(listOfGeneralIssues)
                     .setRepositoryName(parsedUrlData.getRepositoryName())
                     .setUrl(parsedUrlData.getUrl().toString())
                     .setUserName(parsedUrlData.getUserName())
-                    .setSnapshotName(parser.getCmdl().getOptionValue(ArgsParser.OPT_NEW_SNAPSHOT))
-                    .build();
-                dao.save(snapshot);
-                doEvaluate(listOfGeneralIssues);
-            }
-        } else {
-            listOfGeneralIssues = DATA_PROVIDER.getIssuesByUrl(parsedUrlData.getUrl().toString());
-            doEvaluate(listOfGeneralIssues);
-        }
+                    .setSnapshotName(PARSER.getCmdl().getOptionValue(ArgsParser.OPT_NEW_SNAPSHOT))
+                    .build());
     }
     
-    private static void doEvaluateForSnapshot() {
+    private static void doEvaluateForSnapshot() throws InvalidInputException {
         GeneralIssuesSnapshotDaoImpl dao = new GeneralIssuesSnapshotDaoImpl();
-        GeneralIssuesSnapshot snapshot = dao.getSnapshotByName(parser.getCmdl()
+        GeneralIssuesSnapshot snapshot = dao.getSnapshotByName(PARSER.getCmdl()
                 .getOptionValue(ArgsParser.OPT_SNAPSHOT_NAME));
         checkUrl(snapshot.getUrl());
         doEvaluate(snapshot.getListOfGeneralIssues());
     }
     
-    private static void doEvaluate(List<GeneralIssue> listOfGeneralIssues) {
-        int initialNumberOfIssues = listOfGeneralIssues.size();
-        //model <- nls(yvalues ~ b1*(1 - exp(-b2*xvalues))/(1 + b3*exp(-b2*xvalues)),
-        //start = list(b1 = 70,b2 = 1,b3 = 1), lower = list(b1 = 0,b2 = 0, b3 = 0), algorithm = "port")
-        //model <- nls(yvalues ~ a*(1 - (1 + b*xvalues)*exp(-b*xvalues)),
-        //start = list(a = 70,b = 1), lower = list(a = 0,b = 0), algorithm = "port")
-        
-        List<GeneralIssue> filteredList = FilterFactory.runFilters(listOfGeneralIssues, parser.getCmdl());
-
-        String periodicOfTesting = IssuesCounter.WEEKS;
-        Date startOfTesting = filteredList.get(0).getCreatedAt();
-        Date endOfTesting = new Date();
-        
-        // SNAPSHOT
-
-        // COUNTERS
-        IssuesCounter cumulativeCounter = new CumulativeIssuesCounter(periodicOfTesting, startOfTesting, endOfTesting);
-        List<Pair<Integer, Integer>> countedWeeksWithTotal = cumulativeCounter.prepareIssuesDataForModel(filteredList);
-        
-        String timeBetweenIssuesUnit = IssuesCounter.HOURS;
-        IssuesCounter timeBetween = new TimeBetweenIssuesCounter(timeBetweenIssuesUnit);
-        List<Pair<Integer, Integer>> timeBetweenList = timeBetween.prepareIssuesDataForModel(filteredList);
-        // COUNTERS
-        
-        //TEMP
-        //TEMPORARYWriter.write(timeBetweenList);
-        
-        // MODEL
-        GoodnessOfFitTest goodnessOfFitTest = new ChiSquareGoodnessOfFitTest();
-        
-        List<Model> models = new ArrayList<>();
-        if (parser.getCmdl().hasOption(ArgsParser.OPT_MODELS)) {
-            for (String modelArg: parser.getCmdl().getOptionValues(ArgsParser.OPT_MODELS)) {
-                models.add(ModelFactory.getIssuesWriter(countedWeeksWithTotal, goodnessOfFitTest, modelArg));
-            }
-        } else {
-            models.add(ModelFactory.
-                    getIssuesWriter(countedWeeksWithTotal, goodnessOfFitTest, ModelFactory.GOEL_OKUMOTO));
+    private static List<GeneralIssue> runFilters(List<GeneralIssue> listOfGeneralIssues) {
+        List<GeneralIssue> filteredList = new ArrayList<>();
+        filteredList.addAll(listOfGeneralIssues);
+        List<Filter> listOfFilters = FilterFactory.getFilters(PARSER.getCmdl());
+        for (Filter filter: listOfFilters) {
+            filteredList = filter.filter(filteredList);
         }
-        
-        
-        /*Model goModel = new GOModelImpl(countedWeeksWithTotal, goodnessOfFitTest);
-        Model moModel = new MusaOkumotoModelImpl(countedWeeksWithTotal, goodnessOfFitTest);
-        Model duaneModel = new DuaneModelImpl(countedWeeksWithTotal, goodnessOfFitTest);
-        Model goSShapedModel = new GOSShapedModelImpl(countedWeeksWithTotal, goodnessOfFitTest);
-        Model hdModel = new HossainDahiyaModelImpl(countedWeeksWithTotal, goodnessOfFitTest);*/
+        return filteredList;
+    }
+    
+    private static Date getStartOfTesting(List<GeneralIssue> listOfGeneralIssues) {
+        return listOfGeneralIssues.get(0).getCreatedAt();
+    }
+    
+    private static Date getEndOfTesting() {
+        return new Date();
+    }
+    
+    private static String getPeriodOfTesting() {
+        return IssuesCounter.WEEKS;
+    }
+    
+    private static String getTimeBetweenIssuesUnit() {
+        return IssuesCounter.HOURS;
+    }
+    
+    private static List<Pair<Integer, Integer>> getTimeBetweenIssuesList(List<GeneralIssue> listOfGeneralIssues) {
+        return new TimeBetweenIssuesCounter(getTimeBetweenIssuesUnit())
+                        .prepareIssuesDataForModel(listOfGeneralIssues);
+    }
+    
+    private static List<Pair<Integer, Integer>> getCumulativeIssuesList(List<GeneralIssue> listOfGeneralIssues) {
+        return new CumulativeIssuesCounter(getPeriodOfTesting(), 
+                        getStartOfTesting(listOfGeneralIssues), getEndOfTesting())
+                .prepareIssuesDataForModel(listOfGeneralIssues);
+    }
+    
+    private static List<Model> runModels(List<Pair<Integer, Integer>> countedWeeksWithTotal, 
+            GoodnessOfFitTest goodnessOfFitTest) throws InvalidInputException {
+        List<Model> models = ModelFactory.getModels(countedWeeksWithTotal, goodnessOfFitTest, PARSER.getCmdl());
         for (Model model: models) {
             model.estimateModelData();
         }
-        /*hdModel.estimateModelData();
-        duaneModel.estimateModelData();
-        goModel.estimateModelData();
-        moModel.estimateModelData();
-        goSShapedModel.estimateModelData();*/
-        TrendTest trendTest = new LaplaceTrendTest(timeBetweenIssuesUnit);
-        trendTest.executeTrendTest(filteredList);
-        // MODEL
-        
-        int howMuchToPredict;
-        if (parser.getCmdl().hasOption(ArgsParser.OPT_PREDICT)) {
-            howMuchToPredict = Integer.valueOf(parser.getCmdl().getOptionValue(ArgsParser.OPT_PREDICT));
-        } else {
-            howMuchToPredict = 0;
+        return models;
+    }
+    
+    private static GoodnessOfFitTest getGoodnessOfFitTest() {
+        return new ChiSquareGoodnessOfFitTest();
+    }
+    
+    private static TrendTest runTrendTest(List<GeneralIssue> listOfGeneralIssues) {
+        TrendTest trendTest = new LaplaceTrendTest(getTimeBetweenIssuesUnit());
+        trendTest.executeTrendTest(listOfGeneralIssues);
+        return trendTest;
+    }
+    
+    private static int getLengthOfPrediction() {
+        if (PARSER.getCmdl().hasOption(ArgsParser.OPT_PREDICT)) {
+            try {
+                return Integer.parseInt(PARSER.getCmdl().getOptionValue(ArgsParser.OPT_PREDICT));
+            } catch (NumberFormatException e) {
+                System.out.println("[Argument of option '-p' is not a number]");
+                System.exit(1);
+            }
         }
-   
-        List<String> processorsUsed = new ArrayList<>();
-        
+        return 0;
+    }
+    
+    private static List<GeneralIssue> runProcessors(List<GeneralIssue> listOfGeneralIssues) {
+        List<GeneralIssue> processedList = new ArrayList<>();
+        processedList.addAll(listOfGeneralIssues);
+        List<IssuesProcessor> listOfProcessors = ProcessorFactory.getProcessors(PARSER.getCmdl());
+        for (IssuesProcessor processor: listOfProcessors) {
+            processedList = processor.process(processedList);
+        }
+        return processedList;
+    }
+    
+    private static void writeOutput(List<OutputData> outputDataList) throws InvalidInputException {
+        OutputWriterFactory.getIssuesWriter(PARSER.getCmdl())
+                .writeOutputDataToFile(outputDataList, parsedUrlData.getRepositoryName());
+    }
+    
+    private static List<GeneralIssue> runFiltersAndProcessors(List<GeneralIssue> listOfGeneralIssues) {
+        List<GeneralIssue> filteredList = checkFilteredListForEmpty(runFilters(listOfGeneralIssues));
+        filteredList = runProcessors(filteredList);
+        return filteredList;
+    }
+    
+    private static List<GeneralIssue> checkFilteredListForEmpty(List<GeneralIssue> filteredList) {
+        if (filteredList.isEmpty()) {
+            System.out.println("[There are no issues after filtering]");
+            System.exit(1);
+        }
+        return filteredList;
+    }
+    
+    private static List<OutputData> prepareOutputData(int initialNumberOfIssues, 
+            List<GeneralIssue> listOfGeneralIssues, List<Pair<Integer, Integer>> countedWeeksWithTotal, 
+            TrendTest trendTest) throws InvalidInputException {
         List<OutputData> outputDataList = new ArrayList<>();
         OutputData outputData;
-        for (Model model: models) {
+        for (Model model: runModels(countedWeeksWithTotal, getGoodnessOfFitTest())) {
             outputData = new OutputData.OutputDataBuilder()
                     .setCreatedAt(new Date())
                     .setRepositoryName(parsedUrlData.getRepositoryName())
@@ -215,51 +251,54 @@ public class Core {
                     .setUserName(parsedUrlData.getUserName())
                     .setTotalNumberOfDefects(countedWeeksWithTotal.get(countedWeeksWithTotal.size() - 1).getSecond())
                     .setCumulativeDefects(countedWeeksWithTotal)
-                    .setTimeBetweenDefects(timeBetweenList)
+                    .setTimeBetweenDefects(getTimeBetweenIssuesList(listOfGeneralIssues))
                     .setTrend(trendTest.getTrendValue())
                     .setExistTrend(trendTest.getResult())
                     .setModelParameters(model.getModelParameters())
                     .setGoodnessOfFit(model.getGoodnessOfFitData())
-                    .setEstimatedIssuesPrediction(model.getIssuesPrediction(howMuchToPredict))
+                    .setEstimatedIssuesPrediction(model.getIssuesPrediction(getLengthOfPrediction()))
                     .setModelName(model.toString())
                     .setModelFunction(model.getTextFormOfTheFunction())
-                    .setStartOfTesting(startOfTesting)
-                    .setEndOfTesting(endOfTesting)
+                    .setStartOfTesting(getStartOfTesting(listOfGeneralIssues))
+                    .setEndOfTesting(getEndOfTesting())
                     .setInitialNumberOfIssues(initialNumberOfIssues)
-                    .setFiltersUsed(FilterFactory.getFiltersRanWithInfoAsList(parser.getCmdl()))
-                    .setProcessorsUsed(processorsUsed)
-                    .setTestingPeriodsUnit(periodicOfTesting)
-                    .setTimeBetweenDefectsUnit(timeBetweenIssuesUnit).build();
+                    .setFiltersUsed(FilterFactory.getFiltersRanWithInfoAsList(PARSER.getCmdl()))
+                    .setProcessorsUsed(ProcessorFactory.getProcessorsRanWithInfoAsList(PARSER.getCmdl()))
+                    .setTestingPeriodsUnit(getPeriodOfTesting())
+                    .setTimeBetweenDefectsUnit(getTimeBetweenIssuesUnit()).build();
             outputDataList.add(outputData);
         }
-        
-        // OUTPUT 
-        OutputWriter writer = OutputWriterFactory.getIssuesWriter(parser.getCmdl());
-        writer.writeOutputDataToFile(outputDataList, parsedUrlData.getRepositoryName());
-        
-        java.awt.Toolkit.getDefaultToolkit().beep();
+        return outputDataList;
+    }
+    
+    private static void doEvaluate(List<GeneralIssue> listOfGeneralIssues) throws InvalidInputException { 
+        List<GeneralIssue> filteredAndProcessedList = runFiltersAndProcessors(listOfGeneralIssues);
+        List<Pair<Integer, Integer>> countedWeeksWithTotal = getCumulativeIssuesList(filteredAndProcessedList); 
+        TrendTest trendTest = runTrendTest(filteredAndProcessedList); 
+        List<OutputData> outputDataList = 
+                prepareOutputData(listOfGeneralIssues.size(), 
+                        filteredAndProcessedList, countedWeeksWithTotal, trendTest);
+        writeOutput(outputDataList);
     }
 
-    private static void doSaveToFileFromUrl() {
+    private static void doSaveToFileFromUrl() throws InvalidInputException {
         List<GeneralIssue> listOfInitialIssues = DATA_PROVIDER.
-                getIssuesByUrl(parser.getCmdl().getOptionValue(ArgsParser.OPT_URL));
+                getIssuesByUrl(PARSER.getCmdl().getOptionValue(ArgsParser.OPT_URL));
         doSaveToFile(listOfInitialIssues, parsedUrlData.getRepositoryName());
     }
     
-    private static void doSaveToFileFromSnapshot() {
-        GeneralIssuesSnapshotDaoImpl dao = new GeneralIssuesSnapshotDaoImpl();
-        String snapshotName = parser.getCmdl().getOptionValue(ArgsParser.OPT_SNAPSHOT_NAME);
-        doSaveToFile(dao.getSnapshotByName(snapshotName).getListOfGeneralIssues(), snapshotName);
+    private static void doSaveToFileFromSnapshot() throws InvalidInputException {
+        String snapshotName = PARSER.getCmdl().getOptionValue(ArgsParser.OPT_SNAPSHOT_NAME);
+        doSaveToFile(DAO.getSnapshotByName(snapshotName).getListOfGeneralIssues(), snapshotName);
     }
     
-    private static void doSaveToFile(List<GeneralIssue> listOfInitialIssues, String fileName) {
-        FilterFactory.runFilters(listOfInitialIssues, parser.getCmdl());
-        IssuesWriterFactory.getIssuesWriter(parser.getCmdl()).writeToFile(listOfInitialIssues, fileName);
+    private static void doSaveToFile(List<GeneralIssue> listOfInitialIssues, String fileName) 
+            throws InvalidInputException {
+        IssuesWriterFactory.getIssuesWriter(PARSER.getCmdl()).writeToFile(runFilters(listOfInitialIssues), fileName);
     }
 
     private static void doListAllSnapshots() {
-        GeneralIssuesSnapshotDaoImpl dao = new GeneralIssuesSnapshotDaoImpl();
-        List<GeneralIssuesSnapshot> listFromDB = dao.getAllSnapshots(); 
+        List<GeneralIssuesSnapshot> listFromDB = DAO.getAllSnapshots(); 
         if (listFromDB.isEmpty()) {
             System.out.println("No snapshots in Database.");
         } else {
@@ -269,14 +308,17 @@ public class Core {
         }
     }
 
+    private static UrlParser getUrlParser() {
+        return new GitHubUrlParser();
+    }
+    
     private static void checkUrl(String url) {
-        UrlParser urlParser = new GitHubUrlParser();
+        UrlParser urlParser = getUrlParser();
         parsedUrlData = urlParser.parseUrlAndCheck(url);
     }
 
     private static void doListSnapshotsForUrl() {
-        GeneralIssuesSnapshotDaoImpl dao = new GeneralIssuesSnapshotDaoImpl();
-        List<GeneralIssuesSnapshot> listFromDB = dao.
+        List<GeneralIssuesSnapshot> listFromDB = DAO.
                 getAllSnapshotsForUserAndRepository(parsedUrlData.getUserName(), 
                         parsedUrlData.getRepositoryName()); 
         for (GeneralIssuesSnapshot snap: listFromDB) {

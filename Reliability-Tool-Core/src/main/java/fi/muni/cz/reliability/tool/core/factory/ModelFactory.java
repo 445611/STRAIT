@@ -1,5 +1,7 @@
 package fi.muni.cz.reliability.tool.core.factory;
 
+import fi.muni.cz.reliability.tool.core.ArgsParser;
+import fi.muni.cz.reliability.tool.core.exception.InvalidInputException;
 import fi.muni.cz.reliability.tool.models.DuaneModelImpl;
 import fi.muni.cz.reliability.tool.models.GOModelImpl;
 import fi.muni.cz.reliability.tool.models.GOSShapedModelImpl;
@@ -7,7 +9,10 @@ import fi.muni.cz.reliability.tool.models.HossainDahiyaModelImpl;
 import fi.muni.cz.reliability.tool.models.Model;
 import fi.muni.cz.reliability.tool.models.MusaOkumotoModelImpl;
 import fi.muni.cz.reliability.tool.models.testing.GoodnessOfFitTest;
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
+import org.apache.commons.cli.CommandLine;
 import org.apache.commons.math3.util.Pair;
 
 /**
@@ -22,16 +27,39 @@ public class ModelFactory {
     public static final String  HOSSAIN_DAHIYA = "hd";
 
     /**
+     * Get all Model to run.
+     * 
+     * @param countedWeeksWithTotal cumulative data.
+     * @param goodnessOfFitTest     goodnes-of-fit.
+     * @param cmdl                  parsed CommandLine.
+     * @return                      list of Models.
+     * @throws InvalidInputException when there is no such model from cmdl.
+     */
+    public static List<Model> getModels(List<Pair<Integer, Integer>> countedWeeksWithTotal,
+            GoodnessOfFitTest goodnessOfFitTest, CommandLine cmdl) throws InvalidInputException {
+        List<Model> models = new ArrayList<>();
+        if (cmdl.hasOption(ArgsParser.OPT_MODELS)) {
+            for (String modelArg: cmdl.getOptionValues(ArgsParser.OPT_MODELS)) {
+                models.add(ModelFactory.getModel(countedWeeksWithTotal, goodnessOfFitTest, modelArg));
+            }
+        } else {
+            models.add(ModelFactory.getModel(countedWeeksWithTotal, goodnessOfFitTest, ModelFactory.GOEL_OKUMOTO));
+        }
+        return models;
+    }
+    
+    /**
      * Get Model for string value.
      * 
      * @param countedWeeksWithTotal cumulative data.
      * @param goodnessOfFitTest     goodnes-of-fit.
-     * @param modulArg              represnetation of model.
+     * @param modelArg              represnetation of model.
      * @return Model
+     * @throws InvalidInputException when there is no such implmented model.
      */
-    public static Model getIssuesWriter(List<Pair<Integer, Integer>> countedWeeksWithTotal,
-            GoodnessOfFitTest goodnessOfFitTest, String modulArg) {
-        switch (modulArg) {
+    private static Model getModel(List<Pair<Integer, Integer>> countedWeeksWithTotal,
+            GoodnessOfFitTest goodnessOfFitTest, String modelArg) throws InvalidInputException {
+        switch (modelArg) {
             case GOEL_OKUMOTO:
                 return new GOModelImpl(countedWeeksWithTotal, goodnessOfFitTest);
             case GOEL_OKEMURA_SSHAPED:
@@ -43,7 +71,7 @@ public class ModelFactory {
             case HOSSAIN_DAHIYA:
                 return new HossainDahiyaModelImpl(countedWeeksWithTotal, goodnessOfFitTest); 
             default:
-                return new GOModelImpl(countedWeeksWithTotal, goodnessOfFitTest); 
+                throw new InvalidInputException(Arrays.asList("No such model implemented: '" + modelArg + "'")); 
         }
     }
 }

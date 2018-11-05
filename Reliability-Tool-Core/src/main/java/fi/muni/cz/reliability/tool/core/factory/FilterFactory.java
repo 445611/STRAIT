@@ -4,7 +4,6 @@ import fi.muni.cz.reliability.tool.core.ArgsParser;
 import fi.muni.cz.reliability.tool.dataprocessing.issuesprocessing.Filter;
 import fi.muni.cz.reliability.tool.dataprocessing.issuesprocessing.FilterByLabel;
 import fi.muni.cz.reliability.tool.dataprocessing.issuesprocessing.FilterClosed;
-import fi.muni.cz.reliability.tool.dataprovider.GeneralIssue;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -18,7 +17,7 @@ public class FilterFactory {
     private static final List<String> FILTERING_WORDS = Arrays.asList("bug","error","fail","fault","defect");
     
     /**
-     * c
+     * Get string representation of filters.
      * 
      * @param cmdl parsed CommandLine.
      * @return List of filters as String.
@@ -62,38 +61,24 @@ public class FilterFactory {
     }
     
     /**
-     * Run filters that are arguments in CommandLine ove data list.
+     * Get all filters to run.
      * 
-     * @param list  to run filters on.
      * @param cmdl  parsed CommandLine.
-     * @return list of GeneralIssue
+     * @return list of Filters.
      */
-    public static List<GeneralIssue> runFilters(List<GeneralIssue> list, CommandLine cmdl) {
-        List<GeneralIssue> filteredList = new ArrayList<>();
-        filteredList.addAll(checkFilterByLabel(list, cmdl));
-        filteredList = checkFilterClosed(filteredList, cmdl);
-        return filteredList;
-    }
-    
-    private static List<GeneralIssue> checkFilterByLabel(List<GeneralIssue> list, CommandLine cmdl) {
-        Filter issuesFilter;
+    public static List<Filter> getFilters(CommandLine cmdl) {
+        List<Filter> listOfFilters = new ArrayList<>();
         if (cmdl.hasOption(ArgsParser.OPT_FILTER_LABELS)) {
             if (cmdl.getOptionValue(ArgsParser.OPT_FILTER_LABELS) == null) {   
-                issuesFilter = new FilterByLabel(FILTERING_WORDS);
+                listOfFilters.add(new FilterByLabel(FILTERING_WORDS));
             } else {
-                issuesFilter = new FilterByLabel(Arrays.asList(cmdl.getOptionValues(ArgsParser.OPT_FILTER_LABELS)));
+                listOfFilters.add(new FilterByLabel(
+                        Arrays.asList(cmdl.getOptionValues(ArgsParser.OPT_FILTER_LABELS))));
             }
-            return issuesFilter.filter(list);
         }
-        return list;
-    }
-    
-    private static List<GeneralIssue> checkFilterClosed(List<GeneralIssue> list, CommandLine cmdl) {
-        Filter issuesFilter;
         if (cmdl.hasOption(ArgsParser.OPT_FILTER_CLOSED)) {
-            issuesFilter = new FilterClosed();
-            return issuesFilter.filter(list);
+            listOfFilters.add(new FilterClosed());
         }
-        return list;
+        return listOfFilters;
     }
 }

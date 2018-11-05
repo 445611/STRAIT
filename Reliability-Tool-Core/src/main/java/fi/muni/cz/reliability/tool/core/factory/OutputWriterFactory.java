@@ -1,8 +1,10 @@
 package fi.muni.cz.reliability.tool.core.factory;
 
 import fi.muni.cz.reliability.tool.core.ArgsParser;
+import fi.muni.cz.reliability.tool.core.exception.InvalidInputException;
 import fi.muni.cz.reliability.tool.dataprocessing.output.HtmlOutputWriter;
 import fi.muni.cz.reliability.tool.dataprocessing.output.OutputWriter;
+import java.util.Arrays;
 import org.apache.commons.cli.CommandLine;
 
 /**
@@ -17,8 +19,9 @@ public class OutputWriterFactory {
      * 
      * @param cmdl  parsed CommandLine.
      * @return OutputWriter
+     * @throws InvalidInputException if there is no sich output type.
      */
-    public static OutputWriter getIssuesWriter(CommandLine cmdl) {
+    public static OutputWriter getIssuesWriter(CommandLine cmdl) throws InvalidInputException {
         if (!cmdl.hasOption(ArgsParser.OPT_OUT)) {
             return checkMultipleGraphs(cmdl);
         } else {
@@ -26,7 +29,8 @@ public class OutputWriterFactory {
                 case HTML:
                     return checkMultipleGraphs(cmdl);
                 default:
-                    return new HtmlOutputWriter(false);
+                    throw new InvalidInputException(Arrays.asList("No such output type: '" 
+                            + cmdl.getOptionValue(ArgsParser.OPT_OUT) + "'"));
             }
         }
     }
