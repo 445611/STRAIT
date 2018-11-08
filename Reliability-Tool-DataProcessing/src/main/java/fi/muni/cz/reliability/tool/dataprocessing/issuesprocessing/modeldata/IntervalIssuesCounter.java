@@ -15,8 +15,6 @@ import org.apache.commons.math3.util.Pair;
 public class IntervalIssuesCounter implements IssuesCounter {
 
     private final String typeOfTimeToAdd;
-    private Date startOfTesting;
-    private Date endOfTesting;
 
     /**
      * Initialize attributes to default value.
@@ -24,21 +22,15 @@ public class IntervalIssuesCounter implements IssuesCounter {
      */
     public IntervalIssuesCounter() {
         typeOfTimeToAdd = WEEKS;
-        this.startOfTesting = null;
-        this.endOfTesting = null;
     }
 
     /**
      * Initialize attributes to certain values.
      * @param typeOfTimeToAdd type of Calendar enum.
-     * @param startOfTesting date when testing started.
-     * @param endOfTesting date when testing ended.
      */
-    public IntervalIssuesCounter(String typeOfTimeToAdd, 
-            Date startOfTesting, Date endOfTesting) {
+    public IntervalIssuesCounter(String typeOfTimeToAdd) {
         this.typeOfTimeToAdd = typeOfTimeToAdd;
-        this.startOfTesting = startOfTesting;
-        this.endOfTesting = endOfTesting;
+
     }
 
     @Override
@@ -46,25 +38,23 @@ public class IntervalIssuesCounter implements IssuesCounter {
         if (rawIssues == null || rawIssues.isEmpty()) {
             throw new NullPointerException("listOfIssues is null or empty.");
         }
-        if (startOfTesting == null) {
-            startOfTesting = getDateFromMidNight(rawIssues.get(0).getCreatedAt());
-        }
-        if (endOfTesting == null) {
-            endOfTesting = new Date();
-        }
-        return sortingIssuesIntoTimePeriods(rawIssues);
+        Date startOfTesting  = getDateFromMidNight(rawIssues.get(0).getCreatedAt());
+        Date endOfTesting = new Date();
+        return sortingIssuesIntoTimePeriods(rawIssues, startOfTesting, endOfTesting);
     }
     
     /**
      * Get list of Pair of week and number of defects.
      * @param startDate Date to starts counting weeks
      * @param listOfIssues List to iterate over
+     * @param startOfTesting start of testing
+     * @param endOfTesting end of testing
      * @return List of Pairs 
      * 
      * @throw UtilsException when there are no issues in testing period
      */
     private List<Pair<Integer, Integer>> sortingIssuesIntoTimePeriods(
-            List<GeneralIssue> listOfIssues) {
+            List<GeneralIssue> listOfIssues, Date startOfTesting, Date endOfTesting) {
         Date startOfTestingPeriod = startOfTesting;
         Date endOfTestingPeriod = addSpecificTimeToDate(startOfTesting);
 
@@ -156,11 +146,14 @@ public class IntervalIssuesCounter implements IssuesCounter {
                 case WEEKS:
                     c.add(Calendar.WEEK_OF_MONTH, 1);
                     break;
+                case MONTHS:
+                    c.add(Calendar.MONTH, 1);
+                    break;
                 case YEARS:
                     c.add(Calendar.YEAR, 1);
                     break;
                 default:
-                    c.add(Calendar.WEEK_OF_MONTH, 1);
+                    throw new DataProcessingException("Wrong time unit: " + typeOfTimeToAdd);
         }
         return c.getTime(); 
     }  

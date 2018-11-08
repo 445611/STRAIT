@@ -16,7 +16,7 @@ public class FilterByLabel implements Filter, Serializable {
     private final List<String> filteringWords;
 
     /**
-     * Initialize <code>filteringWords</code>.
+     * Initialize.
      * 
      * @param filteringWords words for filter
      */

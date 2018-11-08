@@ -5,16 +5,13 @@ import java.io.Serializable;
 import java.util.Date;
 import java.util.List;
 import java.util.Objects;
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.ElementCollection;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
 import javax.persistence.Lob;
-import javax.persistence.ManyToOne;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import javax.validation.constraints.NotNull;
@@ -56,12 +53,8 @@ public class GeneralIssue implements Serializable {
     @Column(name = "snapshot_id")
     private Long snapshotid;
     
-    @ManyToOne(cascade = CascadeType.MERGE)
-    @JoinColumn(name="GENERALUSER_ID")
     private GeneralUser generalUser;
     
-    @ManyToOne(cascade = CascadeType.MERGE)
-    @JoinColumn(name="GENERALMILESTONE_ID")
     private GeneralMilestone generalMilestone;
 
     public int getComments() {

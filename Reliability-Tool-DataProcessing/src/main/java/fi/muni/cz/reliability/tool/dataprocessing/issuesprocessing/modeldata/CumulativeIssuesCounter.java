@@ -3,7 +3,6 @@ package fi.muni.cz.reliability.tool.dataprocessing.issuesprocessing.modeldata;
 
 import fi.muni.cz.reliability.tool.dataprovider.GeneralIssue;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 import org.apache.commons.math3.util.Pair;
 
@@ -13,8 +12,6 @@ import org.apache.commons.math3.util.Pair;
 public class CumulativeIssuesCounter implements IssuesCounter {
 
     private final String typeOfTimeToAdd;
-    private final Date startOfTesting;
-    private final Date endOfTesting;
     
     /**
      * Initialize attributes to default value.
@@ -22,21 +19,14 @@ public class CumulativeIssuesCounter implements IssuesCounter {
      */
     public CumulativeIssuesCounter() {
         typeOfTimeToAdd = WEEKS;
-        this.startOfTesting = null;
-        this.endOfTesting = null;
     }
     
     /**
      * Initialize attributes to certain values.
      * @param typeOfTimeToAdd type of Calendar enum
-     * @param startOfTesting date when testing started
-     * @param endOfTesting date when testing ended
      */
-    public CumulativeIssuesCounter(String typeOfTimeToAdd, 
-            Date startOfTesting, Date endOfTesting) {
+    public CumulativeIssuesCounter(String typeOfTimeToAdd) {
         this.typeOfTimeToAdd = typeOfTimeToAdd;
-        this.startOfTesting = startOfTesting;
-        this.endOfTesting = endOfTesting;
     }
     
     @Override
@@ -53,8 +43,7 @@ public class CumulativeIssuesCounter implements IssuesCounter {
     }
     
     private List<Pair<Integer, Integer>> getIntervalIssues(List<GeneralIssue> listOfIssues) {
-         IssuesCounter counter = new IntervalIssuesCounter(typeOfTimeToAdd, 
-                startOfTesting, endOfTesting);
+         IssuesCounter counter = new IntervalIssuesCounter(typeOfTimeToAdd);
          return counter.prepareIssuesDataForModel(listOfIssues);
     }
 }

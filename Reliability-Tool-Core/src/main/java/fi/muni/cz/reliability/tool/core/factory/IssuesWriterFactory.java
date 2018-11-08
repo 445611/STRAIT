@@ -5,7 +5,6 @@ import fi.muni.cz.reliability.tool.core.exception.InvalidInputException;
 import fi.muni.cz.reliability.tool.dataprocessing.output.CsvFileIssuesWriter;
 import fi.muni.cz.reliability.tool.dataprocessing.output.IssuesWriter;
 import java.util.Arrays;
-import org.apache.commons.cli.CommandLine;
 
 /**
  * @author Radoslav Micko, 445611@muni.cz
@@ -17,17 +16,17 @@ public class IssuesWriterFactory {
     /**
      * Get IssueWriter for CommandLine argument.
      * 
-     * @param cmdl  parsed CommandLine.
+     * @param parser  parsed CommandLine.
      * @return IssuesWriter
      * @throws InvalidInputException if there is no such format of file.
      */
-    public static IssuesWriter getIssuesWriter(CommandLine cmdl) throws InvalidInputException {
-        switch (cmdl.getOptionValue(ArgsParser.OPT_SAVE)) {
+    public static IssuesWriter getIssuesWriter(ArgsParser parser) throws InvalidInputException {
+        switch (parser.getOptionValueSave()) {
             case CSV:
                 return new CsvFileIssuesWriter(); 
             default:
                 throw new InvalidInputException(Arrays.asList("No such format of file: '" 
-                            + cmdl.getOptionValue(ArgsParser.OPT_SAVE) + "'"));
+                            + parser.getOptionValueSave() + "'"));
         }
     }
 }

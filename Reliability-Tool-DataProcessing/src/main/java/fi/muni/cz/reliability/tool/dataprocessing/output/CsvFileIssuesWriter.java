@@ -15,7 +15,9 @@ public class CsvFileIssuesWriter implements IssuesWriter {
     private static final String COMMA_DELIMITER = "\t";
     private static final String NEW_LINE_SEPARATOR = "\n";
 
-    private static final String FILE_HEADER = "Created at\tClosed at\tUpdated at\tState\tLabels\tBody";
+    private static final String FILE_HEADER = "Created at\tClosed at\tUpdated at\tState\tLabels"
+            + "\tComments\tNumber\tTitle\tUrl\tHtml url\tBody\tUser name\tUser email\tMilestone created at"
+            + "\tMilestone due on\tMilestone descrtiption\tMilestone state\tMilestone title";
 
     @Override
     public void writeToFile(List<GeneralIssue> list, String fileName) {
@@ -25,7 +27,7 @@ public class CsvFileIssuesWriter implements IssuesWriter {
                 fileWriter.append(NEW_LINE_SEPARATOR);
                 for (GeneralIssue issue : list) {
                     writeElementWithDelimiter(
-                            eliminateSeparatorAndCheckNullValue(issue.getCreatedAt().toString()), fileWriter);
+                            eliminateSeparatorAndCheckNullValue(issue.getCreatedAt()), fileWriter);
                     writeElementWithDelimiter(
                             eliminateSeparatorAndCheckNullValue(issue.getClosedAt()), fileWriter);
                     writeElementWithDelimiter(
@@ -34,9 +36,44 @@ public class CsvFileIssuesWriter implements IssuesWriter {
                             eliminateSeparatorAndCheckNullValue(issue.getState()), fileWriter);
                     writeElementWithDelimiter(
                             eliminateSeparatorAndCheckNullValue(issue.getLabels()), fileWriter);
-                    String s = eliminateSeparatorAndCheckNullValue(issue.getBody());
+                    writeElementWithDelimiter(
+                            eliminateSeparatorAndCheckNullValue(issue.getComments()), fileWriter);
+                    writeElementWithDelimiter(
+                            eliminateSeparatorAndCheckNullValue(issue.getNumber()), fileWriter);
+                    writeElementWithDelimiter(
+                            eliminateSeparatorAndCheckNullValue(issue.getTitle()), fileWriter);
+                    writeElementWithDelimiter(
+                            eliminateSeparatorAndCheckNullValue(issue.getUrl()), fileWriter);
+                    writeElementWithDelimiter(
+                            eliminateSeparatorAndCheckNullValue(issue.getHtmlUrl()), fileWriter);
                     writeElementWithDelimiter(
                             eliminateSeparatorAndCheckNullValue(issue.getBody()), fileWriter);
+                    writeElementWithDelimiter(
+                            eliminateSeparatorAndCheckNullValue(issue.getGeneralUser() == null 
+                                    ? "null" : issue.getGeneralUser().getName()), fileWriter);
+                    writeElementWithDelimiter(
+                            eliminateSeparatorAndCheckNullValue(issue.getGeneralUser() == null 
+                                    ? "null" : issue.getGeneralUser().getEmail()), fileWriter);
+                    writeElementWithDelimiter(
+                            eliminateSeparatorAndCheckNullValue(
+                                    issue.getGeneralMilestone() == null 
+                                            ? "null" : issue.getGeneralMilestone().getCreatedAt()), fileWriter);
+                    writeElementWithDelimiter(
+                            eliminateSeparatorAndCheckNullValue(
+                                    issue.getGeneralMilestone() == null 
+                                            ? "null" : issue.getGeneralMilestone().getDueOn()), fileWriter);
+                    writeElementWithDelimiter(
+                            eliminateSeparatorAndCheckNullValue(
+                                    issue.getGeneralMilestone() == null 
+                                            ? "null" : issue.getGeneralMilestone().getDescription()), fileWriter);
+                    writeElementWithDelimiter(
+                            eliminateSeparatorAndCheckNullValue(
+                                    issue.getGeneralMilestone() == null 
+                                            ? "null" : issue.getGeneralMilestone().getState()), fileWriter);
+                    writeElementWithDelimiter(
+                            eliminateSeparatorAndCheckNullValue(
+                                    issue.getGeneralMilestone() == null 
+                                            ? "null" : issue.getGeneralMilestone().getTitle()), fileWriter);
                     fileWriter.append(NEW_LINE_SEPARATOR);
                 }
         } catch (IOException ex) {

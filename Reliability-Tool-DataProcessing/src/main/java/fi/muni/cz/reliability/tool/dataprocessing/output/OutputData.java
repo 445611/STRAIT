@@ -18,8 +18,6 @@ public class OutputData implements Serializable {
     private Date createdAt;
     private int initialNumberOfIssues;
     private int totalNumberOfDefects;
-    private Date startOfTesting;
-    private Date endOfTesting;
     private List<Pair<Integer, Integer>> cumulativeDefects;
     private List<Pair<Integer, Integer>> timeBetweenDefects;
     private String timeBetweenDefectsUnit;
@@ -48,8 +46,6 @@ public class OutputData implements Serializable {
         this.createdAt = builder.createdAt;
         this.initialNumberOfIssues = builder.initialNumberOfIssues;
         this.totalNumberOfDefects = builder.totalNumberOfDefects;
-        this.startOfTesting = builder.startOfTesting;
-        this.endOfTesting = builder.endOfTesting;
         this.cumulativeDefects = builder.cumulativeDefects;
         this.timeBetweenDefects = builder.timeBetweenDefects;
         this.timeBetweenDefectsUnit = builder.timeBetweenDefectsUnit;
@@ -143,22 +139,6 @@ public class OutputData implements Serializable {
 
     public void setGoodnessOfFit(Map<String, String> goodnessOfFit) {
         this.goodnessOfFit = goodnessOfFit;
-    }
-   
-    public Date getStartOfTesting() {
-        return startOfTesting;
-    }
-
-    public void setStartOfTesting(Date startOfTesting) {
-        this.startOfTesting = startOfTesting;
-    }
-
-    public Date getEndOfTesting() {
-        return endOfTesting;
-    }
-
-    public void setEndOfTesting(Date endOfTesting) {
-        this.endOfTesting = endOfTesting;
     }
 
     public String getModelFunction() {
@@ -280,8 +260,6 @@ public class OutputData implements Serializable {
         private Date createdAt;
         private int initialNumberOfIssues;
         private int totalNumberOfDefects;
-        private Date startOfTesting;
-        private Date endOfTesting;
         private List<Pair<Integer, Integer>> cumulativeDefects;
         private List<Pair<Integer, Integer>> timeBetweenDefects;
         private String timeBetweenDefectsUnit;
@@ -360,28 +338,6 @@ public class OutputData implements Serializable {
          */
         public OutputDataBuilder setTotalNumberOfDefects(int totalNumberOfDefects) {
             this.totalNumberOfDefects = totalNumberOfDefects;
-            return this;
-        }
-
-        /**
-         * Set date of start of testing.
-         * 
-         * @param startOfTesting date.
-         * @return this builder, to allow method chaining.
-         */
-        public OutputDataBuilder setStartOfTesting(Date startOfTesting) {
-            this.startOfTesting = startOfTesting;
-            return this;
-        }
-
-        /**
-         * Set date of end of testing.
-         * 
-         * @param endOfTesting date.
-         * @return this builder, to allow method chaining.
-         */
-        public OutputDataBuilder setEndOfTesting(Date endOfTesting) {
-            this.endOfTesting = endOfTesting;
             return this;
         }
 

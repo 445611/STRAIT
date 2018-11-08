@@ -1,6 +1,8 @@
 package fi.muni.cz.reliability.tool.core;
 
 import fi.muni.cz.reliability.tool.core.exception.InvalidInputException;
+import fi.muni.cz.reliability.tool.core.factory.FilterFactory;
+import fi.muni.cz.reliability.tool.dataprocessing.issuesprocessing.modeldata.IssuesCounter;
 import java.io.BufferedReader;
 import java.io.FileInputStream;
 import java.io.IOException;
@@ -35,10 +37,13 @@ public class ArgsParser {
     public static final String OPT_PREDICT = "p";
     public static final String OPT_FILTER_LABELS = "fl";
     public static final String OPT_FILTER_CLOSED = "fc";
+    public static final String OPT_FILTER_TIME = "ft";
     public static final String OPT_MODELS = "ms";
     public static final String OPT_OUT = "out";
     public static final String OPT_GRAPH_MULTIPLE = "gm";
     public static final String OPT_NEW_SNAPSHOT = "ns";
+    public static final String OPT_PRIOD_OF_TESTING = "pt";
+    public static final String OPT_TIME_BETWEEN_ISSUES_UNIT = "tb";
     
     //Configuraton file option
     private static final String FLAG_CONFIG_FILE = "-cf";
@@ -147,8 +152,19 @@ public class ArgsParser {
         options.addOption(option);
         option = Option.builder(OPT_FILTER_CLOSED).longOpt("filterClosed").desc("Filter closed.").build();
         options.addOption(option);
+        option = Option.builder(OPT_FILTER_TIME).longOpt("filterTime").hasArgs()
+                .argName("Time").numberOfArgs(2).desc("Filter by start time and end time. Format: " 
+                        + FilterFactory.DATE_FORMAT).build();
+        options.addOption(option);        
         option = Option.builder(OPT_MODELS).longOpt("models").hasArgs().argName("Model name").
                 desc("Models to evaluate.").build();
+        options.addOption(option);
+        option = Option.builder(OPT_PRIOD_OF_TESTING).longOpt("periodOfTesting").hasArg().argName("Period").
+                desc("Period of testing. e.g.: " + IssuesCounter.WEEKS + ", " + IssuesCounter.MONTHS).build();
+        options.addOption(option);
+        option = Option.builder(OPT_TIME_BETWEEN_ISSUES_UNIT).longOpt("timBetweenIssues")
+                .hasArg().argName("Time unit").desc("Period of testing. e.g.: " 
+                        + IssuesCounter.WEEKS + ", " + IssuesCounter.MONTHS).build();
         options.addOption(option);
         option = Option.builder(OPT_GRAPH_MULTIPLE).longOpt("graphMultiple")
                 .desc("Data show in multiple graphs.").build();
@@ -171,5 +187,296 @@ public class ArgsParser {
      */
     public  Options getOptions() {
         return options;
+    }
+    
+    /**
+     * Get number representation of options from command line.
+     * 
+     * @return number representation.
+     */
+    public int getRunConfiguration() {
+        if (hasOptionListAllSnapshots()) {
+            return 1;
+        } else if (hasOptionHelp()) {
+            return 2;
+        } else if (hasOptionUrl() && hasOptionSave()) {
+            return 3;
+        } else if (hasOptionUrl() && hasOptionListSnapshots()) {
+            return 4;
+        } else if (hasOptionUrl() && hasOptionEvaluate()) {
+            return 5;
+        } else if (hasOptionSnapshotName() && hasOptionSave()) {
+            return 6;
+        } else if (hasOptionSnapshotName() && hasOptionEvaluate()) {
+            return 7;
+        } else if (hasOptionSnapshotName() && hasOptionListSnapshots()) {
+            return 8;
+        } else if (hasOptionSnapshotName()) {
+            return 9;
+        } else {
+            return 0;
+        }
+    }
+    
+    
+    /**
+     * Check if option 'cf' is on command line.
+     * 
+     * @return true if there is 'cf', false otherwise.
+     */
+    public boolean hasOptionConfigFile() {
+        return cmdl.hasOption(OPT_CONFIG_FILE);
+    }
+    
+    /**
+     * Check if option 'url' is on command line.
+     * 
+     * @return true if there is 'url' on command line, false otherwise.
+     */
+    public boolean hasOptionUrl() {
+        return cmdl.hasOption(OPT_URL);
+    }
+    
+    /**
+     * Check if option 'cf' is on command line.
+     * 
+     * @return true if there is 'cf' command line, false otherwise.
+     */
+    public boolean hasOptionSnapshotName() {
+        return cmdl.hasOption(OPT_SNAPSHOT_NAME);
+    }
+    
+    /**
+     * Check if option 'asl' is on command line.
+     * 
+     * @return true if there is 'asl' command line, false otherwise.
+     */
+    public boolean hasOptionListAllSnapshots() {
+        return cmdl.hasOption(OPT_LIST_ALL_SNAPSHOTS);
+    }
+    
+    /**
+     * Check if option 'h' is on command line.
+     * 
+     * @return true if there is 'h' command line, false otherwise.
+     */
+    public boolean hasOptionHelp() {
+        return cmdl.hasOption(OPT_HELP);
+    }
+    
+    /**
+     * Check if option 'ls' is on command line.
+     * 
+     * @return true if there is 'ls' command line, false otherwise.
+     */
+    public boolean hasOptionListSnapshots() {
+        return cmdl.hasOption(OPT_LIST_SNAPSHOTS);
+    }
+    
+    /**
+     * Check if option 'e' is on command line.
+     * 
+     * @return true if there is 'e' command line, false otherwise.
+     */
+    public boolean hasOptionEvaluate() {
+        return cmdl.hasOption(OPT_EVALUATE);
+    }
+    
+    /**
+     * Check if option 'p' is on command line.
+     * 
+     * @return true if there is 'p' command line, false otherwise.
+     */
+    public boolean hasOptionPredict() {
+        return cmdl.hasOption(OPT_PREDICT);
+    }
+    
+    /**
+     * Check if option 'fc' is on command line.
+     * 
+     * @return true if there is 'fc' command line, false otherwise.
+     */
+    public boolean hasOptionFilterClosed() {
+        return cmdl.hasOption(OPT_FILTER_CLOSED);
+    }
+    
+    /**
+     * Check if option 'ft' is on command line.
+     * 
+     * @return true if there is 'ft', false otherwise.
+     */
+    public boolean hasOptionFilterTime() {
+        return cmdl.hasOption(OPT_FILTER_TIME);
+    }
+    
+    /**
+     * Check if option 'fl' is on command line.
+     * 
+     * @return true if there is 'fl' command line, false otherwise.
+     */
+    public boolean hasOptionFilterLabels() {
+        return cmdl.hasOption(OPT_FILTER_LABELS);
+    }
+    
+    /**
+     * Check if option 'ms' is on command line.
+     * 
+     * @return true if there is 'ms' command line, false otherwise.
+     */
+    public boolean hasOptionModels() {
+        return cmdl.hasOption(OPT_MODELS);
+    }
+    
+    /**
+     * Check if option 'out' is on command line.
+     * 
+     * @return true if there is 'out' command line, false otherwise.
+     */
+    public boolean hasOptionOut() {
+        return cmdl.hasOption(OPT_OUT);
+    }
+    
+    /**
+     * Check if option 'pt' is on command line.
+     * 
+     * @return true if there is 'pt' command line, false otherwise.
+     */
+    public boolean hasOptionPeriodOfTestiong() {
+        return cmdl.hasOption(OPT_PRIOD_OF_TESTING);
+    }
+    
+    /**
+     * Check if option 'tb' is on command line.
+     * 
+     * @return true if there is 'tb' command line, false otherwise.
+     */
+    public boolean hasOptionTimeBetweenIssuesUnit() {
+        return cmdl.hasOption(OPT_TIME_BETWEEN_ISSUES_UNIT);
+    }
+    
+    /**
+     * Check if option 's' is on command line.
+     * 
+     * @return true if there is 's' command line, false otherwise.
+     */
+    public boolean hasOptionSave() {
+        return cmdl.hasOption(OPT_SAVE);
+    }
+    
+    /**
+     * Check if option 'gm' is on command line.
+     * 
+     * @return true if there is 'gm' command line, false otherwise.
+     */
+    public boolean hasOptionGraphMultiple() {
+        return cmdl.hasOption(OPT_GRAPH_MULTIPLE);
+    }
+    
+    /**
+     * Check if option 'ns' is on command line.
+     * 
+     * @return true if there is 'ns' command line, false otherwise.
+     */
+    public boolean hasOptionNewSnapshot() {
+        return cmdl.hasOption(OPT_NEW_SNAPSHOT);
+    }
+    
+    /**
+     * Get argument value for 'url'.
+     * 
+     * @return argument value.
+     */
+    public String getOptionValueUrl() {
+        return cmdl.getOptionValue(OPT_URL);
+    }
+    
+    /**
+     * Get argument value for 'pt'.
+     * 
+     * @return argument value.
+     */
+    public String getOptionValuePeriodOfTesting() {
+        return cmdl.getOptionValue(OPT_PRIOD_OF_TESTING);
+    } 
+    
+    /**
+     * Get argument value for 'tb'.
+     * 
+     * @return argument value.
+     */
+    public String getOptionValueTimeBetweenIssuesUnit() {
+        return cmdl.getOptionValue(OPT_TIME_BETWEEN_ISSUES_UNIT);
+    } 
+    
+    /**
+     * Get argument value for 'ns'.
+     * 
+     * @return argument value.
+     */
+    public String getOptionValueNewSnapshot() {
+        return cmdl.getOptionValue(OPT_NEW_SNAPSHOT);
+    }
+    
+    /**
+     * Get argument value for 'sn'.
+     * 
+     * @return argument value.
+     */
+    public String getOptionValueSnapshotName() {
+        return cmdl.getOptionValue(OPT_SNAPSHOT_NAME);
+    }
+    
+    /**
+     * Get argument value for 'p'.
+     * 
+     * @return argument value.
+     */
+    public String getOptionValuePredict() {
+        return cmdl.getOptionValue(OPT_PREDICT);
+    }
+    
+    /**
+     * Get argument values for 'fl'.
+     * 
+     * @return argument values.
+     */
+    public String[] getOptionValuesFilterLables() {
+        return cmdl.getOptionValues(OPT_FILTER_LABELS);
+    }
+    
+    /**
+     * Get argument values for 'ft'.
+     * 
+     * @return argument values.
+     */
+    public String[] getOptionValuesFilterTime() {
+        return cmdl.getOptionValues(OPT_FILTER_TIME);
+    }
+    
+    /**
+     * Get argument value for 's'.
+     * 
+     * @return argument value.
+     */
+    public String getOptionValueSave() {
+        return cmdl.getOptionValue(OPT_SAVE);
+    }
+    
+    /**
+     * Get argument value for 'ms'.
+     * 
+     * @return argument values.
+     */
+    public String[] getOptionValuesModels() {
+        return cmdl.getOptionValues(OPT_MODELS);
+    }
+    
+    /**
+     * Get argument value for 'out'.
+     * 
+     * @return argument value.
+     */
+    public String getOptionValueOut() {
+        return cmdl.getOptionValue(OPT_OUT);
     }
 }

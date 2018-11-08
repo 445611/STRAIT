@@ -52,65 +52,67 @@ public class Core {
         } catch (InvalidInputException e) {
             PARSER.printHelp();
             System.out.println(e.causes());
-            //e.printStackTrace();
+            e.printStackTrace();
             System.exit(1);
         } catch (Exception e) {
-            System.out.println(e.getCause());
+            System.out.println(e.getMessage());
+            e.printStackTrace();
             System.exit(1);
         }
     }
     
     private static void run() throws InvalidInputException {
         System.out.println("Working...");
-        
-        if (PARSER.getCmdl().hasOption(ArgsParser.OPT_LIST_ALL_SNAPSHOTS)) {
-            doListAllSnapshots();
-        } else if (PARSER.getCmdl().hasOption(ArgsParser.OPT_HELP)) {
-            PARSER.printHelp();
-        } else if (PARSER.getCmdl().hasOption(ArgsParser.OPT_URL) && 
-                PARSER.getCmdl().hasOption(ArgsParser.OPT_SAVE)) {
-            checkUrl(PARSER.getCmdl().getOptionValue(ArgsParser.OPT_URL));
-            doSaveToFileFromUrl();
-            System.out.println("Saved to file.");
-        } else if (PARSER.getCmdl().hasOption(ArgsParser.OPT_URL) && 
-                PARSER.getCmdl().hasOption(ArgsParser.OPT_LIST_SNAPSHOTS)) {
-            checkUrl(PARSER.getCmdl().getOptionValue(ArgsParser.OPT_URL));
-            doListSnapshotsForUrl();
-        } else if (PARSER.getCmdl().hasOption(ArgsParser.OPT_URL) && 
-                PARSER.getCmdl().hasOption(ArgsParser.OPT_EVALUATE)) {
-            checkUrl(PARSER.getCmdl().getOptionValue(ArgsParser.OPT_URL));
-            doEvaluateForUrl();
-            System.out.println("Evaluated to file.");
-        } else if (PARSER.getCmdl().hasOption(ArgsParser.OPT_SNAPSHOT_NAME) &&
-                PARSER.getCmdl().hasOption(ArgsParser.OPT_SAVE)) {
-            doSaveToFileFromSnapshot();
-            System.out.println("Saved.");
-        } else if (PARSER.getCmdl().hasOption(ArgsParser.OPT_SNAPSHOT_NAME) &&
-                PARSER.getCmdl().hasOption(ArgsParser.OPT_EVALUATE)) {
-            doEvaluateForSnapshot();
-            System.out.println("Evaluated.");
-        } else if (PARSER.getCmdl().hasOption(ArgsParser.OPT_SNAPSHOT_NAME) &&
-                PARSER.getCmdl().hasOption(ArgsParser.OPT_LIST_SNAPSHOTS)) {
-            PARSER.printHelp();
-            System.out.println("[Can't combine '-sn' with '-sl']");
-        } else if (PARSER.getCmdl().hasOption(ArgsParser.OPT_SNAPSHOT_NAME)) {
-           PARSER.printHelp();
-            System.out.println("[Missing option: '-e' / '-s']");
-        } else {
-            PARSER.printHelp();
-            System.out.println("[Missing option: '-e' / '-s' / '-sl']");
+        switch (PARSER.getRunConfiguration()) {
+            case 1:
+               doListAllSnapshots();
+               break;
+            case 2:
+                PARSER.printHelp();
+            case 3:
+                checkUrl(PARSER.getOptionValueUrl());
+                doSaveToFileFromUrl();
+                System.out.println("Saved to file.");
+                break;
+            case 4:
+                checkUrl(PARSER.getOptionValueUrl());
+                doListSnapshotsForUrl();
+                break;
+            case 5:
+                checkUrl(PARSER.getOptionValueUrl());
+                doEvaluateForUrl();
+                System.out.println("Evaluated to file.");
+                break;
+            case 6:
+                doSaveToFileFromSnapshot();
+                System.out.println("Saved.");
+                break;
+            case 7:
+                doEvaluateForSnapshot();
+                System.out.println("Evaluated.");
+                break;
+            case 8:
+                PARSER.printHelp();
+                System.out.println("[Can't combine '-sn' with '-sl']");
+                break;
+            case 9:
+                PARSER.printHelp();
+                System.out.println("[Missing option: '-e' / '-s']");
+                break;
+            default:
+                PARSER.printHelp();
+                System.out.println("[Missing option: '-e' / '-s' / '-sl']");
         }
-        
         System.out.println("Done!");
         System.exit(0);
     }
     
     private static void  doEvaluateForUrl() throws InvalidInputException {
         List<GeneralIssue> listOfGeneralIssues = null;
-        if (PARSER.getCmdl().hasOption(ArgsParser.OPT_NEW_SNAPSHOT)) {
-            if (DAO.getSnapshotByName(PARSER.getCmdl().getOptionValue(ArgsParser.OPT_NEW_SNAPSHOT)) != null) {
+        if (PARSER.hasOptionNewSnapshot()) {
+            if (DAO.getSnapshotByName(PARSER.getOptionValueNewSnapshot()) != null) {
                 System.out.println("[-name <New name> should be unique name. '" 
-                        + PARSER.getCmdl().getOptionValue(ArgsParser.OPT_NEW_SNAPSHOT) + "' already exists]");
+                        + PARSER.getOptionValueNewSnapshot() + "' already exists]");
                 System.exit(1);
             } else {
                 listOfGeneralIssues = DATA_PROVIDER.getIssuesByUrl(parsedUrlData.getUrl().toString());
@@ -129,14 +131,13 @@ public class Core {
                     .setRepositoryName(parsedUrlData.getRepositoryName())
                     .setUrl(parsedUrlData.getUrl().toString())
                     .setUserName(parsedUrlData.getUserName())
-                    .setSnapshotName(PARSER.getCmdl().getOptionValue(ArgsParser.OPT_NEW_SNAPSHOT))
+                    .setSnapshotName(PARSER.getOptionValueNewSnapshot())
                     .build());
     }
     
     private static void doEvaluateForSnapshot() throws InvalidInputException {
         GeneralIssuesSnapshotDaoImpl dao = new GeneralIssuesSnapshotDaoImpl();
-        GeneralIssuesSnapshot snapshot = dao.getSnapshotByName(PARSER.getCmdl()
-                .getOptionValue(ArgsParser.OPT_SNAPSHOT_NAME));
+        GeneralIssuesSnapshot snapshot = dao.getSnapshotByName(PARSER.getOptionValueSnapshotName());
         checkUrl(snapshot.getUrl());
         doEvaluate(snapshot.getListOfGeneralIssues());
     }
@@ -144,26 +145,24 @@ public class Core {
     private static List<GeneralIssue> runFilters(List<GeneralIssue> listOfGeneralIssues) {
         List<GeneralIssue> filteredList = new ArrayList<>();
         filteredList.addAll(listOfGeneralIssues);
-        List<Filter> listOfFilters = FilterFactory.getFilters(PARSER.getCmdl());
+        List<Filter> listOfFilters = FilterFactory.getFilters(PARSER);
         for (Filter filter: listOfFilters) {
             filteredList = filter.filter(filteredList);
         }
         return filteredList;
-    }
-    
-    private static Date getStartOfTesting(List<GeneralIssue> listOfGeneralIssues) {
-        return listOfGeneralIssues.get(0).getCreatedAt();
-    }
-    
-    private static Date getEndOfTesting() {
-        return new Date();
-    }
+    } 
     
     private static String getPeriodOfTesting() {
+        if (PARSER.hasOptionPeriodOfTestiong()) {
+            return PARSER.getOptionValuePeriodOfTesting();
+        }
         return IssuesCounter.WEEKS;
     }
     
     private static String getTimeBetweenIssuesUnit() {
+        if (PARSER.hasOptionTimeBetweenIssuesUnit()) {
+            return PARSER.getOptionValueTimeBetweenIssuesUnit();
+        }
         return IssuesCounter.HOURS;
     }
     
@@ -173,14 +172,12 @@ public class Core {
     }
     
     private static List<Pair<Integer, Integer>> getCumulativeIssuesList(List<GeneralIssue> listOfGeneralIssues) {
-        return new CumulativeIssuesCounter(getPeriodOfTesting(), 
-                        getStartOfTesting(listOfGeneralIssues), getEndOfTesting())
-                .prepareIssuesDataForModel(listOfGeneralIssues);
+        return new CumulativeIssuesCounter(getPeriodOfTesting()).prepareIssuesDataForModel(listOfGeneralIssues);
     }
     
     private static List<Model> runModels(List<Pair<Integer, Integer>> countedWeeksWithTotal, 
             GoodnessOfFitTest goodnessOfFitTest) throws InvalidInputException {
-        List<Model> models = ModelFactory.getModels(countedWeeksWithTotal, goodnessOfFitTest, PARSER.getCmdl());
+        List<Model> models = ModelFactory.getModels(countedWeeksWithTotal, goodnessOfFitTest, PARSER);
         for (Model model: models) {
             model.estimateModelData();
         }
@@ -198,9 +195,9 @@ public class Core {
     }
     
     private static int getLengthOfPrediction() {
-        if (PARSER.getCmdl().hasOption(ArgsParser.OPT_PREDICT)) {
+        if (PARSER.hasOptionPredict()) {
             try {
-                return Integer.parseInt(PARSER.getCmdl().getOptionValue(ArgsParser.OPT_PREDICT));
+                return Integer.parseInt(PARSER.getOptionValuePredict());
             } catch (NumberFormatException e) {
                 System.out.println("[Argument of option '-p' is not a number]");
                 System.exit(1);
@@ -212,7 +209,7 @@ public class Core {
     private static List<GeneralIssue> runProcessors(List<GeneralIssue> listOfGeneralIssues) {
         List<GeneralIssue> processedList = new ArrayList<>();
         processedList.addAll(listOfGeneralIssues);
-        List<IssuesProcessor> listOfProcessors = ProcessorFactory.getProcessors(PARSER.getCmdl());
+        List<IssuesProcessor> listOfProcessors = ProcessorFactory.getProcessors(PARSER);
         for (IssuesProcessor processor: listOfProcessors) {
             processedList = processor.process(processedList);
         }
@@ -220,7 +217,7 @@ public class Core {
     }
     
     private static void writeOutput(List<OutputData> outputDataList) throws InvalidInputException {
-        OutputWriterFactory.getIssuesWriter(PARSER.getCmdl())
+        OutputWriterFactory.getIssuesWriter(PARSER)
                 .writeOutputDataToFile(outputDataList, parsedUrlData.getRepositoryName());
     }
     
@@ -259,11 +256,9 @@ public class Core {
                     .setEstimatedIssuesPrediction(model.getIssuesPrediction(getLengthOfPrediction()))
                     .setModelName(model.toString())
                     .setModelFunction(model.getTextFormOfTheFunction())
-                    .setStartOfTesting(getStartOfTesting(listOfGeneralIssues))
-                    .setEndOfTesting(getEndOfTesting())
                     .setInitialNumberOfIssues(initialNumberOfIssues)
-                    .setFiltersUsed(FilterFactory.getFiltersRanWithInfoAsList(PARSER.getCmdl()))
-                    .setProcessorsUsed(ProcessorFactory.getProcessorsRanWithInfoAsList(PARSER.getCmdl()))
+                    .setFiltersUsed(FilterFactory.getFiltersRanWithInfoAsList(PARSER))
+                    .setProcessorsUsed(ProcessorFactory.getProcessorsRanWithInfoAsList(PARSER))
                     .setTestingPeriodsUnit(getPeriodOfTesting())
                     .setTimeBetweenDefectsUnit(getTimeBetweenIssuesUnit()).build();
             outputDataList.add(outputData);
@@ -283,18 +278,18 @@ public class Core {
 
     private static void doSaveToFileFromUrl() throws InvalidInputException {
         List<GeneralIssue> listOfInitialIssues = DATA_PROVIDER.
-                getIssuesByUrl(PARSER.getCmdl().getOptionValue(ArgsParser.OPT_URL));
+                getIssuesByUrl(PARSER.getOptionValueUrl());
         doSaveToFile(listOfInitialIssues, parsedUrlData.getRepositoryName());
     }
     
     private static void doSaveToFileFromSnapshot() throws InvalidInputException {
-        String snapshotName = PARSER.getCmdl().getOptionValue(ArgsParser.OPT_SNAPSHOT_NAME);
+        String snapshotName = PARSER.getOptionValueSnapshotName();
         doSaveToFile(DAO.getSnapshotByName(snapshotName).getListOfGeneralIssues(), snapshotName);
     }
     
     private static void doSaveToFile(List<GeneralIssue> listOfInitialIssues, String fileName) 
             throws InvalidInputException {
-        IssuesWriterFactory.getIssuesWriter(PARSER.getCmdl()).writeToFile(runFilters(listOfInitialIssues), fileName);
+        IssuesWriterFactory.getIssuesWriter(PARSER).writeToFile(runFilters(listOfInitialIssues), fileName);
     }
 
     private static void doListAllSnapshots() {

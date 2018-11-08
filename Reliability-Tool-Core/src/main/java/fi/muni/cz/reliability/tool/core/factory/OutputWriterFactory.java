@@ -5,7 +5,6 @@ import fi.muni.cz.reliability.tool.core.exception.InvalidInputException;
 import fi.muni.cz.reliability.tool.dataprocessing.output.HtmlOutputWriter;
 import fi.muni.cz.reliability.tool.dataprocessing.output.OutputWriter;
 import java.util.Arrays;
-import org.apache.commons.cli.CommandLine;
 
 /**
  * @author Radoslav Micko, 445611@muni.cz
@@ -17,26 +16,26 @@ public class OutputWriterFactory {
     /**
      * Get OutputWriter for CommandLine argument.
      * 
-     * @param cmdl  parsed CommandLine.
+     * @param parser  parsed CommandLine.
      * @return OutputWriter
      * @throws InvalidInputException if there is no sich output type.
      */
-    public static OutputWriter getIssuesWriter(CommandLine cmdl) throws InvalidInputException {
-        if (!cmdl.hasOption(ArgsParser.OPT_OUT)) {
-            return checkMultipleGraphs(cmdl);
+    public static OutputWriter getIssuesWriter(ArgsParser parser) throws InvalidInputException {
+        if (!parser.hasOptionOut()) {
+            return checkMultipleGraphs(parser);
         } else {
-            switch (cmdl.getOptionValue(ArgsParser.OPT_OUT)) {
+            switch (parser.getOptionValueOut()) {
                 case HTML:
-                    return checkMultipleGraphs(cmdl);
+                    return checkMultipleGraphs(parser);
                 default:
                     throw new InvalidInputException(Arrays.asList("No such output type: '" 
-                            + cmdl.getOptionValue(ArgsParser.OPT_OUT) + "'"));
+                            + parser.getOptionValueOut() + "'"));
             }
         }
     }
     
-    private static OutputWriter checkMultipleGraphs(CommandLine cmdl) {
-        if (cmdl.hasOption(ArgsParser.OPT_GRAPH_MULTIPLE)) {
+    private static OutputWriter checkMultipleGraphs(ArgsParser parser) {
+        if (parser.hasOptionGraphMultiple()) {
             return new HtmlOutputWriter(true);
         } else {
             return new HtmlOutputWriter(false);

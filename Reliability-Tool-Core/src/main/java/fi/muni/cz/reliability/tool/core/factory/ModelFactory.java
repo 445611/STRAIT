@@ -12,7 +12,6 @@ import fi.muni.cz.reliability.tool.models.testing.GoodnessOfFitTest;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
-import org.apache.commons.cli.CommandLine;
 import org.apache.commons.math3.util.Pair;
 
 /**
@@ -31,15 +30,15 @@ public class ModelFactory {
      * 
      * @param countedWeeksWithTotal cumulative data.
      * @param goodnessOfFitTest     goodnes-of-fit.
-     * @param cmdl                  parsed CommandLine.
+     * @param parser                parsed CommandLine.
      * @return                      list of Models.
      * @throws InvalidInputException when there is no such model from cmdl.
      */
     public static List<Model> getModels(List<Pair<Integer, Integer>> countedWeeksWithTotal,
-            GoodnessOfFitTest goodnessOfFitTest, CommandLine cmdl) throws InvalidInputException {
+            GoodnessOfFitTest goodnessOfFitTest, ArgsParser parser) throws InvalidInputException {
         List<Model> models = new ArrayList<>();
-        if (cmdl.hasOption(ArgsParser.OPT_MODELS)) {
-            for (String modelArg: cmdl.getOptionValues(ArgsParser.OPT_MODELS)) {
+        if (parser.hasOptionModels()) {
+            for (String modelArg: parser.getOptionValuesModels()) {
                 models.add(ModelFactory.getModel(countedWeeksWithTotal, goodnessOfFitTest, modelArg));
             }
         } else {

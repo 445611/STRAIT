@@ -16,7 +16,9 @@ public interface IssuesCounter {
     String HOURS = "Hours";
     String DAYS = "Days";
     String WEEKS = "Weeks";
+    String MONTHS = "Months";
     String YEARS = "Years";
+    
     
     /**
      * Prepare issues data for model.

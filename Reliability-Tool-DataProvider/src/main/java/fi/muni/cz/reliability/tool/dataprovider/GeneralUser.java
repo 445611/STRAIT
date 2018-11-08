@@ -2,23 +2,19 @@ package fi.muni.cz.reliability.tool.dataprovider;
 
 import java.io.Serializable;
 import java.util.Objects;
-import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.Table;
 
 /**
  * @author Radoslav Micko, 445611@muni.cz
  */
 @Entity
-@Table(name = "GENERALUSER")
 public class GeneralUser implements Serializable {
     
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    @Column(name = "GENERALUSER_ID")
     private Long id;
     
     private String name;

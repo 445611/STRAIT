@@ -6,7 +6,7 @@ package fi.muni.cz.reliability.tool.dataprocessing.exception;
  * @author Radoslav Micko, 445611@muni.cz
  */
 public class DataProcessingException extends RuntimeException {
-
+    
     /**
      * Constructor of <code>UtilsException</code>
      */

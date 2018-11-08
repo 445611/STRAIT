@@ -1,5 +1,6 @@
 package fi.muni.cz.reliability.tool.dataprocessing.issuesprocessing.modeldata;
 
+import fi.muni.cz.reliability.tool.dataprocessing.exception.DataProcessingException;
 import fi.muni.cz.reliability.tool.dataprovider.GeneralIssue;
 import java.util.Date;
 import java.util.LinkedList;
@@ -47,11 +48,8 @@ public class TimeBetweenIssuesCounter implements IssuesCounter {
                 case WEEKS:
                     diffInt = (int) TimeUnit.MILLISECONDS.toDays(diff)/7;
                     break;
-                case YEARS:
-                    diffInt = (int) TimeUnit.MILLISECONDS.toDays(diff)/365;
-                    break;
                 default:
-                    diffInt = (int) TimeUnit.MILLISECONDS.toSeconds(diff);
+                    throw new DataProcessingException("Wrong time unit: " + timeUnit);
             }
             timeBetweenIssuesList.add(new Pair<>(i, diffInt));
             i++;
