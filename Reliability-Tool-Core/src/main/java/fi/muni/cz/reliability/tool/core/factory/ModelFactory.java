@@ -8,6 +8,7 @@ import fi.muni.cz.reliability.tool.models.GOSShapedModelImpl;
 import fi.muni.cz.reliability.tool.models.HossainDahiyaModelImpl;
 import fi.muni.cz.reliability.tool.models.Model;
 import fi.muni.cz.reliability.tool.models.MusaOkumotoModelImpl;
+import fi.muni.cz.reliability.tool.models.NewGoModelImpl;
 import fi.muni.cz.reliability.tool.models.testing.GoodnessOfFitTest;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -60,7 +61,7 @@ public class ModelFactory {
             GoodnessOfFitTest goodnessOfFitTest, String modelArg) throws InvalidInputException {
         switch (modelArg) {
             case GOEL_OKUMOTO:
-                return new GOModelImpl(countedWeeksWithTotal, goodnessOfFitTest);
+                return new NewGoModelImpl(countedWeeksWithTotal, goodnessOfFitTest);
             case GOEL_OKEMURA_SSHAPED:
                 return new GOSShapedModelImpl(countedWeeksWithTotal, goodnessOfFitTest); 
             case MUSA_OKUMOTO:
