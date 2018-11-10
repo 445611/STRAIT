@@ -1,0 +1,265 @@
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <title>HTML Output</title>
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+
+        <link href="https://cdnjs.cloudflare.com/ajax/libs/c3/0.5.4/c3.css" rel="stylesheet">
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/d3/4.13.0/d3.min.js" charset="utf-8"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/c3/0.5.4/c3.min.js"></script>
+
+        <style>
+            .row.content {height: 100%;}
+            
+            .borders {
+                border-left: 1px solid #ddd;
+                border-right: 1px solid #ddd;
+                margin: -1px;
+            }
+            
+            .row{
+                background-color: #def2f1;
+            }
+            
+            .container-fluid{
+		background-color: #def2f1;
+            }
+            
+            .container{
+                background-color: #def2f1;
+            }
+            
+            html ,body {
+                height: 100%;
+                background-color: #3aafa9;
+            }
+
+            .testimonial-group > .row {
+                overflow-x: auto;
+                white-space: nowrap;
+            }
+            
+            h3,h1{
+                font-weight: bold; 
+            }
+            
+            .testimonial-group > .row > .col-sm-8 {
+                display: inline-block;
+                float: none;
+            }
+            
+            .sidenav {
+                background-color: #3aafa9;
+            }
+
+            hr.hrstyle {
+                border: 0;
+                height: 1px;
+                background-image: linear-gradient(to right, rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.75), rgba(0, 0, 0, 0));
+            }
+
+            .c3-circle {
+                opacity: 1 !important;
+            }
+        </style>
+    </head>
+    <body>
+        <div class="container-fluid">    
+            <div class="row text-left">
+                <div class="col-sm-2 sidenav"></div>
+                <div class="col-sm-8 text-left"> 
+                    <center><h1>black</h1></center>
+                    <p>
+                        URL = <a href="https://github.com/ambv/black">https://github.com/ambv/black</a><br>
+                        This is estimation of issues occurance for  <a href="https://github.com/ambv/black">black</a> of user ambv.<br>
+                    </p>
+                    <hr class="hrstyle">
+                    <h3>Info:</h3>
+                    <p>
+                        Estimated at <b>11.11.2018 0:32:18</b>.
+                    </p>
+                    <p>
+                        Initial number of total defects = 599<br>
+                        Total defects in repository after processing and filtering = 89<br>
+                    </p>
+                    <h3>Filters and Processors:</h3>
+                    <p> 
+                        <b>Filters:</b><br>
+                                    - FilterByLabel used, with filtering words: [bug, error, fail, fault, defect]<br>
+                        <b>Processors:</b><br>
+                                - None<br>
+                    </p>
+                    <h3>Trend test:</h3> 
+                    <p>
+                        Trend does not exist .<br>
+                        Trend = 17.461387857935186
+
+                    </p>
+                    <hr class="hrstyle">
+                    <center><h3>Time between failures</h3></center>
+                    <div id="chart0"></div>
+                    <hr class="hrstyle">
+                </div>
+                <div class="col-sm-2 sidenav"></div>
+            </div>
+        </div>
+        <div class="container-fluid testimonial-group">
+            <center><h3>Comparison of 5 models:</h3></center>
+            <div class="row text-center flex-nowrap">
+                    <div class="col-sm-6 col-md-6 col-lg-4 borders">
+                            <h3>Goel-Okemura model</h3>
+                            <p> 
+                                Model function:<br>
+                                μ(t) = a * (1 - e<html><sup>-b*t</sup></html>)<br>
+                                Estimated parameters:<br>
+                                  a = 96.50964417375842<br>
+                                  b = 0.0961097437672299<br>
+                            </p>
+                            <h3>Goodness of fit:</h3> 
+                                <p>
+                                        Chi-Square = 9.592412039287707<br>
+                                        Chi-Square significance level = 99.99773413742464%<br>
+                                        Chi-Square null hypothesis rejection = ACCEPT<br>
+                                </p>              
+                    </div>
+                    <div class="col-sm-6 col-md-6 col-lg-4 borders">
+                            <h3>Goel-Okemura S-Shaped model</h3>
+                            <p> 
+                                Model function:<br>
+                                μ(t) = a * (1 - (1 + b*t) * e<html><sup>-b*t</sup></html>)<br>
+                                Estimated parameters:<br>
+                                  a = 88.81519022504044<br>
+                                  b = 0.2540484261315294<br>
+                            </p>
+                            <h3>Goodness of fit:</h3> 
+                                <p>
+                                        Chi-Square = 101.27936046411419<br>
+                                        Chi-Square significance level = 7.33790039841864E-7%<br>
+                                        Chi-Square null hypothesis rejection = REJECT<br>
+                                </p>              
+                    </div>
+                    <div class="col-sm-6 col-md-6 col-lg-4 borders">
+                            <h3>Musa-Okumoto model</h3>
+                            <p> 
+                                Model function:<br>
+                                μ(t) = α * ln(β * t + 1)<br>
+                                Estimated parameters:<br>
+                                  α = 39.82344196656084<br>
+                                  β = 0.440112536858754<br>
+                            </p>
+                            <h3>Goodness of fit:</h3> 
+                                <p>
+                                        Chi-Square = 5.912918834904764<br>
+                                        Chi-Square significance level = 99.99999572878234%<br>
+                                        Chi-Square null hypothesis rejection = ACCEPT<br>
+                                </p>              
+                    </div>
+                    <div class="col-sm-6 col-md-6 col-lg-4 borders">
+                            <h3>Duane model</h3>
+                            <p> 
+                                Model function:<br>
+                                μ(t) = α * t<html><sup>β</sup></html><br>
+                                Estimated parameters:<br>
+                                  α = 19.875047270378282<br>
+                                  β = 0.5180095838976602<br>
+                            </p>
+                            <h3>Goodness of fit:</h3> 
+                                <p>
+                                        Chi-Square = 9.533962509169337<br>
+                                        Chi-Square significance level = 99.9978953532059%<br>
+                                        Chi-Square null hypothesis rejection = ACCEPT<br>
+                                </p>              
+                    </div>
+                    <div class="col-sm-6 col-md-6 col-lg-4 borders">
+                            <h3>Hossain-Dahiya model</h3>
+                            <p> 
+                                Model function:<br>
+                                μ(t) = a * (1 - e<html><sup>-b*t</sup></html>) / (1 + c*e<html><sup>-b*t</sup></html>)<br>
+                                Estimated parameters:<br>
+                                  a = 89.70552571202616<br>
+                                  b = 0.2021889844686912<br>
+                                  c = 4.820910132562213<br>
+                            </p>
+                            <h3>Goodness of fit:</h3> 
+                                <p>
+                                        Chi-Square = 115.5891521487979<br>
+                                        Chi-Square significance level = 4.229505634611996E-9%<br>
+                                        Chi-Square null hypothesis rejection = REJECT<br>
+                                </p>              
+                    </div>
+            </div>
+        </div>
+        <div class="container-fluid">    
+            <div class="row">
+                <div class="col">
+                    <hr class="hrstyle">    
+                    <center><h3>Failure occurance</h3></center>
+                    <div id="chart1"></div>
+                </div>
+            </div>
+        </div>
+        
+        
+        <script>
+            var chart0 = c3.generate({
+                bindto: '#chart0',
+                data: {
+                  columns: [
+                    ['Time between failures', 0,0,0,12,0,0,0,11,0,30,35,60,5,3,0,8,14,0,1,0,4,42,19,34,100,96,32,0,71,48,35,1,71,11,3,44,14,72,31,106,15,89,30,131,215,44,6,17,9,13,4,0,118,1,22,30,35,1,30,93,67,18,32,22,11,0,34,44,199,0,185,43,112,104,227,92,12,102,276,169,37,87,270,45,158,509,268,60,56,],
+                  ],
+                  type: 'scatter',
+                  colors: {
+                      'Time between failures': '#ff4444'
+                  }
+                },
+                axis: {
+                    x: {
+                        label: {
+                            text: 'Failures',
+                            position: 'outer-center'
+                        }
+                    },
+                    y: {
+                        label: {
+                            text: 'Time between failures (Hours)',
+                            position: 'outer-middle'
+                        }
+                    }
+                }
+            });        
+            var chart1 = c3.generate({
+                bindto: '#chart1',
+                size: {
+                        height: 500
+                },
+                data: {
+                  columns: [
+                    ['Real issues', 11,24,25,30,36,39,42,44,44,52,58,60,67,68,70,72,74,74,77,78,78,79,82,82,84,85,85,85,86,86,88,89,89,89,],
+                        ['Goel-Okemura model', 8,16,24,30,36,42,47,51,55,59,62,66,68,71,73,75,77,79,80,82,83,84,85,86,87,88,89,89,90,91,91,92,92,92,],
+                        ['Goel-Okemura S-Shaped model', 2,8,15,23,32,39,47,53,59,64,68,71,74,77,79,81,82,83,84,85,86,86,87,87,87,87,88,88,88,88,88,88,88,88,],
+                        ['Musa-Okumoto model', 14,25,33,40,46,51,56,60,63,67,70,73,75,78,80,83,85,87,89,90,92,94,95,97,98,100,101,103,104,105,106,108,109,110,],
+                        ['Duane model', 19,28,35,40,45,50,54,58,62,65,68,72,75,77,80,83,86,88,91,93,96,98,100,103,105,107,109,111,113,115,117,119,121,123,],
+                        ['Hossain-Dahiya model', 3,7,11,15,20,25,31,36,42,47,52,57,61,65,69,72,75,77,79,81,82,83,84,85,86,87,87,87,88,88,88,88,89,89,],
+                  ]
+                },
+                axis: {
+                    x: {
+                        label: {
+                            text: 'Testing periods (Weeks)',
+                            position: 'outer-center'
+                        }
+                    },
+                    y: {
+                        label: {
+                            text: 'Total failures',
+                            position: 'outer-middle'
+                        }
+                    }
+                }
+            });   
+        </script>
+    </body>
+</html>

@@ -260,10 +260,22 @@ public class Core {
                     .setFiltersUsed(FilterFactory.getFiltersRanWithInfoAsList(PARSER))
                     .setProcessorsUsed(ProcessorFactory.getProcessorsRanWithInfoAsList(PARSER))
                     .setTestingPeriodsUnit(getPeriodOfTesting())
-                    .setTimeBetweenDefectsUnit(getTimeBetweenIssuesUnit()).build();
+                    .setTimeBetweenDefectsUnit(getTimeBetweenIssuesUnit())
+                    .setSolver(getSolver()).build();
             outputDataList.add(outputData);
         }
         return outputDataList;
+    }
+    
+    private static String getSolver() {
+        if (PARSER.hasOptionSolver()) {
+            if (PARSER.getOptionValueSolver().equals(ModelFactory.SOLVER_LEAST_SQUARES)) {
+                return "Least Squares";
+            } else if (PARSER.getOptionValueSolver().equals(ModelFactory.SOLVER_MAXIMUM_LIKELIHOOD)) {
+                return "Maximum Likelihood";
+            }
+        }
+        return "Least Squares";
     }
     
     private static void doEvaluate(List<GeneralIssue> listOfGeneralIssues) throws InvalidInputException { 

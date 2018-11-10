@@ -95,6 +95,7 @@
                     <#list data.modelParameters as key, value> 
                       ${key} = ${value?c}<br>
                     </#list>
+                    Estimated by ${data.solver}.
                 </p>
                 <#if data.goodnessOfFit??>
                     <h3>Goodness of fit:</h3>

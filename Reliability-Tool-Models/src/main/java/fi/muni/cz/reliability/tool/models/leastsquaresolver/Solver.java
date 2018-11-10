@@ -6,7 +6,7 @@ import org.apache.commons.math3.util.Pair;
 /**
  * @author Radoslav Micko, 445611@muni.cz
  */
-public interface LeastSquaresSolver {
+public interface Solver {
     
     /**
      * Optimize array of start parameters to approximate function to fit <code>listOfData</code>
@@ -16,5 +16,5 @@ public interface LeastSquaresSolver {
      * @param listOfData list of data to fit function for
      * @return  array of optimized parameters
      */
-    double[] optimize(double[] startParameters, List<Pair<Integer, Integer>> listOfData);
+    double[] optimize(int[] startParameters, List<Pair<Integer, Integer>> listOfData);
 }

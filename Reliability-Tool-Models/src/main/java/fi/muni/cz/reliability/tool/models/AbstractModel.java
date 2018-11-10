@@ -1,9 +1,7 @@
 package fi.muni.cz.reliability.tool.models;
 
 import fi.muni.cz.reliability.tool.models.testing.GoodnessOfFitTest;
-import fi.muni.cz.reliability.tool.models.leastsquaresolver.Function;
-import fi.muni.cz.reliability.tool.models.leastsquaresolver.LeastSquaresOptimization;
-import fi.muni.cz.reliability.tool.models.leastsquaresolver.LeastSquaresOptimizationImpl;
+import fi.muni.cz.reliability.tool.models.leastsquaresolver.Solver;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
@@ -17,19 +15,21 @@ public abstract class AbstractModel implements Model {
     protected Map<String, Double> modelParameters;
     protected final List<Pair<Integer, Integer>> listOfIssues;
     protected Map<String, String> goodnessOfFit;
-    
     protected final GoodnessOfFitTest goodnessOfFitTest;
-
+    protected final Solver solver;
+    
     /**
      * Initialize model attributes.
      * 
      * @param listOfIssues          list of issues.
      * @param goodnessOfFitTest     Goodness of fit test to execute.
+     * @param solver                Solver to estimate model parameters.
      */
     public AbstractModel(List<Pair<Integer, Integer>> listOfIssues, 
-            GoodnessOfFitTest goodnessOfFitTest) {
+            GoodnessOfFitTest goodnessOfFitTest, Solver solver) {
         this.listOfIssues = listOfIssues;
         this.goodnessOfFitTest = goodnessOfFitTest;
+        this.solver = solver;
     }
     
     @Override
@@ -37,16 +37,17 @@ public abstract class AbstractModel implements Model {
         calculateModelParameters();
         calculateModelGoodnessOfFit();
     }
-    
-    @Override
+
+        @Override
     public List<Pair<Integer, Integer>> getIssuesPrediction(double howMuchToPredict) {
         return calculateEstimatedIssuesOccurance(howMuchToPredict);
     }
     
-    private void calculateModelParameters() {
-        Function function = getModelFunction();
-        LeastSquaresOptimization optimization = new LeastSquaresOptimizationImpl();
-        setParametersToMap(optimization.optimizer(getInitialParametersValue(), listOfIssues, function));
+    /**
+     * Calculate model parameters.
+     */
+    protected void calculateModelParameters() {
+        setParametersToMap(solver.optimize(getInitialParametersValue(), listOfIssues));
     }
     
     private void calculateModelGoodnessOfFit() {
@@ -77,13 +78,6 @@ public abstract class AbstractModel implements Model {
     }
     
     /**
-     * Get initial estimation of model parameters.
-     * 
-     * @return initial parameters.
-     */
-    protected abstract double[] getInitialParametersValue();
-    
-    /**
      * Get function value fo testPeriod. 
      * 
      * @param testPeriod    i-th test period.
@@ -99,11 +93,11 @@ public abstract class AbstractModel implements Model {
     protected abstract void setParametersToMap(double[] params);
     
     /**
-     * Get specific model function.
+     * Get initial estimation of model parameters.
      * 
-     * @return model function.
+     * @return initial parameters.
      */
-    protected abstract Function getModelFunction();
+    protected abstract int[] getInitialParametersValue();
     
     @Override
     public Map<String, String> getGoodnessOfFitData() {

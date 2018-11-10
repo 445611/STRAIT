@@ -32,6 +32,7 @@ public class OutputData implements Serializable {
     private String testingPeriodsUnit;
     private List<String> filtersUsed;
     private List<String> processorsUsed;
+    private String solver;
 
     /**
      * Default constructor.
@@ -59,8 +60,19 @@ public class OutputData implements Serializable {
         this.testingPeriodsUnit = builder.testingPeriodsUnit;
         this.filtersUsed = builder.filtersUsed;
         this.processorsUsed = builder.processorsUsed;
+        this.solver = builder.solver;
     }
 
+    public String getSolver() {
+        return solver;
+    }
+
+    public void setSolver(String solver) {
+        this.solver = solver;
+    }
+
+    
+    
     public String getTimeBetweenDefectsUnit() {
         return timeBetweenDefectsUnit;
     }
@@ -274,7 +286,19 @@ public class OutputData implements Serializable {
         private String testingPeriodsUnit;
         private List<String> filtersUsed;
         private List<String> processorsUsed;
-
+        private String solver;
+        
+        /**
+         * Set solver of models parameters.
+         * 
+         * @param solver models parameters.
+         * @return this builder, to allow method chaining.
+         */
+        public OutputDataBuilder setSolver(String solver) {
+            this.solver = solver;
+            return this;
+        }
+        
         /**
          * Set url of repository.
          * 

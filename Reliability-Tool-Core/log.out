@@ -5,102 +5,102 @@ Dozer JMX MBean [org.dozer.jmx:type=DozerStatisticsController] auto registered w
 Dozer JMX MBean [org.dozer.jmx:type=DozerAdminController] auto registered with the Platform MBean Server
 Initializing a new instance of dozer bean mapper.
 Logging Provider: org.jboss.logging.Log4jLoggerProvider
-Adding type registration boolean -> org.hibernate.type.BooleanType@4445629
-Adding type registration boolean -> org.hibernate.type.BooleanType@4445629
-Adding type registration java.lang.Boolean -> org.hibernate.type.BooleanType@4445629
-Adding type registration numeric_boolean -> org.hibernate.type.NumericBooleanType@318ba8c8
-Adding type registration true_false -> org.hibernate.type.TrueFalseType@56de5251
-Adding type registration yes_no -> org.hibernate.type.YesNoType@5276e6b0
-Adding type registration byte -> org.hibernate.type.ByteType@1677d1
-Adding type registration byte -> org.hibernate.type.ByteType@1677d1
-Adding type registration java.lang.Byte -> org.hibernate.type.ByteType@1677d1
-Adding type registration character -> org.hibernate.type.CharacterType@4313f5bc
-Adding type registration char -> org.hibernate.type.CharacterType@4313f5bc
-Adding type registration java.lang.Character -> org.hibernate.type.CharacterType@4313f5bc
-Adding type registration short -> org.hibernate.type.ShortType@5ccddd20
-Adding type registration short -> org.hibernate.type.ShortType@5ccddd20
-Adding type registration java.lang.Short -> org.hibernate.type.ShortType@5ccddd20
-Adding type registration integer -> org.hibernate.type.IntegerType@20d28811
-Adding type registration int -> org.hibernate.type.IntegerType@20d28811
-Adding type registration java.lang.Integer -> org.hibernate.type.IntegerType@20d28811
-Adding type registration long -> org.hibernate.type.LongType@4ddced80
-Adding type registration long -> org.hibernate.type.LongType@4ddced80
-Adding type registration java.lang.Long -> org.hibernate.type.LongType@4ddced80
-Adding type registration float -> org.hibernate.type.FloatType@1184ab05
-Adding type registration float -> org.hibernate.type.FloatType@1184ab05
-Adding type registration java.lang.Float -> org.hibernate.type.FloatType@1184ab05
-Adding type registration double -> org.hibernate.type.DoubleType@1c93084c
-Adding type registration double -> org.hibernate.type.DoubleType@1c93084c
-Adding type registration java.lang.Double -> org.hibernate.type.DoubleType@1c93084c
-Adding type registration big_decimal -> org.hibernate.type.BigDecimalType@2473d930
-Adding type registration java.math.BigDecimal -> org.hibernate.type.BigDecimalType@2473d930
-Adding type registration big_integer -> org.hibernate.type.BigIntegerType@be64738
-Adding type registration java.math.BigInteger -> org.hibernate.type.BigIntegerType@be64738
-Adding type registration string -> org.hibernate.type.StringType@3c419631
-Adding type registration java.lang.String -> org.hibernate.type.StringType@3c419631
-Adding type registration nstring -> org.hibernate.type.StringNVarcharType@63021689
-Adding type registration ncharacter -> org.hibernate.type.CharacterNCharType@17046283
-Adding type registration url -> org.hibernate.type.UrlType@4b0b0854
-Adding type registration java.net.URL -> org.hibernate.type.UrlType@4b0b0854
-Adding type registration date -> org.hibernate.type.DateType@7e0b85f9
-Adding type registration java.sql.Date -> org.hibernate.type.DateType@7e0b85f9
-Adding type registration time -> org.hibernate.type.TimeType@5c30a9b0
-Adding type registration java.sql.Time -> org.hibernate.type.TimeType@5c30a9b0
-Adding type registration timestamp -> org.hibernate.type.TimestampType@31368b99
-Adding type registration java.sql.Timestamp -> org.hibernate.type.TimestampType@31368b99
-Adding type registration java.util.Date -> org.hibernate.type.TimestampType@31368b99
-Adding type registration dbtimestamp -> org.hibernate.type.DbTimestampType@4facf68f
-Adding type registration calendar -> org.hibernate.type.CalendarType@39529185
-Adding type registration java.util.Calendar -> org.hibernate.type.CalendarType@39529185
-Adding type registration java.util.GregorianCalendar -> org.hibernate.type.CalendarType@39529185
-Adding type registration calendar_date -> org.hibernate.type.CalendarDateType@27ce24aa
-Adding type registration locale -> org.hibernate.type.LocaleType@41fbdac4
-Adding type registration java.util.Locale -> org.hibernate.type.LocaleType@41fbdac4
-Adding type registration currency -> org.hibernate.type.CurrencyType@708f5957
-Adding type registration java.util.Currency -> org.hibernate.type.CurrencyType@708f5957
-Adding type registration timezone -> org.hibernate.type.TimeZoneType@50eac852
-Adding type registration java.util.TimeZone -> org.hibernate.type.TimeZoneType@50eac852
-Adding type registration class -> org.hibernate.type.ClassType@7193666c
-Adding type registration java.lang.Class -> org.hibernate.type.ClassType@7193666c
-Adding type registration uuid-binary -> org.hibernate.type.UUIDBinaryType@6973b51b
-Adding type registration java.util.UUID -> org.hibernate.type.UUIDBinaryType@6973b51b
-Adding type registration uuid-char -> org.hibernate.type.UUIDCharType@479d31f3
-Adding type registration pg-uuid -> org.hibernate.type.PostgresUUIDType@f5ac9e4
-Adding type registration binary -> org.hibernate.type.BinaryType@4d9e68d0
-Adding type registration byte[] -> org.hibernate.type.BinaryType@4d9e68d0
-Adding type registration [B -> org.hibernate.type.BinaryType@4d9e68d0
-Adding type registration wrapper-binary -> org.hibernate.type.WrapperBinaryType@15ff3e9e
-Adding type registration Byte[] -> org.hibernate.type.WrapperBinaryType@15ff3e9e
-Adding type registration [Ljava.lang.Byte; -> org.hibernate.type.WrapperBinaryType@15ff3e9e
-Adding type registration image -> org.hibernate.type.ImageType@71809907
-Adding type registration characters -> org.hibernate.type.CharArrayType@3bb9a3ff
-Adding type registration char[] -> org.hibernate.type.CharArrayType@3bb9a3ff
-Adding type registration [C -> org.hibernate.type.CharArrayType@3bb9a3ff
-Adding type registration wrapper-characters -> org.hibernate.type.CharacterArrayType@5ffead27
-Adding type registration [Ljava.lang.Character; -> org.hibernate.type.CharacterArrayType@5ffead27
-Adding type registration Character[] -> org.hibernate.type.CharacterArrayType@5ffead27
-Adding type registration text -> org.hibernate.type.TextType@a514af7
-Adding type registration ntext -> org.hibernate.type.NTextType@4a94ee4
-Adding type registration blob -> org.hibernate.type.BlobType@7e07db1f
-Adding type registration java.sql.Blob -> org.hibernate.type.BlobType@7e07db1f
-Adding type registration materialized_blob -> org.hibernate.type.MaterializedBlobType@16d04d3d
-Adding type registration clob -> org.hibernate.type.ClobType@5b8dfcc1
-Adding type registration java.sql.Clob -> org.hibernate.type.ClobType@5b8dfcc1
-Adding type registration nclob -> org.hibernate.type.NClobType@145f66e3
-Adding type registration java.sql.NClob -> org.hibernate.type.NClobType@145f66e3
-Adding type registration materialized_clob -> org.hibernate.type.MaterializedClobType@2a65fe7c
-Adding type registration materialized_nclob -> org.hibernate.type.MaterializedNClobType@34a3d150
-Adding type registration serializable -> org.hibernate.type.SerializableType@4d5d943d
-Adding type registration object -> org.hibernate.type.ObjectType@73a1e9a9
-Adding type registration java.lang.Object -> org.hibernate.type.ObjectType@73a1e9a9
-Adding type registration imm_date -> org.hibernate.type.AdaptedImmutableType@34123d65
-Adding type registration imm_time -> org.hibernate.type.AdaptedImmutableType@59474f18
-Adding type registration imm_timestamp -> org.hibernate.type.AdaptedImmutableType@65fb9ffc
-Adding type registration imm_dbtimestamp -> org.hibernate.type.AdaptedImmutableType@3e694b3f
-Adding type registration imm_calendar -> org.hibernate.type.AdaptedImmutableType@1bb5a082
-Adding type registration imm_calendar_date -> org.hibernate.type.AdaptedImmutableType@78691363
-Adding type registration imm_binary -> org.hibernate.type.AdaptedImmutableType@41d477ed
-Adding type registration imm_serializable -> org.hibernate.type.AdaptedImmutableType@3590fc5b
+Adding type registration boolean -> org.hibernate.type.BooleanType@66d2e7d9
+Adding type registration boolean -> org.hibernate.type.BooleanType@66d2e7d9
+Adding type registration java.lang.Boolean -> org.hibernate.type.BooleanType@66d2e7d9
+Adding type registration numeric_boolean -> org.hibernate.type.NumericBooleanType@7c0e2abd
+Adding type registration true_false -> org.hibernate.type.TrueFalseType@7ac7a4e4
+Adding type registration yes_no -> org.hibernate.type.YesNoType@5f375618
+Adding type registration byte -> org.hibernate.type.ByteType@5d5eef3d
+Adding type registration byte -> org.hibernate.type.ByteType@5d5eef3d
+Adding type registration java.lang.Byte -> org.hibernate.type.ByteType@5d5eef3d
+Adding type registration character -> org.hibernate.type.CharacterType@643b1d11
+Adding type registration char -> org.hibernate.type.CharacterType@643b1d11
+Adding type registration java.lang.Character -> org.hibernate.type.CharacterType@643b1d11
+Adding type registration short -> org.hibernate.type.ShortType@51081592
+Adding type registration short -> org.hibernate.type.ShortType@51081592
+Adding type registration java.lang.Short -> org.hibernate.type.ShortType@51081592
+Adding type registration integer -> org.hibernate.type.IntegerType@58651fd0
+Adding type registration int -> org.hibernate.type.IntegerType@58651fd0
+Adding type registration java.lang.Integer -> org.hibernate.type.IntegerType@58651fd0
+Adding type registration long -> org.hibernate.type.LongType@1753acfe
+Adding type registration long -> org.hibernate.type.LongType@1753acfe
+Adding type registration java.lang.Long -> org.hibernate.type.LongType@1753acfe
+Adding type registration float -> org.hibernate.type.FloatType@482f8f11
+Adding type registration float -> org.hibernate.type.FloatType@482f8f11
+Adding type registration java.lang.Float -> org.hibernate.type.FloatType@482f8f11
+Adding type registration double -> org.hibernate.type.DoubleType@39aeed2f
+Adding type registration double -> org.hibernate.type.DoubleType@39aeed2f
+Adding type registration java.lang.Double -> org.hibernate.type.DoubleType@39aeed2f
+Adding type registration big_decimal -> org.hibernate.type.BigDecimalType@18be83e4
+Adding type registration java.math.BigDecimal -> org.hibernate.type.BigDecimalType@18be83e4
+Adding type registration big_integer -> org.hibernate.type.BigIntegerType@1d057a39
+Adding type registration java.math.BigInteger -> org.hibernate.type.BigIntegerType@1d057a39
+Adding type registration string -> org.hibernate.type.StringType@46d56d67
+Adding type registration java.lang.String -> org.hibernate.type.StringType@46d56d67
+Adding type registration nstring -> org.hibernate.type.StringNVarcharType@523884b2
+Adding type registration ncharacter -> org.hibernate.type.CharacterNCharType@5e5792a0
+Adding type registration url -> org.hibernate.type.UrlType@27efef64
+Adding type registration java.net.URL -> org.hibernate.type.UrlType@27efef64
+Adding type registration date -> org.hibernate.type.DateType@1bce4f0a
+Adding type registration java.sql.Date -> org.hibernate.type.DateType@1bce4f0a
+Adding type registration time -> org.hibernate.type.TimeType@6a41eaa2
+Adding type registration java.sql.Time -> org.hibernate.type.TimeType@6a41eaa2
+Adding type registration timestamp -> org.hibernate.type.TimestampType@39c0f4a
+Adding type registration java.sql.Timestamp -> org.hibernate.type.TimestampType@39c0f4a
+Adding type registration java.util.Date -> org.hibernate.type.TimestampType@39c0f4a
+Adding type registration dbtimestamp -> org.hibernate.type.DbTimestampType@57baeedf
+Adding type registration calendar -> org.hibernate.type.CalendarType@4667ae56
+Adding type registration java.util.Calendar -> org.hibernate.type.CalendarType@4667ae56
+Adding type registration java.util.GregorianCalendar -> org.hibernate.type.CalendarType@4667ae56
+Adding type registration calendar_date -> org.hibernate.type.CalendarDateType@e25b2fe
+Adding type registration locale -> org.hibernate.type.LocaleType@f6c48ac
+Adding type registration java.util.Locale -> org.hibernate.type.LocaleType@f6c48ac
+Adding type registration currency -> org.hibernate.type.CurrencyType@598067a5
+Adding type registration java.util.Currency -> org.hibernate.type.CurrencyType@598067a5
+Adding type registration timezone -> org.hibernate.type.TimeZoneType@271053e1
+Adding type registration java.util.TimeZone -> org.hibernate.type.TimeZoneType@271053e1
+Adding type registration class -> org.hibernate.type.ClassType@59ec2012
+Adding type registration java.lang.Class -> org.hibernate.type.ClassType@59ec2012
+Adding type registration uuid-binary -> org.hibernate.type.UUIDBinaryType@e45f292
+Adding type registration java.util.UUID -> org.hibernate.type.UUIDBinaryType@e45f292
+Adding type registration uuid-char -> org.hibernate.type.UUIDCharType@3f49dace
+Adding type registration pg-uuid -> org.hibernate.type.PostgresUUIDType@72d818d1
+Adding type registration binary -> org.hibernate.type.BinaryType@cb644e
+Adding type registration byte[] -> org.hibernate.type.BinaryType@cb644e
+Adding type registration [B -> org.hibernate.type.BinaryType@cb644e
+Adding type registration wrapper-binary -> org.hibernate.type.WrapperBinaryType@25bbe1b6
+Adding type registration Byte[] -> org.hibernate.type.WrapperBinaryType@25bbe1b6
+Adding type registration [Ljava.lang.Byte; -> org.hibernate.type.WrapperBinaryType@25bbe1b6
+Adding type registration image -> org.hibernate.type.ImageType@73846619
+Adding type registration characters -> org.hibernate.type.CharArrayType@2d928643
+Adding type registration char[] -> org.hibernate.type.CharArrayType@2d928643
+Adding type registration [C -> org.hibernate.type.CharArrayType@2d928643
+Adding type registration wrapper-characters -> org.hibernate.type.CharacterArrayType@64bf3bbf
+Adding type registration [Ljava.lang.Character; -> org.hibernate.type.CharacterArrayType@64bf3bbf
+Adding type registration Character[] -> org.hibernate.type.CharacterArrayType@64bf3bbf
+Adding type registration text -> org.hibernate.type.TextType@6e1ec318
+Adding type registration ntext -> org.hibernate.type.NTextType@2038ae61
+Adding type registration blob -> org.hibernate.type.BlobType@13a5fe33
+Adding type registration java.sql.Blob -> org.hibernate.type.BlobType@13a5fe33
+Adding type registration materialized_blob -> org.hibernate.type.MaterializedBlobType@5f9d02cb
+Adding type registration clob -> org.hibernate.type.ClobType@6325a3ee
+Adding type registration java.sql.Clob -> org.hibernate.type.ClobType@6325a3ee
+Adding type registration nclob -> org.hibernate.type.NClobType@2b552920
+Adding type registration java.sql.NClob -> org.hibernate.type.NClobType@2b552920
+Adding type registration materialized_clob -> org.hibernate.type.MaterializedClobType@578486a3
+Adding type registration materialized_nclob -> org.hibernate.type.MaterializedNClobType@1dfe2924
+Adding type registration serializable -> org.hibernate.type.SerializableType@32709393
+Adding type registration object -> org.hibernate.type.ObjectType@1efed156
+Adding type registration java.lang.Object -> org.hibernate.type.ObjectType@1efed156
+Adding type registration imm_date -> org.hibernate.type.AdaptedImmutableType@a7e666
+Adding type registration imm_time -> org.hibernate.type.AdaptedImmutableType@68bbe345
+Adding type registration imm_timestamp -> org.hibernate.type.AdaptedImmutableType@30b8a058
+Adding type registration imm_dbtimestamp -> org.hibernate.type.AdaptedImmutableType@7494e528
+Adding type registration imm_calendar -> org.hibernate.type.AdaptedImmutableType@4bbfb90a
+Adding type registration imm_calendar_date -> org.hibernate.type.AdaptedImmutableType@7c29daf3
+Adding type registration imm_binary -> org.hibernate.type.AdaptedImmutableType@9660f4e
+Adding type registration imm_serializable -> org.hibernate.type.AdaptedImmutableType@5a8806ef
 HCANN000001: Hibernate Commons Annotations {4.0.5.Final}
 HHH000412: Hibernate Core {4.3.11.Final}
 HHH000206: hibernate.properties not found
@@ -139,7 +139,7 @@ Session-factory config [null] named class [fi.muni.cz.reliability.tool.dataprovi
 Session-factory config [null] named class [fi.muni.cz.reliability.tool.dataprovider.GeneralMilestone] for mapping
 HHH000041: Configured SessionFactory: null
 Properties: {hibernate.connection.password=tool123, java.runtime.name=Java(TM) SE Runtime Environment, sun.boot.library.path=C:\Program Files\Java\jdk1.8.0_171\jre\bin, java.vm.version=25.171-b11, hibernate.connection.username=tool, java.vm.vendor=Oracle Corporation, java.vendor.url=http://java.oracle.com/, path.separator=;, java.vm.name=Java HotSpot(TM) 64-Bit Server VM, file.encoding.pkg=sun.io, user.script=, user.country=SK, sun.java.launcher=SUN_STANDARD, sun.os.patch.level=, java.vm.specification.name=Java Virtual Machine Specification, user.dir=C:\Users\rados\Desktop\TOOL\RT-withR\Reliability-Tool\Reliability-Tool-Core, java.runtime.version=1.8.0_171-b11, java.awt.graphicsenv=sun.awt.Win32GraphicsEnvironment, hbm2ddl.auto=update, java.endorsed.dirs=C:\Program Files\Java\jdk1.8.0_171\jre\lib\endorsed, os.arch=amd64, java.io.tmpdir=C:\Users\rados\AppData\Local\Temp\, line.separator=
-, java.vm.specification.vendor=Oracle Corporation, user.variant=, os.name=Windows 10, sun.jnu.encoding=Cp1250, java.library.path=C:\Program Files\Java\jdk1.8.0_171\bin;C:\WINDOWS\Sun\Java\bin;C:\WINDOWS\system32;C:\WINDOWS;C:\Program Files (x86)\Common Files\Oracle\Java\javapath;c:\program files\nvidia gpu computing toolkit\cuda\v9.0\bin;c:\program files\nvidia gpu computing toolkit\cuda\v9.0\libnvvp;c:\windows\system32;c:\windows;c:\windows\system32\wbem;c:\windows\system32\windowspowershell\v1.0\;c:\program files\openvpn\bin;C:\Program Files\Java\jdk1.8.0_171\bin;c:\program files\apache-maven-3.5.0\bin;d:\git\cmd;c:\program files\putty\;C:\Program Files (x86)\NVIDIA Corporation\PhysX\Common;C:\WINDOWS\system32;C:\WINDOWS;C:\WINDOWS\System32\Wbem;C:\WINDOWS\System32\WindowsPowerShell\v1.0\;C:\WINDOWS\System32\OpenSSH\;D:\R-3.5.1\bin\x64;D:\R-3.5.1\library\rJava\libs\x64;D:\R-3.5.1\library\rJava\jri\x64;C:\Users\rados\AppData\Local\Microsoft\WindowsApps;C:\Users\rados\AppData\Local\GitHubDesktop\bin;%USERPROFILE%\AppData\Local\Microsoft\WindowsApps;;., java.specification.name=Java Platform API Specification, java.class.version=52.0, sun.management.compiler=HotSpot 64-Bit Tiered Compilers, os.version=10.0, connection.password=tool123, user.home=C:\Users\rados, user.timezone=Europe/Prague, connection.username=tool, java.awt.printerjob=sun.awt.windows.WPrinterJob, file.encoding=Cp1250, java.specification.version=1.8, hibernate.connection.driver_class=org.apache.derby.jdbc.EmbeddedDriver, show_sql=false, java.class.path=C:\Users\rados\Desktop\TOOL\RT-withR\Reliability-Tool\Reliability-Tool-Core\target\classes;C:\Users\rados\Desktop\TOOL\RT-withR\Reliability-Tool\Reliability-Tool-DataProvider\target\classes;C:\Users\rados\.m2\repository\org\eclipse\mylyn\github\org.eclipse.egit.github.core\2.1.5\org.eclipse.egit.github.core-2.1.5.jar;C:\Users\rados\.m2\repository\com\google\code\gson\gson\2.2.2\gson-2.2.2.jar;C:\Users\rados\.m2\repository\net\sf\dozer\dozer\5.5.1\dozer-5.5.1.jar;C:\Users\rados\.m2\repository\commons-beanutils\commons-beanutils\1.9.1\commons-beanutils-1.9.1.jar;C:\Users\rados\.m2\repository\commons-collections\commons-collections\3.2.1\commons-collections-3.2.1.jar;C:\Users\rados\.m2\repository\org\apache\commons\commons-lang3\3.2.1\commons-lang3-3.2.1.jar;C:\Users\rados\.m2\repository\org\slf4j\jcl-over-slf4j\1.7.5\jcl-over-slf4j-1.7.5.jar;C:\Users\rados\.m2\repository\org\springframework\spring-beans\4.3.11.RELEASE\spring-beans-4.3.11.RELEASE.jar;C:\Users\rados\.m2\repository\org\springframework\spring-core\4.3.11.RELEASE\spring-core-4.3.11.RELEASE.jar;C:\Users\rados\.m2\repository\commons-logging\commons-logging\1.2\commons-logging-1.2.jar;C:\Users\rados\.m2\repository\org\springframework\spring-context\4.3.11.RELEASE\spring-context-4.3.11.RELEASE.jar;C:\Users\rados\.m2\repository\org\springframework\spring-aop\4.3.11.RELEASE\spring-aop-4.3.11.RELEASE.jar;C:\Users\rados\.m2\repository\org\springframework\spring-expression\4.3.11.RELEASE\spring-expression-4.3.11.RELEASE.jar;C:\Users\rados\.m2\repository\org\springframework\spring-test\4.3.11.RELEASE\spring-test-4.3.11.RELEASE.jar;C:\Users\rados\.m2\repository\org\hibernate\javax\persistence\hibernate-jpa-2.1-api\1.0.0.Final\hibernate-jpa-2.1-api-1.0.0.Final.jar;C:\Users\rados\.m2\repository\javax\validation\validation-api\2.0.0.Final\validation-api-2.0.0.Final.jar;C:\Users\rados\.m2\repository\org\apache\commons\commons-math3\3.6.1\commons-math3-3.6.1.jar;C:\Users\rados\Desktop\TOOL\RT-withR\Reliability-Tool\Reliability-Tool-DataProcessing\target\classes;C:\Users\rados\.m2\repository\org\hibernate\hibernate-entitymanager\4.3.11.Final\hibernate-entitymanager-4.3.11.Final.jar;C:\Users\rados\.m2\repository\org\jboss\logging\jboss-logging\3.1.3.GA\jboss-logging-3.1.3.GA.jar;C:\Users\rados\.m2\repository\org\jboss\logging\jboss-logging-annotations\1.2.0.Beta1\jboss-logging-annotations-1.2.0.Beta1.jar;C:\Users\rados\.m2\repository\org\hibernate\hibernate-core\4.3.11.Final\hibernate-core-4.3.11.Final.jar;C:\Users\rados\.m2\repository\antlr\antlr\2.7.7\antlr-2.7.7.jar;C:\Users\rados\.m2\repository\org\jboss\jandex\1.1.0.Final\jandex-1.1.0.Final.jar;C:\Users\rados\.m2\repository\dom4j\dom4j\1.6.1\dom4j-1.6.1.jar;C:\Users\rados\.m2\repository\xml-apis\xml-apis\1.0.b2\xml-apis-1.0.b2.jar;C:\Users\rados\.m2\repository\org\hibernate\common\hibernate-commons-annotations\4.0.5.Final\hibernate-commons-annotations-4.0.5.Final.jar;C:\Users\rados\.m2\repository\org\jboss\spec\javax\transaction\jboss-transaction-api_1.2_spec\1.0.0.Final\jboss-transaction-api_1.2_spec-1.0.0.Final.jar;C:\Users\rados\.m2\repository\org\javassist\javassist\3.18.1-GA\javassist-3.18.1-GA.jar;C:\Users\rados\.m2\repository\org\apache\derby\derby\10.14.1.0\derby-10.14.1.0.jar;C:\Users\rados\.m2\repository\org\freemarker\freemarker\2.3.28\freemarker-2.3.28.jar;C:\Users\rados\.m2\repository\org\slf4j\slf4j-api\1.7.5\slf4j-api-1.7.5.jar;C:\Users\rados\.m2\repository\org\slf4j\slf4j-log4j12\1.7.5\slf4j-log4j12-1.7.5.jar;C:\Users\rados\.m2\repository\log4j\log4j\1.2.17\log4j-1.2.17.jar;C:\Users\rados\Desktop\TOOL\RT-withR\Reliability-Tool\Reliability-Tool-Models\target\classes;C:\Users\rados\.m2\repository\com\github\lucarosellini\rJava\JRI\0.9-7\JRI-0.9-7.jar;C:\Users\rados\.m2\repository\com\github\lucarosellini\rJava\JRIEngine\0.9-7\JRIEngine-0.9-7.jar;C:\Users\rados\.m2\repository\com\github\lucarosellini\rJava\REngine\0.9-7\REngine-0.9-7.jar;C:\Users\rados\.m2\repository\commons-cli\commons-cli\1.4\commons-cli-1.4.jar, user.name=rados, hibernate.bytecode.use_reflection_optimizer=false, hibernate.show_sql=false, java.vm.specification.version=1.8, sun.java.command=fi.muni.cz.reliability.tool.core.Core -sn black -e -fl, java.home=C:\Program Files\Java\jdk1.8.0_171\jre, sun.arch.data.model=64, hibernate.dialect=org.hibernate.dialect.DerbyTenSevenDialect, hibernate.connection.url=jdbc:derby:IssuesDB;create=true, user.language=sk, java.specification.vendor=Oracle Corporation, awt.toolkit=sun.awt.windows.WToolkit, java.vm.info=mixed mode, java.version=1.8.0_171, java.ext.dirs=C:\Program Files\Java\jdk1.8.0_171\jre\lib\ext;C:\WINDOWS\Sun\Java\lib\ext, sun.boot.class.path=C:\Program Files\Java\jdk1.8.0_171\jre\lib\resources.jar;C:\Program Files\Java\jdk1.8.0_171\jre\lib\rt.jar;C:\Program Files\Java\jdk1.8.0_171\jre\lib\sunrsasign.jar;C:\Program Files\Java\jdk1.8.0_171\jre\lib\jsse.jar;C:\Program Files\Java\jdk1.8.0_171\jre\lib\jce.jar;C:\Program Files\Java\jdk1.8.0_171\jre\lib\charsets.jar;C:\Program Files\Java\jdk1.8.0_171\jre\lib\jfr.jar;C:\Program Files\Java\jdk1.8.0_171\jre\classes, java.vendor=Oracle Corporation, connection.driver_class=org.apache.derby.jdbc.EmbeddedDriver, file.separator=\, hibernate.hbm2ddl.auto=update, java.vendor.url.bug=http://bugreport.sun.com/bugreport/, sun.io.unicode.encoding=UnicodeLittle, sun.cpu.endian=little, sun.desktop=windows, connection.url=jdbc:derby:IssuesDB;create=true, dialect=org.hibernate.dialect.DerbyTenSevenDialect, sun.cpu.isalist=amd64}
+, java.vm.specification.vendor=Oracle Corporation, user.variant=, os.name=Windows 10, sun.jnu.encoding=Cp1250, java.library.path=C:\Program Files\Java\jdk1.8.0_171\bin;C:\WINDOWS\Sun\Java\bin;C:\WINDOWS\system32;C:\WINDOWS;C:\Program Files (x86)\Common Files\Oracle\Java\javapath;c:\program files\nvidia gpu computing toolkit\cuda\v9.0\bin;c:\program files\nvidia gpu computing toolkit\cuda\v9.0\libnvvp;c:\windows\system32;c:\windows;c:\windows\system32\wbem;c:\windows\system32\windowspowershell\v1.0\;c:\program files\openvpn\bin;C:\Program Files\Java\jdk1.8.0_171\bin;c:\program files\apache-maven-3.5.0\bin;d:\git\cmd;c:\program files\putty\;C:\Program Files (x86)\NVIDIA Corporation\PhysX\Common;C:\WINDOWS\system32;C:\WINDOWS;C:\WINDOWS\System32\Wbem;C:\WINDOWS\System32\WindowsPowerShell\v1.0\;C:\WINDOWS\System32\OpenSSH\;D:\R-3.5.1\bin\x64;D:\R-3.5.1\library\rJava\libs\x64;D:\R-3.5.1\library\rJava\jri\x64;C:\Users\rados\AppData\Local\Microsoft\WindowsApps;C:\Users\rados\AppData\Local\GitHubDesktop\bin;%USERPROFILE%\AppData\Local\Microsoft\WindowsApps;;., java.specification.name=Java Platform API Specification, java.class.version=52.0, sun.management.compiler=HotSpot 64-Bit Tiered Compilers, os.version=10.0, connection.password=tool123, user.home=C:\Users\rados, user.timezone=Europe/Prague, connection.username=tool, java.awt.printerjob=sun.awt.windows.WPrinterJob, file.encoding=Cp1250, java.specification.version=1.8, hibernate.connection.driver_class=org.apache.derby.jdbc.EmbeddedDriver, show_sql=false, java.class.path=C:\Users\rados\Desktop\TOOL\RT-withR\Reliability-Tool\Reliability-Tool-Core\target\classes;C:\Users\rados\Desktop\TOOL\RT-withR\Reliability-Tool\Reliability-Tool-DataProvider\target\classes;C:\Users\rados\.m2\repository\org\eclipse\mylyn\github\org.eclipse.egit.github.core\2.1.5\org.eclipse.egit.github.core-2.1.5.jar;C:\Users\rados\.m2\repository\com\google\code\gson\gson\2.2.2\gson-2.2.2.jar;C:\Users\rados\.m2\repository\net\sf\dozer\dozer\5.5.1\dozer-5.5.1.jar;C:\Users\rados\.m2\repository\commons-beanutils\commons-beanutils\1.9.1\commons-beanutils-1.9.1.jar;C:\Users\rados\.m2\repository\commons-collections\commons-collections\3.2.1\commons-collections-3.2.1.jar;C:\Users\rados\.m2\repository\org\apache\commons\commons-lang3\3.2.1\commons-lang3-3.2.1.jar;C:\Users\rados\.m2\repository\org\slf4j\jcl-over-slf4j\1.7.5\jcl-over-slf4j-1.7.5.jar;C:\Users\rados\.m2\repository\org\springframework\spring-beans\4.3.11.RELEASE\spring-beans-4.3.11.RELEASE.jar;C:\Users\rados\.m2\repository\org\springframework\spring-core\4.3.11.RELEASE\spring-core-4.3.11.RELEASE.jar;C:\Users\rados\.m2\repository\commons-logging\commons-logging\1.2\commons-logging-1.2.jar;C:\Users\rados\.m2\repository\org\springframework\spring-context\4.3.11.RELEASE\spring-context-4.3.11.RELEASE.jar;C:\Users\rados\.m2\repository\org\springframework\spring-aop\4.3.11.RELEASE\spring-aop-4.3.11.RELEASE.jar;C:\Users\rados\.m2\repository\org\springframework\spring-expression\4.3.11.RELEASE\spring-expression-4.3.11.RELEASE.jar;C:\Users\rados\.m2\repository\org\springframework\spring-test\4.3.11.RELEASE\spring-test-4.3.11.RELEASE.jar;C:\Users\rados\.m2\repository\org\hibernate\javax\persistence\hibernate-jpa-2.1-api\1.0.0.Final\hibernate-jpa-2.1-api-1.0.0.Final.jar;C:\Users\rados\.m2\repository\javax\validation\validation-api\2.0.0.Final\validation-api-2.0.0.Final.jar;C:\Users\rados\.m2\repository\org\apache\commons\commons-math3\3.6.1\commons-math3-3.6.1.jar;C:\Users\rados\Desktop\TOOL\RT-withR\Reliability-Tool\Reliability-Tool-DataProcessing\target\classes;C:\Users\rados\.m2\repository\org\hibernate\hibernate-entitymanager\4.3.11.Final\hibernate-entitymanager-4.3.11.Final.jar;C:\Users\rados\.m2\repository\org\jboss\logging\jboss-logging\3.1.3.GA\jboss-logging-3.1.3.GA.jar;C:\Users\rados\.m2\repository\org\jboss\logging\jboss-logging-annotations\1.2.0.Beta1\jboss-logging-annotations-1.2.0.Beta1.jar;C:\Users\rados\.m2\repository\org\hibernate\hibernate-core\4.3.11.Final\hibernate-core-4.3.11.Final.jar;C:\Users\rados\.m2\repository\antlr\antlr\2.7.7\antlr-2.7.7.jar;C:\Users\rados\.m2\repository\org\jboss\jandex\1.1.0.Final\jandex-1.1.0.Final.jar;C:\Users\rados\.m2\repository\dom4j\dom4j\1.6.1\dom4j-1.6.1.jar;C:\Users\rados\.m2\repository\xml-apis\xml-apis\1.0.b2\xml-apis-1.0.b2.jar;C:\Users\rados\.m2\repository\org\hibernate\common\hibernate-commons-annotations\4.0.5.Final\hibernate-commons-annotations-4.0.5.Final.jar;C:\Users\rados\.m2\repository\org\jboss\spec\javax\transaction\jboss-transaction-api_1.2_spec\1.0.0.Final\jboss-transaction-api_1.2_spec-1.0.0.Final.jar;C:\Users\rados\.m2\repository\org\javassist\javassist\3.18.1-GA\javassist-3.18.1-GA.jar;C:\Users\rados\.m2\repository\org\apache\derby\derby\10.14.1.0\derby-10.14.1.0.jar;C:\Users\rados\.m2\repository\org\freemarker\freemarker\2.3.28\freemarker-2.3.28.jar;C:\Users\rados\.m2\repository\org\slf4j\slf4j-api\1.7.5\slf4j-api-1.7.5.jar;C:\Users\rados\.m2\repository\org\slf4j\slf4j-log4j12\1.7.5\slf4j-log4j12-1.7.5.jar;C:\Users\rados\.m2\repository\log4j\log4j\1.2.17\log4j-1.2.17.jar;C:\Users\rados\Desktop\TOOL\RT-withR\Reliability-Tool\Reliability-Tool-Models\target\classes;C:\Users\rados\.m2\repository\com\github\lucarosellini\rJava\JRI\0.9-7\JRI-0.9-7.jar;C:\Users\rados\.m2\repository\com\github\lucarosellini\rJava\JRIEngine\0.9-7\JRIEngine-0.9-7.jar;C:\Users\rados\.m2\repository\com\github\lucarosellini\rJava\REngine\0.9-7\REngine-0.9-7.jar;C:\Users\rados\.m2\repository\commons-cli\commons-cli\1.4\commons-cli-1.4.jar, user.name=rados, hibernate.bytecode.use_reflection_optimizer=false, hibernate.show_sql=false, java.vm.specification.version=1.8, sun.java.command=fi.muni.cz.reliability.tool.core.Core -sn black -e -fl -ms go gos mo du hd, java.home=C:\Program Files\Java\jdk1.8.0_171\jre, sun.arch.data.model=64, hibernate.dialect=org.hibernate.dialect.DerbyTenSevenDialect, hibernate.connection.url=jdbc:derby:IssuesDB;create=true, user.language=sk, java.specification.vendor=Oracle Corporation, awt.toolkit=sun.awt.windows.WToolkit, java.vm.info=mixed mode, java.version=1.8.0_171, java.ext.dirs=C:\Program Files\Java\jdk1.8.0_171\jre\lib\ext;C:\WINDOWS\Sun\Java\lib\ext, sun.boot.class.path=C:\Program Files\Java\jdk1.8.0_171\jre\lib\resources.jar;C:\Program Files\Java\jdk1.8.0_171\jre\lib\rt.jar;C:\Program Files\Java\jdk1.8.0_171\jre\lib\sunrsasign.jar;C:\Program Files\Java\jdk1.8.0_171\jre\lib\jsse.jar;C:\Program Files\Java\jdk1.8.0_171\jre\lib\jce.jar;C:\Program Files\Java\jdk1.8.0_171\jre\lib\charsets.jar;C:\Program Files\Java\jdk1.8.0_171\jre\lib\jfr.jar;C:\Program Files\Java\jdk1.8.0_171\jre\classes, java.vendor=Oracle Corporation, connection.driver_class=org.apache.derby.jdbc.EmbeddedDriver, file.separator=\, hibernate.hbm2ddl.auto=update, java.vendor.url.bug=http://bugreport.sun.com/bugreport/, sun.io.unicode.encoding=UnicodeLittle, sun.cpu.endian=little, sun.desktop=windows, connection.url=jdbc:derby:IssuesDB;create=true, dialect=org.hibernate.dialect.DerbyTenSevenDialect, sun.cpu.isalist=amd64}
 Adding Integrator [org.hibernate.cfg.beanvalidation.BeanValidationIntegrator].
 Adding Integrator [org.hibernate.secure.spi.JaccIntegrator].
 Adding Integrator [org.hibernate.cache.internal.CollectionCacheInvalidator].
@@ -440,7 +440,7 @@ JTA Track by Thread: enabled
 Building session factory
 Session factory constructed with filter configurations : {}
 Instantiating session factory with properties: {java.runtime.name=Java(TM) SE Runtime Environment, hibernate.connection.password=tool123, sun.boot.library.path=C:\Program Files\Java\jdk1.8.0_171\jre\bin, java.vm.version=25.171-b11, hibernate.connection.username=tool, java.vm.vendor=Oracle Corporation, java.vendor.url=http://java.oracle.com/, path.separator=;, java.vm.name=Java HotSpot(TM) 64-Bit Server VM, file.encoding.pkg=sun.io, user.script=, user.country=SK, sun.java.launcher=SUN_STANDARD, sun.os.patch.level=, java.vm.specification.name=Java Virtual Machine Specification, user.dir=C:\Users\rados\Desktop\TOOL\RT-withR\Reliability-Tool\Reliability-Tool-Core, java.runtime.version=1.8.0_171-b11, java.awt.graphicsenv=sun.awt.Win32GraphicsEnvironment, hbm2ddl.auto=update, java.endorsed.dirs=C:\Program Files\Java\jdk1.8.0_171\jre\lib\endorsed, os.arch=amd64, java.io.tmpdir=C:\Users\rados\AppData\Local\Temp\, line.separator=
-, java.vm.specification.vendor=Oracle Corporation, user.variant=, os.name=Windows 10, sun.jnu.encoding=Cp1250, java.library.path=C:\Program Files\Java\jdk1.8.0_171\bin;C:\WINDOWS\Sun\Java\bin;C:\WINDOWS\system32;C:\WINDOWS;C:\Program Files (x86)\Common Files\Oracle\Java\javapath;c:\program files\nvidia gpu computing toolkit\cuda\v9.0\bin;c:\program files\nvidia gpu computing toolkit\cuda\v9.0\libnvvp;c:\windows\system32;c:\windows;c:\windows\system32\wbem;c:\windows\system32\windowspowershell\v1.0\;c:\program files\openvpn\bin;C:\Program Files\Java\jdk1.8.0_171\bin;c:\program files\apache-maven-3.5.0\bin;d:\git\cmd;c:\program files\putty\;C:\Program Files (x86)\NVIDIA Corporation\PhysX\Common;C:\WINDOWS\system32;C:\WINDOWS;C:\WINDOWS\System32\Wbem;C:\WINDOWS\System32\WindowsPowerShell\v1.0\;C:\WINDOWS\System32\OpenSSH\;D:\R-3.5.1\bin\x64;D:\R-3.5.1\library\rJava\libs\x64;D:\R-3.5.1\library\rJava\jri\x64;C:\Users\rados\AppData\Local\Microsoft\WindowsApps;C:\Users\rados\AppData\Local\GitHubDesktop\bin;%USERPROFILE%\AppData\Local\Microsoft\WindowsApps;;., java.specification.name=Java Platform API Specification, java.class.version=52.0, sun.management.compiler=HotSpot 64-Bit Tiered Compilers, os.version=10.0, user.home=C:\Users\rados, connection.password=tool123, user.timezone=Europe/Prague, java.awt.printerjob=sun.awt.windows.WPrinterJob, connection.username=tool, java.specification.version=1.8, file.encoding=Cp1250, hibernate.connection.driver_class=org.apache.derby.jdbc.EmbeddedDriver, show_sql=false, user.name=rados, java.class.path=C:\Users\rados\Desktop\TOOL\RT-withR\Reliability-Tool\Reliability-Tool-Core\target\classes;C:\Users\rados\Desktop\TOOL\RT-withR\Reliability-Tool\Reliability-Tool-DataProvider\target\classes;C:\Users\rados\.m2\repository\org\eclipse\mylyn\github\org.eclipse.egit.github.core\2.1.5\org.eclipse.egit.github.core-2.1.5.jar;C:\Users\rados\.m2\repository\com\google\code\gson\gson\2.2.2\gson-2.2.2.jar;C:\Users\rados\.m2\repository\net\sf\dozer\dozer\5.5.1\dozer-5.5.1.jar;C:\Users\rados\.m2\repository\commons-beanutils\commons-beanutils\1.9.1\commons-beanutils-1.9.1.jar;C:\Users\rados\.m2\repository\commons-collections\commons-collections\3.2.1\commons-collections-3.2.1.jar;C:\Users\rados\.m2\repository\org\apache\commons\commons-lang3\3.2.1\commons-lang3-3.2.1.jar;C:\Users\rados\.m2\repository\org\slf4j\jcl-over-slf4j\1.7.5\jcl-over-slf4j-1.7.5.jar;C:\Users\rados\.m2\repository\org\springframework\spring-beans\4.3.11.RELEASE\spring-beans-4.3.11.RELEASE.jar;C:\Users\rados\.m2\repository\org\springframework\spring-core\4.3.11.RELEASE\spring-core-4.3.11.RELEASE.jar;C:\Users\rados\.m2\repository\commons-logging\commons-logging\1.2\commons-logging-1.2.jar;C:\Users\rados\.m2\repository\org\springframework\spring-context\4.3.11.RELEASE\spring-context-4.3.11.RELEASE.jar;C:\Users\rados\.m2\repository\org\springframework\spring-aop\4.3.11.RELEASE\spring-aop-4.3.11.RELEASE.jar;C:\Users\rados\.m2\repository\org\springframework\spring-expression\4.3.11.RELEASE\spring-expression-4.3.11.RELEASE.jar;C:\Users\rados\.m2\repository\org\springframework\spring-test\4.3.11.RELEASE\spring-test-4.3.11.RELEASE.jar;C:\Users\rados\.m2\repository\org\hibernate\javax\persistence\hibernate-jpa-2.1-api\1.0.0.Final\hibernate-jpa-2.1-api-1.0.0.Final.jar;C:\Users\rados\.m2\repository\javax\validation\validation-api\2.0.0.Final\validation-api-2.0.0.Final.jar;C:\Users\rados\.m2\repository\org\apache\commons\commons-math3\3.6.1\commons-math3-3.6.1.jar;C:\Users\rados\Desktop\TOOL\RT-withR\Reliability-Tool\Reliability-Tool-DataProcessing\target\classes;C:\Users\rados\.m2\repository\org\hibernate\hibernate-entitymanager\4.3.11.Final\hibernate-entitymanager-4.3.11.Final.jar;C:\Users\rados\.m2\repository\org\jboss\logging\jboss-logging\3.1.3.GA\jboss-logging-3.1.3.GA.jar;C:\Users\rados\.m2\repository\org\jboss\logging\jboss-logging-annotations\1.2.0.Beta1\jboss-logging-annotations-1.2.0.Beta1.jar;C:\Users\rados\.m2\repository\org\hibernate\hibernate-core\4.3.11.Final\hibernate-core-4.3.11.Final.jar;C:\Users\rados\.m2\repository\antlr\antlr\2.7.7\antlr-2.7.7.jar;C:\Users\rados\.m2\repository\org\jboss\jandex\1.1.0.Final\jandex-1.1.0.Final.jar;C:\Users\rados\.m2\repository\dom4j\dom4j\1.6.1\dom4j-1.6.1.jar;C:\Users\rados\.m2\repository\xml-apis\xml-apis\1.0.b2\xml-apis-1.0.b2.jar;C:\Users\rados\.m2\repository\org\hibernate\common\hibernate-commons-annotations\4.0.5.Final\hibernate-commons-annotations-4.0.5.Final.jar;C:\Users\rados\.m2\repository\org\jboss\spec\javax\transaction\jboss-transaction-api_1.2_spec\1.0.0.Final\jboss-transaction-api_1.2_spec-1.0.0.Final.jar;C:\Users\rados\.m2\repository\org\javassist\javassist\3.18.1-GA\javassist-3.18.1-GA.jar;C:\Users\rados\.m2\repository\org\apache\derby\derby\10.14.1.0\derby-10.14.1.0.jar;C:\Users\rados\.m2\repository\org\freemarker\freemarker\2.3.28\freemarker-2.3.28.jar;C:\Users\rados\.m2\repository\org\slf4j\slf4j-api\1.7.5\slf4j-api-1.7.5.jar;C:\Users\rados\.m2\repository\org\slf4j\slf4j-log4j12\1.7.5\slf4j-log4j12-1.7.5.jar;C:\Users\rados\.m2\repository\log4j\log4j\1.2.17\log4j-1.2.17.jar;C:\Users\rados\Desktop\TOOL\RT-withR\Reliability-Tool\Reliability-Tool-Models\target\classes;C:\Users\rados\.m2\repository\com\github\lucarosellini\rJava\JRI\0.9-7\JRI-0.9-7.jar;C:\Users\rados\.m2\repository\com\github\lucarosellini\rJava\JRIEngine\0.9-7\JRIEngine-0.9-7.jar;C:\Users\rados\.m2\repository\com\github\lucarosellini\rJava\REngine\0.9-7\REngine-0.9-7.jar;C:\Users\rados\.m2\repository\commons-cli\commons-cli\1.4\commons-cli-1.4.jar, hibernate.bytecode.use_reflection_optimizer=false, hibernate.show_sql=false, java.vm.specification.version=1.8, sun.arch.data.model=64, java.home=C:\Program Files\Java\jdk1.8.0_171\jre, sun.java.command=fi.muni.cz.reliability.tool.core.Core -sn black -e -fl, hibernate.connection.url=jdbc:derby:IssuesDB;create=true, hibernate.dialect=org.hibernate.dialect.DerbyTenSevenDialect, java.specification.vendor=Oracle Corporation, user.language=sk, awt.toolkit=sun.awt.windows.WToolkit, java.vm.info=mixed mode, java.version=1.8.0_171, java.ext.dirs=C:\Program Files\Java\jdk1.8.0_171\jre\lib\ext;C:\WINDOWS\Sun\Java\lib\ext, sun.boot.class.path=C:\Program Files\Java\jdk1.8.0_171\jre\lib\resources.jar;C:\Program Files\Java\jdk1.8.0_171\jre\lib\rt.jar;C:\Program Files\Java\jdk1.8.0_171\jre\lib\sunrsasign.jar;C:\Program Files\Java\jdk1.8.0_171\jre\lib\jsse.jar;C:\Program Files\Java\jdk1.8.0_171\jre\lib\jce.jar;C:\Program Files\Java\jdk1.8.0_171\jre\lib\charsets.jar;C:\Program Files\Java\jdk1.8.0_171\jre\lib\jfr.jar;C:\Program Files\Java\jdk1.8.0_171\jre\classes, java.vendor=Oracle Corporation, file.separator=\, connection.driver_class=org.apache.derby.jdbc.EmbeddedDriver, java.vendor.url.bug=http://bugreport.sun.com/bugreport/, hibernate.hbm2ddl.auto=update, sun.cpu.endian=little, sun.io.unicode.encoding=UnicodeLittle, sun.desktop=windows, connection.url=jdbc:derby:IssuesDB;create=true, sun.cpu.isalist=amd64, dialect=org.hibernate.dialect.DerbyTenSevenDialect}
+, java.vm.specification.vendor=Oracle Corporation, user.variant=, os.name=Windows 10, sun.jnu.encoding=Cp1250, java.library.path=C:\Program Files\Java\jdk1.8.0_171\bin;C:\WINDOWS\Sun\Java\bin;C:\WINDOWS\system32;C:\WINDOWS;C:\Program Files (x86)\Common Files\Oracle\Java\javapath;c:\program files\nvidia gpu computing toolkit\cuda\v9.0\bin;c:\program files\nvidia gpu computing toolkit\cuda\v9.0\libnvvp;c:\windows\system32;c:\windows;c:\windows\system32\wbem;c:\windows\system32\windowspowershell\v1.0\;c:\program files\openvpn\bin;C:\Program Files\Java\jdk1.8.0_171\bin;c:\program files\apache-maven-3.5.0\bin;d:\git\cmd;c:\program files\putty\;C:\Program Files (x86)\NVIDIA Corporation\PhysX\Common;C:\WINDOWS\system32;C:\WINDOWS;C:\WINDOWS\System32\Wbem;C:\WINDOWS\System32\WindowsPowerShell\v1.0\;C:\WINDOWS\System32\OpenSSH\;D:\R-3.5.1\bin\x64;D:\R-3.5.1\library\rJava\libs\x64;D:\R-3.5.1\library\rJava\jri\x64;C:\Users\rados\AppData\Local\Microsoft\WindowsApps;C:\Users\rados\AppData\Local\GitHubDesktop\bin;%USERPROFILE%\AppData\Local\Microsoft\WindowsApps;;., java.specification.name=Java Platform API Specification, java.class.version=52.0, sun.management.compiler=HotSpot 64-Bit Tiered Compilers, os.version=10.0, user.home=C:\Users\rados, connection.password=tool123, user.timezone=Europe/Prague, java.awt.printerjob=sun.awt.windows.WPrinterJob, connection.username=tool, java.specification.version=1.8, file.encoding=Cp1250, hibernate.connection.driver_class=org.apache.derby.jdbc.EmbeddedDriver, show_sql=false, user.name=rados, java.class.path=C:\Users\rados\Desktop\TOOL\RT-withR\Reliability-Tool\Reliability-Tool-Core\target\classes;C:\Users\rados\Desktop\TOOL\RT-withR\Reliability-Tool\Reliability-Tool-DataProvider\target\classes;C:\Users\rados\.m2\repository\org\eclipse\mylyn\github\org.eclipse.egit.github.core\2.1.5\org.eclipse.egit.github.core-2.1.5.jar;C:\Users\rados\.m2\repository\com\google\code\gson\gson\2.2.2\gson-2.2.2.jar;C:\Users\rados\.m2\repository\net\sf\dozer\dozer\5.5.1\dozer-5.5.1.jar;C:\Users\rados\.m2\repository\commons-beanutils\commons-beanutils\1.9.1\commons-beanutils-1.9.1.jar;C:\Users\rados\.m2\repository\commons-collections\commons-collections\3.2.1\commons-collections-3.2.1.jar;C:\Users\rados\.m2\repository\org\apache\commons\commons-lang3\3.2.1\commons-lang3-3.2.1.jar;C:\Users\rados\.m2\repository\org\slf4j\jcl-over-slf4j\1.7.5\jcl-over-slf4j-1.7.5.jar;C:\Users\rados\.m2\repository\org\springframework\spring-beans\4.3.11.RELEASE\spring-beans-4.3.11.RELEASE.jar;C:\Users\rados\.m2\repository\org\springframework\spring-core\4.3.11.RELEASE\spring-core-4.3.11.RELEASE.jar;C:\Users\rados\.m2\repository\commons-logging\commons-logging\1.2\commons-logging-1.2.jar;C:\Users\rados\.m2\repository\org\springframework\spring-context\4.3.11.RELEASE\spring-context-4.3.11.RELEASE.jar;C:\Users\rados\.m2\repository\org\springframework\spring-aop\4.3.11.RELEASE\spring-aop-4.3.11.RELEASE.jar;C:\Users\rados\.m2\repository\org\springframework\spring-expression\4.3.11.RELEASE\spring-expression-4.3.11.RELEASE.jar;C:\Users\rados\.m2\repository\org\springframework\spring-test\4.3.11.RELEASE\spring-test-4.3.11.RELEASE.jar;C:\Users\rados\.m2\repository\org\hibernate\javax\persistence\hibernate-jpa-2.1-api\1.0.0.Final\hibernate-jpa-2.1-api-1.0.0.Final.jar;C:\Users\rados\.m2\repository\javax\validation\validation-api\2.0.0.Final\validation-api-2.0.0.Final.jar;C:\Users\rados\.m2\repository\org\apache\commons\commons-math3\3.6.1\commons-math3-3.6.1.jar;C:\Users\rados\Desktop\TOOL\RT-withR\Reliability-Tool\Reliability-Tool-DataProcessing\target\classes;C:\Users\rados\.m2\repository\org\hibernate\hibernate-entitymanager\4.3.11.Final\hibernate-entitymanager-4.3.11.Final.jar;C:\Users\rados\.m2\repository\org\jboss\logging\jboss-logging\3.1.3.GA\jboss-logging-3.1.3.GA.jar;C:\Users\rados\.m2\repository\org\jboss\logging\jboss-logging-annotations\1.2.0.Beta1\jboss-logging-annotations-1.2.0.Beta1.jar;C:\Users\rados\.m2\repository\org\hibernate\hibernate-core\4.3.11.Final\hibernate-core-4.3.11.Final.jar;C:\Users\rados\.m2\repository\antlr\antlr\2.7.7\antlr-2.7.7.jar;C:\Users\rados\.m2\repository\org\jboss\jandex\1.1.0.Final\jandex-1.1.0.Final.jar;C:\Users\rados\.m2\repository\dom4j\dom4j\1.6.1\dom4j-1.6.1.jar;C:\Users\rados\.m2\repository\xml-apis\xml-apis\1.0.b2\xml-apis-1.0.b2.jar;C:\Users\rados\.m2\repository\org\hibernate\common\hibernate-commons-annotations\4.0.5.Final\hibernate-commons-annotations-4.0.5.Final.jar;C:\Users\rados\.m2\repository\org\jboss\spec\javax\transaction\jboss-transaction-api_1.2_spec\1.0.0.Final\jboss-transaction-api_1.2_spec-1.0.0.Final.jar;C:\Users\rados\.m2\repository\org\javassist\javassist\3.18.1-GA\javassist-3.18.1-GA.jar;C:\Users\rados\.m2\repository\org\apache\derby\derby\10.14.1.0\derby-10.14.1.0.jar;C:\Users\rados\.m2\repository\org\freemarker\freemarker\2.3.28\freemarker-2.3.28.jar;C:\Users\rados\.m2\repository\org\slf4j\slf4j-api\1.7.5\slf4j-api-1.7.5.jar;C:\Users\rados\.m2\repository\org\slf4j\slf4j-log4j12\1.7.5\slf4j-log4j12-1.7.5.jar;C:\Users\rados\.m2\repository\log4j\log4j\1.2.17\log4j-1.2.17.jar;C:\Users\rados\Desktop\TOOL\RT-withR\Reliability-Tool\Reliability-Tool-Models\target\classes;C:\Users\rados\.m2\repository\com\github\lucarosellini\rJava\JRI\0.9-7\JRI-0.9-7.jar;C:\Users\rados\.m2\repository\com\github\lucarosellini\rJava\JRIEngine\0.9-7\JRIEngine-0.9-7.jar;C:\Users\rados\.m2\repository\com\github\lucarosellini\rJava\REngine\0.9-7\REngine-0.9-7.jar;C:\Users\rados\.m2\repository\commons-cli\commons-cli\1.4\commons-cli-1.4.jar, hibernate.bytecode.use_reflection_optimizer=false, hibernate.show_sql=false, java.vm.specification.version=1.8, sun.arch.data.model=64, java.home=C:\Program Files\Java\jdk1.8.0_171\jre, sun.java.command=fi.muni.cz.reliability.tool.core.Core -sn black -e -fl -ms go gos mo du hd, hibernate.connection.url=jdbc:derby:IssuesDB;create=true, hibernate.dialect=org.hibernate.dialect.DerbyTenSevenDialect, java.specification.vendor=Oracle Corporation, user.language=sk, awt.toolkit=sun.awt.windows.WToolkit, java.vm.info=mixed mode, java.version=1.8.0_171, java.ext.dirs=C:\Program Files\Java\jdk1.8.0_171\jre\lib\ext;C:\WINDOWS\Sun\Java\lib\ext, sun.boot.class.path=C:\Program Files\Java\jdk1.8.0_171\jre\lib\resources.jar;C:\Program Files\Java\jdk1.8.0_171\jre\lib\rt.jar;C:\Program Files\Java\jdk1.8.0_171\jre\lib\sunrsasign.jar;C:\Program Files\Java\jdk1.8.0_171\jre\lib\jsse.jar;C:\Program Files\Java\jdk1.8.0_171\jre\lib\jce.jar;C:\Program Files\Java\jdk1.8.0_171\jre\lib\charsets.jar;C:\Program Files\Java\jdk1.8.0_171\jre\lib\jfr.jar;C:\Program Files\Java\jdk1.8.0_171\jre\classes, java.vendor=Oracle Corporation, file.separator=\, connection.driver_class=org.apache.derby.jdbc.EmbeddedDriver, java.vendor.url.bug=http://bugreport.sun.com/bugreport/, hibernate.hbm2ddl.auto=update, sun.cpu.endian=little, sun.io.unicode.encoding=UnicodeLittle, sun.desktop=windows, connection.url=jdbc:derby:IssuesDB;create=true, sun.cpu.isalist=amd64, dialect=org.hibernate.dialect.DerbyTenSevenDialect}
 Unable to acquire Bean Validation ValidatorFactory, skipping activation
 Skipping JACC integration as it was not enabled
 Setting dialect [org.hibernate.dialect.DerbyTenSevenDialect]
@@ -464,7 +464,7 @@ Static SQL for entity: fi.muni.cz.reliability.tool.dataprovider.GeneralMilestone
  Update 0: update GeneralMilestone set createdAt=?, description=?, dueOn=?, MilestoneState=?, title=? where id=?
  Delete 0: delete from GeneralMilestone where id=?
  Identity insert: insert into GeneralMilestone (id, createdAt, description, dueOn, MilestoneState, title) values (default, ?, ?, ?, ?, ?)
-Adding QuerySpace : uid = <gen:0> -> org.hibernate.loader.plan.build.internal.spaces.EntityQuerySpaceImpl@263bbfeb]
+Adding QuerySpace : uid = <gen:0> -> org.hibernate.loader.plan.build.internal.spaces.EntityQuerySpaceImpl@68d6972f]
 Visiting attribute path : createdAt
 Visiting attribute path : description
 Visiting attribute path : dueOn
@@ -482,7 +482,7 @@ LoadPlan(entity=fi.muni.cz.reliability.tool.dataprovider.GeneralMilestone)
           - suffixed key columns - {id1_3_0_}
 
 Static select for entity fi.muni.cz.reliability.tool.dataprovider.GeneralMilestone [NONE]: select generalmil0_.id as id1_3_0_, generalmil0_.createdAt as createdA2_3_0_, generalmil0_.description as descript3_3_0_, generalmil0_.dueOn as dueOn4_3_0_, generalmil0_.MilestoneState as Mileston5_3_0_, generalmil0_.title as title6_3_0_ from GeneralMilestone generalmil0_ where generalmil0_.id=?
-Adding QuerySpace : uid = <gen:0> -> org.hibernate.loader.plan.build.internal.spaces.EntityQuerySpaceImpl@444cc791]
+Adding QuerySpace : uid = <gen:0> -> org.hibernate.loader.plan.build.internal.spaces.EntityQuerySpaceImpl@2a65bb85]
 Visiting attribute path : createdAt
 Visiting attribute path : description
 Visiting attribute path : dueOn
@@ -500,7 +500,7 @@ LoadPlan(entity=fi.muni.cz.reliability.tool.dataprovider.GeneralMilestone)
           - suffixed key columns - {id1_3_0_}
 
 Static select for entity fi.muni.cz.reliability.tool.dataprovider.GeneralMilestone [READ]: select generalmil0_.id as id1_3_0_, generalmil0_.createdAt as createdA2_3_0_, generalmil0_.description as descript3_3_0_, generalmil0_.dueOn as dueOn4_3_0_, generalmil0_.MilestoneState as Mileston5_3_0_, generalmil0_.title as title6_3_0_ from GeneralMilestone generalmil0_ where generalmil0_.id=?
-Adding QuerySpace : uid = <gen:0> -> org.hibernate.loader.plan.build.internal.spaces.EntityQuerySpaceImpl@1c6c6f24]
+Adding QuerySpace : uid = <gen:0> -> org.hibernate.loader.plan.build.internal.spaces.EntityQuerySpaceImpl@4f936da8]
 Visiting attribute path : createdAt
 Visiting attribute path : description
 Visiting attribute path : dueOn
@@ -518,7 +518,7 @@ LoadPlan(entity=fi.muni.cz.reliability.tool.dataprovider.GeneralMilestone)
           - suffixed key columns - {id1_3_0_}
 
 Static select for entity fi.muni.cz.reliability.tool.dataprovider.GeneralMilestone [UPGRADE]: select generalmil0_.id as id1_3_0_, generalmil0_.createdAt as createdA2_3_0_, generalmil0_.description as descript3_3_0_, generalmil0_.dueOn as dueOn4_3_0_, generalmil0_.MilestoneState as Mileston5_3_0_, generalmil0_.title as title6_3_0_ from GeneralMilestone generalmil0_ where generalmil0_.id=? for update with rs
-Adding QuerySpace : uid = <gen:0> -> org.hibernate.loader.plan.build.internal.spaces.EntityQuerySpaceImpl@c6b2dd9]
+Adding QuerySpace : uid = <gen:0> -> org.hibernate.loader.plan.build.internal.spaces.EntityQuerySpaceImpl@452ba1db]
 Visiting attribute path : createdAt
 Visiting attribute path : description
 Visiting attribute path : dueOn
@@ -536,7 +536,7 @@ LoadPlan(entity=fi.muni.cz.reliability.tool.dataprovider.GeneralMilestone)
           - suffixed key columns - {id1_3_0_}
 
 Static select for entity fi.muni.cz.reliability.tool.dataprovider.GeneralMilestone [UPGRADE_NOWAIT]: select generalmil0_.id as id1_3_0_, generalmil0_.createdAt as createdA2_3_0_, generalmil0_.description as descript3_3_0_, generalmil0_.dueOn as dueOn4_3_0_, generalmil0_.MilestoneState as Mileston5_3_0_, generalmil0_.title as title6_3_0_ from GeneralMilestone generalmil0_ where generalmil0_.id=? for update with rs
-Adding QuerySpace : uid = <gen:0> -> org.hibernate.loader.plan.build.internal.spaces.EntityQuerySpaceImpl@ca93621]
+Adding QuerySpace : uid = <gen:0> -> org.hibernate.loader.plan.build.internal.spaces.EntityQuerySpaceImpl@76a36b71]
 Visiting attribute path : createdAt
 Visiting attribute path : description
 Visiting attribute path : dueOn
@@ -554,7 +554,7 @@ LoadPlan(entity=fi.muni.cz.reliability.tool.dataprovider.GeneralMilestone)
           - suffixed key columns - {id1_3_0_}
 
 Static select for entity fi.muni.cz.reliability.tool.dataprovider.GeneralMilestone [UPGRADE_SKIPLOCKED]: select generalmil0_.id as id1_3_0_, generalmil0_.createdAt as createdA2_3_0_, generalmil0_.description as descript3_3_0_, generalmil0_.dueOn as dueOn4_3_0_, generalmil0_.MilestoneState as Mileston5_3_0_, generalmil0_.title as title6_3_0_ from GeneralMilestone generalmil0_ where generalmil0_.id=? for update with rs
-Adding QuerySpace : uid = <gen:0> -> org.hibernate.loader.plan.build.internal.spaces.EntityQuerySpaceImpl@3f985a86]
+Adding QuerySpace : uid = <gen:0> -> org.hibernate.loader.plan.build.internal.spaces.EntityQuerySpaceImpl@f9d87b]
 Visiting attribute path : createdAt
 Visiting attribute path : description
 Visiting attribute path : dueOn
@@ -572,7 +572,7 @@ LoadPlan(entity=fi.muni.cz.reliability.tool.dataprovider.GeneralMilestone)
           - suffixed key columns - {id1_3_0_}
 
 Static select for entity fi.muni.cz.reliability.tool.dataprovider.GeneralMilestone [FORCE]: select generalmil0_.id as id1_3_0_, generalmil0_.createdAt as createdA2_3_0_, generalmil0_.description as descript3_3_0_, generalmil0_.dueOn as dueOn4_3_0_, generalmil0_.MilestoneState as Mileston5_3_0_, generalmil0_.title as title6_3_0_ from GeneralMilestone generalmil0_ where generalmil0_.id=? for update with rs
-Adding QuerySpace : uid = <gen:0> -> org.hibernate.loader.plan.build.internal.spaces.EntityQuerySpaceImpl@12ffd1de]
+Adding QuerySpace : uid = <gen:0> -> org.hibernate.loader.plan.build.internal.spaces.EntityQuerySpaceImpl@26fb628]
 Visiting attribute path : createdAt
 Visiting attribute path : description
 Visiting attribute path : dueOn
@@ -590,7 +590,7 @@ LoadPlan(entity=fi.muni.cz.reliability.tool.dataprovider.GeneralMilestone)
           - suffixed key columns - {id1_3_0_}
 
 Static select for entity fi.muni.cz.reliability.tool.dataprovider.GeneralMilestone [PESSIMISTIC_READ]: select generalmil0_.id as id1_3_0_, generalmil0_.createdAt as createdA2_3_0_, generalmil0_.description as descript3_3_0_, generalmil0_.dueOn as dueOn4_3_0_, generalmil0_.MilestoneState as Mileston5_3_0_, generalmil0_.title as title6_3_0_ from GeneralMilestone generalmil0_ where generalmil0_.id=? for read only with rs
-Adding QuerySpace : uid = <gen:0> -> org.hibernate.loader.plan.build.internal.spaces.EntityQuerySpaceImpl@4096aa05]
+Adding QuerySpace : uid = <gen:0> -> org.hibernate.loader.plan.build.internal.spaces.EntityQuerySpaceImpl@70dd7e15]
 Visiting attribute path : createdAt
 Visiting attribute path : description
 Visiting attribute path : dueOn
@@ -608,7 +608,7 @@ LoadPlan(entity=fi.muni.cz.reliability.tool.dataprovider.GeneralMilestone)
           - suffixed key columns - {id1_3_0_}
 
 Static select for entity fi.muni.cz.reliability.tool.dataprovider.GeneralMilestone [PESSIMISTIC_WRITE]: select generalmil0_.id as id1_3_0_, generalmil0_.createdAt as createdA2_3_0_, generalmil0_.description as descript3_3_0_, generalmil0_.dueOn as dueOn4_3_0_, generalmil0_.MilestoneState as Mileston5_3_0_, generalmil0_.title as title6_3_0_ from GeneralMilestone generalmil0_ where generalmil0_.id=? for update with rs
-Adding QuerySpace : uid = <gen:0> -> org.hibernate.loader.plan.build.internal.spaces.EntityQuerySpaceImpl@6c806c8b]
+Adding QuerySpace : uid = <gen:0> -> org.hibernate.loader.plan.build.internal.spaces.EntityQuerySpaceImpl@35beb15e]
 Visiting attribute path : createdAt
 Visiting attribute path : description
 Visiting attribute path : dueOn
@@ -626,7 +626,7 @@ LoadPlan(entity=fi.muni.cz.reliability.tool.dataprovider.GeneralMilestone)
           - suffixed key columns - {id1_3_0_}
 
 Static select for entity fi.muni.cz.reliability.tool.dataprovider.GeneralMilestone [PESSIMISTIC_FORCE_INCREMENT]: select generalmil0_.id as id1_3_0_, generalmil0_.createdAt as createdA2_3_0_, generalmil0_.description as descript3_3_0_, generalmil0_.dueOn as dueOn4_3_0_, generalmil0_.MilestoneState as Mileston5_3_0_, generalmil0_.title as title6_3_0_ from GeneralMilestone generalmil0_ where generalmil0_.id=? for update with rs
-Adding QuerySpace : uid = <gen:0> -> org.hibernate.loader.plan.build.internal.spaces.EntityQuerySpaceImpl@184fb68d]
+Adding QuerySpace : uid = <gen:0> -> org.hibernate.loader.plan.build.internal.spaces.EntityQuerySpaceImpl@5ac86ba5]
 Visiting attribute path : createdAt
 Visiting attribute path : description
 Visiting attribute path : dueOn
@@ -644,7 +644,7 @@ LoadPlan(entity=fi.muni.cz.reliability.tool.dataprovider.GeneralMilestone)
           - suffixed key columns - {id1_3_0_}
 
 Static select for entity fi.muni.cz.reliability.tool.dataprovider.GeneralMilestone [OPTIMISTIC]: select generalmil0_.id as id1_3_0_, generalmil0_.createdAt as createdA2_3_0_, generalmil0_.description as descript3_3_0_, generalmil0_.dueOn as dueOn4_3_0_, generalmil0_.MilestoneState as Mileston5_3_0_, generalmil0_.title as title6_3_0_ from GeneralMilestone generalmil0_ where generalmil0_.id=?
-Adding QuerySpace : uid = <gen:0> -> org.hibernate.loader.plan.build.internal.spaces.EntityQuerySpaceImpl@1e530163]
+Adding QuerySpace : uid = <gen:0> -> org.hibernate.loader.plan.build.internal.spaces.EntityQuerySpaceImpl@2c9399a4]
 Visiting attribute path : createdAt
 Visiting attribute path : description
 Visiting attribute path : dueOn
@@ -671,7 +671,7 @@ Static SQL for entity: fi.muni.cz.reliability.tool.dataprovider.GeneralIssue
  Update 0: update GeneralIssue set body=?, closedAt=?, comments=?, createdAt=?, generalMilestone=?, generalUser=?, htmlUrl=?, number=?, snapshot_id=?, IssueState=?, title=?, updatedAt=?, url=? where id=?
  Delete 0: delete from GeneralIssue where id=?
  Identity insert: insert into GeneralIssue (id, body, closedAt, comments, createdAt, generalMilestone, generalUser, htmlUrl, number, snapshot_id, IssueState, title, updatedAt, url) values (default, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
-Adding QuerySpace : uid = <gen:0> -> org.hibernate.loader.plan.build.internal.spaces.EntityQuerySpaceImpl@7be7e15]
+Adding QuerySpace : uid = <gen:0> -> org.hibernate.loader.plan.build.internal.spaces.EntityQuerySpaceImpl@66629f63]
 Visiting attribute path : body
 Visiting attribute path : closedAt
 Visiting attribute path : comments
@@ -698,7 +698,7 @@ LoadPlan(entity=fi.muni.cz.reliability.tool.dataprovider.GeneralIssue)
           - suffixed key columns - {id1_1_0_}
 
 Static select for entity fi.muni.cz.reliability.tool.dataprovider.GeneralIssue [NONE]: select generaliss0_.id as id1_1_0_, generaliss0_.body as body2_1_0_, generaliss0_.closedAt as closedAt3_1_0_, generaliss0_.comments as comments4_1_0_, generaliss0_.createdAt as createdA5_1_0_, generaliss0_.generalMilestone as generalM6_1_0_, generaliss0_.generalUser as generalU7_1_0_, generaliss0_.htmlUrl as htmlUrl8_1_0_, generaliss0_.number as number9_1_0_, generaliss0_.snapshot_id as snapsho10_1_0_, generaliss0_.IssueState as IssueSt11_1_0_, generaliss0_.title as title12_1_0_, generaliss0_.updatedAt as updated13_1_0_, generaliss0_.url as url14_1_0_ from GeneralIssue generaliss0_ where generaliss0_.id=?
-Adding QuerySpace : uid = <gen:0> -> org.hibernate.loader.plan.build.internal.spaces.EntityQuerySpaceImpl@3bfc6a5e]
+Adding QuerySpace : uid = <gen:0> -> org.hibernate.loader.plan.build.internal.spaces.EntityQuerySpaceImpl@4ef27d66]
 Visiting attribute path : body
 Visiting attribute path : closedAt
 Visiting attribute path : comments
@@ -725,7 +725,7 @@ LoadPlan(entity=fi.muni.cz.reliability.tool.dataprovider.GeneralIssue)
           - suffixed key columns - {id1_1_0_}
 
 Static select for entity fi.muni.cz.reliability.tool.dataprovider.GeneralIssue [READ]: select generaliss0_.id as id1_1_0_, generaliss0_.body as body2_1_0_, generaliss0_.closedAt as closedAt3_1_0_, generaliss0_.comments as comments4_1_0_, generaliss0_.createdAt as createdA5_1_0_, generaliss0_.generalMilestone as generalM6_1_0_, generaliss0_.generalUser as generalU7_1_0_, generaliss0_.htmlUrl as htmlUrl8_1_0_, generaliss0_.number as number9_1_0_, generaliss0_.snapshot_id as snapsho10_1_0_, generaliss0_.IssueState as IssueSt11_1_0_, generaliss0_.title as title12_1_0_, generaliss0_.updatedAt as updated13_1_0_, generaliss0_.url as url14_1_0_ from GeneralIssue generaliss0_ where generaliss0_.id=?
-Adding QuerySpace : uid = <gen:0> -> org.hibernate.loader.plan.build.internal.spaces.EntityQuerySpaceImpl@abff8b7]
+Adding QuerySpace : uid = <gen:0> -> org.hibernate.loader.plan.build.internal.spaces.EntityQuerySpaceImpl@1d9bec4d]
 Visiting attribute path : body
 Visiting attribute path : closedAt
 Visiting attribute path : comments
@@ -752,7 +752,7 @@ LoadPlan(entity=fi.muni.cz.reliability.tool.dataprovider.GeneralIssue)
           - suffixed key columns - {id1_1_0_}
 
 Static select for entity fi.muni.cz.reliability.tool.dataprovider.GeneralIssue [UPGRADE]: select generaliss0_.id as id1_1_0_, generaliss0_.body as body2_1_0_, generaliss0_.closedAt as closedAt3_1_0_, generaliss0_.comments as comments4_1_0_, generaliss0_.createdAt as createdA5_1_0_, generaliss0_.generalMilestone as generalM6_1_0_, generaliss0_.generalUser as generalU7_1_0_, generaliss0_.htmlUrl as htmlUrl8_1_0_, generaliss0_.number as number9_1_0_, generaliss0_.snapshot_id as snapsho10_1_0_, generaliss0_.IssueState as IssueSt11_1_0_, generaliss0_.title as title12_1_0_, generaliss0_.updatedAt as updated13_1_0_, generaliss0_.url as url14_1_0_ from GeneralIssue generaliss0_ where generaliss0_.id=? for update with rs
-Adding QuerySpace : uid = <gen:0> -> org.hibernate.loader.plan.build.internal.spaces.EntityQuerySpaceImpl@350a94ce]
+Adding QuerySpace : uid = <gen:0> -> org.hibernate.loader.plan.build.internal.spaces.EntityQuerySpaceImpl@10c8f62]
 Visiting attribute path : body
 Visiting attribute path : closedAt
 Visiting attribute path : comments
@@ -779,7 +779,7 @@ LoadPlan(entity=fi.muni.cz.reliability.tool.dataprovider.GeneralIssue)
           - suffixed key columns - {id1_1_0_}
 
 Static select for entity fi.muni.cz.reliability.tool.dataprovider.GeneralIssue [UPGRADE_NOWAIT]: select generaliss0_.id as id1_1_0_, generaliss0_.body as body2_1_0_, generaliss0_.closedAt as closedAt3_1_0_, generaliss0_.comments as comments4_1_0_, generaliss0_.createdAt as createdA5_1_0_, generaliss0_.generalMilestone as generalM6_1_0_, generaliss0_.generalUser as generalU7_1_0_, generaliss0_.htmlUrl as htmlUrl8_1_0_, generaliss0_.number as number9_1_0_, generaliss0_.snapshot_id as snapsho10_1_0_, generaliss0_.IssueState as IssueSt11_1_0_, generaliss0_.title as title12_1_0_, generaliss0_.updatedAt as updated13_1_0_, generaliss0_.url as url14_1_0_ from GeneralIssue generaliss0_ where generaliss0_.id=? for update with rs
-Adding QuerySpace : uid = <gen:0> -> org.hibernate.loader.plan.build.internal.spaces.EntityQuerySpaceImpl@b0fc838]
+Adding QuerySpace : uid = <gen:0> -> org.hibernate.loader.plan.build.internal.spaces.EntityQuerySpaceImpl@25f7391e]
 Visiting attribute path : body
 Visiting attribute path : closedAt
 Visiting attribute path : comments
@@ -806,7 +806,7 @@ LoadPlan(entity=fi.muni.cz.reliability.tool.dataprovider.GeneralIssue)
           - suffixed key columns - {id1_1_0_}
 
 Static select for entity fi.muni.cz.reliability.tool.dataprovider.GeneralIssue [UPGRADE_SKIPLOCKED]: select generaliss0_.id as id1_1_0_, generaliss0_.body as body2_1_0_, generaliss0_.closedAt as closedAt3_1_0_, generaliss0_.comments as comments4_1_0_, generaliss0_.createdAt as createdA5_1_0_, generaliss0_.generalMilestone as generalM6_1_0_, generaliss0_.generalUser as generalU7_1_0_, generaliss0_.htmlUrl as htmlUrl8_1_0_, generaliss0_.number as number9_1_0_, generaliss0_.snapshot_id as snapsho10_1_0_, generaliss0_.IssueState as IssueSt11_1_0_, generaliss0_.title as title12_1_0_, generaliss0_.updatedAt as updated13_1_0_, generaliss0_.url as url14_1_0_ from GeneralIssue generaliss0_ where generaliss0_.id=? for update with rs
-Adding QuerySpace : uid = <gen:0> -> org.hibernate.loader.plan.build.internal.spaces.EntityQuerySpaceImpl@6ef1a1b9]
+Adding QuerySpace : uid = <gen:0> -> org.hibernate.loader.plan.build.internal.spaces.EntityQuerySpaceImpl@5fb97279]
 Visiting attribute path : body
 Visiting attribute path : closedAt
 Visiting attribute path : comments
@@ -833,7 +833,7 @@ LoadPlan(entity=fi.muni.cz.reliability.tool.dataprovider.GeneralIssue)
           - suffixed key columns - {id1_1_0_}
 
 Static select for entity fi.muni.cz.reliability.tool.dataprovider.GeneralIssue [FORCE]: select generaliss0_.id as id1_1_0_, generaliss0_.body as body2_1_0_, generaliss0_.closedAt as closedAt3_1_0_, generaliss0_.comments as comments4_1_0_, generaliss0_.createdAt as createdA5_1_0_, generaliss0_.generalMilestone as generalM6_1_0_, generaliss0_.generalUser as generalU7_1_0_, generaliss0_.htmlUrl as htmlUrl8_1_0_, generaliss0_.number as number9_1_0_, generaliss0_.snapshot_id as snapsho10_1_0_, generaliss0_.IssueState as IssueSt11_1_0_, generaliss0_.title as title12_1_0_, generaliss0_.updatedAt as updated13_1_0_, generaliss0_.url as url14_1_0_ from GeneralIssue generaliss0_ where generaliss0_.id=? for update with rs
-Adding QuerySpace : uid = <gen:0> -> org.hibernate.loader.plan.build.internal.spaces.EntityQuerySpaceImpl@65753040]
+Adding QuerySpace : uid = <gen:0> -> org.hibernate.loader.plan.build.internal.spaces.EntityQuerySpaceImpl@61861a29]
 Visiting attribute path : body
 Visiting attribute path : closedAt
 Visiting attribute path : comments
@@ -860,7 +860,7 @@ LoadPlan(entity=fi.muni.cz.reliability.tool.dataprovider.GeneralIssue)
           - suffixed key columns - {id1_1_0_}
 
 Static select for entity fi.muni.cz.reliability.tool.dataprovider.GeneralIssue [PESSIMISTIC_READ]: select generaliss0_.id as id1_1_0_, generaliss0_.body as body2_1_0_, generaliss0_.closedAt as closedAt3_1_0_, generaliss0_.comments as comments4_1_0_, generaliss0_.createdAt as createdA5_1_0_, generaliss0_.generalMilestone as generalM6_1_0_, generaliss0_.generalUser as generalU7_1_0_, generaliss0_.htmlUrl as htmlUrl8_1_0_, generaliss0_.number as number9_1_0_, generaliss0_.snapshot_id as snapsho10_1_0_, generaliss0_.IssueState as IssueSt11_1_0_, generaliss0_.title as title12_1_0_, generaliss0_.updatedAt as updated13_1_0_, generaliss0_.url as url14_1_0_ from GeneralIssue generaliss0_ where generaliss0_.id=? for read only with rs
-Adding QuerySpace : uid = <gen:0> -> org.hibernate.loader.plan.build.internal.spaces.EntityQuerySpaceImpl@4acb2510]
+Adding QuerySpace : uid = <gen:0> -> org.hibernate.loader.plan.build.internal.spaces.EntityQuerySpaceImpl@25bcd0c7]
 Visiting attribute path : body
 Visiting attribute path : closedAt
 Visiting attribute path : comments
@@ -887,7 +887,7 @@ LoadPlan(entity=fi.muni.cz.reliability.tool.dataprovider.GeneralIssue)
           - suffixed key columns - {id1_1_0_}
 
 Static select for entity fi.muni.cz.reliability.tool.dataprovider.GeneralIssue [PESSIMISTIC_WRITE]: select generaliss0_.id as id1_1_0_, generaliss0_.body as body2_1_0_, generaliss0_.closedAt as closedAt3_1_0_, generaliss0_.comments as comments4_1_0_, generaliss0_.createdAt as createdA5_1_0_, generaliss0_.generalMilestone as generalM6_1_0_, generaliss0_.generalUser as generalU7_1_0_, generaliss0_.htmlUrl as htmlUrl8_1_0_, generaliss0_.number as number9_1_0_, generaliss0_.snapshot_id as snapsho10_1_0_, generaliss0_.IssueState as IssueSt11_1_0_, generaliss0_.title as title12_1_0_, generaliss0_.updatedAt as updated13_1_0_, generaliss0_.url as url14_1_0_ from GeneralIssue generaliss0_ where generaliss0_.id=? for update with rs
-Adding QuerySpace : uid = <gen:0> -> org.hibernate.loader.plan.build.internal.spaces.EntityQuerySpaceImpl@37d871c2]
+Adding QuerySpace : uid = <gen:0> -> org.hibernate.loader.plan.build.internal.spaces.EntityQuerySpaceImpl@63cd604c]
 Visiting attribute path : body
 Visiting attribute path : closedAt
 Visiting attribute path : comments
@@ -914,7 +914,7 @@ LoadPlan(entity=fi.muni.cz.reliability.tool.dataprovider.GeneralIssue)
           - suffixed key columns - {id1_1_0_}
 
 Static select for entity fi.muni.cz.reliability.tool.dataprovider.GeneralIssue [PESSIMISTIC_FORCE_INCREMENT]: select generaliss0_.id as id1_1_0_, generaliss0_.body as body2_1_0_, generaliss0_.closedAt as closedAt3_1_0_, generaliss0_.comments as comments4_1_0_, generaliss0_.createdAt as createdA5_1_0_, generaliss0_.generalMilestone as generalM6_1_0_, generaliss0_.generalUser as generalU7_1_0_, generaliss0_.htmlUrl as htmlUrl8_1_0_, generaliss0_.number as number9_1_0_, generaliss0_.snapshot_id as snapsho10_1_0_, generaliss0_.IssueState as IssueSt11_1_0_, generaliss0_.title as title12_1_0_, generaliss0_.updatedAt as updated13_1_0_, generaliss0_.url as url14_1_0_ from GeneralIssue generaliss0_ where generaliss0_.id=? for update with rs
-Adding QuerySpace : uid = <gen:0> -> org.hibernate.loader.plan.build.internal.spaces.EntityQuerySpaceImpl@285f38f6]
+Adding QuerySpace : uid = <gen:0> -> org.hibernate.loader.plan.build.internal.spaces.EntityQuerySpaceImpl@3a4e343]
 Visiting attribute path : body
 Visiting attribute path : closedAt
 Visiting attribute path : comments
@@ -941,7 +941,7 @@ LoadPlan(entity=fi.muni.cz.reliability.tool.dataprovider.GeneralIssue)
           - suffixed key columns - {id1_1_0_}
 
 Static select for entity fi.muni.cz.reliability.tool.dataprovider.GeneralIssue [OPTIMISTIC]: select generaliss0_.id as id1_1_0_, generaliss0_.body as body2_1_0_, generaliss0_.closedAt as closedAt3_1_0_, generaliss0_.comments as comments4_1_0_, generaliss0_.createdAt as createdA5_1_0_, generaliss0_.generalMilestone as generalM6_1_0_, generaliss0_.generalUser as generalU7_1_0_, generaliss0_.htmlUrl as htmlUrl8_1_0_, generaliss0_.number as number9_1_0_, generaliss0_.snapshot_id as snapsho10_1_0_, generaliss0_.IssueState as IssueSt11_1_0_, generaliss0_.title as title12_1_0_, generaliss0_.updatedAt as updated13_1_0_, generaliss0_.url as url14_1_0_ from GeneralIssue generaliss0_ where generaliss0_.id=?
-Adding QuerySpace : uid = <gen:0> -> org.hibernate.loader.plan.build.internal.spaces.EntityQuerySpaceImpl@3ab6678b]
+Adding QuerySpace : uid = <gen:0> -> org.hibernate.loader.plan.build.internal.spaces.EntityQuerySpaceImpl@62dae245]
 Visiting attribute path : body
 Visiting attribute path : closedAt
 Visiting attribute path : comments
@@ -977,7 +977,7 @@ Static SQL for entity: fi.muni.cz.reliability.tool.dataprovider.GeneralUser
  Update 0: update GeneralUser set email=?, name=? where id=?
  Delete 0: delete from GeneralUser where id=?
  Identity insert: insert into GeneralUser (id, email, name) values (default, ?, ?)
-Adding QuerySpace : uid = <gen:0> -> org.hibernate.loader.plan.build.internal.spaces.EntityQuerySpaceImpl@2b59501e]
+Adding QuerySpace : uid = <gen:0> -> org.hibernate.loader.plan.build.internal.spaces.EntityQuerySpaceImpl@6fff253c]
 Visiting attribute path : email
 Visiting attribute path : name
 Building LoadPlan...
@@ -992,7 +992,7 @@ LoadPlan(entity=fi.muni.cz.reliability.tool.dataprovider.GeneralUser)
           - suffixed key columns - {id1_4_0_}
 
 Static select for entity fi.muni.cz.reliability.tool.dataprovider.GeneralUser [NONE]: select generaluse0_.id as id1_4_0_, generaluse0_.email as email2_4_0_, generaluse0_.name as name3_4_0_ from GeneralUser generaluse0_ where generaluse0_.id=?
-Adding QuerySpace : uid = <gen:0> -> org.hibernate.loader.plan.build.internal.spaces.EntityQuerySpaceImpl@4eed2acf]
+Adding QuerySpace : uid = <gen:0> -> org.hibernate.loader.plan.build.internal.spaces.EntityQuerySpaceImpl@591e58fa]
 Visiting attribute path : email
 Visiting attribute path : name
 Building LoadPlan...
@@ -1007,7 +1007,7 @@ LoadPlan(entity=fi.muni.cz.reliability.tool.dataprovider.GeneralUser)
           - suffixed key columns - {id1_4_0_}
 
 Static select for entity fi.muni.cz.reliability.tool.dataprovider.GeneralUser [READ]: select generaluse0_.id as id1_4_0_, generaluse0_.email as email2_4_0_, generaluse0_.name as name3_4_0_ from GeneralUser generaluse0_ where generaluse0_.id=?
-Adding QuerySpace : uid = <gen:0> -> org.hibernate.loader.plan.build.internal.spaces.EntityQuerySpaceImpl@57c47a9e]
+Adding QuerySpace : uid = <gen:0> -> org.hibernate.loader.plan.build.internal.spaces.EntityQuerySpaceImpl@2f94c4db]
 Visiting attribute path : email
 Visiting attribute path : name
 Building LoadPlan...
@@ -1022,7 +1022,7 @@ LoadPlan(entity=fi.muni.cz.reliability.tool.dataprovider.GeneralUser)
           - suffixed key columns - {id1_4_0_}
 
 Static select for entity fi.muni.cz.reliability.tool.dataprovider.GeneralUser [UPGRADE]: select generaluse0_.id as id1_4_0_, generaluse0_.email as email2_4_0_, generaluse0_.name as name3_4_0_ from GeneralUser generaluse0_ where generaluse0_.id=? for update with rs
-Adding QuerySpace : uid = <gen:0> -> org.hibernate.loader.plan.build.internal.spaces.EntityQuerySpaceImpl@4339e0de]
+Adding QuerySpace : uid = <gen:0> -> org.hibernate.loader.plan.build.internal.spaces.EntityQuerySpaceImpl@72ccd81a]
 Visiting attribute path : email
 Visiting attribute path : name
 Building LoadPlan...
@@ -1037,7 +1037,7 @@ LoadPlan(entity=fi.muni.cz.reliability.tool.dataprovider.GeneralUser)
           - suffixed key columns - {id1_4_0_}
 
 Static select for entity fi.muni.cz.reliability.tool.dataprovider.GeneralUser [UPGRADE_NOWAIT]: select generaluse0_.id as id1_4_0_, generaluse0_.email as email2_4_0_, generaluse0_.name as name3_4_0_ from GeneralUser generaluse0_ where generaluse0_.id=? for update with rs
-Adding QuerySpace : uid = <gen:0> -> org.hibernate.loader.plan.build.internal.spaces.EntityQuerySpaceImpl@61d84e08]
+Adding QuerySpace : uid = <gen:0> -> org.hibernate.loader.plan.build.internal.spaces.EntityQuerySpaceImpl@64bc21ac]
 Visiting attribute path : email
 Visiting attribute path : name
 Building LoadPlan...
@@ -1052,7 +1052,7 @@ LoadPlan(entity=fi.muni.cz.reliability.tool.dataprovider.GeneralUser)
           - suffixed key columns - {id1_4_0_}
 
 Static select for entity fi.muni.cz.reliability.tool.dataprovider.GeneralUser [UPGRADE_SKIPLOCKED]: select generaluse0_.id as id1_4_0_, generaluse0_.email as email2_4_0_, generaluse0_.name as name3_4_0_ from GeneralUser generaluse0_ where generaluse0_.id=? for update with rs
-Adding QuerySpace : uid = <gen:0> -> org.hibernate.loader.plan.build.internal.spaces.EntityQuerySpaceImpl@21ac5eb4]
+Adding QuerySpace : uid = <gen:0> -> org.hibernate.loader.plan.build.internal.spaces.EntityQuerySpaceImpl@5d25e6bb]
 Visiting attribute path : email
 Visiting attribute path : name
 Building LoadPlan...
@@ -1067,7 +1067,7 @@ LoadPlan(entity=fi.muni.cz.reliability.tool.dataprovider.GeneralUser)
           - suffixed key columns - {id1_4_0_}
 
 Static select for entity fi.muni.cz.reliability.tool.dataprovider.GeneralUser [FORCE]: select generaluse0_.id as id1_4_0_, generaluse0_.email as email2_4_0_, generaluse0_.name as name3_4_0_ from GeneralUser generaluse0_ where generaluse0_.id=? for update with rs
-Adding QuerySpace : uid = <gen:0> -> org.hibernate.loader.plan.build.internal.spaces.EntityQuerySpaceImpl@715d6168]
+Adding QuerySpace : uid = <gen:0> -> org.hibernate.loader.plan.build.internal.spaces.EntityQuerySpaceImpl@9d157ff]
 Visiting attribute path : email
 Visiting attribute path : name
 Building LoadPlan...
@@ -1082,7 +1082,7 @@ LoadPlan(entity=fi.muni.cz.reliability.tool.dataprovider.GeneralUser)
           - suffixed key columns - {id1_4_0_}
 
 Static select for entity fi.muni.cz.reliability.tool.dataprovider.GeneralUser [PESSIMISTIC_READ]: select generaluse0_.id as id1_4_0_, generaluse0_.email as email2_4_0_, generaluse0_.name as name3_4_0_ from GeneralUser generaluse0_ where generaluse0_.id=? for read only with rs
-Adding QuerySpace : uid = <gen:0> -> org.hibernate.loader.plan.build.internal.spaces.EntityQuerySpaceImpl@6428591a]
+Adding QuerySpace : uid = <gen:0> -> org.hibernate.loader.plan.build.internal.spaces.EntityQuerySpaceImpl@5df417a7]
 Visiting attribute path : email
 Visiting attribute path : name
 Building LoadPlan...
@@ -1097,7 +1097,7 @@ LoadPlan(entity=fi.muni.cz.reliability.tool.dataprovider.GeneralUser)
           - suffixed key columns - {id1_4_0_}
 
 Static select for entity fi.muni.cz.reliability.tool.dataprovider.GeneralUser [PESSIMISTIC_WRITE]: select generaluse0_.id as id1_4_0_, generaluse0_.email as email2_4_0_, generaluse0_.name as name3_4_0_ from GeneralUser generaluse0_ where generaluse0_.id=? for update with rs
-Adding QuerySpace : uid = <gen:0> -> org.hibernate.loader.plan.build.internal.spaces.EntityQuerySpaceImpl@1abfe081]
+Adding QuerySpace : uid = <gen:0> -> org.hibernate.loader.plan.build.internal.spaces.EntityQuerySpaceImpl@7f69d591]
 Visiting attribute path : email
 Visiting attribute path : name
 Building LoadPlan...
@@ -1112,7 +1112,7 @@ LoadPlan(entity=fi.muni.cz.reliability.tool.dataprovider.GeneralUser)
           - suffixed key columns - {id1_4_0_}
 
 Static select for entity fi.muni.cz.reliability.tool.dataprovider.GeneralUser [PESSIMISTIC_FORCE_INCREMENT]: select generaluse0_.id as id1_4_0_, generaluse0_.email as email2_4_0_, generaluse0_.name as name3_4_0_ from GeneralUser generaluse0_ where generaluse0_.id=? for update with rs
-Adding QuerySpace : uid = <gen:0> -> org.hibernate.loader.plan.build.internal.spaces.EntityQuerySpaceImpl@c2e3264]
+Adding QuerySpace : uid = <gen:0> -> org.hibernate.loader.plan.build.internal.spaces.EntityQuerySpaceImpl@1cb3ec38]
 Visiting attribute path : email
 Visiting attribute path : name
 Building LoadPlan...
@@ -1127,7 +1127,7 @@ LoadPlan(entity=fi.muni.cz.reliability.tool.dataprovider.GeneralUser)
           - suffixed key columns - {id1_4_0_}
 
 Static select for entity fi.muni.cz.reliability.tool.dataprovider.GeneralUser [OPTIMISTIC]: select generaluse0_.id as id1_4_0_, generaluse0_.email as email2_4_0_, generaluse0_.name as name3_4_0_ from GeneralUser generaluse0_ where generaluse0_.id=?
-Adding QuerySpace : uid = <gen:0> -> org.hibernate.loader.plan.build.internal.spaces.EntityQuerySpaceImpl@75a118e6]
+Adding QuerySpace : uid = <gen:0> -> org.hibernate.loader.plan.build.internal.spaces.EntityQuerySpaceImpl@71c5b236]
 Visiting attribute path : email
 Visiting attribute path : name
 Building LoadPlan...
@@ -1151,7 +1151,7 @@ Static SQL for entity: fi.muni.cz.reliability.tool.dataprocessing.persistence.Ge
  Update 0: update GENERALISSUE_SNAPSHOT set createdAt=?, repositoryName=?, snapshotName=?, url=?, userName=? where id=?
  Delete 0: delete from GENERALISSUE_SNAPSHOT where id=?
  Identity insert: insert into GENERALISSUE_SNAPSHOT (id, createdAt, repositoryName, snapshotName, url, userName) values (default, ?, ?, ?, ?, ?)
-Adding QuerySpace : uid = <gen:0> -> org.hibernate.loader.plan.build.internal.spaces.EntityQuerySpaceImpl@6014a9ba]
+Adding QuerySpace : uid = <gen:0> -> org.hibernate.loader.plan.build.internal.spaces.EntityQuerySpaceImpl@2f7a7219]
 Visiting attribute path : createdAt
 Visiting attribute path : listOfGeneralIssues
 Visiting attribute path : repositoryName
@@ -1170,7 +1170,7 @@ LoadPlan(entity=fi.muni.cz.reliability.tool.dataprocessing.persistence.GeneralIs
           - suffixed key columns - {id1_0_0_}
 
 Static select for entity fi.muni.cz.reliability.tool.dataprocessing.persistence.GeneralIssuesSnapshot [NONE]: select generaliss0_.id as id1_0_0_, generaliss0_.createdAt as createdA2_0_0_, generaliss0_.repositoryName as reposito3_0_0_, generaliss0_.snapshotName as snapshot4_0_0_, generaliss0_.url as url5_0_0_, generaliss0_.userName as userName6_0_0_ from GENERALISSUE_SNAPSHOT generaliss0_ where generaliss0_.id=?
-Adding QuerySpace : uid = <gen:0> -> org.hibernate.loader.plan.build.internal.spaces.EntityQuerySpaceImpl@77d680e6]
+Adding QuerySpace : uid = <gen:0> -> org.hibernate.loader.plan.build.internal.spaces.EntityQuerySpaceImpl@3a1d593e]
 Visiting attribute path : createdAt
 Visiting attribute path : listOfGeneralIssues
 Visiting attribute path : repositoryName
@@ -1189,7 +1189,7 @@ LoadPlan(entity=fi.muni.cz.reliability.tool.dataprocessing.persistence.GeneralIs
           - suffixed key columns - {id1_0_0_}
 
 Static select for entity fi.muni.cz.reliability.tool.dataprocessing.persistence.GeneralIssuesSnapshot [READ]: select generaliss0_.id as id1_0_0_, generaliss0_.createdAt as createdA2_0_0_, generaliss0_.repositoryName as reposito3_0_0_, generaliss0_.snapshotName as snapshot4_0_0_, generaliss0_.url as url5_0_0_, generaliss0_.userName as userName6_0_0_ from GENERALISSUE_SNAPSHOT generaliss0_ where generaliss0_.id=?
-Adding QuerySpace : uid = <gen:0> -> org.hibernate.loader.plan.build.internal.spaces.EntityQuerySpaceImpl@f08fdce]
+Adding QuerySpace : uid = <gen:0> -> org.hibernate.loader.plan.build.internal.spaces.EntityQuerySpaceImpl@361c294e]
 Visiting attribute path : createdAt
 Visiting attribute path : listOfGeneralIssues
 Visiting attribute path : repositoryName
@@ -1208,7 +1208,7 @@ LoadPlan(entity=fi.muni.cz.reliability.tool.dataprocessing.persistence.GeneralIs
           - suffixed key columns - {id1_0_0_}
 
 Static select for entity fi.muni.cz.reliability.tool.dataprocessing.persistence.GeneralIssuesSnapshot [UPGRADE]: select generaliss0_.id as id1_0_0_, generaliss0_.createdAt as createdA2_0_0_, generaliss0_.repositoryName as reposito3_0_0_, generaliss0_.snapshotName as snapshot4_0_0_, generaliss0_.url as url5_0_0_, generaliss0_.userName as userName6_0_0_ from GENERALISSUE_SNAPSHOT generaliss0_ where generaliss0_.id=? for update with rs
-Adding QuerySpace : uid = <gen:0> -> org.hibernate.loader.plan.build.internal.spaces.EntityQuerySpaceImpl@28c86134]
+Adding QuerySpace : uid = <gen:0> -> org.hibernate.loader.plan.build.internal.spaces.EntityQuerySpaceImpl@285d851a]
 Visiting attribute path : createdAt
 Visiting attribute path : listOfGeneralIssues
 Visiting attribute path : repositoryName
@@ -1227,7 +1227,7 @@ LoadPlan(entity=fi.muni.cz.reliability.tool.dataprocessing.persistence.GeneralIs
           - suffixed key columns - {id1_0_0_}
 
 Static select for entity fi.muni.cz.reliability.tool.dataprocessing.persistence.GeneralIssuesSnapshot [UPGRADE_NOWAIT]: select generaliss0_.id as id1_0_0_, generaliss0_.createdAt as createdA2_0_0_, generaliss0_.repositoryName as reposito3_0_0_, generaliss0_.snapshotName as snapshot4_0_0_, generaliss0_.url as url5_0_0_, generaliss0_.userName as userName6_0_0_ from GENERALISSUE_SNAPSHOT generaliss0_ where generaliss0_.id=? for update with rs
-Adding QuerySpace : uid = <gen:0> -> org.hibernate.loader.plan.build.internal.spaces.EntityQuerySpaceImpl@cbc8d0f]
+Adding QuerySpace : uid = <gen:0> -> org.hibernate.loader.plan.build.internal.spaces.EntityQuerySpaceImpl@664a9613]
 Visiting attribute path : createdAt
 Visiting attribute path : listOfGeneralIssues
 Visiting attribute path : repositoryName
@@ -1246,7 +1246,7 @@ LoadPlan(entity=fi.muni.cz.reliability.tool.dataprocessing.persistence.GeneralIs
           - suffixed key columns - {id1_0_0_}
 
 Static select for entity fi.muni.cz.reliability.tool.dataprocessing.persistence.GeneralIssuesSnapshot [UPGRADE_SKIPLOCKED]: select generaliss0_.id as id1_0_0_, generaliss0_.createdAt as createdA2_0_0_, generaliss0_.repositoryName as reposito3_0_0_, generaliss0_.snapshotName as snapshot4_0_0_, generaliss0_.url as url5_0_0_, generaliss0_.userName as userName6_0_0_ from GENERALISSUE_SNAPSHOT generaliss0_ where generaliss0_.id=? for update with rs
-Adding QuerySpace : uid = <gen:0> -> org.hibernate.loader.plan.build.internal.spaces.EntityQuerySpaceImpl@5c1f6d57]
+Adding QuerySpace : uid = <gen:0> -> org.hibernate.loader.plan.build.internal.spaces.EntityQuerySpaceImpl@15a902e7]
 Visiting attribute path : createdAt
 Visiting attribute path : listOfGeneralIssues
 Visiting attribute path : repositoryName
@@ -1265,7 +1265,7 @@ LoadPlan(entity=fi.muni.cz.reliability.tool.dataprocessing.persistence.GeneralIs
           - suffixed key columns - {id1_0_0_}
 
 Static select for entity fi.muni.cz.reliability.tool.dataprocessing.persistence.GeneralIssuesSnapshot [FORCE]: select generaliss0_.id as id1_0_0_, generaliss0_.createdAt as createdA2_0_0_, generaliss0_.repositoryName as reposito3_0_0_, generaliss0_.snapshotName as snapshot4_0_0_, generaliss0_.url as url5_0_0_, generaliss0_.userName as userName6_0_0_ from GENERALISSUE_SNAPSHOT generaliss0_ where generaliss0_.id=? for update with rs
-Adding QuerySpace : uid = <gen:0> -> org.hibernate.loader.plan.build.internal.spaces.EntityQuerySpaceImpl@6794ac0b]
+Adding QuerySpace : uid = <gen:0> -> org.hibernate.loader.plan.build.internal.spaces.EntityQuerySpaceImpl@4a3e3e8b]
 Visiting attribute path : createdAt
 Visiting attribute path : listOfGeneralIssues
 Visiting attribute path : repositoryName
@@ -1284,7 +1284,7 @@ LoadPlan(entity=fi.muni.cz.reliability.tool.dataprocessing.persistence.GeneralIs
           - suffixed key columns - {id1_0_0_}
 
 Static select for entity fi.muni.cz.reliability.tool.dataprocessing.persistence.GeneralIssuesSnapshot [PESSIMISTIC_READ]: select generaliss0_.id as id1_0_0_, generaliss0_.createdAt as createdA2_0_0_, generaliss0_.repositoryName as reposito3_0_0_, generaliss0_.snapshotName as snapshot4_0_0_, generaliss0_.url as url5_0_0_, generaliss0_.userName as userName6_0_0_ from GENERALISSUE_SNAPSHOT generaliss0_ where generaliss0_.id=? for read only with rs
-Adding QuerySpace : uid = <gen:0> -> org.hibernate.loader.plan.build.internal.spaces.EntityQuerySpaceImpl@5cb5bb88]
+Adding QuerySpace : uid = <gen:0> -> org.hibernate.loader.plan.build.internal.spaces.EntityQuerySpaceImpl@71104a4]
 Visiting attribute path : createdAt
 Visiting attribute path : listOfGeneralIssues
 Visiting attribute path : repositoryName
@@ -1303,7 +1303,7 @@ LoadPlan(entity=fi.muni.cz.reliability.tool.dataprocessing.persistence.GeneralIs
           - suffixed key columns - {id1_0_0_}
 
 Static select for entity fi.muni.cz.reliability.tool.dataprocessing.persistence.GeneralIssuesSnapshot [PESSIMISTIC_WRITE]: select generaliss0_.id as id1_0_0_, generaliss0_.createdAt as createdA2_0_0_, generaliss0_.repositoryName as reposito3_0_0_, generaliss0_.snapshotName as snapshot4_0_0_, generaliss0_.url as url5_0_0_, generaliss0_.userName as userName6_0_0_ from GENERALISSUE_SNAPSHOT generaliss0_ where generaliss0_.id=? for update with rs
-Adding QuerySpace : uid = <gen:0> -> org.hibernate.loader.plan.build.internal.spaces.EntityQuerySpaceImpl@5580d62f]
+Adding QuerySpace : uid = <gen:0> -> org.hibernate.loader.plan.build.internal.spaces.EntityQuerySpaceImpl@72f46e16]
 Visiting attribute path : createdAt
 Visiting attribute path : listOfGeneralIssues
 Visiting attribute path : repositoryName
@@ -1322,7 +1322,7 @@ LoadPlan(entity=fi.muni.cz.reliability.tool.dataprocessing.persistence.GeneralIs
           - suffixed key columns - {id1_0_0_}
 
 Static select for entity fi.muni.cz.reliability.tool.dataprocessing.persistence.GeneralIssuesSnapshot [PESSIMISTIC_FORCE_INCREMENT]: select generaliss0_.id as id1_0_0_, generaliss0_.createdAt as createdA2_0_0_, generaliss0_.repositoryName as reposito3_0_0_, generaliss0_.snapshotName as snapshot4_0_0_, generaliss0_.url as url5_0_0_, generaliss0_.userName as userName6_0_0_ from GENERALISSUE_SNAPSHOT generaliss0_ where generaliss0_.id=? for update with rs
-Adding QuerySpace : uid = <gen:0> -> org.hibernate.loader.plan.build.internal.spaces.EntityQuerySpaceImpl@671facee]
+Adding QuerySpace : uid = <gen:0> -> org.hibernate.loader.plan.build.internal.spaces.EntityQuerySpaceImpl@332a7fce]
 Visiting attribute path : createdAt
 Visiting attribute path : listOfGeneralIssues
 Visiting attribute path : repositoryName
@@ -1341,7 +1341,7 @@ LoadPlan(entity=fi.muni.cz.reliability.tool.dataprocessing.persistence.GeneralIs
           - suffixed key columns - {id1_0_0_}
 
 Static select for entity fi.muni.cz.reliability.tool.dataprocessing.persistence.GeneralIssuesSnapshot [OPTIMISTIC]: select generaliss0_.id as id1_0_0_, generaliss0_.createdAt as createdA2_0_0_, generaliss0_.repositoryName as reposito3_0_0_, generaliss0_.snapshotName as snapshot4_0_0_, generaliss0_.url as url5_0_0_, generaliss0_.userName as userName6_0_0_ from GENERALISSUE_SNAPSHOT generaliss0_ where generaliss0_.id=?
-Adding QuerySpace : uid = <gen:0> -> org.hibernate.loader.plan.build.internal.spaces.EntityQuerySpaceImpl@154bd49b]
+Adding QuerySpace : uid = <gen:0> -> org.hibernate.loader.plan.build.internal.spaces.EntityQuerySpaceImpl@54361a9]
 Visiting attribute path : createdAt
 Visiting attribute path : listOfGeneralIssues
 Visiting attribute path : repositoryName
@@ -1362,8 +1362,8 @@ LoadPlan(entity=fi.muni.cz.reliability.tool.dataprocessing.persistence.GeneralIs
 Static select for entity fi.muni.cz.reliability.tool.dataprocessing.persistence.GeneralIssuesSnapshot [OPTIMISTIC_FORCE_INCREMENT]: select generaliss0_.id as id1_0_0_, generaliss0_.createdAt as createdA2_0_0_, generaliss0_.repositoryName as reposito3_0_0_, generaliss0_.snapshotName as snapshot4_0_0_, generaliss0_.url as url5_0_0_, generaliss0_.userName as userName6_0_0_ from GENERALISSUE_SNAPSHOT generaliss0_ where generaliss0_.id=?
 Static select for action ACTION_MERGE on entity fi.muni.cz.reliability.tool.dataprocessing.persistence.GeneralIssuesSnapshot: select generaliss0_.id as id1_0_1_, generaliss0_.createdAt as createdA2_0_1_, generaliss0_.repositoryName as reposito3_0_1_, generaliss0_.snapshotName as snapshot4_0_1_, generaliss0_.url as url5_0_1_, generaliss0_.userName as userName6_0_1_, listofgene1_.snapshot_id as snapsho10_0_3_, listofgene1_.id as id1_1_3_, listofgene1_.id as id1_1_0_, listofgene1_.body as body2_1_0_, listofgene1_.closedAt as closedAt3_1_0_, listofgene1_.comments as comments4_1_0_, listofgene1_.createdAt as createdA5_1_0_, listofgene1_.generalMilestone as generalM6_1_0_, listofgene1_.generalUser as generalU7_1_0_, listofgene1_.htmlUrl as htmlUrl8_1_0_, listofgene1_.number as number9_1_0_, listofgene1_.snapshot_id as snapsho10_1_0_, listofgene1_.IssueState as IssueSt11_1_0_, listofgene1_.title as title12_1_0_, listofgene1_.updatedAt as updated13_1_0_, listofgene1_.url as url14_1_0_ from GENERALISSUE_SNAPSHOT generaliss0_ left outer join GeneralIssue listofgene1_ on generaliss0_.id=listofgene1_.snapshot_id where generaliss0_.id=?
 Static select for action ACTION_REFRESH on entity fi.muni.cz.reliability.tool.dataprocessing.persistence.GeneralIssuesSnapshot: select generaliss0_.id as id1_0_0_, generaliss0_.createdAt as createdA2_0_0_, generaliss0_.repositoryName as reposito3_0_0_, generaliss0_.snapshotName as snapshot4_0_0_, generaliss0_.url as url5_0_0_, generaliss0_.userName as userName6_0_0_ from GENERALISSUE_SNAPSHOT generaliss0_ where generaliss0_.id=?
-Adding QuerySpace : uid = <gen:0> -> org.hibernate.loader.plan.build.internal.spaces.CollectionQuerySpaceImpl@70f822e]
-Adding QuerySpace : uid = <gen:1> -> org.hibernate.loader.plan.build.internal.spaces.EntityQuerySpaceImpl@17a703f5]
+Adding QuerySpace : uid = <gen:0> -> org.hibernate.loader.plan.build.internal.spaces.CollectionQuerySpaceImpl@532a02d9]
+Adding QuerySpace : uid = <gen:1> -> org.hibernate.loader.plan.build.internal.spaces.EntityQuerySpaceImpl@7cbee484]
 Visiting attribute path : body
 Visiting attribute path : closedAt
 Visiting attribute path : comments
@@ -1398,7 +1398,7 @@ LoadPlan(collection=fi.muni.cz.reliability.tool.dataprocessing.persistence.Gener
                 - suffixed key columns - {id1_1_1_}
 
 Static select for collection fi.muni.cz.reliability.tool.dataprocessing.persistence.GeneralIssuesSnapshot.listOfGeneralIssues: select listofgene0_.snapshot_id as snapsho10_0_0_, listofgene0_.id as id1_1_0_, listofgene0_.id as id1_1_1_, listofgene0_.body as body2_1_1_, listofgene0_.closedAt as closedAt3_1_1_, listofgene0_.comments as comments4_1_1_, listofgene0_.createdAt as createdA5_1_1_, listofgene0_.generalMilestone as generalM6_1_1_, listofgene0_.generalUser as generalU7_1_1_, listofgene0_.htmlUrl as htmlUrl8_1_1_, listofgene0_.number as number9_1_1_, listofgene0_.snapshot_id as snapsho10_1_1_, listofgene0_.IssueState as IssueSt11_1_1_, listofgene0_.title as title12_1_1_, listofgene0_.updatedAt as updated13_1_1_, listofgene0_.url as url14_1_1_ from GeneralIssue listofgene0_ where listofgene0_.snapshot_id=?
-Adding QuerySpace : uid = <gen:0> -> org.hibernate.loader.plan.build.internal.spaces.CollectionQuerySpaceImpl@316a598d]
+Adding QuerySpace : uid = <gen:0> -> org.hibernate.loader.plan.build.internal.spaces.CollectionQuerySpaceImpl@a486d78]
 Building LoadPlan...
 processing queryspace <gen:0>
 LoadPlan(collection=fi.muni.cz.reliability.tool.dataprovider.GeneralIssue.labels)
@@ -1411,8 +1411,8 @@ LoadPlan(collection=fi.muni.cz.reliability.tool.dataprovider.GeneralIssue.labels
           - suffixed key columns - {GeneralI1_1_0_}
 
 Static select for collection fi.muni.cz.reliability.tool.dataprovider.GeneralIssue.labels: select labels0_.GeneralIssue_id as GeneralI1_1_0_, labels0_.labels as labels2_2_0_ from GeneralIssue_labels labels0_ where labels0_.GeneralIssue_id=?
-Initializing SessionFactoryRegistry : org.hibernate.internal.SessionFactoryRegistry@3936df72
-Registering SessionFactory: 8eac2f1e-45be-4a31-92ae-0493e283b20a (<unnamed>)
+Initializing SessionFactoryRegistry : org.hibernate.internal.SessionFactoryRegistry@7caa550
+Registering SessionFactory: 868ba00a-bc38-4db6-a796-0fa1aabe5fd4 (<unnamed>)
 Not binding SessionFactory to JNDI, no JNDI name configured
 Instantiated session factory
 HHH000228: Running hbm2ddl schema update
@@ -1487,102 +1487,102 @@ Database 'IssuesDB' not created, connection made to existing database instead.
 Checking 0 named HQL queries
 Checking 0 named SQL queries
 Statistics initialized [enabled=false]
-Adding type registration boolean -> org.hibernate.type.BooleanType@4445629
-Adding type registration boolean -> org.hibernate.type.BooleanType@4445629
-Adding type registration java.lang.Boolean -> org.hibernate.type.BooleanType@4445629
-Adding type registration numeric_boolean -> org.hibernate.type.NumericBooleanType@318ba8c8
-Adding type registration true_false -> org.hibernate.type.TrueFalseType@56de5251
-Adding type registration yes_no -> org.hibernate.type.YesNoType@5276e6b0
-Adding type registration byte -> org.hibernate.type.ByteType@1677d1
-Adding type registration byte -> org.hibernate.type.ByteType@1677d1
-Adding type registration java.lang.Byte -> org.hibernate.type.ByteType@1677d1
-Adding type registration character -> org.hibernate.type.CharacterType@4313f5bc
-Adding type registration char -> org.hibernate.type.CharacterType@4313f5bc
-Adding type registration java.lang.Character -> org.hibernate.type.CharacterType@4313f5bc
-Adding type registration short -> org.hibernate.type.ShortType@5ccddd20
-Adding type registration short -> org.hibernate.type.ShortType@5ccddd20
-Adding type registration java.lang.Short -> org.hibernate.type.ShortType@5ccddd20
-Adding type registration integer -> org.hibernate.type.IntegerType@20d28811
-Adding type registration int -> org.hibernate.type.IntegerType@20d28811
-Adding type registration java.lang.Integer -> org.hibernate.type.IntegerType@20d28811
-Adding type registration long -> org.hibernate.type.LongType@4ddced80
-Adding type registration long -> org.hibernate.type.LongType@4ddced80
-Adding type registration java.lang.Long -> org.hibernate.type.LongType@4ddced80
-Adding type registration float -> org.hibernate.type.FloatType@1184ab05
-Adding type registration float -> org.hibernate.type.FloatType@1184ab05
-Adding type registration java.lang.Float -> org.hibernate.type.FloatType@1184ab05
-Adding type registration double -> org.hibernate.type.DoubleType@1c93084c
-Adding type registration double -> org.hibernate.type.DoubleType@1c93084c
-Adding type registration java.lang.Double -> org.hibernate.type.DoubleType@1c93084c
-Adding type registration big_decimal -> org.hibernate.type.BigDecimalType@2473d930
-Adding type registration java.math.BigDecimal -> org.hibernate.type.BigDecimalType@2473d930
-Adding type registration big_integer -> org.hibernate.type.BigIntegerType@be64738
-Adding type registration java.math.BigInteger -> org.hibernate.type.BigIntegerType@be64738
-Adding type registration string -> org.hibernate.type.StringType@3c419631
-Adding type registration java.lang.String -> org.hibernate.type.StringType@3c419631
-Adding type registration nstring -> org.hibernate.type.StringNVarcharType@63021689
-Adding type registration ncharacter -> org.hibernate.type.CharacterNCharType@17046283
-Adding type registration url -> org.hibernate.type.UrlType@4b0b0854
-Adding type registration java.net.URL -> org.hibernate.type.UrlType@4b0b0854
-Adding type registration date -> org.hibernate.type.DateType@7e0b85f9
-Adding type registration java.sql.Date -> org.hibernate.type.DateType@7e0b85f9
-Adding type registration time -> org.hibernate.type.TimeType@5c30a9b0
-Adding type registration java.sql.Time -> org.hibernate.type.TimeType@5c30a9b0
-Adding type registration timestamp -> org.hibernate.type.TimestampType@31368b99
-Adding type registration java.sql.Timestamp -> org.hibernate.type.TimestampType@31368b99
-Adding type registration java.util.Date -> org.hibernate.type.TimestampType@31368b99
-Adding type registration dbtimestamp -> org.hibernate.type.DbTimestampType@4facf68f
-Adding type registration calendar -> org.hibernate.type.CalendarType@39529185
-Adding type registration java.util.Calendar -> org.hibernate.type.CalendarType@39529185
-Adding type registration java.util.GregorianCalendar -> org.hibernate.type.CalendarType@39529185
-Adding type registration calendar_date -> org.hibernate.type.CalendarDateType@27ce24aa
-Adding type registration locale -> org.hibernate.type.LocaleType@41fbdac4
-Adding type registration java.util.Locale -> org.hibernate.type.LocaleType@41fbdac4
-Adding type registration currency -> org.hibernate.type.CurrencyType@708f5957
-Adding type registration java.util.Currency -> org.hibernate.type.CurrencyType@708f5957
-Adding type registration timezone -> org.hibernate.type.TimeZoneType@50eac852
-Adding type registration java.util.TimeZone -> org.hibernate.type.TimeZoneType@50eac852
-Adding type registration class -> org.hibernate.type.ClassType@7193666c
-Adding type registration java.lang.Class -> org.hibernate.type.ClassType@7193666c
-Adding type registration uuid-binary -> org.hibernate.type.UUIDBinaryType@6973b51b
-Adding type registration java.util.UUID -> org.hibernate.type.UUIDBinaryType@6973b51b
-Adding type registration uuid-char -> org.hibernate.type.UUIDCharType@479d31f3
-Adding type registration pg-uuid -> org.hibernate.type.PostgresUUIDType@f5ac9e4
-Adding type registration binary -> org.hibernate.type.BinaryType@4d9e68d0
-Adding type registration byte[] -> org.hibernate.type.BinaryType@4d9e68d0
-Adding type registration [B -> org.hibernate.type.BinaryType@4d9e68d0
-Adding type registration wrapper-binary -> org.hibernate.type.WrapperBinaryType@15ff3e9e
-Adding type registration Byte[] -> org.hibernate.type.WrapperBinaryType@15ff3e9e
-Adding type registration [Ljava.lang.Byte; -> org.hibernate.type.WrapperBinaryType@15ff3e9e
-Adding type registration image -> org.hibernate.type.ImageType@71809907
-Adding type registration characters -> org.hibernate.type.CharArrayType@3bb9a3ff
-Adding type registration char[] -> org.hibernate.type.CharArrayType@3bb9a3ff
-Adding type registration [C -> org.hibernate.type.CharArrayType@3bb9a3ff
-Adding type registration wrapper-characters -> org.hibernate.type.CharacterArrayType@5ffead27
-Adding type registration [Ljava.lang.Character; -> org.hibernate.type.CharacterArrayType@5ffead27
-Adding type registration Character[] -> org.hibernate.type.CharacterArrayType@5ffead27
-Adding type registration text -> org.hibernate.type.TextType@a514af7
-Adding type registration ntext -> org.hibernate.type.NTextType@4a94ee4
-Adding type registration blob -> org.hibernate.type.BlobType@7e07db1f
-Adding type registration java.sql.Blob -> org.hibernate.type.BlobType@7e07db1f
-Adding type registration materialized_blob -> org.hibernate.type.MaterializedBlobType@16d04d3d
-Adding type registration clob -> org.hibernate.type.ClobType@5b8dfcc1
-Adding type registration java.sql.Clob -> org.hibernate.type.ClobType@5b8dfcc1
-Adding type registration nclob -> org.hibernate.type.NClobType@145f66e3
-Adding type registration java.sql.NClob -> org.hibernate.type.NClobType@145f66e3
-Adding type registration materialized_clob -> org.hibernate.type.MaterializedClobType@2a65fe7c
-Adding type registration materialized_nclob -> org.hibernate.type.MaterializedNClobType@34a3d150
-Adding type registration serializable -> org.hibernate.type.SerializableType@4d5d943d
-Adding type registration object -> org.hibernate.type.ObjectType@73a1e9a9
-Adding type registration java.lang.Object -> org.hibernate.type.ObjectType@73a1e9a9
-Adding type registration imm_date -> org.hibernate.type.AdaptedImmutableType@4af70944
-Adding type registration imm_time -> org.hibernate.type.AdaptedImmutableType@35267fd4
-Adding type registration imm_timestamp -> org.hibernate.type.AdaptedImmutableType@397ef2
-Adding type registration imm_dbtimestamp -> org.hibernate.type.AdaptedImmutableType@36a6bea6
-Adding type registration imm_calendar -> org.hibernate.type.AdaptedImmutableType@44e93c1f
-Adding type registration imm_calendar_date -> org.hibernate.type.AdaptedImmutableType@42373389
-Adding type registration imm_binary -> org.hibernate.type.AdaptedImmutableType@9b21bd3
-Adding type registration imm_serializable -> org.hibernate.type.AdaptedImmutableType@a62c7cd
+Adding type registration boolean -> org.hibernate.type.BooleanType@66d2e7d9
+Adding type registration boolean -> org.hibernate.type.BooleanType@66d2e7d9
+Adding type registration java.lang.Boolean -> org.hibernate.type.BooleanType@66d2e7d9
+Adding type registration numeric_boolean -> org.hibernate.type.NumericBooleanType@7c0e2abd
+Adding type registration true_false -> org.hibernate.type.TrueFalseType@7ac7a4e4
+Adding type registration yes_no -> org.hibernate.type.YesNoType@5f375618
+Adding type registration byte -> org.hibernate.type.ByteType@5d5eef3d
+Adding type registration byte -> org.hibernate.type.ByteType@5d5eef3d
+Adding type registration java.lang.Byte -> org.hibernate.type.ByteType@5d5eef3d
+Adding type registration character -> org.hibernate.type.CharacterType@643b1d11
+Adding type registration char -> org.hibernate.type.CharacterType@643b1d11
+Adding type registration java.lang.Character -> org.hibernate.type.CharacterType@643b1d11
+Adding type registration short -> org.hibernate.type.ShortType@51081592
+Adding type registration short -> org.hibernate.type.ShortType@51081592
+Adding type registration java.lang.Short -> org.hibernate.type.ShortType@51081592
+Adding type registration integer -> org.hibernate.type.IntegerType@58651fd0
+Adding type registration int -> org.hibernate.type.IntegerType@58651fd0
+Adding type registration java.lang.Integer -> org.hibernate.type.IntegerType@58651fd0
+Adding type registration long -> org.hibernate.type.LongType@1753acfe
+Adding type registration long -> org.hibernate.type.LongType@1753acfe
+Adding type registration java.lang.Long -> org.hibernate.type.LongType@1753acfe
+Adding type registration float -> org.hibernate.type.FloatType@482f8f11
+Adding type registration float -> org.hibernate.type.FloatType@482f8f11
+Adding type registration java.lang.Float -> org.hibernate.type.FloatType@482f8f11
+Adding type registration double -> org.hibernate.type.DoubleType@39aeed2f
+Adding type registration double -> org.hibernate.type.DoubleType@39aeed2f
+Adding type registration java.lang.Double -> org.hibernate.type.DoubleType@39aeed2f
+Adding type registration big_decimal -> org.hibernate.type.BigDecimalType@18be83e4
+Adding type registration java.math.BigDecimal -> org.hibernate.type.BigDecimalType@18be83e4
+Adding type registration big_integer -> org.hibernate.type.BigIntegerType@1d057a39
+Adding type registration java.math.BigInteger -> org.hibernate.type.BigIntegerType@1d057a39
+Adding type registration string -> org.hibernate.type.StringType@46d56d67
+Adding type registration java.lang.String -> org.hibernate.type.StringType@46d56d67
+Adding type registration nstring -> org.hibernate.type.StringNVarcharType@523884b2
+Adding type registration ncharacter -> org.hibernate.type.CharacterNCharType@5e5792a0
+Adding type registration url -> org.hibernate.type.UrlType@27efef64
+Adding type registration java.net.URL -> org.hibernate.type.UrlType@27efef64
+Adding type registration date -> org.hibernate.type.DateType@1bce4f0a
+Adding type registration java.sql.Date -> org.hibernate.type.DateType@1bce4f0a
+Adding type registration time -> org.hibernate.type.TimeType@6a41eaa2
+Adding type registration java.sql.Time -> org.hibernate.type.TimeType@6a41eaa2
+Adding type registration timestamp -> org.hibernate.type.TimestampType@39c0f4a
+Adding type registration java.sql.Timestamp -> org.hibernate.type.TimestampType@39c0f4a
+Adding type registration java.util.Date -> org.hibernate.type.TimestampType@39c0f4a
+Adding type registration dbtimestamp -> org.hibernate.type.DbTimestampType@57baeedf
+Adding type registration calendar -> org.hibernate.type.CalendarType@4667ae56
+Adding type registration java.util.Calendar -> org.hibernate.type.CalendarType@4667ae56
+Adding type registration java.util.GregorianCalendar -> org.hibernate.type.CalendarType@4667ae56
+Adding type registration calendar_date -> org.hibernate.type.CalendarDateType@e25b2fe
+Adding type registration locale -> org.hibernate.type.LocaleType@f6c48ac
+Adding type registration java.util.Locale -> org.hibernate.type.LocaleType@f6c48ac
+Adding type registration currency -> org.hibernate.type.CurrencyType@598067a5
+Adding type registration java.util.Currency -> org.hibernate.type.CurrencyType@598067a5
+Adding type registration timezone -> org.hibernate.type.TimeZoneType@271053e1
+Adding type registration java.util.TimeZone -> org.hibernate.type.TimeZoneType@271053e1
+Adding type registration class -> org.hibernate.type.ClassType@59ec2012
+Adding type registration java.lang.Class -> org.hibernate.type.ClassType@59ec2012
+Adding type registration uuid-binary -> org.hibernate.type.UUIDBinaryType@e45f292
+Adding type registration java.util.UUID -> org.hibernate.type.UUIDBinaryType@e45f292
+Adding type registration uuid-char -> org.hibernate.type.UUIDCharType@3f49dace
+Adding type registration pg-uuid -> org.hibernate.type.PostgresUUIDType@72d818d1
+Adding type registration binary -> org.hibernate.type.BinaryType@cb644e
+Adding type registration byte[] -> org.hibernate.type.BinaryType@cb644e
+Adding type registration [B -> org.hibernate.type.BinaryType@cb644e
+Adding type registration wrapper-binary -> org.hibernate.type.WrapperBinaryType@25bbe1b6
+Adding type registration Byte[] -> org.hibernate.type.WrapperBinaryType@25bbe1b6
+Adding type registration [Ljava.lang.Byte; -> org.hibernate.type.WrapperBinaryType@25bbe1b6
+Adding type registration image -> org.hibernate.type.ImageType@73846619
+Adding type registration characters -> org.hibernate.type.CharArrayType@2d928643
+Adding type registration char[] -> org.hibernate.type.CharArrayType@2d928643
+Adding type registration [C -> org.hibernate.type.CharArrayType@2d928643
+Adding type registration wrapper-characters -> org.hibernate.type.CharacterArrayType@64bf3bbf
+Adding type registration [Ljava.lang.Character; -> org.hibernate.type.CharacterArrayType@64bf3bbf
+Adding type registration Character[] -> org.hibernate.type.CharacterArrayType@64bf3bbf
+Adding type registration text -> org.hibernate.type.TextType@6e1ec318
+Adding type registration ntext -> org.hibernate.type.NTextType@2038ae61
+Adding type registration blob -> org.hibernate.type.BlobType@13a5fe33
+Adding type registration java.sql.Blob -> org.hibernate.type.BlobType@13a5fe33
+Adding type registration materialized_blob -> org.hibernate.type.MaterializedBlobType@5f9d02cb
+Adding type registration clob -> org.hibernate.type.ClobType@6325a3ee
+Adding type registration java.sql.Clob -> org.hibernate.type.ClobType@6325a3ee
+Adding type registration nclob -> org.hibernate.type.NClobType@2b552920
+Adding type registration java.sql.NClob -> org.hibernate.type.NClobType@2b552920
+Adding type registration materialized_clob -> org.hibernate.type.MaterializedClobType@578486a3
+Adding type registration materialized_nclob -> org.hibernate.type.MaterializedNClobType@1dfe2924
+Adding type registration serializable -> org.hibernate.type.SerializableType@32709393
+Adding type registration object -> org.hibernate.type.ObjectType@1efed156
+Adding type registration java.lang.Object -> org.hibernate.type.ObjectType@1efed156
+Adding type registration imm_date -> org.hibernate.type.AdaptedImmutableType@42a9a63e
+Adding type registration imm_time -> org.hibernate.type.AdaptedImmutableType@62da83ed
+Adding type registration imm_timestamp -> org.hibernate.type.AdaptedImmutableType@5d8445d7
+Adding type registration imm_dbtimestamp -> org.hibernate.type.AdaptedImmutableType@37d80fe7
+Adding type registration imm_calendar -> org.hibernate.type.AdaptedImmutableType@384fc774
+Adding type registration imm_calendar_date -> org.hibernate.type.AdaptedImmutableType@e3cee7b
+Adding type registration imm_binary -> org.hibernate.type.AdaptedImmutableType@71e9a896
+Adding type registration imm_serializable -> org.hibernate.type.AdaptedImmutableType@6b9267b
 Registering IdentifierGenerator strategy [uuid2] -> [org.hibernate.id.UUIDGenerator]
 Registering IdentifierGenerator strategy [guid] -> [org.hibernate.id.GUIDGenerator]
 Registering IdentifierGenerator strategy [uuid] -> [org.hibernate.id.UUIDHexGenerator]
@@ -1617,7 +1617,7 @@ Session-factory config [null] named class [fi.muni.cz.reliability.tool.dataprovi
 Session-factory config [null] named class [fi.muni.cz.reliability.tool.dataprovider.GeneralMilestone] for mapping
 HHH000041: Configured SessionFactory: null
 Properties: {hibernate.connection.password=tool123, java.runtime.name=Java(TM) SE Runtime Environment, sun.boot.library.path=C:\Program Files\Java\jdk1.8.0_171\jre\bin, java.vm.version=25.171-b11, hibernate.connection.username=tool, java.vm.vendor=Oracle Corporation, java.vendor.url=http://java.oracle.com/, path.separator=;, java.vm.name=Java HotSpot(TM) 64-Bit Server VM, file.encoding.pkg=sun.io, user.script=, user.country=SK, sun.java.launcher=SUN_STANDARD, sun.os.patch.level=, java.vm.specification.name=Java Virtual Machine Specification, user.dir=C:\Users\rados\Desktop\TOOL\RT-withR\Reliability-Tool\Reliability-Tool-Core, java.runtime.version=1.8.0_171-b11, java.awt.graphicsenv=sun.awt.Win32GraphicsEnvironment, hbm2ddl.auto=update, java.endorsed.dirs=C:\Program Files\Java\jdk1.8.0_171\jre\lib\endorsed, os.arch=amd64, java.io.tmpdir=C:\Users\rados\AppData\Local\Temp\, line.separator=
-, java.vm.specification.vendor=Oracle Corporation, user.variant=, os.name=Windows 10, sun.jnu.encoding=Cp1250, java.library.path=C:\Program Files\Java\jdk1.8.0_171\bin;C:\WINDOWS\Sun\Java\bin;C:\WINDOWS\system32;C:\WINDOWS;C:\Program Files (x86)\Common Files\Oracle\Java\javapath;c:\program files\nvidia gpu computing toolkit\cuda\v9.0\bin;c:\program files\nvidia gpu computing toolkit\cuda\v9.0\libnvvp;c:\windows\system32;c:\windows;c:\windows\system32\wbem;c:\windows\system32\windowspowershell\v1.0\;c:\program files\openvpn\bin;C:\Program Files\Java\jdk1.8.0_171\bin;c:\program files\apache-maven-3.5.0\bin;d:\git\cmd;c:\program files\putty\;C:\Program Files (x86)\NVIDIA Corporation\PhysX\Common;C:\WINDOWS\system32;C:\WINDOWS;C:\WINDOWS\System32\Wbem;C:\WINDOWS\System32\WindowsPowerShell\v1.0\;C:\WINDOWS\System32\OpenSSH\;D:\R-3.5.1\bin\x64;D:\R-3.5.1\library\rJava\libs\x64;D:\R-3.5.1\library\rJava\jri\x64;C:\Users\rados\AppData\Local\Microsoft\WindowsApps;C:\Users\rados\AppData\Local\GitHubDesktop\bin;%USERPROFILE%\AppData\Local\Microsoft\WindowsApps;;., java.specification.name=Java Platform API Specification, java.class.version=52.0, sun.management.compiler=HotSpot 64-Bit Tiered Compilers, os.version=10.0, connection.password=tool123, user.home=C:\Users\rados, user.timezone=Europe/Prague, connection.username=tool, java.awt.printerjob=sun.awt.windows.WPrinterJob, file.encoding=Cp1250, java.specification.version=1.8, hibernate.connection.driver_class=org.apache.derby.jdbc.EmbeddedDriver, show_sql=false, java.class.path=C:\Users\rados\Desktop\TOOL\RT-withR\Reliability-Tool\Reliability-Tool-Core\target\classes;C:\Users\rados\Desktop\TOOL\RT-withR\Reliability-Tool\Reliability-Tool-DataProvider\target\classes;C:\Users\rados\.m2\repository\org\eclipse\mylyn\github\org.eclipse.egit.github.core\2.1.5\org.eclipse.egit.github.core-2.1.5.jar;C:\Users\rados\.m2\repository\com\google\code\gson\gson\2.2.2\gson-2.2.2.jar;C:\Users\rados\.m2\repository\net\sf\dozer\dozer\5.5.1\dozer-5.5.1.jar;C:\Users\rados\.m2\repository\commons-beanutils\commons-beanutils\1.9.1\commons-beanutils-1.9.1.jar;C:\Users\rados\.m2\repository\commons-collections\commons-collections\3.2.1\commons-collections-3.2.1.jar;C:\Users\rados\.m2\repository\org\apache\commons\commons-lang3\3.2.1\commons-lang3-3.2.1.jar;C:\Users\rados\.m2\repository\org\slf4j\jcl-over-slf4j\1.7.5\jcl-over-slf4j-1.7.5.jar;C:\Users\rados\.m2\repository\org\springframework\spring-beans\4.3.11.RELEASE\spring-beans-4.3.11.RELEASE.jar;C:\Users\rados\.m2\repository\org\springframework\spring-core\4.3.11.RELEASE\spring-core-4.3.11.RELEASE.jar;C:\Users\rados\.m2\repository\commons-logging\commons-logging\1.2\commons-logging-1.2.jar;C:\Users\rados\.m2\repository\org\springframework\spring-context\4.3.11.RELEASE\spring-context-4.3.11.RELEASE.jar;C:\Users\rados\.m2\repository\org\springframework\spring-aop\4.3.11.RELEASE\spring-aop-4.3.11.RELEASE.jar;C:\Users\rados\.m2\repository\org\springframework\spring-expression\4.3.11.RELEASE\spring-expression-4.3.11.RELEASE.jar;C:\Users\rados\.m2\repository\org\springframework\spring-test\4.3.11.RELEASE\spring-test-4.3.11.RELEASE.jar;C:\Users\rados\.m2\repository\org\hibernate\javax\persistence\hibernate-jpa-2.1-api\1.0.0.Final\hibernate-jpa-2.1-api-1.0.0.Final.jar;C:\Users\rados\.m2\repository\javax\validation\validation-api\2.0.0.Final\validation-api-2.0.0.Final.jar;C:\Users\rados\.m2\repository\org\apache\commons\commons-math3\3.6.1\commons-math3-3.6.1.jar;C:\Users\rados\Desktop\TOOL\RT-withR\Reliability-Tool\Reliability-Tool-DataProcessing\target\classes;C:\Users\rados\.m2\repository\org\hibernate\hibernate-entitymanager\4.3.11.Final\hibernate-entitymanager-4.3.11.Final.jar;C:\Users\rados\.m2\repository\org\jboss\logging\jboss-logging\3.1.3.GA\jboss-logging-3.1.3.GA.jar;C:\Users\rados\.m2\repository\org\jboss\logging\jboss-logging-annotations\1.2.0.Beta1\jboss-logging-annotations-1.2.0.Beta1.jar;C:\Users\rados\.m2\repository\org\hibernate\hibernate-core\4.3.11.Final\hibernate-core-4.3.11.Final.jar;C:\Users\rados\.m2\repository\antlr\antlr\2.7.7\antlr-2.7.7.jar;C:\Users\rados\.m2\repository\org\jboss\jandex\1.1.0.Final\jandex-1.1.0.Final.jar;C:\Users\rados\.m2\repository\dom4j\dom4j\1.6.1\dom4j-1.6.1.jar;C:\Users\rados\.m2\repository\xml-apis\xml-apis\1.0.b2\xml-apis-1.0.b2.jar;C:\Users\rados\.m2\repository\org\hibernate\common\hibernate-commons-annotations\4.0.5.Final\hibernate-commons-annotations-4.0.5.Final.jar;C:\Users\rados\.m2\repository\org\jboss\spec\javax\transaction\jboss-transaction-api_1.2_spec\1.0.0.Final\jboss-transaction-api_1.2_spec-1.0.0.Final.jar;C:\Users\rados\.m2\repository\org\javassist\javassist\3.18.1-GA\javassist-3.18.1-GA.jar;C:\Users\rados\.m2\repository\org\apache\derby\derby\10.14.1.0\derby-10.14.1.0.jar;C:\Users\rados\.m2\repository\org\freemarker\freemarker\2.3.28\freemarker-2.3.28.jar;C:\Users\rados\.m2\repository\org\slf4j\slf4j-api\1.7.5\slf4j-api-1.7.5.jar;C:\Users\rados\.m2\repository\org\slf4j\slf4j-log4j12\1.7.5\slf4j-log4j12-1.7.5.jar;C:\Users\rados\.m2\repository\log4j\log4j\1.2.17\log4j-1.2.17.jar;C:\Users\rados\Desktop\TOOL\RT-withR\Reliability-Tool\Reliability-Tool-Models\target\classes;C:\Users\rados\.m2\repository\com\github\lucarosellini\rJava\JRI\0.9-7\JRI-0.9-7.jar;C:\Users\rados\.m2\repository\com\github\lucarosellini\rJava\JRIEngine\0.9-7\JRIEngine-0.9-7.jar;C:\Users\rados\.m2\repository\com\github\lucarosellini\rJava\REngine\0.9-7\REngine-0.9-7.jar;C:\Users\rados\.m2\repository\commons-cli\commons-cli\1.4\commons-cli-1.4.jar, user.name=rados, hibernate.bytecode.use_reflection_optimizer=false, hibernate.show_sql=false, java.vm.specification.version=1.8, sun.java.command=fi.muni.cz.reliability.tool.core.Core -sn black -e -fl, java.home=C:\Program Files\Java\jdk1.8.0_171\jre, sun.arch.data.model=64, hibernate.dialect=org.hibernate.dialect.DerbyTenSevenDialect, hibernate.connection.url=jdbc:derby:IssuesDB;create=true, user.language=sk, java.specification.vendor=Oracle Corporation, awt.toolkit=sun.awt.windows.WToolkit, java.vm.info=mixed mode, java.version=1.8.0_171, java.ext.dirs=C:\Program Files\Java\jdk1.8.0_171\jre\lib\ext;C:\WINDOWS\Sun\Java\lib\ext, sun.boot.class.path=C:\Program Files\Java\jdk1.8.0_171\jre\lib\resources.jar;C:\Program Files\Java\jdk1.8.0_171\jre\lib\rt.jar;C:\Program Files\Java\jdk1.8.0_171\jre\lib\sunrsasign.jar;C:\Program Files\Java\jdk1.8.0_171\jre\lib\jsse.jar;C:\Program Files\Java\jdk1.8.0_171\jre\lib\jce.jar;C:\Program Files\Java\jdk1.8.0_171\jre\lib\charsets.jar;C:\Program Files\Java\jdk1.8.0_171\jre\lib\jfr.jar;C:\Program Files\Java\jdk1.8.0_171\jre\classes, java.vendor=Oracle Corporation, connection.driver_class=org.apache.derby.jdbc.EmbeddedDriver, file.separator=\, hibernate.hbm2ddl.auto=update, java.vendor.url.bug=http://bugreport.sun.com/bugreport/, sun.io.unicode.encoding=UnicodeLittle, sun.cpu.endian=little, sun.desktop=windows, connection.url=jdbc:derby:IssuesDB;create=true, dialect=org.hibernate.dialect.DerbyTenSevenDialect, sun.cpu.isalist=amd64}
+, java.vm.specification.vendor=Oracle Corporation, user.variant=, os.name=Windows 10, sun.jnu.encoding=Cp1250, java.library.path=C:\Program Files\Java\jdk1.8.0_171\bin;C:\WINDOWS\Sun\Java\bin;C:\WINDOWS\system32;C:\WINDOWS;C:\Program Files (x86)\Common Files\Oracle\Java\javapath;c:\program files\nvidia gpu computing toolkit\cuda\v9.0\bin;c:\program files\nvidia gpu computing toolkit\cuda\v9.0\libnvvp;c:\windows\system32;c:\windows;c:\windows\system32\wbem;c:\windows\system32\windowspowershell\v1.0\;c:\program files\openvpn\bin;C:\Program Files\Java\jdk1.8.0_171\bin;c:\program files\apache-maven-3.5.0\bin;d:\git\cmd;c:\program files\putty\;C:\Program Files (x86)\NVIDIA Corporation\PhysX\Common;C:\WINDOWS\system32;C:\WINDOWS;C:\WINDOWS\System32\Wbem;C:\WINDOWS\System32\WindowsPowerShell\v1.0\;C:\WINDOWS\System32\OpenSSH\;D:\R-3.5.1\bin\x64;D:\R-3.5.1\library\rJava\libs\x64;D:\R-3.5.1\library\rJava\jri\x64;C:\Users\rados\AppData\Local\Microsoft\WindowsApps;C:\Users\rados\AppData\Local\GitHubDesktop\bin;%USERPROFILE%\AppData\Local\Microsoft\WindowsApps;;., java.specification.name=Java Platform API Specification, java.class.version=52.0, sun.management.compiler=HotSpot 64-Bit Tiered Compilers, os.version=10.0, connection.password=tool123, user.home=C:\Users\rados, user.timezone=Europe/Prague, connection.username=tool, java.awt.printerjob=sun.awt.windows.WPrinterJob, file.encoding=Cp1250, java.specification.version=1.8, hibernate.connection.driver_class=org.apache.derby.jdbc.EmbeddedDriver, show_sql=false, java.class.path=C:\Users\rados\Desktop\TOOL\RT-withR\Reliability-Tool\Reliability-Tool-Core\target\classes;C:\Users\rados\Desktop\TOOL\RT-withR\Reliability-Tool\Reliability-Tool-DataProvider\target\classes;C:\Users\rados\.m2\repository\org\eclipse\mylyn\github\org.eclipse.egit.github.core\2.1.5\org.eclipse.egit.github.core-2.1.5.jar;C:\Users\rados\.m2\repository\com\google\code\gson\gson\2.2.2\gson-2.2.2.jar;C:\Users\rados\.m2\repository\net\sf\dozer\dozer\5.5.1\dozer-5.5.1.jar;C:\Users\rados\.m2\repository\commons-beanutils\commons-beanutils\1.9.1\commons-beanutils-1.9.1.jar;C:\Users\rados\.m2\repository\commons-collections\commons-collections\3.2.1\commons-collections-3.2.1.jar;C:\Users\rados\.m2\repository\org\apache\commons\commons-lang3\3.2.1\commons-lang3-3.2.1.jar;C:\Users\rados\.m2\repository\org\slf4j\jcl-over-slf4j\1.7.5\jcl-over-slf4j-1.7.5.jar;C:\Users\rados\.m2\repository\org\springframework\spring-beans\4.3.11.RELEASE\spring-beans-4.3.11.RELEASE.jar;C:\Users\rados\.m2\repository\org\springframework\spring-core\4.3.11.RELEASE\spring-core-4.3.11.RELEASE.jar;C:\Users\rados\.m2\repository\commons-logging\commons-logging\1.2\commons-logging-1.2.jar;C:\Users\rados\.m2\repository\org\springframework\spring-context\4.3.11.RELEASE\spring-context-4.3.11.RELEASE.jar;C:\Users\rados\.m2\repository\org\springframework\spring-aop\4.3.11.RELEASE\spring-aop-4.3.11.RELEASE.jar;C:\Users\rados\.m2\repository\org\springframework\spring-expression\4.3.11.RELEASE\spring-expression-4.3.11.RELEASE.jar;C:\Users\rados\.m2\repository\org\springframework\spring-test\4.3.11.RELEASE\spring-test-4.3.11.RELEASE.jar;C:\Users\rados\.m2\repository\org\hibernate\javax\persistence\hibernate-jpa-2.1-api\1.0.0.Final\hibernate-jpa-2.1-api-1.0.0.Final.jar;C:\Users\rados\.m2\repository\javax\validation\validation-api\2.0.0.Final\validation-api-2.0.0.Final.jar;C:\Users\rados\.m2\repository\org\apache\commons\commons-math3\3.6.1\commons-math3-3.6.1.jar;C:\Users\rados\Desktop\TOOL\RT-withR\Reliability-Tool\Reliability-Tool-DataProcessing\target\classes;C:\Users\rados\.m2\repository\org\hibernate\hibernate-entitymanager\4.3.11.Final\hibernate-entitymanager-4.3.11.Final.jar;C:\Users\rados\.m2\repository\org\jboss\logging\jboss-logging\3.1.3.GA\jboss-logging-3.1.3.GA.jar;C:\Users\rados\.m2\repository\org\jboss\logging\jboss-logging-annotations\1.2.0.Beta1\jboss-logging-annotations-1.2.0.Beta1.jar;C:\Users\rados\.m2\repository\org\hibernate\hibernate-core\4.3.11.Final\hibernate-core-4.3.11.Final.jar;C:\Users\rados\.m2\repository\antlr\antlr\2.7.7\antlr-2.7.7.jar;C:\Users\rados\.m2\repository\org\jboss\jandex\1.1.0.Final\jandex-1.1.0.Final.jar;C:\Users\rados\.m2\repository\dom4j\dom4j\1.6.1\dom4j-1.6.1.jar;C:\Users\rados\.m2\repository\xml-apis\xml-apis\1.0.b2\xml-apis-1.0.b2.jar;C:\Users\rados\.m2\repository\org\hibernate\common\hibernate-commons-annotations\4.0.5.Final\hibernate-commons-annotations-4.0.5.Final.jar;C:\Users\rados\.m2\repository\org\jboss\spec\javax\transaction\jboss-transaction-api_1.2_spec\1.0.0.Final\jboss-transaction-api_1.2_spec-1.0.0.Final.jar;C:\Users\rados\.m2\repository\org\javassist\javassist\3.18.1-GA\javassist-3.18.1-GA.jar;C:\Users\rados\.m2\repository\org\apache\derby\derby\10.14.1.0\derby-10.14.1.0.jar;C:\Users\rados\.m2\repository\org\freemarker\freemarker\2.3.28\freemarker-2.3.28.jar;C:\Users\rados\.m2\repository\org\slf4j\slf4j-api\1.7.5\slf4j-api-1.7.5.jar;C:\Users\rados\.m2\repository\org\slf4j\slf4j-log4j12\1.7.5\slf4j-log4j12-1.7.5.jar;C:\Users\rados\.m2\repository\log4j\log4j\1.2.17\log4j-1.2.17.jar;C:\Users\rados\Desktop\TOOL\RT-withR\Reliability-Tool\Reliability-Tool-Models\target\classes;C:\Users\rados\.m2\repository\com\github\lucarosellini\rJava\JRI\0.9-7\JRI-0.9-7.jar;C:\Users\rados\.m2\repository\com\github\lucarosellini\rJava\JRIEngine\0.9-7\JRIEngine-0.9-7.jar;C:\Users\rados\.m2\repository\com\github\lucarosellini\rJava\REngine\0.9-7\REngine-0.9-7.jar;C:\Users\rados\.m2\repository\commons-cli\commons-cli\1.4\commons-cli-1.4.jar, user.name=rados, hibernate.bytecode.use_reflection_optimizer=false, hibernate.show_sql=false, java.vm.specification.version=1.8, sun.java.command=fi.muni.cz.reliability.tool.core.Core -sn black -e -fl -ms go gos mo du hd, java.home=C:\Program Files\Java\jdk1.8.0_171\jre, sun.arch.data.model=64, hibernate.dialect=org.hibernate.dialect.DerbyTenSevenDialect, hibernate.connection.url=jdbc:derby:IssuesDB;create=true, user.language=sk, java.specification.vendor=Oracle Corporation, awt.toolkit=sun.awt.windows.WToolkit, java.vm.info=mixed mode, java.version=1.8.0_171, java.ext.dirs=C:\Program Files\Java\jdk1.8.0_171\jre\lib\ext;C:\WINDOWS\Sun\Java\lib\ext, sun.boot.class.path=C:\Program Files\Java\jdk1.8.0_171\jre\lib\resources.jar;C:\Program Files\Java\jdk1.8.0_171\jre\lib\rt.jar;C:\Program Files\Java\jdk1.8.0_171\jre\lib\sunrsasign.jar;C:\Program Files\Java\jdk1.8.0_171\jre\lib\jsse.jar;C:\Program Files\Java\jdk1.8.0_171\jre\lib\jce.jar;C:\Program Files\Java\jdk1.8.0_171\jre\lib\charsets.jar;C:\Program Files\Java\jdk1.8.0_171\jre\lib\jfr.jar;C:\Program Files\Java\jdk1.8.0_171\jre\classes, java.vendor=Oracle Corporation, connection.driver_class=org.apache.derby.jdbc.EmbeddedDriver, file.separator=\, hibernate.hbm2ddl.auto=update, java.vendor.url.bug=http://bugreport.sun.com/bugreport/, sun.io.unicode.encoding=UnicodeLittle, sun.cpu.endian=little, sun.desktop=windows, connection.url=jdbc:derby:IssuesDB;create=true, dialect=org.hibernate.dialect.DerbyTenSevenDialect, sun.cpu.isalist=amd64}
 Adding Integrator [org.hibernate.cfg.beanvalidation.BeanValidationIntegrator].
 Adding Integrator [org.hibernate.secure.spi.JaccIntegrator].
 Adding Integrator [org.hibernate.cache.internal.CollectionCacheInvalidator].
@@ -1918,7 +1918,7 @@ JTA Track by Thread: enabled
 Building session factory
 Session factory constructed with filter configurations : {}
 Instantiating session factory with properties: {java.runtime.name=Java(TM) SE Runtime Environment, hibernate.connection.password=tool123, sun.boot.library.path=C:\Program Files\Java\jdk1.8.0_171\jre\bin, java.vm.version=25.171-b11, hibernate.connection.username=tool, java.vm.vendor=Oracle Corporation, java.vendor.url=http://java.oracle.com/, path.separator=;, java.vm.name=Java HotSpot(TM) 64-Bit Server VM, file.encoding.pkg=sun.io, user.script=, user.country=SK, sun.java.launcher=SUN_STANDARD, sun.os.patch.level=, java.vm.specification.name=Java Virtual Machine Specification, user.dir=C:\Users\rados\Desktop\TOOL\RT-withR\Reliability-Tool\Reliability-Tool-Core, java.runtime.version=1.8.0_171-b11, java.awt.graphicsenv=sun.awt.Win32GraphicsEnvironment, hbm2ddl.auto=update, java.endorsed.dirs=C:\Program Files\Java\jdk1.8.0_171\jre\lib\endorsed, os.arch=amd64, java.io.tmpdir=C:\Users\rados\AppData\Local\Temp\, line.separator=
-, java.vm.specification.vendor=Oracle Corporation, user.variant=, os.name=Windows 10, sun.jnu.encoding=Cp1250, java.library.path=C:\Program Files\Java\jdk1.8.0_171\bin;C:\WINDOWS\Sun\Java\bin;C:\WINDOWS\system32;C:\WINDOWS;C:\Program Files (x86)\Common Files\Oracle\Java\javapath;c:\program files\nvidia gpu computing toolkit\cuda\v9.0\bin;c:\program files\nvidia gpu computing toolkit\cuda\v9.0\libnvvp;c:\windows\system32;c:\windows;c:\windows\system32\wbem;c:\windows\system32\windowspowershell\v1.0\;c:\program files\openvpn\bin;C:\Program Files\Java\jdk1.8.0_171\bin;c:\program files\apache-maven-3.5.0\bin;d:\git\cmd;c:\program files\putty\;C:\Program Files (x86)\NVIDIA Corporation\PhysX\Common;C:\WINDOWS\system32;C:\WINDOWS;C:\WINDOWS\System32\Wbem;C:\WINDOWS\System32\WindowsPowerShell\v1.0\;C:\WINDOWS\System32\OpenSSH\;D:\R-3.5.1\bin\x64;D:\R-3.5.1\library\rJava\libs\x64;D:\R-3.5.1\library\rJava\jri\x64;C:\Users\rados\AppData\Local\Microsoft\WindowsApps;C:\Users\rados\AppData\Local\GitHubDesktop\bin;%USERPROFILE%\AppData\Local\Microsoft\WindowsApps;;., java.specification.name=Java Platform API Specification, java.class.version=52.0, sun.management.compiler=HotSpot 64-Bit Tiered Compilers, os.version=10.0, user.home=C:\Users\rados, connection.password=tool123, user.timezone=Europe/Prague, java.awt.printerjob=sun.awt.windows.WPrinterJob, connection.username=tool, java.specification.version=1.8, file.encoding=Cp1250, hibernate.connection.driver_class=org.apache.derby.jdbc.EmbeddedDriver, show_sql=false, user.name=rados, java.class.path=C:\Users\rados\Desktop\TOOL\RT-withR\Reliability-Tool\Reliability-Tool-Core\target\classes;C:\Users\rados\Desktop\TOOL\RT-withR\Reliability-Tool\Reliability-Tool-DataProvider\target\classes;C:\Users\rados\.m2\repository\org\eclipse\mylyn\github\org.eclipse.egit.github.core\2.1.5\org.eclipse.egit.github.core-2.1.5.jar;C:\Users\rados\.m2\repository\com\google\code\gson\gson\2.2.2\gson-2.2.2.jar;C:\Users\rados\.m2\repository\net\sf\dozer\dozer\5.5.1\dozer-5.5.1.jar;C:\Users\rados\.m2\repository\commons-beanutils\commons-beanutils\1.9.1\commons-beanutils-1.9.1.jar;C:\Users\rados\.m2\repository\commons-collections\commons-collections\3.2.1\commons-collections-3.2.1.jar;C:\Users\rados\.m2\repository\org\apache\commons\commons-lang3\3.2.1\commons-lang3-3.2.1.jar;C:\Users\rados\.m2\repository\org\slf4j\jcl-over-slf4j\1.7.5\jcl-over-slf4j-1.7.5.jar;C:\Users\rados\.m2\repository\org\springframework\spring-beans\4.3.11.RELEASE\spring-beans-4.3.11.RELEASE.jar;C:\Users\rados\.m2\repository\org\springframework\spring-core\4.3.11.RELEASE\spring-core-4.3.11.RELEASE.jar;C:\Users\rados\.m2\repository\commons-logging\commons-logging\1.2\commons-logging-1.2.jar;C:\Users\rados\.m2\repository\org\springframework\spring-context\4.3.11.RELEASE\spring-context-4.3.11.RELEASE.jar;C:\Users\rados\.m2\repository\org\springframework\spring-aop\4.3.11.RELEASE\spring-aop-4.3.11.RELEASE.jar;C:\Users\rados\.m2\repository\org\springframework\spring-expression\4.3.11.RELEASE\spring-expression-4.3.11.RELEASE.jar;C:\Users\rados\.m2\repository\org\springframework\spring-test\4.3.11.RELEASE\spring-test-4.3.11.RELEASE.jar;C:\Users\rados\.m2\repository\org\hibernate\javax\persistence\hibernate-jpa-2.1-api\1.0.0.Final\hibernate-jpa-2.1-api-1.0.0.Final.jar;C:\Users\rados\.m2\repository\javax\validation\validation-api\2.0.0.Final\validation-api-2.0.0.Final.jar;C:\Users\rados\.m2\repository\org\apache\commons\commons-math3\3.6.1\commons-math3-3.6.1.jar;C:\Users\rados\Desktop\TOOL\RT-withR\Reliability-Tool\Reliability-Tool-DataProcessing\target\classes;C:\Users\rados\.m2\repository\org\hibernate\hibernate-entitymanager\4.3.11.Final\hibernate-entitymanager-4.3.11.Final.jar;C:\Users\rados\.m2\repository\org\jboss\logging\jboss-logging\3.1.3.GA\jboss-logging-3.1.3.GA.jar;C:\Users\rados\.m2\repository\org\jboss\logging\jboss-logging-annotations\1.2.0.Beta1\jboss-logging-annotations-1.2.0.Beta1.jar;C:\Users\rados\.m2\repository\org\hibernate\hibernate-core\4.3.11.Final\hibernate-core-4.3.11.Final.jar;C:\Users\rados\.m2\repository\antlr\antlr\2.7.7\antlr-2.7.7.jar;C:\Users\rados\.m2\repository\org\jboss\jandex\1.1.0.Final\jandex-1.1.0.Final.jar;C:\Users\rados\.m2\repository\dom4j\dom4j\1.6.1\dom4j-1.6.1.jar;C:\Users\rados\.m2\repository\xml-apis\xml-apis\1.0.b2\xml-apis-1.0.b2.jar;C:\Users\rados\.m2\repository\org\hibernate\common\hibernate-commons-annotations\4.0.5.Final\hibernate-commons-annotations-4.0.5.Final.jar;C:\Users\rados\.m2\repository\org\jboss\spec\javax\transaction\jboss-transaction-api_1.2_spec\1.0.0.Final\jboss-transaction-api_1.2_spec-1.0.0.Final.jar;C:\Users\rados\.m2\repository\org\javassist\javassist\3.18.1-GA\javassist-3.18.1-GA.jar;C:\Users\rados\.m2\repository\org\apache\derby\derby\10.14.1.0\derby-10.14.1.0.jar;C:\Users\rados\.m2\repository\org\freemarker\freemarker\2.3.28\freemarker-2.3.28.jar;C:\Users\rados\.m2\repository\org\slf4j\slf4j-api\1.7.5\slf4j-api-1.7.5.jar;C:\Users\rados\.m2\repository\org\slf4j\slf4j-log4j12\1.7.5\slf4j-log4j12-1.7.5.jar;C:\Users\rados\.m2\repository\log4j\log4j\1.2.17\log4j-1.2.17.jar;C:\Users\rados\Desktop\TOOL\RT-withR\Reliability-Tool\Reliability-Tool-Models\target\classes;C:\Users\rados\.m2\repository\com\github\lucarosellini\rJava\JRI\0.9-7\JRI-0.9-7.jar;C:\Users\rados\.m2\repository\com\github\lucarosellini\rJava\JRIEngine\0.9-7\JRIEngine-0.9-7.jar;C:\Users\rados\.m2\repository\com\github\lucarosellini\rJava\REngine\0.9-7\REngine-0.9-7.jar;C:\Users\rados\.m2\repository\commons-cli\commons-cli\1.4\commons-cli-1.4.jar, hibernate.bytecode.use_reflection_optimizer=false, hibernate.show_sql=false, java.vm.specification.version=1.8, sun.arch.data.model=64, java.home=C:\Program Files\Java\jdk1.8.0_171\jre, sun.java.command=fi.muni.cz.reliability.tool.core.Core -sn black -e -fl, hibernate.connection.url=jdbc:derby:IssuesDB;create=true, hibernate.dialect=org.hibernate.dialect.DerbyTenSevenDialect, java.specification.vendor=Oracle Corporation, user.language=sk, awt.toolkit=sun.awt.windows.WToolkit, java.vm.info=mixed mode, java.version=1.8.0_171, java.ext.dirs=C:\Program Files\Java\jdk1.8.0_171\jre\lib\ext;C:\WINDOWS\Sun\Java\lib\ext, sun.boot.class.path=C:\Program Files\Java\jdk1.8.0_171\jre\lib\resources.jar;C:\Program Files\Java\jdk1.8.0_171\jre\lib\rt.jar;C:\Program Files\Java\jdk1.8.0_171\jre\lib\sunrsasign.jar;C:\Program Files\Java\jdk1.8.0_171\jre\lib\jsse.jar;C:\Program Files\Java\jdk1.8.0_171\jre\lib\jce.jar;C:\Program Files\Java\jdk1.8.0_171\jre\lib\charsets.jar;C:\Program Files\Java\jdk1.8.0_171\jre\lib\jfr.jar;C:\Program Files\Java\jdk1.8.0_171\jre\classes, java.vendor=Oracle Corporation, file.separator=\, connection.driver_class=org.apache.derby.jdbc.EmbeddedDriver, java.vendor.url.bug=http://bugreport.sun.com/bugreport/, hibernate.hbm2ddl.auto=update, sun.cpu.endian=little, sun.io.unicode.encoding=UnicodeLittle, sun.desktop=windows, connection.url=jdbc:derby:IssuesDB;create=true, sun.cpu.isalist=amd64, dialect=org.hibernate.dialect.DerbyTenSevenDialect}
+, java.vm.specification.vendor=Oracle Corporation, user.variant=, os.name=Windows 10, sun.jnu.encoding=Cp1250, java.library.path=C:\Program Files\Java\jdk1.8.0_171\bin;C:\WINDOWS\Sun\Java\bin;C:\WINDOWS\system32;C:\WINDOWS;C:\Program Files (x86)\Common Files\Oracle\Java\javapath;c:\program files\nvidia gpu computing toolkit\cuda\v9.0\bin;c:\program files\nvidia gpu computing toolkit\cuda\v9.0\libnvvp;c:\windows\system32;c:\windows;c:\windows\system32\wbem;c:\windows\system32\windowspowershell\v1.0\;c:\program files\openvpn\bin;C:\Program Files\Java\jdk1.8.0_171\bin;c:\program files\apache-maven-3.5.0\bin;d:\git\cmd;c:\program files\putty\;C:\Program Files (x86)\NVIDIA Corporation\PhysX\Common;C:\WINDOWS\system32;C:\WINDOWS;C:\WINDOWS\System32\Wbem;C:\WINDOWS\System32\WindowsPowerShell\v1.0\;C:\WINDOWS\System32\OpenSSH\;D:\R-3.5.1\bin\x64;D:\R-3.5.1\library\rJava\libs\x64;D:\R-3.5.1\library\rJava\jri\x64;C:\Users\rados\AppData\Local\Microsoft\WindowsApps;C:\Users\rados\AppData\Local\GitHubDesktop\bin;%USERPROFILE%\AppData\Local\Microsoft\WindowsApps;;., java.specification.name=Java Platform API Specification, java.class.version=52.0, sun.management.compiler=HotSpot 64-Bit Tiered Compilers, os.version=10.0, user.home=C:\Users\rados, connection.password=tool123, user.timezone=Europe/Prague, java.awt.printerjob=sun.awt.windows.WPrinterJob, connection.username=tool, java.specification.version=1.8, file.encoding=Cp1250, hibernate.connection.driver_class=org.apache.derby.jdbc.EmbeddedDriver, show_sql=false, user.name=rados, java.class.path=C:\Users\rados\Desktop\TOOL\RT-withR\Reliability-Tool\Reliability-Tool-Core\target\classes;C:\Users\rados\Desktop\TOOL\RT-withR\Reliability-Tool\Reliability-Tool-DataProvider\target\classes;C:\Users\rados\.m2\repository\org\eclipse\mylyn\github\org.eclipse.egit.github.core\2.1.5\org.eclipse.egit.github.core-2.1.5.jar;C:\Users\rados\.m2\repository\com\google\code\gson\gson\2.2.2\gson-2.2.2.jar;C:\Users\rados\.m2\repository\net\sf\dozer\dozer\5.5.1\dozer-5.5.1.jar;C:\Users\rados\.m2\repository\commons-beanutils\commons-beanutils\1.9.1\commons-beanutils-1.9.1.jar;C:\Users\rados\.m2\repository\commons-collections\commons-collections\3.2.1\commons-collections-3.2.1.jar;C:\Users\rados\.m2\repository\org\apache\commons\commons-lang3\3.2.1\commons-lang3-3.2.1.jar;C:\Users\rados\.m2\repository\org\slf4j\jcl-over-slf4j\1.7.5\jcl-over-slf4j-1.7.5.jar;C:\Users\rados\.m2\repository\org\springframework\spring-beans\4.3.11.RELEASE\spring-beans-4.3.11.RELEASE.jar;C:\Users\rados\.m2\repository\org\springframework\spring-core\4.3.11.RELEASE\spring-core-4.3.11.RELEASE.jar;C:\Users\rados\.m2\repository\commons-logging\commons-logging\1.2\commons-logging-1.2.jar;C:\Users\rados\.m2\repository\org\springframework\spring-context\4.3.11.RELEASE\spring-context-4.3.11.RELEASE.jar;C:\Users\rados\.m2\repository\org\springframework\spring-aop\4.3.11.RELEASE\spring-aop-4.3.11.RELEASE.jar;C:\Users\rados\.m2\repository\org\springframework\spring-expression\4.3.11.RELEASE\spring-expression-4.3.11.RELEASE.jar;C:\Users\rados\.m2\repository\org\springframework\spring-test\4.3.11.RELEASE\spring-test-4.3.11.RELEASE.jar;C:\Users\rados\.m2\repository\org\hibernate\javax\persistence\hibernate-jpa-2.1-api\1.0.0.Final\hibernate-jpa-2.1-api-1.0.0.Final.jar;C:\Users\rados\.m2\repository\javax\validation\validation-api\2.0.0.Final\validation-api-2.0.0.Final.jar;C:\Users\rados\.m2\repository\org\apache\commons\commons-math3\3.6.1\commons-math3-3.6.1.jar;C:\Users\rados\Desktop\TOOL\RT-withR\Reliability-Tool\Reliability-Tool-DataProcessing\target\classes;C:\Users\rados\.m2\repository\org\hibernate\hibernate-entitymanager\4.3.11.Final\hibernate-entitymanager-4.3.11.Final.jar;C:\Users\rados\.m2\repository\org\jboss\logging\jboss-logging\3.1.3.GA\jboss-logging-3.1.3.GA.jar;C:\Users\rados\.m2\repository\org\jboss\logging\jboss-logging-annotations\1.2.0.Beta1\jboss-logging-annotations-1.2.0.Beta1.jar;C:\Users\rados\.m2\repository\org\hibernate\hibernate-core\4.3.11.Final\hibernate-core-4.3.11.Final.jar;C:\Users\rados\.m2\repository\antlr\antlr\2.7.7\antlr-2.7.7.jar;C:\Users\rados\.m2\repository\org\jboss\jandex\1.1.0.Final\jandex-1.1.0.Final.jar;C:\Users\rados\.m2\repository\dom4j\dom4j\1.6.1\dom4j-1.6.1.jar;C:\Users\rados\.m2\repository\xml-apis\xml-apis\1.0.b2\xml-apis-1.0.b2.jar;C:\Users\rados\.m2\repository\org\hibernate\common\hibernate-commons-annotations\4.0.5.Final\hibernate-commons-annotations-4.0.5.Final.jar;C:\Users\rados\.m2\repository\org\jboss\spec\javax\transaction\jboss-transaction-api_1.2_spec\1.0.0.Final\jboss-transaction-api_1.2_spec-1.0.0.Final.jar;C:\Users\rados\.m2\repository\org\javassist\javassist\3.18.1-GA\javassist-3.18.1-GA.jar;C:\Users\rados\.m2\repository\org\apache\derby\derby\10.14.1.0\derby-10.14.1.0.jar;C:\Users\rados\.m2\repository\org\freemarker\freemarker\2.3.28\freemarker-2.3.28.jar;C:\Users\rados\.m2\repository\org\slf4j\slf4j-api\1.7.5\slf4j-api-1.7.5.jar;C:\Users\rados\.m2\repository\org\slf4j\slf4j-log4j12\1.7.5\slf4j-log4j12-1.7.5.jar;C:\Users\rados\.m2\repository\log4j\log4j\1.2.17\log4j-1.2.17.jar;C:\Users\rados\Desktop\TOOL\RT-withR\Reliability-Tool\Reliability-Tool-Models\target\classes;C:\Users\rados\.m2\repository\com\github\lucarosellini\rJava\JRI\0.9-7\JRI-0.9-7.jar;C:\Users\rados\.m2\repository\com\github\lucarosellini\rJava\JRIEngine\0.9-7\JRIEngine-0.9-7.jar;C:\Users\rados\.m2\repository\com\github\lucarosellini\rJava\REngine\0.9-7\REngine-0.9-7.jar;C:\Users\rados\.m2\repository\commons-cli\commons-cli\1.4\commons-cli-1.4.jar, hibernate.bytecode.use_reflection_optimizer=false, hibernate.show_sql=false, java.vm.specification.version=1.8, sun.arch.data.model=64, java.home=C:\Program Files\Java\jdk1.8.0_171\jre, sun.java.command=fi.muni.cz.reliability.tool.core.Core -sn black -e -fl -ms go gos mo du hd, hibernate.connection.url=jdbc:derby:IssuesDB;create=true, hibernate.dialect=org.hibernate.dialect.DerbyTenSevenDialect, java.specification.vendor=Oracle Corporation, user.language=sk, awt.toolkit=sun.awt.windows.WToolkit, java.vm.info=mixed mode, java.version=1.8.0_171, java.ext.dirs=C:\Program Files\Java\jdk1.8.0_171\jre\lib\ext;C:\WINDOWS\Sun\Java\lib\ext, sun.boot.class.path=C:\Program Files\Java\jdk1.8.0_171\jre\lib\resources.jar;C:\Program Files\Java\jdk1.8.0_171\jre\lib\rt.jar;C:\Program Files\Java\jdk1.8.0_171\jre\lib\sunrsasign.jar;C:\Program Files\Java\jdk1.8.0_171\jre\lib\jsse.jar;C:\Program Files\Java\jdk1.8.0_171\jre\lib\jce.jar;C:\Program Files\Java\jdk1.8.0_171\jre\lib\charsets.jar;C:\Program Files\Java\jdk1.8.0_171\jre\lib\jfr.jar;C:\Program Files\Java\jdk1.8.0_171\jre\classes, java.vendor=Oracle Corporation, file.separator=\, connection.driver_class=org.apache.derby.jdbc.EmbeddedDriver, java.vendor.url.bug=http://bugreport.sun.com/bugreport/, hibernate.hbm2ddl.auto=update, sun.cpu.endian=little, sun.io.unicode.encoding=UnicodeLittle, sun.desktop=windows, connection.url=jdbc:derby:IssuesDB;create=true, sun.cpu.isalist=amd64, dialect=org.hibernate.dialect.DerbyTenSevenDialect}
 Unable to acquire Bean Validation ValidatorFactory, skipping activation
 Skipping JACC integration as it was not enabled
 Setting dialect [org.hibernate.dialect.DerbyTenSevenDialect]
@@ -1942,7 +1942,7 @@ Static SQL for entity: fi.muni.cz.reliability.tool.dataprovider.GeneralMilestone
  Update 0: update GeneralMilestone set createdAt=?, description=?, dueOn=?, MilestoneState=?, title=? where id=?
  Delete 0: delete from GeneralMilestone where id=?
  Identity insert: insert into GeneralMilestone (id, createdAt, description, dueOn, MilestoneState, title) values (default, ?, ?, ?, ?, ?)
-Adding QuerySpace : uid = <gen:0> -> org.hibernate.loader.plan.build.internal.spaces.EntityQuerySpaceImpl@73c9e8e8]
+Adding QuerySpace : uid = <gen:0> -> org.hibernate.loader.plan.build.internal.spaces.EntityQuerySpaceImpl@6e33c391]
 Visiting attribute path : createdAt
 Visiting attribute path : description
 Visiting attribute path : dueOn
@@ -1960,7 +1960,7 @@ LoadPlan(entity=fi.muni.cz.reliability.tool.dataprovider.GeneralMilestone)
           - suffixed key columns - {id1_3_0_}
 
 Static select for entity fi.muni.cz.reliability.tool.dataprovider.GeneralMilestone [NONE]: select generalmil0_.id as id1_3_0_, generalmil0_.createdAt as createdA2_3_0_, generalmil0_.description as descript3_3_0_, generalmil0_.dueOn as dueOn4_3_0_, generalmil0_.MilestoneState as Mileston5_3_0_, generalmil0_.title as title6_3_0_ from GeneralMilestone generalmil0_ where generalmil0_.id=?
-Adding QuerySpace : uid = <gen:0> -> org.hibernate.loader.plan.build.internal.spaces.EntityQuerySpaceImpl@1deceb67]
+Adding QuerySpace : uid = <gen:0> -> org.hibernate.loader.plan.build.internal.spaces.EntityQuerySpaceImpl@31c269fd]
 Visiting attribute path : createdAt
 Visiting attribute path : description
 Visiting attribute path : dueOn
@@ -1978,7 +1978,7 @@ LoadPlan(entity=fi.muni.cz.reliability.tool.dataprovider.GeneralMilestone)
           - suffixed key columns - {id1_3_0_}
 
 Static select for entity fi.muni.cz.reliability.tool.dataprovider.GeneralMilestone [READ]: select generalmil0_.id as id1_3_0_, generalmil0_.createdAt as createdA2_3_0_, generalmil0_.description as descript3_3_0_, generalmil0_.dueOn as dueOn4_3_0_, generalmil0_.MilestoneState as Mileston5_3_0_, generalmil0_.title as title6_3_0_ from GeneralMilestone generalmil0_ where generalmil0_.id=?
-Adding QuerySpace : uid = <gen:0> -> org.hibernate.loader.plan.build.internal.spaces.EntityQuerySpaceImpl@64984b0f]
+Adding QuerySpace : uid = <gen:0> -> org.hibernate.loader.plan.build.internal.spaces.EntityQuerySpaceImpl@47747fb9]
 Visiting attribute path : createdAt
 Visiting attribute path : description
 Visiting attribute path : dueOn
@@ -1996,7 +1996,7 @@ LoadPlan(entity=fi.muni.cz.reliability.tool.dataprovider.GeneralMilestone)
           - suffixed key columns - {id1_3_0_}
 
 Static select for entity fi.muni.cz.reliability.tool.dataprovider.GeneralMilestone [UPGRADE]: select generalmil0_.id as id1_3_0_, generalmil0_.createdAt as createdA2_3_0_, generalmil0_.description as descript3_3_0_, generalmil0_.dueOn as dueOn4_3_0_, generalmil0_.MilestoneState as Mileston5_3_0_, generalmil0_.title as title6_3_0_ from GeneralMilestone generalmil0_ where generalmil0_.id=? for update with rs
-Adding QuerySpace : uid = <gen:0> -> org.hibernate.loader.plan.build.internal.spaces.EntityQuerySpaceImpl@53ec2968]
+Adding QuerySpace : uid = <gen:0> -> org.hibernate.loader.plan.build.internal.spaces.EntityQuerySpaceImpl@213e3629]
 Visiting attribute path : createdAt
 Visiting attribute path : description
 Visiting attribute path : dueOn
@@ -2014,7 +2014,7 @@ LoadPlan(entity=fi.muni.cz.reliability.tool.dataprovider.GeneralMilestone)
           - suffixed key columns - {id1_3_0_}
 
 Static select for entity fi.muni.cz.reliability.tool.dataprovider.GeneralMilestone [UPGRADE_NOWAIT]: select generalmil0_.id as id1_3_0_, generalmil0_.createdAt as createdA2_3_0_, generalmil0_.description as descript3_3_0_, generalmil0_.dueOn as dueOn4_3_0_, generalmil0_.MilestoneState as Mileston5_3_0_, generalmil0_.title as title6_3_0_ from GeneralMilestone generalmil0_ where generalmil0_.id=? for update with rs
-Adding QuerySpace : uid = <gen:0> -> org.hibernate.loader.plan.build.internal.spaces.EntityQuerySpaceImpl@7e19755a]
+Adding QuerySpace : uid = <gen:0> -> org.hibernate.loader.plan.build.internal.spaces.EntityQuerySpaceImpl@2a7b6f69]
 Visiting attribute path : createdAt
 Visiting attribute path : description
 Visiting attribute path : dueOn
@@ -2032,7 +2032,7 @@ LoadPlan(entity=fi.muni.cz.reliability.tool.dataprovider.GeneralMilestone)
           - suffixed key columns - {id1_3_0_}
 
 Static select for entity fi.muni.cz.reliability.tool.dataprovider.GeneralMilestone [UPGRADE_SKIPLOCKED]: select generalmil0_.id as id1_3_0_, generalmil0_.createdAt as createdA2_3_0_, generalmil0_.description as descript3_3_0_, generalmil0_.dueOn as dueOn4_3_0_, generalmil0_.MilestoneState as Mileston5_3_0_, generalmil0_.title as title6_3_0_ from GeneralMilestone generalmil0_ where generalmil0_.id=? for update with rs
-Adding QuerySpace : uid = <gen:0> -> org.hibernate.loader.plan.build.internal.spaces.EntityQuerySpaceImpl@6f49d153]
+Adding QuerySpace : uid = <gen:0> -> org.hibernate.loader.plan.build.internal.spaces.EntityQuerySpaceImpl@70eecdc2]
 Visiting attribute path : createdAt
 Visiting attribute path : description
 Visiting attribute path : dueOn
@@ -2050,7 +2050,7 @@ LoadPlan(entity=fi.muni.cz.reliability.tool.dataprovider.GeneralMilestone)
           - suffixed key columns - {id1_3_0_}
 
 Static select for entity fi.muni.cz.reliability.tool.dataprovider.GeneralMilestone [FORCE]: select generalmil0_.id as id1_3_0_, generalmil0_.createdAt as createdA2_3_0_, generalmil0_.description as descript3_3_0_, generalmil0_.dueOn as dueOn4_3_0_, generalmil0_.MilestoneState as Mileston5_3_0_, generalmil0_.title as title6_3_0_ from GeneralMilestone generalmil0_ where generalmil0_.id=? for update with rs
-Adding QuerySpace : uid = <gen:0> -> org.hibernate.loader.plan.build.internal.spaces.EntityQuerySpaceImpl@7e7f0216]
+Adding QuerySpace : uid = <gen:0> -> org.hibernate.loader.plan.build.internal.spaces.EntityQuerySpaceImpl@7db0565c]
 Visiting attribute path : createdAt
 Visiting attribute path : description
 Visiting attribute path : dueOn
@@ -2068,7 +2068,7 @@ LoadPlan(entity=fi.muni.cz.reliability.tool.dataprovider.GeneralMilestone)
           - suffixed key columns - {id1_3_0_}
 
 Static select for entity fi.muni.cz.reliability.tool.dataprovider.GeneralMilestone [PESSIMISTIC_READ]: select generalmil0_.id as id1_3_0_, generalmil0_.createdAt as createdA2_3_0_, generalmil0_.description as descript3_3_0_, generalmil0_.dueOn as dueOn4_3_0_, generalmil0_.MilestoneState as Mileston5_3_0_, generalmil0_.title as title6_3_0_ from GeneralMilestone generalmil0_ where generalmil0_.id=? for read only with rs
-Adding QuerySpace : uid = <gen:0> -> org.hibernate.loader.plan.build.internal.spaces.EntityQuerySpaceImpl@62db3891]
+Adding QuerySpace : uid = <gen:0> -> org.hibernate.loader.plan.build.internal.spaces.EntityQuerySpaceImpl@52eacb4b]
 Visiting attribute path : createdAt
 Visiting attribute path : description
 Visiting attribute path : dueOn
@@ -2086,7 +2086,7 @@ LoadPlan(entity=fi.muni.cz.reliability.tool.dataprovider.GeneralMilestone)
           - suffixed key columns - {id1_3_0_}
 
 Static select for entity fi.muni.cz.reliability.tool.dataprovider.GeneralMilestone [PESSIMISTIC_WRITE]: select generalmil0_.id as id1_3_0_, generalmil0_.createdAt as createdA2_3_0_, generalmil0_.description as descript3_3_0_, generalmil0_.dueOn as dueOn4_3_0_, generalmil0_.MilestoneState as Mileston5_3_0_, generalmil0_.title as title6_3_0_ from GeneralMilestone generalmil0_ where generalmil0_.id=? for update with rs
-Adding QuerySpace : uid = <gen:0> -> org.hibernate.loader.plan.build.internal.spaces.EntityQuerySpaceImpl@6724cdec]
+Adding QuerySpace : uid = <gen:0> -> org.hibernate.loader.plan.build.internal.spaces.EntityQuerySpaceImpl@2a551a63]
 Visiting attribute path : createdAt
 Visiting attribute path : description
 Visiting attribute path : dueOn
@@ -2104,7 +2104,7 @@ LoadPlan(entity=fi.muni.cz.reliability.tool.dataprovider.GeneralMilestone)
           - suffixed key columns - {id1_3_0_}
 
 Static select for entity fi.muni.cz.reliability.tool.dataprovider.GeneralMilestone [PESSIMISTIC_FORCE_INCREMENT]: select generalmil0_.id as id1_3_0_, generalmil0_.createdAt as createdA2_3_0_, generalmil0_.description as descript3_3_0_, generalmil0_.dueOn as dueOn4_3_0_, generalmil0_.MilestoneState as Mileston5_3_0_, generalmil0_.title as title6_3_0_ from GeneralMilestone generalmil0_ where generalmil0_.id=? for update with rs
-Adding QuerySpace : uid = <gen:0> -> org.hibernate.loader.plan.build.internal.spaces.EntityQuerySpaceImpl@52e04737]
+Adding QuerySpace : uid = <gen:0> -> org.hibernate.loader.plan.build.internal.spaces.EntityQuerySpaceImpl@1edb61b1]
 Visiting attribute path : createdAt
 Visiting attribute path : description
 Visiting attribute path : dueOn
@@ -2122,7 +2122,7 @@ LoadPlan(entity=fi.muni.cz.reliability.tool.dataprovider.GeneralMilestone)
           - suffixed key columns - {id1_3_0_}
 
 Static select for entity fi.muni.cz.reliability.tool.dataprovider.GeneralMilestone [OPTIMISTIC]: select generalmil0_.id as id1_3_0_, generalmil0_.createdAt as createdA2_3_0_, generalmil0_.description as descript3_3_0_, generalmil0_.dueOn as dueOn4_3_0_, generalmil0_.MilestoneState as Mileston5_3_0_, generalmil0_.title as title6_3_0_ from GeneralMilestone generalmil0_ where generalmil0_.id=?
-Adding QuerySpace : uid = <gen:0> -> org.hibernate.loader.plan.build.internal.spaces.EntityQuerySpaceImpl@1a4d1ab7]
+Adding QuerySpace : uid = <gen:0> -> org.hibernate.loader.plan.build.internal.spaces.EntityQuerySpaceImpl@cc62a3b]
 Visiting attribute path : createdAt
 Visiting attribute path : description
 Visiting attribute path : dueOn
@@ -2149,7 +2149,7 @@ Static SQL for entity: fi.muni.cz.reliability.tool.dataprovider.GeneralIssue
  Update 0: update GeneralIssue set body=?, closedAt=?, comments=?, createdAt=?, generalMilestone=?, generalUser=?, htmlUrl=?, number=?, snapshot_id=?, IssueState=?, title=?, updatedAt=?, url=? where id=?
  Delete 0: delete from GeneralIssue where id=?
  Identity insert: insert into GeneralIssue (id, body, closedAt, comments, createdAt, generalMilestone, generalUser, htmlUrl, number, snapshot_id, IssueState, title, updatedAt, url) values (default, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
-Adding QuerySpace : uid = <gen:0> -> org.hibernate.loader.plan.build.internal.spaces.EntityQuerySpaceImpl@4674d90]
+Adding QuerySpace : uid = <gen:0> -> org.hibernate.loader.plan.build.internal.spaces.EntityQuerySpaceImpl@29539e36]
 Visiting attribute path : body
 Visiting attribute path : closedAt
 Visiting attribute path : comments
@@ -2176,7 +2176,7 @@ LoadPlan(entity=fi.muni.cz.reliability.tool.dataprovider.GeneralIssue)
           - suffixed key columns - {id1_1_0_}
 
 Static select for entity fi.muni.cz.reliability.tool.dataprovider.GeneralIssue [NONE]: select generaliss0_.id as id1_1_0_, generaliss0_.body as body2_1_0_, generaliss0_.closedAt as closedAt3_1_0_, generaliss0_.comments as comments4_1_0_, generaliss0_.createdAt as createdA5_1_0_, generaliss0_.generalMilestone as generalM6_1_0_, generaliss0_.generalUser as generalU7_1_0_, generaliss0_.htmlUrl as htmlUrl8_1_0_, generaliss0_.number as number9_1_0_, generaliss0_.snapshot_id as snapsho10_1_0_, generaliss0_.IssueState as IssueSt11_1_0_, generaliss0_.title as title12_1_0_, generaliss0_.updatedAt as updated13_1_0_, generaliss0_.url as url14_1_0_ from GeneralIssue generaliss0_ where generaliss0_.id=?
-Adding QuerySpace : uid = <gen:0> -> org.hibernate.loader.plan.build.internal.spaces.EntityQuerySpaceImpl@1292071f]
+Adding QuerySpace : uid = <gen:0> -> org.hibernate.loader.plan.build.internal.spaces.EntityQuerySpaceImpl@f5c79a6]
 Visiting attribute path : body
 Visiting attribute path : closedAt
 Visiting attribute path : comments
@@ -2203,7 +2203,7 @@ LoadPlan(entity=fi.muni.cz.reliability.tool.dataprovider.GeneralIssue)
           - suffixed key columns - {id1_1_0_}
 
 Static select for entity fi.muni.cz.reliability.tool.dataprovider.GeneralIssue [READ]: select generaliss0_.id as id1_1_0_, generaliss0_.body as body2_1_0_, generaliss0_.closedAt as closedAt3_1_0_, generaliss0_.comments as comments4_1_0_, generaliss0_.createdAt as createdA5_1_0_, generaliss0_.generalMilestone as generalM6_1_0_, generaliss0_.generalUser as generalU7_1_0_, generaliss0_.htmlUrl as htmlUrl8_1_0_, generaliss0_.number as number9_1_0_, generaliss0_.snapshot_id as snapsho10_1_0_, generaliss0_.IssueState as IssueSt11_1_0_, generaliss0_.title as title12_1_0_, generaliss0_.updatedAt as updated13_1_0_, generaliss0_.url as url14_1_0_ from GeneralIssue generaliss0_ where generaliss0_.id=?
-Adding QuerySpace : uid = <gen:0> -> org.hibernate.loader.plan.build.internal.spaces.EntityQuerySpaceImpl@b606cb6]
+Adding QuerySpace : uid = <gen:0> -> org.hibernate.loader.plan.build.internal.spaces.EntityQuerySpaceImpl@5305c37d]
 Visiting attribute path : body
 Visiting attribute path : closedAt
 Visiting attribute path : comments
@@ -2230,7 +2230,7 @@ LoadPlan(entity=fi.muni.cz.reliability.tool.dataprovider.GeneralIssue)
           - suffixed key columns - {id1_1_0_}
 
 Static select for entity fi.muni.cz.reliability.tool.dataprovider.GeneralIssue [UPGRADE]: select generaliss0_.id as id1_1_0_, generaliss0_.body as body2_1_0_, generaliss0_.closedAt as closedAt3_1_0_, generaliss0_.comments as comments4_1_0_, generaliss0_.createdAt as createdA5_1_0_, generaliss0_.generalMilestone as generalM6_1_0_, generaliss0_.generalUser as generalU7_1_0_, generaliss0_.htmlUrl as htmlUrl8_1_0_, generaliss0_.number as number9_1_0_, generaliss0_.snapshot_id as snapsho10_1_0_, generaliss0_.IssueState as IssueSt11_1_0_, generaliss0_.title as title12_1_0_, generaliss0_.updatedAt as updated13_1_0_, generaliss0_.url as url14_1_0_ from GeneralIssue generaliss0_ where generaliss0_.id=? for update with rs
-Adding QuerySpace : uid = <gen:0> -> org.hibernate.loader.plan.build.internal.spaces.EntityQuerySpaceImpl@2819c460]
+Adding QuerySpace : uid = <gen:0> -> org.hibernate.loader.plan.build.internal.spaces.EntityQuerySpaceImpl@3dddbe65]
 Visiting attribute path : body
 Visiting attribute path : closedAt
 Visiting attribute path : comments
@@ -2257,7 +2257,7 @@ LoadPlan(entity=fi.muni.cz.reliability.tool.dataprovider.GeneralIssue)
           - suffixed key columns - {id1_1_0_}
 
 Static select for entity fi.muni.cz.reliability.tool.dataprovider.GeneralIssue [UPGRADE_NOWAIT]: select generaliss0_.id as id1_1_0_, generaliss0_.body as body2_1_0_, generaliss0_.closedAt as closedAt3_1_0_, generaliss0_.comments as comments4_1_0_, generaliss0_.createdAt as createdA5_1_0_, generaliss0_.generalMilestone as generalM6_1_0_, generaliss0_.generalUser as generalU7_1_0_, generaliss0_.htmlUrl as htmlUrl8_1_0_, generaliss0_.number as number9_1_0_, generaliss0_.snapshot_id as snapsho10_1_0_, generaliss0_.IssueState as IssueSt11_1_0_, generaliss0_.title as title12_1_0_, generaliss0_.updatedAt as updated13_1_0_, generaliss0_.url as url14_1_0_ from GeneralIssue generaliss0_ where generaliss0_.id=? for update with rs
-Adding QuerySpace : uid = <gen:0> -> org.hibernate.loader.plan.build.internal.spaces.EntityQuerySpaceImpl@38bb9d7a]
+Adding QuerySpace : uid = <gen:0> -> org.hibernate.loader.plan.build.internal.spaces.EntityQuerySpaceImpl@344561e0]
 Visiting attribute path : body
 Visiting attribute path : closedAt
 Visiting attribute path : comments
@@ -2284,7 +2284,7 @@ LoadPlan(entity=fi.muni.cz.reliability.tool.dataprovider.GeneralIssue)
           - suffixed key columns - {id1_1_0_}
 
 Static select for entity fi.muni.cz.reliability.tool.dataprovider.GeneralIssue [UPGRADE_SKIPLOCKED]: select generaliss0_.id as id1_1_0_, generaliss0_.body as body2_1_0_, generaliss0_.closedAt as closedAt3_1_0_, generaliss0_.comments as comments4_1_0_, generaliss0_.createdAt as createdA5_1_0_, generaliss0_.generalMilestone as generalM6_1_0_, generaliss0_.generalUser as generalU7_1_0_, generaliss0_.htmlUrl as htmlUrl8_1_0_, generaliss0_.number as number9_1_0_, generaliss0_.snapshot_id as snapsho10_1_0_, generaliss0_.IssueState as IssueSt11_1_0_, generaliss0_.title as title12_1_0_, generaliss0_.updatedAt as updated13_1_0_, generaliss0_.url as url14_1_0_ from GeneralIssue generaliss0_ where generaliss0_.id=? for update with rs
-Adding QuerySpace : uid = <gen:0> -> org.hibernate.loader.plan.build.internal.spaces.EntityQuerySpaceImpl@78d6447a]
+Adding QuerySpace : uid = <gen:0> -> org.hibernate.loader.plan.build.internal.spaces.EntityQuerySpaceImpl@36ac8a63]
 Visiting attribute path : body
 Visiting attribute path : closedAt
 Visiting attribute path : comments
@@ -2311,7 +2311,7 @@ LoadPlan(entity=fi.muni.cz.reliability.tool.dataprovider.GeneralIssue)
           - suffixed key columns - {id1_1_0_}
 
 Static select for entity fi.muni.cz.reliability.tool.dataprovider.GeneralIssue [FORCE]: select generaliss0_.id as id1_1_0_, generaliss0_.body as body2_1_0_, generaliss0_.closedAt as closedAt3_1_0_, generaliss0_.comments as comments4_1_0_, generaliss0_.createdAt as createdA5_1_0_, generaliss0_.generalMilestone as generalM6_1_0_, generaliss0_.generalUser as generalU7_1_0_, generaliss0_.htmlUrl as htmlUrl8_1_0_, generaliss0_.number as number9_1_0_, generaliss0_.snapshot_id as snapsho10_1_0_, generaliss0_.IssueState as IssueSt11_1_0_, generaliss0_.title as title12_1_0_, generaliss0_.updatedAt as updated13_1_0_, generaliss0_.url as url14_1_0_ from GeneralIssue generaliss0_ where generaliss0_.id=? for update with rs
-Adding QuerySpace : uid = <gen:0> -> org.hibernate.loader.plan.build.internal.spaces.EntityQuerySpaceImpl@1e469dfd]
+Adding QuerySpace : uid = <gen:0> -> org.hibernate.loader.plan.build.internal.spaces.EntityQuerySpaceImpl@52c8295b]
 Visiting attribute path : body
 Visiting attribute path : closedAt
 Visiting attribute path : comments
@@ -2338,7 +2338,7 @@ LoadPlan(entity=fi.muni.cz.reliability.tool.dataprovider.GeneralIssue)
           - suffixed key columns - {id1_1_0_}
 
 Static select for entity fi.muni.cz.reliability.tool.dataprovider.GeneralIssue [PESSIMISTIC_READ]: select generaliss0_.id as id1_1_0_, generaliss0_.body as body2_1_0_, generaliss0_.closedAt as closedAt3_1_0_, generaliss0_.comments as comments4_1_0_, generaliss0_.createdAt as createdA5_1_0_, generaliss0_.generalMilestone as generalM6_1_0_, generaliss0_.generalUser as generalU7_1_0_, generaliss0_.htmlUrl as htmlUrl8_1_0_, generaliss0_.number as number9_1_0_, generaliss0_.snapshot_id as snapsho10_1_0_, generaliss0_.IssueState as IssueSt11_1_0_, generaliss0_.title as title12_1_0_, generaliss0_.updatedAt as updated13_1_0_, generaliss0_.url as url14_1_0_ from GeneralIssue generaliss0_ where generaliss0_.id=? for read only with rs
-Adding QuerySpace : uid = <gen:0> -> org.hibernate.loader.plan.build.internal.spaces.EntityQuerySpaceImpl@1f7076bc]
+Adding QuerySpace : uid = <gen:0> -> org.hibernate.loader.plan.build.internal.spaces.EntityQuerySpaceImpl@77b21474]
 Visiting attribute path : body
 Visiting attribute path : closedAt
 Visiting attribute path : comments
@@ -2365,7 +2365,7 @@ LoadPlan(entity=fi.muni.cz.reliability.tool.dataprovider.GeneralIssue)
           - suffixed key columns - {id1_1_0_}
 
 Static select for entity fi.muni.cz.reliability.tool.dataprovider.GeneralIssue [PESSIMISTIC_WRITE]: select generaliss0_.id as id1_1_0_, generaliss0_.body as body2_1_0_, generaliss0_.closedAt as closedAt3_1_0_, generaliss0_.comments as comments4_1_0_, generaliss0_.createdAt as createdA5_1_0_, generaliss0_.generalMilestone as generalM6_1_0_, generaliss0_.generalUser as generalU7_1_0_, generaliss0_.htmlUrl as htmlUrl8_1_0_, generaliss0_.number as number9_1_0_, generaliss0_.snapshot_id as snapsho10_1_0_, generaliss0_.IssueState as IssueSt11_1_0_, generaliss0_.title as title12_1_0_, generaliss0_.updatedAt as updated13_1_0_, generaliss0_.url as url14_1_0_ from GeneralIssue generaliss0_ where generaliss0_.id=? for update with rs
-Adding QuerySpace : uid = <gen:0> -> org.hibernate.loader.plan.build.internal.spaces.EntityQuerySpaceImpl@5b9396d3]
+Adding QuerySpace : uid = <gen:0> -> org.hibernate.loader.plan.build.internal.spaces.EntityQuerySpaceImpl@41c07648]
 Visiting attribute path : body
 Visiting attribute path : closedAt
 Visiting attribute path : comments
@@ -2392,7 +2392,7 @@ LoadPlan(entity=fi.muni.cz.reliability.tool.dataprovider.GeneralIssue)
           - suffixed key columns - {id1_1_0_}
 
 Static select for entity fi.muni.cz.reliability.tool.dataprovider.GeneralIssue [PESSIMISTIC_FORCE_INCREMENT]: select generaliss0_.id as id1_1_0_, generaliss0_.body as body2_1_0_, generaliss0_.closedAt as closedAt3_1_0_, generaliss0_.comments as comments4_1_0_, generaliss0_.createdAt as createdA5_1_0_, generaliss0_.generalMilestone as generalM6_1_0_, generaliss0_.generalUser as generalU7_1_0_, generaliss0_.htmlUrl as htmlUrl8_1_0_, generaliss0_.number as number9_1_0_, generaliss0_.snapshot_id as snapsho10_1_0_, generaliss0_.IssueState as IssueSt11_1_0_, generaliss0_.title as title12_1_0_, generaliss0_.updatedAt as updated13_1_0_, generaliss0_.url as url14_1_0_ from GeneralIssue generaliss0_ where generaliss0_.id=? for update with rs
-Adding QuerySpace : uid = <gen:0> -> org.hibernate.loader.plan.build.internal.spaces.EntityQuerySpaceImpl@6a472566]
+Adding QuerySpace : uid = <gen:0> -> org.hibernate.loader.plan.build.internal.spaces.EntityQuerySpaceImpl@781e7326]
 Visiting attribute path : body
 Visiting attribute path : closedAt
 Visiting attribute path : comments
@@ -2419,7 +2419,7 @@ LoadPlan(entity=fi.muni.cz.reliability.tool.dataprovider.GeneralIssue)
           - suffixed key columns - {id1_1_0_}
 
 Static select for entity fi.muni.cz.reliability.tool.dataprovider.GeneralIssue [OPTIMISTIC]: select generaliss0_.id as id1_1_0_, generaliss0_.body as body2_1_0_, generaliss0_.closedAt as closedAt3_1_0_, generaliss0_.comments as comments4_1_0_, generaliss0_.createdAt as createdA5_1_0_, generaliss0_.generalMilestone as generalM6_1_0_, generaliss0_.generalUser as generalU7_1_0_, generaliss0_.htmlUrl as htmlUrl8_1_0_, generaliss0_.number as number9_1_0_, generaliss0_.snapshot_id as snapsho10_1_0_, generaliss0_.IssueState as IssueSt11_1_0_, generaliss0_.title as title12_1_0_, generaliss0_.updatedAt as updated13_1_0_, generaliss0_.url as url14_1_0_ from GeneralIssue generaliss0_ where generaliss0_.id=?
-Adding QuerySpace : uid = <gen:0> -> org.hibernate.loader.plan.build.internal.spaces.EntityQuerySpaceImpl@5e65afb6]
+Adding QuerySpace : uid = <gen:0> -> org.hibernate.loader.plan.build.internal.spaces.EntityQuerySpaceImpl@60d84f61]
 Visiting attribute path : body
 Visiting attribute path : closedAt
 Visiting attribute path : comments
@@ -2455,7 +2455,7 @@ Static SQL for entity: fi.muni.cz.reliability.tool.dataprovider.GeneralUser
  Update 0: update GeneralUser set email=?, name=? where id=?
  Delete 0: delete from GeneralUser where id=?
  Identity insert: insert into GeneralUser (id, email, name) values (default, ?, ?)
-Adding QuerySpace : uid = <gen:0> -> org.hibernate.loader.plan.build.internal.spaces.EntityQuerySpaceImpl@8851ce1]
+Adding QuerySpace : uid = <gen:0> -> org.hibernate.loader.plan.build.internal.spaces.EntityQuerySpaceImpl@324dcd31]
 Visiting attribute path : email
 Visiting attribute path : name
 Building LoadPlan...
@@ -2470,7 +2470,7 @@ LoadPlan(entity=fi.muni.cz.reliability.tool.dataprovider.GeneralUser)
           - suffixed key columns - {id1_4_0_}
 
 Static select for entity fi.muni.cz.reliability.tool.dataprovider.GeneralUser [NONE]: select generaluse0_.id as id1_4_0_, generaluse0_.email as email2_4_0_, generaluse0_.name as name3_4_0_ from GeneralUser generaluse0_ where generaluse0_.id=?
-Adding QuerySpace : uid = <gen:0> -> org.hibernate.loader.plan.build.internal.spaces.EntityQuerySpaceImpl@5ef6fd7f]
+Adding QuerySpace : uid = <gen:0> -> org.hibernate.loader.plan.build.internal.spaces.EntityQuerySpaceImpl@72bca894]
 Visiting attribute path : email
 Visiting attribute path : name
 Building LoadPlan...
@@ -2485,7 +2485,7 @@ LoadPlan(entity=fi.muni.cz.reliability.tool.dataprovider.GeneralUser)
           - suffixed key columns - {id1_4_0_}
 
 Static select for entity fi.muni.cz.reliability.tool.dataprovider.GeneralUser [READ]: select generaluse0_.id as id1_4_0_, generaluse0_.email as email2_4_0_, generaluse0_.name as name3_4_0_ from GeneralUser generaluse0_ where generaluse0_.id=?
-Adding QuerySpace : uid = <gen:0> -> org.hibernate.loader.plan.build.internal.spaces.EntityQuerySpaceImpl@767191b1]
+Adding QuerySpace : uid = <gen:0> -> org.hibernate.loader.plan.build.internal.spaces.EntityQuerySpaceImpl@1fc793c2]
 Visiting attribute path : email
 Visiting attribute path : name
 Building LoadPlan...
@@ -2500,7 +2500,7 @@ LoadPlan(entity=fi.muni.cz.reliability.tool.dataprovider.GeneralUser)
           - suffixed key columns - {id1_4_0_}
 
 Static select for entity fi.muni.cz.reliability.tool.dataprovider.GeneralUser [UPGRADE]: select generaluse0_.id as id1_4_0_, generaluse0_.email as email2_4_0_, generaluse0_.name as name3_4_0_ from GeneralUser generaluse0_ where generaluse0_.id=? for update with rs
-Adding QuerySpace : uid = <gen:0> -> org.hibernate.loader.plan.build.internal.spaces.EntityQuerySpaceImpl@5d21202d]
+Adding QuerySpace : uid = <gen:0> -> org.hibernate.loader.plan.build.internal.spaces.EntityQuerySpaceImpl@329a1243]
 Visiting attribute path : email
 Visiting attribute path : name
 Building LoadPlan...
@@ -2515,7 +2515,7 @@ LoadPlan(entity=fi.muni.cz.reliability.tool.dataprovider.GeneralUser)
           - suffixed key columns - {id1_4_0_}
 
 Static select for entity fi.muni.cz.reliability.tool.dataprovider.GeneralUser [UPGRADE_NOWAIT]: select generaluse0_.id as id1_4_0_, generaluse0_.email as email2_4_0_, generaluse0_.name as name3_4_0_ from GeneralUser generaluse0_ where generaluse0_.id=? for update with rs
-Adding QuerySpace : uid = <gen:0> -> org.hibernate.loader.plan.build.internal.spaces.EntityQuerySpaceImpl@6eb17ec8]
+Adding QuerySpace : uid = <gen:0> -> org.hibernate.loader.plan.build.internal.spaces.EntityQuerySpaceImpl@2d35442b]
 Visiting attribute path : email
 Visiting attribute path : name
 Building LoadPlan...
@@ -2530,7 +2530,7 @@ LoadPlan(entity=fi.muni.cz.reliability.tool.dataprovider.GeneralUser)
           - suffixed key columns - {id1_4_0_}
 
 Static select for entity fi.muni.cz.reliability.tool.dataprovider.GeneralUser [UPGRADE_SKIPLOCKED]: select generaluse0_.id as id1_4_0_, generaluse0_.email as email2_4_0_, generaluse0_.name as name3_4_0_ from GeneralUser generaluse0_ where generaluse0_.id=? for update with rs
-Adding QuerySpace : uid = <gen:0> -> org.hibernate.loader.plan.build.internal.spaces.EntityQuerySpaceImpl@277bf091]
+Adding QuerySpace : uid = <gen:0> -> org.hibernate.loader.plan.build.internal.spaces.EntityQuerySpaceImpl@4593ff34]
 Visiting attribute path : email
 Visiting attribute path : name
 Building LoadPlan...
@@ -2545,7 +2545,7 @@ LoadPlan(entity=fi.muni.cz.reliability.tool.dataprovider.GeneralUser)
           - suffixed key columns - {id1_4_0_}
 
 Static select for entity fi.muni.cz.reliability.tool.dataprovider.GeneralUser [FORCE]: select generaluse0_.id as id1_4_0_, generaluse0_.email as email2_4_0_, generaluse0_.name as name3_4_0_ from GeneralUser generaluse0_ where generaluse0_.id=? for update with rs
-Adding QuerySpace : uid = <gen:0> -> org.hibernate.loader.plan.build.internal.spaces.EntityQuerySpaceImpl@6a094db2]
+Adding QuerySpace : uid = <gen:0> -> org.hibernate.loader.plan.build.internal.spaces.EntityQuerySpaceImpl@30c0ccff]
 Visiting attribute path : email
 Visiting attribute path : name
 Building LoadPlan...
@@ -2560,7 +2560,7 @@ LoadPlan(entity=fi.muni.cz.reliability.tool.dataprovider.GeneralUser)
           - suffixed key columns - {id1_4_0_}
 
 Static select for entity fi.muni.cz.reliability.tool.dataprovider.GeneralUser [PESSIMISTIC_READ]: select generaluse0_.id as id1_4_0_, generaluse0_.email as email2_4_0_, generaluse0_.name as name3_4_0_ from GeneralUser generaluse0_ where generaluse0_.id=? for read only with rs
-Adding QuerySpace : uid = <gen:0> -> org.hibernate.loader.plan.build.internal.spaces.EntityQuerySpaceImpl@1dba4e06]
+Adding QuerySpace : uid = <gen:0> -> org.hibernate.loader.plan.build.internal.spaces.EntityQuerySpaceImpl@22db8f4]
 Visiting attribute path : email
 Visiting attribute path : name
 Building LoadPlan...
@@ -2575,7 +2575,7 @@ LoadPlan(entity=fi.muni.cz.reliability.tool.dataprovider.GeneralUser)
           - suffixed key columns - {id1_4_0_}
 
 Static select for entity fi.muni.cz.reliability.tool.dataprovider.GeneralUser [PESSIMISTIC_WRITE]: select generaluse0_.id as id1_4_0_, generaluse0_.email as email2_4_0_, generaluse0_.name as name3_4_0_ from GeneralUser generaluse0_ where generaluse0_.id=? for update with rs
-Adding QuerySpace : uid = <gen:0> -> org.hibernate.loader.plan.build.internal.spaces.EntityQuerySpaceImpl@6b2e46af]
+Adding QuerySpace : uid = <gen:0> -> org.hibernate.loader.plan.build.internal.spaces.EntityQuerySpaceImpl@1d572e62]
 Visiting attribute path : email
 Visiting attribute path : name
 Building LoadPlan...
@@ -2590,7 +2590,7 @@ LoadPlan(entity=fi.muni.cz.reliability.tool.dataprovider.GeneralUser)
           - suffixed key columns - {id1_4_0_}
 
 Static select for entity fi.muni.cz.reliability.tool.dataprovider.GeneralUser [PESSIMISTIC_FORCE_INCREMENT]: select generaluse0_.id as id1_4_0_, generaluse0_.email as email2_4_0_, generaluse0_.name as name3_4_0_ from GeneralUser generaluse0_ where generaluse0_.id=? for update with rs
-Adding QuerySpace : uid = <gen:0> -> org.hibernate.loader.plan.build.internal.spaces.EntityQuerySpaceImpl@2f37f1f9]
+Adding QuerySpace : uid = <gen:0> -> org.hibernate.loader.plan.build.internal.spaces.EntityQuerySpaceImpl@46cf05f7]
 Visiting attribute path : email
 Visiting attribute path : name
 Building LoadPlan...
@@ -2605,7 +2605,7 @@ LoadPlan(entity=fi.muni.cz.reliability.tool.dataprovider.GeneralUser)
           - suffixed key columns - {id1_4_0_}
 
 Static select for entity fi.muni.cz.reliability.tool.dataprovider.GeneralUser [OPTIMISTIC]: select generaluse0_.id as id1_4_0_, generaluse0_.email as email2_4_0_, generaluse0_.name as name3_4_0_ from GeneralUser generaluse0_ where generaluse0_.id=?
-Adding QuerySpace : uid = <gen:0> -> org.hibernate.loader.plan.build.internal.spaces.EntityQuerySpaceImpl@2af69643]
+Adding QuerySpace : uid = <gen:0> -> org.hibernate.loader.plan.build.internal.spaces.EntityQuerySpaceImpl@7cd1ac19]
 Visiting attribute path : email
 Visiting attribute path : name
 Building LoadPlan...
@@ -2629,7 +2629,7 @@ Static SQL for entity: fi.muni.cz.reliability.tool.dataprocessing.persistence.Ge
  Update 0: update GENERALISSUE_SNAPSHOT set createdAt=?, repositoryName=?, snapshotName=?, url=?, userName=? where id=?
  Delete 0: delete from GENERALISSUE_SNAPSHOT where id=?
  Identity insert: insert into GENERALISSUE_SNAPSHOT (id, createdAt, repositoryName, snapshotName, url, userName) values (default, ?, ?, ?, ?, ?)
-Adding QuerySpace : uid = <gen:0> -> org.hibernate.loader.plan.build.internal.spaces.EntityQuerySpaceImpl@48528634]
+Adding QuerySpace : uid = <gen:0> -> org.hibernate.loader.plan.build.internal.spaces.EntityQuerySpaceImpl@3caa4757]
 Visiting attribute path : createdAt
 Visiting attribute path : listOfGeneralIssues
 Visiting attribute path : repositoryName
@@ -2648,7 +2648,7 @@ LoadPlan(entity=fi.muni.cz.reliability.tool.dataprocessing.persistence.GeneralIs
           - suffixed key columns - {id1_0_0_}
 
 Static select for entity fi.muni.cz.reliability.tool.dataprocessing.persistence.GeneralIssuesSnapshot [NONE]: select generaliss0_.id as id1_0_0_, generaliss0_.createdAt as createdA2_0_0_, generaliss0_.repositoryName as reposito3_0_0_, generaliss0_.snapshotName as snapshot4_0_0_, generaliss0_.url as url5_0_0_, generaliss0_.userName as userName6_0_0_ from GENERALISSUE_SNAPSHOT generaliss0_ where generaliss0_.id=?
-Adding QuerySpace : uid = <gen:0> -> org.hibernate.loader.plan.build.internal.spaces.EntityQuerySpaceImpl@4047d2d9]
+Adding QuerySpace : uid = <gen:0> -> org.hibernate.loader.plan.build.internal.spaces.EntityQuerySpaceImpl@1804f60d]
 Visiting attribute path : createdAt
 Visiting attribute path : listOfGeneralIssues
 Visiting attribute path : repositoryName
@@ -2667,7 +2667,7 @@ LoadPlan(entity=fi.muni.cz.reliability.tool.dataprocessing.persistence.GeneralIs
           - suffixed key columns - {id1_0_0_}
 
 Static select for entity fi.muni.cz.reliability.tool.dataprocessing.persistence.GeneralIssuesSnapshot [READ]: select generaliss0_.id as id1_0_0_, generaliss0_.createdAt as createdA2_0_0_, generaliss0_.repositoryName as reposito3_0_0_, generaliss0_.snapshotName as snapshot4_0_0_, generaliss0_.url as url5_0_0_, generaliss0_.userName as userName6_0_0_ from GENERALISSUE_SNAPSHOT generaliss0_ where generaliss0_.id=?
-Adding QuerySpace : uid = <gen:0> -> org.hibernate.loader.plan.build.internal.spaces.EntityQuerySpaceImpl@146dcfe6]
+Adding QuerySpace : uid = <gen:0> -> org.hibernate.loader.plan.build.internal.spaces.EntityQuerySpaceImpl@547e29a4]
 Visiting attribute path : createdAt
 Visiting attribute path : listOfGeneralIssues
 Visiting attribute path : repositoryName
@@ -2686,7 +2686,7 @@ LoadPlan(entity=fi.muni.cz.reliability.tool.dataprocessing.persistence.GeneralIs
           - suffixed key columns - {id1_0_0_}
 
 Static select for entity fi.muni.cz.reliability.tool.dataprocessing.persistence.GeneralIssuesSnapshot [UPGRADE]: select generaliss0_.id as id1_0_0_, generaliss0_.createdAt as createdA2_0_0_, generaliss0_.repositoryName as reposito3_0_0_, generaliss0_.snapshotName as snapshot4_0_0_, generaliss0_.url as url5_0_0_, generaliss0_.userName as userName6_0_0_ from GENERALISSUE_SNAPSHOT generaliss0_ where generaliss0_.id=? for update with rs
-Adding QuerySpace : uid = <gen:0> -> org.hibernate.loader.plan.build.internal.spaces.EntityQuerySpaceImpl@5c77ba8f]
+Adding QuerySpace : uid = <gen:0> -> org.hibernate.loader.plan.build.internal.spaces.EntityQuerySpaceImpl@238b521e]
 Visiting attribute path : createdAt
 Visiting attribute path : listOfGeneralIssues
 Visiting attribute path : repositoryName
@@ -2705,7 +2705,7 @@ LoadPlan(entity=fi.muni.cz.reliability.tool.dataprocessing.persistence.GeneralIs
           - suffixed key columns - {id1_0_0_}
 
 Static select for entity fi.muni.cz.reliability.tool.dataprocessing.persistence.GeneralIssuesSnapshot [UPGRADE_NOWAIT]: select generaliss0_.id as id1_0_0_, generaliss0_.createdAt as createdA2_0_0_, generaliss0_.repositoryName as reposito3_0_0_, generaliss0_.snapshotName as snapshot4_0_0_, generaliss0_.url as url5_0_0_, generaliss0_.userName as userName6_0_0_ from GENERALISSUE_SNAPSHOT generaliss0_ where generaliss0_.id=? for update with rs
-Adding QuerySpace : uid = <gen:0> -> org.hibernate.loader.plan.build.internal.spaces.EntityQuerySpaceImpl@7a0ef219]
+Adding QuerySpace : uid = <gen:0> -> org.hibernate.loader.plan.build.internal.spaces.EntityQuerySpaceImpl@3e2fc448]
 Visiting attribute path : createdAt
 Visiting attribute path : listOfGeneralIssues
 Visiting attribute path : repositoryName
@@ -2724,7 +2724,7 @@ LoadPlan(entity=fi.muni.cz.reliability.tool.dataprocessing.persistence.GeneralIs
           - suffixed key columns - {id1_0_0_}
 
 Static select for entity fi.muni.cz.reliability.tool.dataprocessing.persistence.GeneralIssuesSnapshot [UPGRADE_SKIPLOCKED]: select generaliss0_.id as id1_0_0_, generaliss0_.createdAt as createdA2_0_0_, generaliss0_.repositoryName as reposito3_0_0_, generaliss0_.snapshotName as snapshot4_0_0_, generaliss0_.url as url5_0_0_, generaliss0_.userName as userName6_0_0_ from GENERALISSUE_SNAPSHOT generaliss0_ where generaliss0_.id=? for update with rs
-Adding QuerySpace : uid = <gen:0> -> org.hibernate.loader.plan.build.internal.spaces.EntityQuerySpaceImpl@7add323c]
+Adding QuerySpace : uid = <gen:0> -> org.hibernate.loader.plan.build.internal.spaces.EntityQuerySpaceImpl@588ab592]
 Visiting attribute path : createdAt
 Visiting attribute path : listOfGeneralIssues
 Visiting attribute path : repositoryName
@@ -2743,7 +2743,7 @@ LoadPlan(entity=fi.muni.cz.reliability.tool.dataprocessing.persistence.GeneralIs
           - suffixed key columns - {id1_0_0_}
 
 Static select for entity fi.muni.cz.reliability.tool.dataprocessing.persistence.GeneralIssuesSnapshot [FORCE]: select generaliss0_.id as id1_0_0_, generaliss0_.createdAt as createdA2_0_0_, generaliss0_.repositoryName as reposito3_0_0_, generaliss0_.snapshotName as snapshot4_0_0_, generaliss0_.url as url5_0_0_, generaliss0_.userName as userName6_0_0_ from GENERALISSUE_SNAPSHOT generaliss0_ where generaliss0_.id=? for update with rs
-Adding QuerySpace : uid = <gen:0> -> org.hibernate.loader.plan.build.internal.spaces.EntityQuerySpaceImpl@4760f169]
+Adding QuerySpace : uid = <gen:0> -> org.hibernate.loader.plan.build.internal.spaces.EntityQuerySpaceImpl@4cc61eb1]
 Visiting attribute path : createdAt
 Visiting attribute path : listOfGeneralIssues
 Visiting attribute path : repositoryName
@@ -2762,7 +2762,7 @@ LoadPlan(entity=fi.muni.cz.reliability.tool.dataprocessing.persistence.GeneralIs
           - suffixed key columns - {id1_0_0_}
 
 Static select for entity fi.muni.cz.reliability.tool.dataprocessing.persistence.GeneralIssuesSnapshot [PESSIMISTIC_READ]: select generaliss0_.id as id1_0_0_, generaliss0_.createdAt as createdA2_0_0_, generaliss0_.repositoryName as reposito3_0_0_, generaliss0_.snapshotName as snapshot4_0_0_, generaliss0_.url as url5_0_0_, generaliss0_.userName as userName6_0_0_ from GENERALISSUE_SNAPSHOT generaliss0_ where generaliss0_.id=? for read only with rs
-Adding QuerySpace : uid = <gen:0> -> org.hibernate.loader.plan.build.internal.spaces.EntityQuerySpaceImpl@35c12c7a]
+Adding QuerySpace : uid = <gen:0> -> org.hibernate.loader.plan.build.internal.spaces.EntityQuerySpaceImpl@2024293c]
 Visiting attribute path : createdAt
 Visiting attribute path : listOfGeneralIssues
 Visiting attribute path : repositoryName
@@ -2781,7 +2781,7 @@ LoadPlan(entity=fi.muni.cz.reliability.tool.dataprocessing.persistence.GeneralIs
           - suffixed key columns - {id1_0_0_}
 
 Static select for entity fi.muni.cz.reliability.tool.dataprocessing.persistence.GeneralIssuesSnapshot [PESSIMISTIC_WRITE]: select generaliss0_.id as id1_0_0_, generaliss0_.createdAt as createdA2_0_0_, generaliss0_.repositoryName as reposito3_0_0_, generaliss0_.snapshotName as snapshot4_0_0_, generaliss0_.url as url5_0_0_, generaliss0_.userName as userName6_0_0_ from GENERALISSUE_SNAPSHOT generaliss0_ where generaliss0_.id=? for update with rs
-Adding QuerySpace : uid = <gen:0> -> org.hibernate.loader.plan.build.internal.spaces.EntityQuerySpaceImpl@25290bca]
+Adding QuerySpace : uid = <gen:0> -> org.hibernate.loader.plan.build.internal.spaces.EntityQuerySpaceImpl@c074c0c]
 Visiting attribute path : createdAt
 Visiting attribute path : listOfGeneralIssues
 Visiting attribute path : repositoryName
@@ -2800,7 +2800,7 @@ LoadPlan(entity=fi.muni.cz.reliability.tool.dataprocessing.persistence.GeneralIs
           - suffixed key columns - {id1_0_0_}
 
 Static select for entity fi.muni.cz.reliability.tool.dataprocessing.persistence.GeneralIssuesSnapshot [PESSIMISTIC_FORCE_INCREMENT]: select generaliss0_.id as id1_0_0_, generaliss0_.createdAt as createdA2_0_0_, generaliss0_.repositoryName as reposito3_0_0_, generaliss0_.snapshotName as snapshot4_0_0_, generaliss0_.url as url5_0_0_, generaliss0_.userName as userName6_0_0_ from GENERALISSUE_SNAPSHOT generaliss0_ where generaliss0_.id=? for update with rs
-Adding QuerySpace : uid = <gen:0> -> org.hibernate.loader.plan.build.internal.spaces.EntityQuerySpaceImpl@4ac86d6a]
+Adding QuerySpace : uid = <gen:0> -> org.hibernate.loader.plan.build.internal.spaces.EntityQuerySpaceImpl@5949eba8]
 Visiting attribute path : createdAt
 Visiting attribute path : listOfGeneralIssues
 Visiting attribute path : repositoryName
@@ -2819,7 +2819,7 @@ LoadPlan(entity=fi.muni.cz.reliability.tool.dataprocessing.persistence.GeneralIs
           - suffixed key columns - {id1_0_0_}
 
 Static select for entity fi.muni.cz.reliability.tool.dataprocessing.persistence.GeneralIssuesSnapshot [OPTIMISTIC]: select generaliss0_.id as id1_0_0_, generaliss0_.createdAt as createdA2_0_0_, generaliss0_.repositoryName as reposito3_0_0_, generaliss0_.snapshotName as snapshot4_0_0_, generaliss0_.url as url5_0_0_, generaliss0_.userName as userName6_0_0_ from GENERALISSUE_SNAPSHOT generaliss0_ where generaliss0_.id=?
-Adding QuerySpace : uid = <gen:0> -> org.hibernate.loader.plan.build.internal.spaces.EntityQuerySpaceImpl@508a65bf]
+Adding QuerySpace : uid = <gen:0> -> org.hibernate.loader.plan.build.internal.spaces.EntityQuerySpaceImpl@58dea0a5]
 Visiting attribute path : createdAt
 Visiting attribute path : listOfGeneralIssues
 Visiting attribute path : repositoryName
@@ -2840,8 +2840,8 @@ LoadPlan(entity=fi.muni.cz.reliability.tool.dataprocessing.persistence.GeneralIs
 Static select for entity fi.muni.cz.reliability.tool.dataprocessing.persistence.GeneralIssuesSnapshot [OPTIMISTIC_FORCE_INCREMENT]: select generaliss0_.id as id1_0_0_, generaliss0_.createdAt as createdA2_0_0_, generaliss0_.repositoryName as reposito3_0_0_, generaliss0_.snapshotName as snapshot4_0_0_, generaliss0_.url as url5_0_0_, generaliss0_.userName as userName6_0_0_ from GENERALISSUE_SNAPSHOT generaliss0_ where generaliss0_.id=?
 Static select for action ACTION_MERGE on entity fi.muni.cz.reliability.tool.dataprocessing.persistence.GeneralIssuesSnapshot: select generaliss0_.id as id1_0_1_, generaliss0_.createdAt as createdA2_0_1_, generaliss0_.repositoryName as reposito3_0_1_, generaliss0_.snapshotName as snapshot4_0_1_, generaliss0_.url as url5_0_1_, generaliss0_.userName as userName6_0_1_, listofgene1_.snapshot_id as snapsho10_0_3_, listofgene1_.id as id1_1_3_, listofgene1_.id as id1_1_0_, listofgene1_.body as body2_1_0_, listofgene1_.closedAt as closedAt3_1_0_, listofgene1_.comments as comments4_1_0_, listofgene1_.createdAt as createdA5_1_0_, listofgene1_.generalMilestone as generalM6_1_0_, listofgene1_.generalUser as generalU7_1_0_, listofgene1_.htmlUrl as htmlUrl8_1_0_, listofgene1_.number as number9_1_0_, listofgene1_.snapshot_id as snapsho10_1_0_, listofgene1_.IssueState as IssueSt11_1_0_, listofgene1_.title as title12_1_0_, listofgene1_.updatedAt as updated13_1_0_, listofgene1_.url as url14_1_0_ from GENERALISSUE_SNAPSHOT generaliss0_ left outer join GeneralIssue listofgene1_ on generaliss0_.id=listofgene1_.snapshot_id where generaliss0_.id=?
 Static select for action ACTION_REFRESH on entity fi.muni.cz.reliability.tool.dataprocessing.persistence.GeneralIssuesSnapshot: select generaliss0_.id as id1_0_0_, generaliss0_.createdAt as createdA2_0_0_, generaliss0_.repositoryName as reposito3_0_0_, generaliss0_.snapshotName as snapshot4_0_0_, generaliss0_.url as url5_0_0_, generaliss0_.userName as userName6_0_0_ from GENERALISSUE_SNAPSHOT generaliss0_ where generaliss0_.id=?
-Adding QuerySpace : uid = <gen:0> -> org.hibernate.loader.plan.build.internal.spaces.CollectionQuerySpaceImpl@1e58512c]
-Adding QuerySpace : uid = <gen:1> -> org.hibernate.loader.plan.build.internal.spaces.EntityQuerySpaceImpl@210308d5]
+Adding QuerySpace : uid = <gen:0> -> org.hibernate.loader.plan.build.internal.spaces.CollectionQuerySpaceImpl@3c291aad]
+Adding QuerySpace : uid = <gen:1> -> org.hibernate.loader.plan.build.internal.spaces.EntityQuerySpaceImpl@2d0566ba]
 Visiting attribute path : body
 Visiting attribute path : closedAt
 Visiting attribute path : comments
@@ -2876,7 +2876,7 @@ LoadPlan(collection=fi.muni.cz.reliability.tool.dataprocessing.persistence.Gener
                 - suffixed key columns - {id1_1_1_}
 
 Static select for collection fi.muni.cz.reliability.tool.dataprocessing.persistence.GeneralIssuesSnapshot.listOfGeneralIssues: select listofgene0_.snapshot_id as snapsho10_0_0_, listofgene0_.id as id1_1_0_, listofgene0_.id as id1_1_1_, listofgene0_.body as body2_1_1_, listofgene0_.closedAt as closedAt3_1_1_, listofgene0_.comments as comments4_1_1_, listofgene0_.createdAt as createdA5_1_1_, listofgene0_.generalMilestone as generalM6_1_1_, listofgene0_.generalUser as generalU7_1_1_, listofgene0_.htmlUrl as htmlUrl8_1_1_, listofgene0_.number as number9_1_1_, listofgene0_.snapshot_id as snapsho10_1_1_, listofgene0_.IssueState as IssueSt11_1_1_, listofgene0_.title as title12_1_1_, listofgene0_.updatedAt as updated13_1_1_, listofgene0_.url as url14_1_1_ from GeneralIssue listofgene0_ where listofgene0_.snapshot_id=?
-Adding QuerySpace : uid = <gen:0> -> org.hibernate.loader.plan.build.internal.spaces.CollectionQuerySpaceImpl@7f353d99]
+Adding QuerySpace : uid = <gen:0> -> org.hibernate.loader.plan.build.internal.spaces.CollectionQuerySpaceImpl@320e400]
 Building LoadPlan...
 processing queryspace <gen:0>
 LoadPlan(collection=fi.muni.cz.reliability.tool.dataprovider.GeneralIssue.labels)
@@ -2889,7 +2889,7 @@ LoadPlan(collection=fi.muni.cz.reliability.tool.dataprovider.GeneralIssue.labels
           - suffixed key columns - {GeneralI1_1_0_}
 
 Static select for collection fi.muni.cz.reliability.tool.dataprovider.GeneralIssue.labels: select labels0_.GeneralIssue_id as GeneralI1_1_0_, labels0_.labels as labels2_2_0_ from GeneralIssue_labels labels0_ where labels0_.GeneralIssue_id=?
-Registering SessionFactory: c034a67f-8e0d-45b7-8094-fb52ab951d69 (<unnamed>)
+Registering SessionFactory: 4b1cd31f-ba4c-4590-b416-6ee7596e60da (<unnamed>)
 Not binding SessionFactory to JNDI, no JNDI name configured
 Instantiated session factory
 HHH000228: Running hbm2ddl schema update
@@ -3000,7 +3000,7 @@ throwQueryException() : no errors
 select << begin [level=1, statement=select]
 FromClause{level=1} : fi.muni.cz.reliability.tool.dataprocessing.persistence.GeneralIssuesSnapshot (<no alias>) -> generaliss0_
 Resolved : {synthetic-alias} -> {synthetic-alias}
-getDataType() : snapshotName -> org.hibernate.type.StringType@3c419631
+getDataType() : snapshotName -> org.hibernate.type.StringType@46d56d67
 Resolved : {synthetic-alias}.snapshotName -> generaliss0_.snapshotName
 [DEPRECATION] Encountered positional parameter near line 1, column 104 in HQL: [FROM fi.muni.cz.reliability.tool.dataprocessing.persistence.GeneralIssuesSnapshot WHERE snapshotName = ?].  Positional parameter are considered deprecated; use named parameters or JPA-style positional parameters instead.
 select : finishing up [level=1, statement=select]
@@ -3020,7 +3020,7 @@ select >> end [level=1, statement=select]
           +-[DOT] DotNode: 'generaliss0_.snapshotName' {propertyName=snapshotName,dereferenceType=PRIMITIVE,getPropertyPath=snapshotName,path={synthetic-alias}.snapshotName,tableAlias=generaliss0_,className=fi.muni.cz.reliability.tool.dataprocessing.persistence.GeneralIssuesSnapshot,classAlias=null}
           |  +-[IDENT] IdentNode: '{synthetic-alias}' {originalText={synthetic-alias}}
           |  \-[IDENT] IdentNode: 'snapshotName' {originalText=snapshotName}
-          \-[PARAM] ParameterNode: '?' {ordinal=0, expectedType=org.hibernate.type.StringType@3c419631}
+          \-[PARAM] ParameterNode: '?' {ordinal=0, expectedType=org.hibernate.type.StringType@46d56d67}
 
 throwQueryException() : no errors
 HQL: FROM fi.muni.cz.reliability.tool.dataprocessing.persistence.GeneralIssuesSnapshot WHERE snapshotName = ?
@@ -10325,8 +10325,8 @@ Preparing collection intializer : [fi.muni.cz.reliability.tool.dataprovider.Gene
 Collection fully initialized: [fi.muni.cz.reliability.tool.dataprovider.GeneralIssue.labels#599]
 1 collections initialized for role: fi.muni.cz.reliability.tool.dataprovider.GeneralIssue.labels
 Done loading collection
-Couldn't find template in cache for "template_one.html"("sk_SK", UTF-8, parsed); will try to load it.
-TemplateLoader.findTemplateSource("template_one_sk_SK.html"): Not found
-TemplateLoader.findTemplateSource("template_one_sk.html"): Not found
-TemplateLoader.findTemplateSource("template_one.html"): Found
-Loading template for "template_one.html"("sk_SK", UTF-8, parsed) from "file:/C:/Users/rados/Desktop/TOOL/RT-withR/Reliability-Tool/Reliability-Tool-DataProcessing/target/classes/templates/template_one.html"
+Couldn't find template in cache for "template_three.html"("sk_SK", UTF-8, parsed); will try to load it.
+TemplateLoader.findTemplateSource("template_three_sk_SK.html"): Not found
+TemplateLoader.findTemplateSource("template_three_sk.html"): Not found
+TemplateLoader.findTemplateSource("template_three.html"): Found
+Loading template for "template_three.html"("sk_SK", UTF-8, parsed) from "file:/C:/Users/rados/Desktop/TOOL/RT-withR/Reliability-Tool/Reliability-Tool-DataProcessing/target/classes/templates/template_three.html"

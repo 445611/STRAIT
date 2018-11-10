@@ -44,6 +44,7 @@ public class ArgsParser {
     public static final String OPT_NEW_SNAPSHOT = "ns";
     public static final String OPT_PRIOD_OF_TESTING = "pt";
     public static final String OPT_TIME_BETWEEN_ISSUES_UNIT = "tb";
+    public static final String OPT_SOLVER = "so";
     
     //Configuraton file option
     private static final String FLAG_CONFIG_FILE = "-cf";
@@ -169,6 +170,9 @@ public class ArgsParser {
         option = Option.builder(OPT_GRAPH_MULTIPLE).longOpt("graphMultiple")
                 .desc("Data show in multiple graphs.").build();
         options.addOption(option);
+        option = Option.builder(OPT_SOLVER).longOpt("solver").hasArg()
+                .desc("Solver to evaluate model parameters.").build();
+        options.addOption(option);    
         option = Option.builder(OPT_OUT).hasArg().desc("Output type.").build();
         options.addOption(option);
     }
@@ -226,6 +230,15 @@ public class ArgsParser {
      */
     public boolean hasOptionConfigFile() {
         return cmdl.hasOption(OPT_CONFIG_FILE);
+    }
+    
+    /**
+     * Check if option 'so' is on command line.
+     * 
+     * @return true if there is 'so', false otherwise.
+     */
+    public boolean hasOptionSolver() {
+        return cmdl.hasOption(OPT_SOLVER);
     }
     
     /**
@@ -388,6 +401,15 @@ public class ArgsParser {
      */
     public String getOptionValueUrl() {
         return cmdl.getOptionValue(OPT_URL);
+    }
+    
+    /**
+     * Get argument value for 'so'.
+     * 
+     * @return argument value.
+     */
+    public String getOptionValueSolver() {
+        return cmdl.getOptionValue(OPT_SOLVER);
     }
     
     /**

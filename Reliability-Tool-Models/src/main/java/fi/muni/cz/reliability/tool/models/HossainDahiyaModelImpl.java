@@ -1,7 +1,6 @@
 package fi.muni.cz.reliability.tool.models;
 
-import fi.muni.cz.reliability.tool.models.leastsquaresolver.Function;
-import fi.muni.cz.reliability.tool.models.leastsquaresolver.HossainDahiyaFunctionImpl;
+import fi.muni.cz.reliability.tool.models.leastsquaresolver.Solver;
 import fi.muni.cz.reliability.tool.models.testing.GoodnessOfFitTest;
 import java.util.HashMap;
 import java.util.List;
@@ -22,14 +21,16 @@ public class HossainDahiyaModelImpl extends AbstractModel {
      * 
      * @param listOfIssues          list of issues.
      * @param goodnessOfFitTest     Goodness of fit test to execute.
+     * @param solver                Solver to estimate model parameters.
      */
-    public HossainDahiyaModelImpl(List<Pair<Integer, Integer>> listOfIssues, GoodnessOfFitTest goodnessOfFitTest) {
-        super(listOfIssues, goodnessOfFitTest);
+    public HossainDahiyaModelImpl(List<Pair<Integer, Integer>> listOfIssues, GoodnessOfFitTest goodnessOfFitTest,
+            Solver solver) {
+        super(listOfIssues, goodnessOfFitTest, solver);
     }
     
     @Override
-    protected double[] getInitialParametersValue() {
-        return new double[]{listOfIssues.get(listOfIssues.size() - 1).getSecond(), 1, 1};
+    protected int[] getInitialParametersValue() {
+        return new int[]{listOfIssues.get(listOfIssues.size() - 1).getSecond(), 1, 1};
     }
     
     @Override
@@ -38,11 +39,6 @@ public class HossainDahiyaModelImpl extends AbstractModel {
                 (1 - Math.exp(- modelParameters.get(secondParameter) * testPeriod)) 
                 / (1 + modelParameters.get(thirdParameter) 
                 * Math.exp(- modelParameters.get(secondParameter) * testPeriod));         
-    }
-    
-    @Override
-    protected  Function getModelFunction() {
-        return new HossainDahiyaFunctionImpl();
     }
     
     @Override

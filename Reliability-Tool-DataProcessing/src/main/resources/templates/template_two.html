@@ -132,6 +132,7 @@
                                 <#list outputData.modelParameters as key, value> 
                                   ${key} = ${value?c}<br>
                                 </#list>
+                                Estimated by ${outputData.solver}.
                             </p>
                             <#if outputData.goodnessOfFit??>
                             <h3>Goodness of fit:</h3> 

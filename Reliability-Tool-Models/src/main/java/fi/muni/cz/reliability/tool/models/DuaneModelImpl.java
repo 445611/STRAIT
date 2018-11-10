@@ -1,7 +1,6 @@
 package fi.muni.cz.reliability.tool.models;
 
-import fi.muni.cz.reliability.tool.models.leastsquaresolver.DuaneFunctionImpl;
-import fi.muni.cz.reliability.tool.models.leastsquaresolver.Function;
+import fi.muni.cz.reliability.tool.models.leastsquaresolver.Solver;
 import fi.muni.cz.reliability.tool.models.testing.GoodnessOfFitTest;
 import java.util.HashMap;
 import java.util.List;
@@ -21,25 +20,22 @@ public class DuaneModelImpl extends AbstractModel {
      * 
      * @param listOfIssues          list of issues.
      * @param goodnessOfFitTest     Goodness of fit test to execute.
+     * @param solver                Solver to estimate model parameters.
      */
-    public DuaneModelImpl(List<Pair<Integer, Integer>> listOfIssues, GoodnessOfFitTest goodnessOfFitTest) {
-        super(listOfIssues, goodnessOfFitTest);
+    public DuaneModelImpl(List<Pair<Integer, Integer>> listOfIssues, GoodnessOfFitTest goodnessOfFitTest,
+            Solver solver) {
+        super(listOfIssues, goodnessOfFitTest, solver);
     }
 
     @Override
-    protected double[] getInitialParametersValue() {
-        return new double[]{listOfIssues.get(listOfIssues.size() - 1).getSecond(), 1};
+    protected int[] getInitialParametersValue() {
+        return new int[]{listOfIssues.get(listOfIssues.size() - 1).getSecond(), 1};
     }
     
     @Override
     protected double getFunctionValue(Integer testPeriod) {
         return modelParameters.get(firstParameter) *
                 Math.pow(testPeriod, modelParameters.get(secondParameter));        
-    }
-    
-    @Override
-    protected  Function getModelFunction() {
-        return new DuaneFunctionImpl();
     }
     
     @Override

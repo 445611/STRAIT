@@ -8,13 +8,13 @@ import org.rosuda.JRI.Rengine;
 /**
  * @author Radoslav Micko, 445611@muni.cz
  */
-public class GOLeastSquaresSolver extends SolverAbstract {
+public class DuaneLeastSquaresSolver extends SolverAbstract {
 
     /**
      * Initialize Rengine.
      * @param rEngine Rengine.
      */
-    public GOLeastSquaresSolver(Rengine rEngine) {
+    public DuaneLeastSquaresSolver(Rengine rEngine) {
         super(rEngine);
     }
     
@@ -22,7 +22,7 @@ public class GOLeastSquaresSolver extends SolverAbstract {
     public double[] optimize(int[] startParameters, List<Pair<Integer, Integer>> listOfData) {
         rEngine.eval(String.format("xvalues = c(%s)", getPreparedListWithCommas(getListOfFirstFromPair(listOfData))));
         rEngine.eval(String.format("yvalues = c(%s)", getPreparedListWithCommas(getListOfSecondFromPair(listOfData))));
-        rEngine.eval(String.format("model <- nls(yvalues ~ a*(1 - exp(-b*xvalues)), "
+        rEngine.eval(String.format("model <- nls(yvalues ~ a*(xvalues ^ b), "
                 + "start = list(a = %d,b = %d), "
                 + "lower = list(a = 0, b = 0), "
                 + "algorithm = \"port\")", startParameters[0], startParameters[1]));
