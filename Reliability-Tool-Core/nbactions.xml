@@ -10,7 +10,7 @@
                 <goal>org.codehaus.mojo:exec-maven-plugin:1.2.1:exec</goal>
             </goals>
             <properties>
-                <exec.args>-classpath %classpath fi.muni.cz.reliability.tool.core.Core -sn black -e -fl -ms go gos mo du hd</exec.args>
+                <exec.args>-classpath %classpath fi.muni.cz.reliability.tool.core.Core -url https://github.com/445611/PB071 -e -ms go gos mo du hd</exec.args>
                 <exec.executable>java</exec.executable>
                 <exec.workingdir></exec.workingdir>
             </properties>
@@ -25,7 +25,7 @@
                 <goal>org.codehaus.mojo:exec-maven-plugin:1.2.1:exec</goal>
             </goals>
             <properties>
-                <exec.args>-Xdebug -Xrunjdwp:transport=dt_socket,server=n,address=${jpda.address} -classpath %classpath fi.muni.cz.reliability.tool.core.Core -sn black -e -fl -ms go gos mo du hd</exec.args>
+                <exec.args>-Xdebug -Xrunjdwp:transport=dt_socket,server=n,address=${jpda.address} -classpath %classpath fi.muni.cz.reliability.tool.core.Core -url https://github.com/445611/PB071 -e -ms go gos mo du hd</exec.args>
                 <exec.executable>java</exec.executable>
                 <jpda.listen>true</jpda.listen>
                 <exec.workingdir></exec.workingdir>
@@ -41,7 +41,7 @@
                 <goal>org.codehaus.mojo:exec-maven-plugin:1.2.1:exec</goal>
             </goals>
             <properties>
-                <exec.args>-classpath %classpath fi.muni.cz.reliability.tool.core.Core -sn black -e -fl -ms go gos mo du hd</exec.args>
+                <exec.args>-classpath %classpath fi.muni.cz.reliability.tool.core.Core -url https://github.com/445611/PB071 -e -ms go gos mo du hd</exec.args>
                 <exec.executable>java</exec.executable>
                 <exec.workingdir></exec.workingdir>
             </properties>

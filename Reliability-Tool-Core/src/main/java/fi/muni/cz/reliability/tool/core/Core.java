@@ -1,5 +1,13 @@
 package fi.muni.cz.reliability.tool.core;
 
+import static fi.muni.cz.reliability.tool.core.RunConfiguration.LIST_ALL_SNAPSHOTS;
+import static fi.muni.cz.reliability.tool.core.RunConfiguration.NOT_SUPPORTED;
+import static fi.muni.cz.reliability.tool.core.RunConfiguration.SNAPSHOT_NAME_AND_EVALUATE;
+import static fi.muni.cz.reliability.tool.core.RunConfiguration.SNAPSHOT_NAME_AND_LIST_SNAPSHOTS;
+import static fi.muni.cz.reliability.tool.core.RunConfiguration.SNAPSHOT_NAME_AND_SAVE;
+import static fi.muni.cz.reliability.tool.core.RunConfiguration.URL_AND_EVALUATE;
+import static fi.muni.cz.reliability.tool.core.RunConfiguration.URL_AND_LIST_SNAPSHOTS;
+import static fi.muni.cz.reliability.tool.core.RunConfiguration.URL_AND_SAVE;
 import fi.muni.cz.reliability.tool.core.exception.InvalidInputException;
 import fi.muni.cz.reliability.tool.core.factory.FilterFactory;
 import fi.muni.cz.reliability.tool.core.factory.IssuesWriterFactory;
@@ -64,38 +72,38 @@ public class Core {
     private static void run() throws InvalidInputException {
         System.out.println("Working...");
         switch (PARSER.getRunConfiguration()) {
-            case 1:
+            case LIST_ALL_SNAPSHOTS:
                doListAllSnapshots();
                break;
-            case 2:
+            case HELP:
                 PARSER.printHelp();
-            case 3:
+            case URL_AND_SAVE:
                 checkUrl(PARSER.getOptionValueUrl());
                 doSaveToFileFromUrl();
                 System.out.println("Saved to file.");
                 break;
-            case 4:
+            case URL_AND_LIST_SNAPSHOTS:
                 checkUrl(PARSER.getOptionValueUrl());
                 doListSnapshotsForUrl();
                 break;
-            case 5:
+            case URL_AND_EVALUATE:
                 checkUrl(PARSER.getOptionValueUrl());
                 doEvaluateForUrl();
                 System.out.println("Evaluated to file.");
                 break;
-            case 6:
+            case SNAPSHOT_NAME_AND_SAVE:
                 doSaveToFileFromSnapshot();
                 System.out.println("Saved.");
                 break;
-            case 7:
+            case SNAPSHOT_NAME_AND_EVALUATE:
                 doEvaluateForSnapshot();
                 System.out.println("Evaluated.");
                 break;
-            case 8:
+            case SNAPSHOT_NAME_AND_LIST_SNAPSHOTS:
                 PARSER.printHelp();
                 System.out.println("[Can't combine '-sn' with '-sl']");
                 break;
-            case 9:
+            case NOT_SUPPORTED:
                 PARSER.printHelp();
                 System.out.println("[Missing option: '-e' / '-s']");
                 break;

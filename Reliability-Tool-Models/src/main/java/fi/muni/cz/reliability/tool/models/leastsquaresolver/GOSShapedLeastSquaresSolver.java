@@ -26,9 +26,9 @@ public class GOSShapedLeastSquaresSolver extends SolverAbstract {
                 + "start = list(a = %d,b = %d), "
                 + "lower = list(a = 0, b = 0), "
                 + "algorithm = \"port\")", startParameters[0], startParameters[1]));
-        REXP result = rEngine.eval("confint(model)");
+        REXP result = rEngine.eval("coef(model)");
         rEngine.end();
         double[] d = result.asDoubleArray();
-        return new double[]{d[2], d[3]};
+        return new double[]{d[0], d[1]};
     }
 }

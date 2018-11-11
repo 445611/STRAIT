@@ -1,5 +1,15 @@
 package fi.muni.cz.reliability.tool.core;
 
+import static fi.muni.cz.reliability.tool.core.RunConfiguration.HELP;
+import static fi.muni.cz.reliability.tool.core.RunConfiguration.LIST_ALL_SNAPSHOTS;
+import static fi.muni.cz.reliability.tool.core.RunConfiguration.NOT_SUPPORTED;
+import static fi.muni.cz.reliability.tool.core.RunConfiguration.SNAPSHOT_NAME_AND_EVALUATE;
+import static fi.muni.cz.reliability.tool.core.RunConfiguration.SNAPSHOT_NAME_AND_LIST_SNAPSHOTS;
+import static fi.muni.cz.reliability.tool.core.RunConfiguration.SNAPSHOT_NAME_AND_SAVE;
+import static fi.muni.cz.reliability.tool.core.RunConfiguration.UNSPECIFIED;
+import static fi.muni.cz.reliability.tool.core.RunConfiguration.URL_AND_EVALUATE;
+import static fi.muni.cz.reliability.tool.core.RunConfiguration.URL_AND_LIST_SNAPSHOTS;
+import static fi.muni.cz.reliability.tool.core.RunConfiguration.URL_AND_SAVE;
 import fi.muni.cz.reliability.tool.core.exception.InvalidInputException;
 import fi.muni.cz.reliability.tool.core.factory.FilterFactory;
 import fi.muni.cz.reliability.tool.dataprocessing.issuesprocessing.modeldata.IssuesCounter;
@@ -198,27 +208,27 @@ public class ArgsParser {
      * 
      * @return number representation.
      */
-    public int getRunConfiguration() {
+    public RunConfiguration getRunConfiguration() {
         if (hasOptionListAllSnapshots()) {
-            return 1;
+            return LIST_ALL_SNAPSHOTS;
         } else if (hasOptionHelp()) {
-            return 2;
+            return HELP;
         } else if (hasOptionUrl() && hasOptionSave()) {
-            return 3;
+            return URL_AND_SAVE;
         } else if (hasOptionUrl() && hasOptionListSnapshots()) {
-            return 4;
+            return URL_AND_LIST_SNAPSHOTS;
         } else if (hasOptionUrl() && hasOptionEvaluate()) {
-            return 5;
+            return URL_AND_EVALUATE;
         } else if (hasOptionSnapshotName() && hasOptionSave()) {
-            return 6;
+            return SNAPSHOT_NAME_AND_SAVE;
         } else if (hasOptionSnapshotName() && hasOptionEvaluate()) {
-            return 7;
+            return SNAPSHOT_NAME_AND_EVALUATE;
         } else if (hasOptionSnapshotName() && hasOptionListSnapshots()) {
-            return 8;
+            return SNAPSHOT_NAME_AND_LIST_SNAPSHOTS;
         } else if (hasOptionSnapshotName()) {
-            return 9;
+            return NOT_SUPPORTED;
         } else {
-            return 0;
+            return UNSPECIFIED;
         }
     }
     

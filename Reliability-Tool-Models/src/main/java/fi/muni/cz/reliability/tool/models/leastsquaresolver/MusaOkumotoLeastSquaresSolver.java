@@ -25,9 +25,9 @@ public class MusaOkumotoLeastSquaresSolver extends SolverAbstract {
         rEngine.eval(String.format("model <- nls(yvalues ~ a*log(b * xvalues + 1), "
                 + "start = list(a = %d,b = %d), "
                 + "algorithm = \"port\")", startParameters[0], startParameters[1]));
-        REXP result = rEngine.eval("confint(model)");
+        REXP result = rEngine.eval("coef(model)");
         rEngine.end();
         double[] d = result.asDoubleArray();
-        return new double[]{d[2], d[3]};
+        return new double[]{d[0], d[1]};
     }
 }
