@@ -51,7 +51,9 @@ public class Core {
     private static final GeneralIssuesSnapshotDaoImpl DAO = new GeneralIssuesSnapshotDaoImpl();
     
     /**
-     * @param args the command line arguments
+     * Main method, takes command line arguments.
+     * 
+     * @param args  command line arguments
      */
     public static void main(String[] args) {
         try {
