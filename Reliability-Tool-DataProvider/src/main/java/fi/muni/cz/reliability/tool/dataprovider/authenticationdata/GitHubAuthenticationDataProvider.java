@@ -28,8 +28,7 @@ public class GitHubAuthenticationDataProvider {
     private final GitHubClient gitHubClient;
 
     /**
-     * Constructor that runs <code>loadAuthenticationToClient</code> and 
-     * <code>parseDataFromFile</code>.
+     * Initialize GitHubClient and runs loadAuthenticationToClient and parseDataFromFile.
      */
     public GitHubAuthenticationDataProvider() {
         this.gitHubClient = new GitHubClient();
@@ -49,11 +48,10 @@ public class GitHubAuthenticationDataProvider {
         return oAuthToken;
     }
 
-    /**
-     * Get {@link GitHubClient} with preset
-     * crediatials.
+    /** 
+     * Get GitHubClient with preset crediatials.
      * 
-     * @return {@link org.eclipse.egit.github.core.client.GitHubClient GitHubClient}
+     * @return GitHubClient     GitHubClient
      */
     public GitHubClient getGitHubClientWithCreditials() {
         return gitHubClient;
@@ -72,15 +70,14 @@ public class GitHubAuthenticationDataProvider {
     }
     
     /**
-     * Set <code>oAuthToken</code> to <code>gitHubClient</code>
+     * Set oAuthToken to GitHubClient
      */
     private void gitHubClientSetOAuthToken() {
         gitHubClient.setOAuth2Token(oAuthToken);
     }
     
     /**
-     * Set <code>userName</code> and <code>password</code> 
-     * to <code>gitHubClient</code>
+     * Set userName andpassword to GitHubClient
      */
     private void gitHubClientSetUserNameAndPassword() {
         if (userName == null || password == null) {

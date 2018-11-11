@@ -20,12 +20,6 @@ public class HossainDahiyaLeastSquaresSolver extends SolverAbstract {
     
     @Override
     public double[] optimize(int[] startParameters, List<Pair<Integer, Integer>> listOfData) {
-        String a = String.format("xvalues = c(%s)", getPreparedListWithCommas(getListOfFirstFromPair(listOfData)));
-        String b = String.format("yvalues = c(%s)", getPreparedListWithCommas(getListOfSecondFromPair(listOfData)));
-        String v = String.format("model <- nls(yvalues ~ ((a * 1 - exp(-b*xvalues)) / (1 + c * exp(-b*xvalues))), "
-                + "start = list(a = %d,b = %d,c = %d), "
-                + "lower = list(a = 0, b = 0, c = 0), "
-                + "algorithm = \"port\")", startParameters[0], startParameters[1], startParameters[2]);
         rEngine.eval(String.format("xvalues = c(%s)", getPreparedListWithCommas(getListOfFirstFromPair(listOfData))));
         rEngine.eval(String.format("yvalues = c(%s)", getPreparedListWithCommas(getListOfSecondFromPair(listOfData))));
         rEngine.eval(String.format("model <- nls(yvalues ~ ((a * (1 - exp(-b*xvalues))) / (1 + c * exp(-b*xvalues))), "

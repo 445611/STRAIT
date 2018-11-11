@@ -9,7 +9,7 @@ import java.util.List;
 public interface IssuesWriter {
     
     /**
-     * Write <code>GeneralIssue</code> to file.
+     * Write List of GeneralIssue to file.
      * 
      * @param list      GeneralIssue to write.
      * @param fileName  name of file.

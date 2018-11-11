@@ -178,7 +178,7 @@ public class GeneralIssue implements Serializable {
     }
 
     /**
-     * Covert all <code>labels</code> to lower case.
+     * Covert all labels to lower case.
      */
     public void allLabelsToLowerCase() {
         labels.replaceAll(String::toLowerCase);

@@ -14,7 +14,7 @@ public class GitHubMapping implements BeanMapping {
     private final DozerBeanMapper dozerBeanMapper;
     
     /**
-     * Initialize <code>dozerBeanMapper</code> with specified mapping file.
+     * Initialize DozerBeanMapper with specified mapping file.
      * 
      * @param mappingFile name of mapping file.
      */

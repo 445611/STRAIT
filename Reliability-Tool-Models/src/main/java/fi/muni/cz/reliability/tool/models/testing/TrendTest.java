@@ -12,7 +12,6 @@ public interface TrendTest {
      * Execute the data trend.
      * 
      * @param listOfGeneralIssues   List of issues.
-     * @throw TrendModelException   if there is no such trend in data.
      */
     void executeTrendTest(List<GeneralIssue> listOfGeneralIssues);
     

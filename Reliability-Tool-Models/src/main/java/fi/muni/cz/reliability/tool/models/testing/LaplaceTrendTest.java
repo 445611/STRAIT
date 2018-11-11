@@ -25,22 +25,16 @@ public class LaplaceTrendTest implements TrendTest {
     
     @Override
     public void executeTrendTest(List<GeneralIssue> listOfGeneralIssues) {
-        
         IssuesCounter timeBetweenCounter = new TimeBetweenIssuesCounter(timeUnit);
         List<Pair<Integer, Integer>> timeBetweenIssues = timeBetweenCounter
                 .prepareIssuesDataForModel(listOfGeneralIssues);
         double totalNumberOfIssues = timeBetweenIssues.size();
         double sumOfDuration = timeBetweenIssues.stream().mapToDouble(a -> a.getSecond().doubleValue()).sum();
-        //double totalOperatingTime = listOfIssues.get(listOfIssues.size() - 1).getFirst();
-        
         double numerator = (sumOfDuration / totalNumberOfIssues - timeBetweenIssues.get(timeBetweenIssues.size() - 1)
                 .getSecond() / 2) ;
         double denumerator = timeBetweenIssues.get(timeBetweenIssues.size() - 1).getSecond() 
                 * Math.sqrt(1 / (12 * totalNumberOfIssues));
         trend = numerator / denumerator;
-        
-        //EVALUATION
-        //THROW TrendModelException when no trend or detoriorating trend
     }
 
     @Override

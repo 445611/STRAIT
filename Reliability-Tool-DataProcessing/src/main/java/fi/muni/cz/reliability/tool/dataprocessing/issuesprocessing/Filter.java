@@ -12,10 +12,10 @@ import java.util.List;
 public interface Filter {
     
     /**
-     * Filter list of <code>GeneralIssue</code> 
+     * Filter list of GeneralIssue 
      * 
      * @param list to be filtered
-     * @return {@link java.util.List List} filtered list
+     * @return List filtered list
      */
     List<GeneralIssue> filter(List<GeneralIssue> list);
     

@@ -13,8 +13,6 @@ public interface Model {
     
     /**
      * Calculate all parameters need for models functions and execute all data test.
-     * 
-     * @throw TrendModelException   when thare is no such trend in data.
      */
     void estimateModelData();
 

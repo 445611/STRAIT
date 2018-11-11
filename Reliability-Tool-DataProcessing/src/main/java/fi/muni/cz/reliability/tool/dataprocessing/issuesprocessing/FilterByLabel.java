@@ -6,8 +6,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * Filtering list of {@link fi.muni.cz.reliability.tool.dataprovider.GeneralIssue GeneralIssue}
- * by labels
+ * Filtering list of GeneralIssue by labels
  * 
  * @author Radoslav Micko, 445611@muni.cz
  */
@@ -16,7 +15,7 @@ public class FilterByLabel implements Filter, Serializable {
     private final List<String> filteringWords;
 
     /**
-     * Initialize.
+     * Initialize List of filteringWords.
      * 
      * @param filteringWords words for filter
      */
@@ -33,7 +32,7 @@ public class FilterByLabel implements Filter, Serializable {
     }
     
     /**
-     * Filter List of {@link fi.muni.cz.reliability.tool.dataprovider.GeneralIssue GeneralIssue}
+     * Filter List of GeneralIssue.
      * 
      * @param list to be filtered
      * @return filtered list.
@@ -49,7 +48,7 @@ public class FilterByLabel implements Filter, Serializable {
     }
     
     /**
-     * Check labels for any match with <code>filteringWords</code>
+     * Check labels for any match with List of filteringWords.
      * @param labels to check
      * @return true if any match, false otherwise
      */

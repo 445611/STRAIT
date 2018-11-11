@@ -29,7 +29,7 @@ public class GitHubDataProvider implements DataProvider {
     private final IssueService issueService;
     
     /**
-     * Initialize <code>beanMapping</code> and <code>gitHubClient</code>
+     * Initialize beanMapping and IssueService with client.
      * 
      * @param client GitHubClient with preset authentication data
      */

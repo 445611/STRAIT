@@ -8,21 +8,6 @@ import java.util.List;
  * @author Radoslav Micko, 445611@muni.cz
  */
 public interface FilteringConfiguration {
-    
-    /**
-     * Add word to configuration file
-     * 
-     * @param word to add
-     */
-    //void addWordToConfigFile(String word);
-    
-    /**
-     * Remove word from configuration file
-     * 
-     * @param word to remove
-     */
-    //void removeWordfromConfigFile(String word);
-    
     /**
      * Load filtering words from file
      * 

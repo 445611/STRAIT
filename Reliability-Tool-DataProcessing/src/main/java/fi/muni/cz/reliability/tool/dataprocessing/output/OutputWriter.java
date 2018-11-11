@@ -9,17 +9,15 @@ import org.apache.commons.math3.util.Pair;
 public interface OutputWriter {
     
     /**
-     * Write data from <code>OutputData</code> to certain file.
+     * Write data from OutputData to certain file.
      * 
      * @param outputData data to write 
      * @param fileName name of file
-     * @throw   DataProcessingException if there occures any probelm with parsing template
-     *          or writing to file.
      */
     void writeOutputDataToFile(List<OutputData> outputData, String fileName);
     
     /**
-     * Prepare attributes in <code>OutputData</code>
+     * Prepare attributes in OutputData
      * 
      * @param   url of repositry
      * @param   listOfPairsData Pair data 

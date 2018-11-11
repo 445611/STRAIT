@@ -18,7 +18,7 @@ public interface GeneralIssuesSnapshotDao {
     /**
      * Get all saved snapshots.
      * 
-     * @return list of <code>GeneralIssuesSnapshot</code>.
+     * @return list of GeneralIssuesSnapshot.
      */
     List<GeneralIssuesSnapshot> getAllSnapshots();
     
@@ -27,7 +27,7 @@ public interface GeneralIssuesSnapshotDao {
      * 
      * @param name  of snapshot.
      * @throws DataProcessingException  When there is no such snapshot.
-     * @return      <code>GeneralIssuesSnapshot</code>.
+     * @return GeneralIssuesSnapshot.
      */
     GeneralIssuesSnapshot getSnapshotByName(String name) throws DataProcessingException;
     
@@ -36,7 +36,7 @@ public interface GeneralIssuesSnapshotDao {
      * 
      * @param user          user name.
      * @param repository    repository name.
-     * @return      list of  <code>GeneralIssuesSnapshot</code> for repository.
+     * @return      list of  GeneralIssuesSnapshot for repository.
      */
     List<GeneralIssuesSnapshot> getAllSnapshotsForUserAndRepository(String user, String repository);
 }

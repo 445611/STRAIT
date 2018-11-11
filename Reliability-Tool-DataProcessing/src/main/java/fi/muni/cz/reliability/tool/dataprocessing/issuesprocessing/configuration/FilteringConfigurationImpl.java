@@ -20,23 +20,6 @@ public class FilteringConfigurationImpl implements FilteringConfiguration {
     private static final String FILTERING_CONFIG_FILE = "Filtering_config";
     private static final String SPLITTER = "/"; 
     
-    /*
-    @Override
-    public void addWordToConfigFile(String word) {
-        List<String> actualToUpdate = loadFilteringWordsFromFile();
-        if (!actualToUpdate.contains(word.toLowerCase())) {
-            actualToUpdate.add(word.toLowerCase());
-        }
-        writeListToFile(actualToUpdate);
-    }
-    
-    @Override
-    public void removeWordfromConfigFile(String word) {
-        List<String> actualToUpdate = loadFilteringWordsFromFile();
-        actualToUpdate.remove(word);
-        writeListToFile(actualToUpdate);
-    }*/
-    
     @Override
     public List<String> loadFilteringWordsFromFile() {
         File file = getConfigurationFile();
@@ -55,17 +38,6 @@ public class FilteringConfigurationImpl implements FilteringConfiguration {
                     + " file from resources.", ex);
         } 
     }
-    /*
-    private void writeListToFile(List<String> list) {
-        try (BufferedWriter writer = new BufferedWriter(new FileWriter(getConfigurationFile()))) {
-            for (String wordToWrite: list) {
-                writer.write(wordToWrite.toLowerCase());
-                writer.write(SPLITTER);
-            }
-        } catch (IOException ex){
-            throw new UtilsException("Error occured during writing to file.", ex);
-        }
-    }*/
     
     private File getConfigurationFile() {
         return new File(getClass().getClassLoader()
