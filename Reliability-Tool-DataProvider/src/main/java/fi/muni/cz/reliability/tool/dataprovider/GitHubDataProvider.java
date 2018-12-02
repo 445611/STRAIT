@@ -25,8 +25,8 @@ public class GitHubDataProvider implements DataProvider {
     
     private static final String MAPPING_FILE = "github_dozer_mapping.xml";
     
-    private final BeanMapping beanMapping; 
-    private final IssueService issueService;
+    private BeanMapping beanMapping;
+    private IssueService issueService;
     
     /**
      * Initialize beanMapping and IssueService with client.

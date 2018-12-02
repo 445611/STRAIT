@@ -21,7 +21,7 @@ import java.util.logging.Logger;
 /**
  * @author Radoslav Micko, 445611@muni.cz
  */
-public class HtmlOutputWriter extends OutputWriterAbstract {
+public class HtmlOutputWriter implements OutputWriter {
 
     private static final String TEMPLATE_ONE = "template_one.html";
     private static final String TEMPLATE_TWO = "template_two.html";
