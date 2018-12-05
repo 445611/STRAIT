@@ -148,6 +148,10 @@ public class Core {
     private static void doEvaluateForSnapshot() throws InvalidInputException {
         GeneralIssuesSnapshotDaoImpl dao = new GeneralIssuesSnapshotDaoImpl();
         GeneralIssuesSnapshot snapshot = dao.getSnapshotByName(PARSER.getOptionValueSnapshotName());
+        if (snapshot == null) {
+            System.out.println("No such snapshot '" + PARSER.getOptionValueSnapshotName() + "' in database.");
+            System.exit(1);
+        }
         checkUrl(snapshot.getUrl());
         doEvaluate(snapshot.getListOfGeneralIssues());
     }

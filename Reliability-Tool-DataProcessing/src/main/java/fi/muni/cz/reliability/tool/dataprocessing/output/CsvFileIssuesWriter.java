@@ -49,31 +49,20 @@ public class CsvFileIssuesWriter implements IssuesWriter {
                     writeElementWithDelimiter(
                             eliminateSeparatorAndCheckNullValue(issue.getBody()), fileWriter);
                     writeElementWithDelimiter(
-                            eliminateSeparatorAndCheckNullValue(issue.getGeneralUser() == null 
-                                    ? "null" : issue.getGeneralUser().getName()), fileWriter);
+                            eliminateSeparatorAndCheckNullValue(issue.getUserName()), fileWriter);
                     writeElementWithDelimiter(
-                            eliminateSeparatorAndCheckNullValue(issue.getGeneralUser() == null 
-                                    ? "null" : issue.getGeneralUser().getEmail()), fileWriter);
+                            eliminateSeparatorAndCheckNullValue(issue.getUserEmail()), fileWriter);
                     writeElementWithDelimiter(
-                            eliminateSeparatorAndCheckNullValue(
-                                    issue.getGeneralMilestone() == null 
-                                            ? "null" : issue.getGeneralMilestone().getCreatedAt()), fileWriter);
+                            eliminateSeparatorAndCheckNullValue(issue.getMilestoneCreatedAt()), fileWriter);
+                    writeElementWithDelimiter(
+                            eliminateSeparatorAndCheckNullValue(issue.getMilestoneDueOn()), fileWriter);
                     writeElementWithDelimiter(
                             eliminateSeparatorAndCheckNullValue(
-                                    issue.getGeneralMilestone() == null 
-                                            ? "null" : issue.getGeneralMilestone().getDueOn()), fileWriter);
+                                    issue.getMilestoneDescription()), fileWriter);
                     writeElementWithDelimiter(
-                            eliminateSeparatorAndCheckNullValue(
-                                    issue.getGeneralMilestone() == null 
-                                            ? "null" : issue.getGeneralMilestone().getDescription()), fileWriter);
+                            eliminateSeparatorAndCheckNullValue(issue.getMilestoneState()), fileWriter);
                     writeElementWithDelimiter(
-                            eliminateSeparatorAndCheckNullValue(
-                                    issue.getGeneralMilestone() == null 
-                                            ? "null" : issue.getGeneralMilestone().getState()), fileWriter);
-                    writeElementWithDelimiter(
-                            eliminateSeparatorAndCheckNullValue(
-                                    issue.getGeneralMilestone() == null 
-                                            ? "null" : issue.getGeneralMilestone().getTitle()), fileWriter);
+                            eliminateSeparatorAndCheckNullValue(issue.getMilestoneTitle()), fileWriter);
                     fileWriter.append(NEW_LINE_SEPARATOR);
                 }
         } catch (IOException ex) {

@@ -1,5 +1,6 @@
 package fi.muni.cz.reliability.tool.models.leastsquaresolver;
 
+import fi.muni.cz.reliability.tool.models.exception.ModelException;
 import java.util.List;
 import org.apache.commons.math3.util.Pair;
 import org.rosuda.JRI.REXP;
@@ -19,7 +20,7 @@ public class GOLeastSquaresSolver extends SolverAbstract {
     }
     
     @Override
-    public double[] optimize(int[] startParameters, List<Pair<Integer, Integer>> listOfData) {
+    public double[] optimize(int[] startParameters, List<Pair<Integer, Integer>> listOfData) {        
         rEngine.eval(String.format("xvalues = c(%s)", getPreparedListWithCommas(getListOfFirstFromPair(listOfData))));
         rEngine.eval(String.format("yvalues = c(%s)", getPreparedListWithCommas(getListOfSecondFromPair(listOfData))));
         rEngine.eval(String.format("model <- nls(yvalues ~ a*(1 - exp(-b*xvalues)), "
@@ -28,6 +29,9 @@ public class GOLeastSquaresSolver extends SolverAbstract {
                 + "algorithm = \"port\")", startParameters[0], startParameters[1]));
         REXP result = rEngine.eval("coef(model)");
         rEngine.end();
+        if (result == null) {
+            throw new ModelException("Repository data not suaitable for R evealuation.");
+        }
         double[] d = result.asDoubleArray();
         return new double[]{d[0], d[1]};
     }

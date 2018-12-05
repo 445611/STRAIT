@@ -36,8 +36,9 @@ public class GeneralIssue implements Serializable {
     private int comments;
     private int number;
     
-    @Column(columnDefinition="clob")
+    
     @Lob
+    @Column(columnDefinition="clob")
     private String body;
     @Column(name = "IssueState")
     private String state;
@@ -53,10 +54,79 @@ public class GeneralIssue implements Serializable {
     @Column(name = "snapshot_id")
     private Long snapshotid;
     
-    private GeneralUser generalUser;
+    private String userName;
+    private String userEmail;
     
-    private GeneralMilestone generalMilestone;
+    @Temporal(TemporalType.TIMESTAMP)
+    private Date milestoneCreatedAt;
+    @Temporal(TemporalType.TIMESTAMP)
+    private Date milestoneDueOn;
+    
+    @Lob
+    @Column(columnDefinition="clob")
+    private String milestoneDescription;
+    
+    @Column(name = "MilestoneState")
+    private String milestoneState;
+    private String milestoneTitle;
 
+    public Date getMilestoneCreatedAt() {
+        return milestoneCreatedAt;
+    }
+
+    public void setMilestoneCreatedAt(Date milestoneCreatedAt) {
+        this.milestoneCreatedAt = milestoneCreatedAt;
+    }
+
+    public Date getMilestoneDueOn() {
+        return milestoneDueOn;
+    }
+
+    public void setMilestoneDueOn(Date milestoneDueOn) {
+        this.milestoneDueOn = milestoneDueOn;
+    }
+
+    public String getMilestoneDescription() {
+        return milestoneDescription;
+    }
+
+    public void setMilestoneDescription(String milestoneDescription) {
+        this.milestoneDescription = milestoneDescription;
+    }
+
+    public String getMilestoneState() {
+        return milestoneState;
+    }
+
+    public void setMilestoneState(String milestoneState) {
+        this.milestoneState = milestoneState;
+    }
+
+    public String getMilestoneTitle() {
+        return milestoneTitle;
+    }
+
+    public void setMilestoneTitle(String milestoneTitle) {
+        this.milestoneTitle = milestoneTitle;
+    }
+    
+
+    public String getUserName() {
+        return userName;
+    }
+
+    public void setUserName(String userName) {
+        this.userName = userName;
+    }
+
+    public String getUserEmail() {
+        return userEmail;
+    }
+
+    public void setUserEmail(String userEmail) {
+        this.userEmail = userEmail;
+    }
+    
     public int getComments() {
         return comments;
     }
@@ -95,22 +165,6 @@ public class GeneralIssue implements Serializable {
 
     public void setHtmlUrl(String htmlUrl) {
         this.htmlUrl = htmlUrl;
-    }
-    
-    public GeneralMilestone getGeneralMilestone() {
-        return generalMilestone;
-    }
-
-    public void setGeneralMilestone(GeneralMilestone generalMilestone) {
-        this.generalMilestone = generalMilestone;
-    }
-    
-    public GeneralUser getGeneralUser() {
-        return generalUser;
-    }
-
-    public void setGeneralUser(GeneralUser generalUser) {
-        this.generalUser = generalUser;
     }
     
     public Long getSnapshotid() {
