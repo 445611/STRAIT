@@ -59,8 +59,8 @@ public class ArgsParser {
     //Configuraton file option
     private static final String FLAG_CONFIG_FILE = "-cf";
     
-    private static CommandLine cmdl;
-    private static Options options;
+    private CommandLine cmdl;
+    private Options options;
     
     /**
      * Parse and check input arguments.

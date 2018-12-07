@@ -6,11 +6,11 @@ import org.apache.commons.math3.util.Pair;
 import org.rosuda.JRI.Rengine;
 
 /**
- * @author Radoslav Micko, 445611@muni.cz@author rados
+ * @author Radoslav Micko, 445611@muni.cz
  */
 public abstract class SolverAbstract implements Solver {
     
-    protected final Rengine rEngine; 
+    protected Rengine rEngine; 
 
     /**
      * Initialize Rengine.

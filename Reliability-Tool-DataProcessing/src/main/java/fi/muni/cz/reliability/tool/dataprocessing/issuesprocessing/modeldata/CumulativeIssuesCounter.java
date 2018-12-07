@@ -11,14 +11,14 @@ import org.apache.commons.math3.util.Pair;
  */
 public class CumulativeIssuesCounter implements IssuesCounter {
 
-    private final String typeOfTimeToAdd;
+    private IssuesCounter counter;
     
     /**
      * Initialize attributes to default value.
      * Defaul value is one week.
      */
     public CumulativeIssuesCounter() {
-        typeOfTimeToAdd = WEEKS;
+        counter = new IntervalIssuesCounter(WEEKS);
     }
     
     /**
@@ -26,7 +26,7 @@ public class CumulativeIssuesCounter implements IssuesCounter {
      * @param typeOfTimeToAdd type of Calendar enum
      */
     public CumulativeIssuesCounter(String typeOfTimeToAdd) {
-        this.typeOfTimeToAdd = typeOfTimeToAdd;
+        counter = new IntervalIssuesCounter(typeOfTimeToAdd);
     }
     
     @Override
@@ -43,7 +43,6 @@ public class CumulativeIssuesCounter implements IssuesCounter {
     }
     
     private List<Pair<Integer, Integer>> getIntervalIssues(List<GeneralIssue> listOfIssues) {
-         IssuesCounter counter = new IntervalIssuesCounter(typeOfTimeToAdd);
-         return counter.prepareIssuesDataForModel(listOfIssues);
+        return counter.prepareIssuesDataForModel(listOfIssues);
     }
 }

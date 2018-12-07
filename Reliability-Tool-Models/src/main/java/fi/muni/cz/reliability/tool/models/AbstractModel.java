@@ -13,10 +13,10 @@ import org.apache.commons.math3.util.Pair;
 public abstract class AbstractModel implements Model {
 
     protected Map<String, Double> modelParameters;
-    protected final List<Pair<Integer, Integer>> listOfIssues;
+    protected List<Pair<Integer, Integer>> listOfIssues;
     protected Map<String, String> goodnessOfFit;
-    protected final GoodnessOfFitTest goodnessOfFitTest;
-    protected final Solver solver;
+    protected GoodnessOfFitTest goodnessOfFitTest;
+    protected Solver solver;
     
     /**
      * Initialize model attributes.
@@ -38,7 +38,7 @@ public abstract class AbstractModel implements Model {
         calculateModelGoodnessOfFit();
     }
 
-        @Override
+    @Override
     public List<Pair<Integer, Integer>> getIssuesPrediction(double howMuchToPredict) {
         return calculateEstimatedIssuesOccurance(howMuchToPredict);
     }

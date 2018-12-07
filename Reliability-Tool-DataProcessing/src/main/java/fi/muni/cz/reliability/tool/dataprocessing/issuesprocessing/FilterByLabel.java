@@ -1,5 +1,6 @@
 package fi.muni.cz.reliability.tool.dataprocessing.issuesprocessing;
 
+import fi.muni.cz.reliability.tool.dataprocessing.exception.DataProcessingException;
 import fi.muni.cz.reliability.tool.dataprovider.GeneralIssue;
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -26,7 +27,7 @@ public class FilterByLabel implements Filter, Serializable {
     @Override
     public List<GeneralIssue> filter(List<GeneralIssue> list) {
         if (filteringWords.isEmpty()) {
-            return list;
+            throw new DataProcessingException("No filtering words");
         }
         return filterByLabels(allLabelsToLowerCase(list));
     }
