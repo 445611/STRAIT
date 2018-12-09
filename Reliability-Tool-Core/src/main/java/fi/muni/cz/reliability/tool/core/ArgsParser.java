@@ -155,7 +155,7 @@ public class ArgsParser {
         option = Option.builder(OPT_PREDICT).longOpt("predict").type(Number.class).hasArg().argName("Number").
                 desc("Number of test periods to predict.").build();
         options.addOption(option);
-        option = Option.builder(OPT_NEW_SNAPSHOT).hasArg().argName("Name of new snapshot").
+        option = Option.builder(OPT_NEW_SNAPSHOT).longOpt("newSnapshot").hasArg().argName("Name of new snapshot").
                 desc("Name of new snapshot that will be persisted.").build();
         options.addOption(option);
         option = Option.builder(OPT_FILTER_LABELS).longOpt("filterLabel").optionalArg(true)
