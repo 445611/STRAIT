@@ -7,10 +7,10 @@
     <packaging>pom</packaging>
     <name>Reliability Tool Parent</name>
     <modules>
-        <module>Reliability-Tool-DataProvider</module>
-        <module>Reliability-Tool-Models</module>
-        <module>Reliability-Tool-Core</module>
-        <module>Reliability-Tool-DataProcessing</module>
+        <module>DataProvider</module>
+        <module>Models</module>
+        <module>DataProcessing</module>
+        <module>Core</module>
     </modules>
     
     <build>
