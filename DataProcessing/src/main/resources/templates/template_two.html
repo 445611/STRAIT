@@ -1,0 +1,211 @@
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <title>HTML Output</title>
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+
+        <link href="https://cdnjs.cloudflare.com/ajax/libs/c3/0.5.4/c3.css" rel="stylesheet">
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/d3/4.13.0/d3.min.js" charset="utf-8"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/c3/0.5.4/c3.min.js"></script>
+
+        <style>
+            .row.content {height: 100%;}
+            
+            .borders {
+                border-left: 1px solid #ddd;
+                border-right: 1px solid #ddd;
+                margin: -1px;
+            }
+            
+            .row{
+                overflow-y: hidden;
+                background-color: #def2f1;
+            }
+            
+            .container-fluid{
+		background-color: #def2f1;
+            }
+            
+            .container{
+                background-color: #def2f1;
+            }
+            
+            html ,body {
+                height: 100%;
+                background-color: #3aafa9;
+            }
+
+            .testimonial-group > .row {
+                overflow-x: auto;
+                white-space: nowrap;
+            }
+            
+            h3,h1{
+                font-weight: bold; 
+            }
+            
+            .testimonial-group > .row > .col-sm-8 {
+                display: inline-block;
+                float: none;
+            }
+            
+            .sidenav {
+                background-color: #3aafa9;
+            }
+
+            hr.hrstyle {
+                border: 0;
+                height: 1px;
+                background-image: linear-gradient(to right, rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.75), rgba(0, 0, 0, 0));
+            }
+
+            .c3-circle {
+                opacity: 1 !important;
+            }
+        </style>
+    </head>
+    <body>
+        <div class="container-fluid">    
+            <div class="row text-left">
+                <div class="col-sm-2 sidenav"></div>
+                <div class="col-sm-8 text-left"> 
+                    <center><h1>${dataList[0].repositoryName}</h1></center>
+                    <p>
+                        URL = <a href="${dataList[0].url}">${dataList[0].url}</a><br>
+                        This is estimation of issues occurance for  <a href="${dataList[0].url}">${dataList[0].repositoryName}</a> of user ${dataList[0].userName}.<br>
+                    </p>
+                    <hr class="hrstyle">
+                    <h3>Info:</h3>
+                    <p>
+                        Estimated at <b>${dataList[0].createdAt?datetime}</b>.
+                    </p>
+                    <p>
+                        Initial number of total defects = ${dataList[0].initialNumberOfIssues}<br>
+                        Total defects in repository after processing and filtering = ${dataList[0].totalNumberOfDefects}<br>
+                    </p>
+                    <h3>Filters and Processors:</h3>
+                    <p> 
+                        <b>Filters:</b><br>
+                            <#if dataList[0].filtersUsed?size != 0>
+                                <#list dataList[0].filtersUsed as value> 
+                                    - ${value}<br>
+                                </#list>
+                            <#else>
+                                - None<br>
+                            </#if>
+                        <b>Processors:</b><br>
+                            <#if dataList[0].processorsUsed?size != 0>
+                                <#list dataList[0].processorsUsed as value> 
+                                    - ${value}<br>
+                                </#list>
+                            <#else>
+                                - None<br>
+                            </#if>
+                    </p>
+                    <h3>Trend test:</h3> 
+                    <p>
+                        Trend ${dataList[0].existTrend?string("exists", "does not exist")} .<br>
+                        Trend = ${dataList[0].trend?c}
+
+                    </p>
+                    <hr class="hrstyle">
+                    <center><h3>Time between failures</h3></center>
+                    <div id="chart0"></div>
+                    <hr class="hrstyle">
+                </div>
+                <div class="col-sm-2 sidenav"></div>
+            </div>
+        </div>
+        <div class="container-fluid testimonial-group">
+            <center><h3>Comparison of ${dataList?size} models:</h3></center>
+            <div class="row text-center flex-nowrap">
+                <#assign i = 1>
+                <#list dataList as outputData>
+                    <div class="col-sm-8 col-md-6 col-lg-6 borders">
+                            <h3>${outputData.modelName}</h3>
+                            <p> 
+                                Model function:<br>
+                                ${outputData.modelFunction}<br>
+                                Estimated parameters:<br>
+                                <#list outputData.modelParameters as key, value> 
+                                  ${key} = ${value?c}<br>
+                                </#list>
+                                Estimated by ${outputData.solver}.
+                            </p>
+                            <#if outputData.goodnessOfFit??>
+                            <h3>Goodness of fit:</h3> 
+                                <p>
+                                    <#list outputData.goodnessOfFit as key, value> 
+                                        ${key}${value}<br>
+                                    </#list> 
+                                </p>              
+                            </#if>
+                            <hr class="hrstyle">    
+                            <center><h3>Failure occurance</h3></center>
+                            <div id="chart${i}"></div>
+
+                    </div>
+                <#assign i++>
+                </#list>
+            </div>
+        </div>  
+        <script>
+            var chart0 = c3.generate({
+                bindto: '#chart0',
+                data: {
+                  columns: [
+                    ['Time between failures', <#list dataList[0].timeBetweenDefects as pair>${pair.getSecond()?c},</#list>]
+                  ],
+                  type: 'scatter',
+                  colors: {
+                      'Time between failures': '#ff4444'
+                  }
+                },
+                axis: {
+                    x: {
+                        label: {
+                            text: 'Failures',
+                            position: 'outer-center'
+                        }
+                    },
+                    y: {
+                        label: {
+                            text: 'Time between failures (${dataList[0].timeBetweenDefectsUnit})',
+                            position: 'outer-middle'
+                        }
+                    }
+                }
+            });        
+            <#assign i = 1>
+            <#list dataList as outputData>
+                var chart${i} = c3.generate({
+                    bindto: '#chart${i}',
+                    data: {
+                      columns: [
+                        ['Real issues', <#list outputData.cumulativeDefects as pair>${pair.getSecond()?c},</#list>],
+                        ['Estimated issues', <#list outputData.estimatedIssuesPrediction as pair>${pair.getSecond()?c},</#list>]
+                      ]
+                    },
+                    axis: {
+                        x: {
+                            label: {
+                                text: 'Testing periods (${outputData.testingPeriodsUnit})',
+                                position: 'outer-center'
+                            }
+                        },
+                        y: {
+                            label: {
+                                text: 'Total failures',
+                                position: 'outer-middle'
+                            }
+                        }
+                    }
+                });
+            <#assign i++>
+            </#list>       
+        </script>
+    </body>
+</html>
