@@ -29,7 +29,7 @@ public class GOLeastSquaresSolver extends SolverAbstract {
                 + "algorithm = \"port\")", startParameters[0], startParameters[1]));
         REXP result = rEngine.eval("coef(model)");
         rEngine.end();
-        if (result == null) {
+        if (result == null || result.asDoubleArray().length < 2) {
             throw new ModelException("Repository data not suaitable for R evealuation.");
         }
         double[] d = result.asDoubleArray();

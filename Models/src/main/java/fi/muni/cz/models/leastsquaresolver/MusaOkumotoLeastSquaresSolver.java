@@ -1,5 +1,6 @@
 package fi.muni.cz.models.leastsquaresolver;
 
+import fi.muni.cz.models.exception.ModelException;
 import java.util.List;
 import org.apache.commons.math3.util.Pair;
 import org.rosuda.JRI.REXP;
@@ -27,6 +28,9 @@ public class MusaOkumotoLeastSquaresSolver extends SolverAbstract {
                 + "algorithm = \"port\")", startParameters[0], startParameters[1]));
         REXP result = rEngine.eval("coef(model)");
         rEngine.end();
+        if (result == null || result.asDoubleArray().length < 2) {
+            throw new ModelException("Repository data not suaitable for R evealuation.");
+        }
         double[] d = result.asDoubleArray();
         return new double[]{d[0], d[1]};
     }
