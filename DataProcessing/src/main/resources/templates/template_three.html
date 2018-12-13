@@ -65,6 +65,22 @@
             .c3-circle {
                 opacity: 1 !important;
             }
+            
+            .c3-axis-y text 
+            {
+              font-size: 19px;
+            }
+            
+            .c3-axis-x text 
+            {
+              font-size: 16px;
+            }
+            
+            .c3-legend-item text 
+            {
+              font-size: 19px;
+            }
+            
         </style>
     </head>
     <body>
@@ -75,7 +91,7 @@
                     <center><h1>${dataList[0].repositoryName}</h1></center>
                     <p>
                         URL = <a href="${dataList[0].url}">${dataList[0].url}</a><br>
-                        This is estimation of issues occurance for  <a href="${dataList[0].url}">${dataList[0].repositoryName}</a> of user ${dataList[0].userName}.<br>
+                        This is estimation of issues occurence for  <a href="${dataList[0].url}">${dataList[0].repositoryName}</a> of user ${dataList[0].userName}.<br>
                     </p>
                     <hr class="hrstyle">
                     <h3>Info:</h3>
@@ -152,7 +168,7 @@
             <div class="row">
                 <div class="col">
                     <hr class="hrstyle">    
-                    <center><h3>Failure occurance</h3></center>
+                    <center><h3>Failure occurence</h3></center>
                     <div id="chart1"></div>
                 </div>
             </div>
@@ -203,7 +219,7 @@
                     x: {
                         label: {
                             text: 'Testing periods (${dataList[0].testingPeriodsUnit})',
-                            position: 'outer-center'
+                            position: 'inner-center'
                         }
                     },
                     y: {
