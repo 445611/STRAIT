@@ -56,6 +56,14 @@ public class ModelFactory {
         } else {
             models.add(ModelFactory.getModel(countedWeeksWithTotal, goodnessOfFitTest, 
                     ModelFactory.GOEL_OKUMOTO, parser));
+            models.add(ModelFactory.getModel(countedWeeksWithTotal, goodnessOfFitTest, 
+                    ModelFactory.GOEL_OKEMURA_SSHAPED, parser));
+            models.add(ModelFactory.getModel(countedWeeksWithTotal, goodnessOfFitTest, 
+                    ModelFactory.HOSSAIN_DAHIYA, parser));
+            models.add(ModelFactory.getModel(countedWeeksWithTotal, goodnessOfFitTest, 
+                    ModelFactory.MUSA_OKUMOTO, parser));
+            models.add(ModelFactory.getModel(countedWeeksWithTotal, goodnessOfFitTest, 
+                    ModelFactory.DUANE, parser));
         }
         return models;
     }

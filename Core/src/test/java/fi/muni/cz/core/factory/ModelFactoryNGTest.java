@@ -40,7 +40,7 @@ public class ModelFactoryNGTest {
     public void testGetModelsWithoutModelOption() throws InvalidInputException {
         when(cmdl.hasOption(OPT_MODELS)).thenReturn(false);
         assertEquals(ModelFactory.getModels(new ArrayList<>(), 
-                new ChiSquareGoodnessOfFitTest(), argsParser).size(), 1);
+                new ChiSquareGoodnessOfFitTest(), argsParser).size(), 5);
         assertTrue(ModelFactory.getModels(new ArrayList<>(), 
                 new ChiSquareGoodnessOfFitTest(), argsParser).get(0) instanceof GOModelImpl);
     }
