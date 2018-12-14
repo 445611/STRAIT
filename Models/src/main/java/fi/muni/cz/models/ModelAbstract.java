@@ -10,7 +10,7 @@ import org.apache.commons.math3.util.Pair;
 /**
  * @author Radoslav Micko, 445611@muni.cz
  */
-public abstract class AbstractModel implements Model {
+public abstract class ModelAbstract implements Model {
 
     protected Map<String, Double> modelParameters;
     protected List<Pair<Integer, Integer>> listOfIssues;
@@ -25,7 +25,7 @@ public abstract class AbstractModel implements Model {
      * @param goodnessOfFitTest     Goodness of fit test to execute.
      * @param solver                Solver to estimate model parameters.
      */
-    public AbstractModel(List<Pair<Integer, Integer>> listOfIssues, 
+    public ModelAbstract(List<Pair<Integer, Integer>> listOfIssues, 
             GoodnessOfFitTest goodnessOfFitTest, Solver solver) {
         this.listOfIssues = listOfIssues;
         this.goodnessOfFitTest = goodnessOfFitTest;

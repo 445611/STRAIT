@@ -10,7 +10,7 @@ import org.apache.commons.math3.util.Pair;
 /**
  * @author Radoslav Micko, 445611@muni.cz
  */
-public class HossainDahiyaModelImpl extends AbstractModel {
+public class HossainDahiyaModelImpl extends ModelAbstract {
     
     private final String firstParameter = "a";
     private final String secondParameter = "b";

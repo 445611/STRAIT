@@ -10,7 +10,7 @@ import org.apache.commons.math3.util.Pair;
 /**
  * @author Radoslav Micko, 445611@muni.cz
  */
-public class DuaneModelImpl extends AbstractModel {
+public class DuaneModelImpl extends ModelAbstract {
     
     private final String firstParameter = "α";
     private final String secondParameter = "β";
