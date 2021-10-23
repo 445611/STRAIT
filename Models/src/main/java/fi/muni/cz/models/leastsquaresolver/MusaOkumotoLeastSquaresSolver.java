@@ -23,10 +23,16 @@ public class MusaOkumotoLeastSquaresSolver extends SolverAbstract {
     public double[] optimize(int[] startParameters, List<Pair<Integer, Integer>> listOfData) {
         rEngine.eval(String.format("xvalues = c(%s)", getPreparedListWithCommas(getListOfFirstFromPair(listOfData))));
         rEngine.eval(String.format("yvalues = c(%s)", getPreparedListWithCommas(getListOfSecondFromPair(listOfData))));
-        rEngine.eval(String.format("model <- nls(yvalues ~ a*log(b * xvalues + 1), "
+        rEngine.eval(String.format("modelMO <- nls(yvalues ~ a*log(b * xvalues + 1), "
                 + "start = list(a = %d,b = %d), "
+                + "control = list(warnOnly = TRUE), "
                 + "algorithm = \"port\")", startParameters[0], startParameters[1]));
-        REXP result = rEngine.eval("coef(model)");
+        /* FOR DUBUGGING */
+        /*REXP a = rEngine.eval(String.format("try(modelMO <- nls(yvalues ~ a*log(b * xvalues + 1), "
+                + "start = list(a = %d,b = %d), "
+                + "control = list(warnOnly = TRUE), "
+                + "algorithm = \"port\"), silent = TRUE)", startParameters[0], startParameters[1]));*/
+        REXP result = rEngine.eval("coef(modelMO)");
         rEngine.end();
         if (result == null || result.asDoubleArray().length < 2) {
             throw new ModelException("Repository data not suaitable for R evealuation.");

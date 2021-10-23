@@ -1,4 +1,4 @@
-<html>
+<html lang="EN">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -18,7 +18,7 @@
         }
         
         .sidenav {
-            background-color: #3aafa9;
+            background-color: #ffffff;
         }
         
         h3,h1{
@@ -50,6 +50,17 @@
                     URL = <a href="${data.url}">${data.url}</a><br>
                     This is estimation of issues occurence for  <a href="${data.url}">${data.repositoryName}</a> of user ${data.userName}.<br>
                 </p>
+                <b>Description:</b><br>
+                <p>
+                    ${data.repositoryDescription}
+                </p>
+                <b>Size:</b> ${data.repositorySize}<br>
+                <b>Contributors:</b> ${data.repositoryContributors}<br>
+                <b>Watchers:</b> ${data.repositoryWatchers}<br>
+                <b>Forks:</b> ${data.repositoryForks}<br>
+                <b>Created at:</b> ${data.repositoryCreatedAt?datetime}<br>
+                <b>Last pushed at:</b> ${data.repositoryLastPushedAt?datetime}<br>
+                <b>Count of development days:</b> ${data.developmentDays}<br>
                 <hr class="hrstyle">
                 <h3>Info:</h3>
                 <p>

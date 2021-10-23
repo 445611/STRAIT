@@ -50,5 +50,6 @@ Contributor(s):
     <property name="hbm2ddl.auto">update</property>
     <mapping class="fi.muni.cz.dataprocessing.persistence.GeneralIssuesSnapshot"/>
     <mapping class="fi.muni.cz.dataprovider.GeneralIssue"/>
+    <mapping class="fi.muni.cz.dataprovider.RepositoryInformation"/>
     </session-factory>
 </hibernate-configuration>

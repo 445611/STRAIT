@@ -1,21 +1,13 @@
 package fi.muni.cz.dataprocessing.persistence;
 
 import fi.muni.cz.dataprovider.GeneralIssue;
+import fi.muni.cz.dataprovider.RepositoryInformation;
+
 import java.io.Serializable;
 import java.util.Date;
 import java.util.List;
 import java.util.Objects;
-import javax.persistence.CascadeType;
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.OneToMany;
-import javax.persistence.Table;
-import javax.persistence.Temporal;
-import javax.persistence.TemporalType;
+import javax.persistence.*;
 
 /**
  * @author Radoslav Micko, 445611@muni.cz
@@ -42,6 +34,9 @@ public class GeneralIssuesSnapshot implements Serializable {
     @Temporal(TemporalType.TIMESTAMP)
     private Date createdAt;
 
+    @OneToOne(cascade = CascadeType.MERGE)
+    private RepositoryInformation repositoryInformation;
+
     /**
      * Default constructor.
      */
@@ -55,6 +50,7 @@ public class GeneralIssuesSnapshot implements Serializable {
         this.repositoryName = builder.repositoryName;
         this.snapshotName = builder.snapshotName;
         this.createdAt = builder.createdAt;
+        this.repositoryInformation = builder.repositoryInformation;
     }
     
     public Long getId() {
@@ -113,6 +109,14 @@ public class GeneralIssuesSnapshot implements Serializable {
         this.createdAt = createdAt;
     }
 
+    public RepositoryInformation getRepositoryInformation() {
+        return repositoryInformation;
+    }
+
+    public void setRepositoryInformation(RepositoryInformation repositoryInformation) {
+        this.repositoryInformation = repositoryInformation;
+    }
+
     @Override
     public int hashCode() {
         return Objects.hash(this.url, this.userName, 
@@ -164,6 +168,7 @@ public class GeneralIssuesSnapshot implements Serializable {
         private String repositoryName;
         private String snapshotName;
         private Date createdAt;
+        private RepositoryInformation repositoryInformation;
 
         /**
          * Set list of general isues.
@@ -230,7 +235,18 @@ public class GeneralIssuesSnapshot implements Serializable {
             this.createdAt = createdAt;
             return this;
         }
-        
+
+        /**
+         * Set repository information.
+         *
+         * @param repositoryInformation repository information.
+         * @return this builder, to allow method chaining.
+         */
+        public GeneralIssuesSnapshotBuilder setRepositoryInformation(RepositoryInformation repositoryInformation) {
+            this.repositoryInformation = repositoryInformation;
+            return this;
+        }
+
         /**
          * Constructs an GeneralIssuesSnapshot with the values declared by 
          * this GeneralIssuesSnapshot.GeneralIssuesSnapshotBuilder

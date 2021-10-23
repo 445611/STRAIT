@@ -26,6 +26,7 @@ public class HtmlOutputWriter implements OutputWriter {
     private static final String TEMPLATE_ONE = "template_one.html";
     private static final String TEMPLATE_TWO = "template_two.html";
     private static final String TEMPLATE_THREE = "template_three.html";
+    private static final String TEMPLATE_EMPTY = "template_empty.html";
     private final Configuration configuration;
     private final boolean multipleGraphs;
     
@@ -43,7 +44,11 @@ public class HtmlOutputWriter implements OutputWriter {
     public void writeOutputDataToFile(List<OutputData> outputData, String fileName) {
         Map<String, Object> root = new HashMap<>();
         if (outputData.size() == 1) {
-            root.put("data", outputData.get(0));
+            if (outputData.get(0).getModelName() == null) {
+                root.put("noModelsData", outputData.get(0));
+            } else {
+                root.put("data", outputData.get(0));
+            }
         } else {
             root.put("dataList", outputData);
         }
@@ -51,8 +56,10 @@ public class HtmlOutputWriter implements OutputWriter {
     }
     
     private void writeTemplateToFile(Map<String, Object> root, String fileName) {
-        if (root.get("data") == null) {
+        if (root.get("dataList") != null) {
             fileName = fileName + " - Models comparison";
+        } else if (root.get("noModelsData") != null) {
+            fileName = fileName + " - no models";
         }
         File file = new File("./output/" + fileName + ".html");
         file.getParentFile().mkdirs();
@@ -63,10 +70,13 @@ public class HtmlOutputWriter implements OutputWriter {
                 template = getTemplateFromConfiguration(TEMPLATE_ONE);
             } else if (multipleGraphs){
                 template = getTemplateFromConfiguration(TEMPLATE_TWO);
-            } else {
+            } else if (root.get("dataList") != null) {
                 template = getTemplateFromConfiguration(TEMPLATE_THREE);
+            } else {
+                template = getTemplateFromConfiguration(TEMPLATE_EMPTY);
             }
             template.process(root, writer);
+            System.out.println("File created - " + fileName + ".html");
         } catch (IOException ex) {
             logAndThrowException("Error occured during writing to file.", ex);
         } catch (TemplateException ex) {

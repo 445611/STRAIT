@@ -17,7 +17,7 @@ public class LabelsToLowerCaseProcessor implements IssuesProcessor {
     }
 
     @Override
-    public String infoAboutFilter() {
+    public String infoAboutProcessor() {
         return "LabelsToLowerCaseProcessor used to lowercase all lables of issues.";
     }
     

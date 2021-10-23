@@ -1,4 +1,4 @@
-<html>
+<html lang="EN">
     <head>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -35,7 +35,7 @@
             
             html ,body {
                 height: 100%;
-                background-color: #3aafa9;
+                background-color: #ffffff;
             }
 
             .testimonial-group > .row {
@@ -53,7 +53,7 @@
             }
             
             .sidenav {
-                background-color: #3aafa9;
+                background-color: #ffffff;
             }
 
             hr.hrstyle {
@@ -77,6 +77,17 @@
                         URL = <a href="${dataList[0].url}">${dataList[0].url}</a><br>
                         This is estimation of issues occurence for  <a href="${dataList[0].url}">${dataList[0].repositoryName}</a> of user ${dataList[0].userName}.<br>
                     </p>
+                    <b>Description:</b><br>
+                    <p>
+                        ${dataList[0].repositoryDescription}
+                    </p>
+                    <b>Size:</b> ${dataList[0].repositorySize}<br>
+                    <b>Contributors:</b> ${dataList[0].repositoryContributors}<br>
+                    <b>Watchers:</b> ${dataList[0].repositoryWatchers}<br>
+                    <b>Forks:</b> ${dataList[0].repositoryForks}<br>
+                    <b>Created at:</b> ${dataList[0].repositoryCreatedAt?datetime}<br>
+                    <b>Last pushed at:</b> ${dataList[0].repositoryLastPushedAt?datetime}<br>
+                    <b>Count of development days:</b> ${dataList[0].developmentDays}<br>
                     <hr class="hrstyle">
                     <h3>Info:</h3>
                     <p>

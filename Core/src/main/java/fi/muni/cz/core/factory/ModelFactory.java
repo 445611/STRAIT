@@ -2,18 +2,8 @@ package fi.muni.cz.core.factory;
 
 import fi.muni.cz.core.ArgsParser;
 import fi.muni.cz.core.exception.InvalidInputException;
-import fi.muni.cz.models.DuaneModelImpl;
-import fi.muni.cz.models.GOModelImpl;
-import fi.muni.cz.models.GOSShapedModelImpl;
-import fi.muni.cz.models.HossainDahiyaModelImpl;
-import fi.muni.cz.models.Model;
-import fi.muni.cz.models.MusaOkumotoModelImpl;
-import fi.muni.cz.models.leastsquaresolver.DuaneLeastSquaresSolver;
-import fi.muni.cz.models.leastsquaresolver.GOLeastSquaresSolver;
-import fi.muni.cz.models.leastsquaresolver.GOSShapedLeastSquaresSolver;
-import fi.muni.cz.models.leastsquaresolver.HossainDahiyaLeastSquaresSolver;
-import fi.muni.cz.models.leastsquaresolver.MusaOkumotoLeastSquaresSolver;
-import fi.muni.cz.models.leastsquaresolver.Solver;
+import fi.muni.cz.models.*;
+import fi.muni.cz.models.leastsquaresolver.*;
 import fi.muni.cz.models.testing.GoodnessOfFitTest;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -31,11 +21,12 @@ public class ModelFactory {
     public static final String  MUSA_OKUMOTO = "mo";
     public static final String  DUANE = "du";
     public static final String  HOSSAIN_DAHIYA = "hd";
+    public static final String  WEIBULL = "we";
 
     public static final String SOLVER_LEAST_SQUARES = "ls";
     public static final String SOLVER_MAXIMUM_LIKELIHOOD = "ml";
         
-    private static final Rengine R_ENGINE = new Rengine(new String[] {"–no-save"}, false, null);
+    private static final Rengine R_ENGINE = new Rengine(new String[] {"-–no-save"}, false, null);
     
     /**
      * Get all Model to run.
@@ -64,6 +55,11 @@ public class ModelFactory {
                     ModelFactory.MUSA_OKUMOTO, parser));
             models.add(ModelFactory.getModel(countedWeeksWithTotal, goodnessOfFitTest, 
                     ModelFactory.DUANE, parser));
+
+            models.add(ModelFactory.getModel(countedWeeksWithTotal, goodnessOfFitTest,
+                    ModelFactory.WEIBULL, parser));
+            // TODO Add new models + to parser as arguments
+
         }
         return models;
     }
@@ -94,12 +90,32 @@ public class ModelFactory {
                         getDuaneSolverBySolverArgument(parser));
             case HOSSAIN_DAHIYA:
                 return new HossainDahiyaModelImpl(countedWeeksWithTotal, goodnessOfFitTest, 
-                        getHossainDahiyaSolverBySolverArgument(parser)); 
+                        getHossainDahiyaSolverBySolverArgument(parser));
+            case WEIBULL:
+                return new WeibullModelImpl(countedWeeksWithTotal, goodnessOfFitTest,
+                        getWeibullSolverBySolverArgument(parser));
             default:
                 throw new InvalidInputException(Arrays.asList("No such model implemented: '" + modelArg + "'")); 
         }
     }
-    
+
+    private static Solver getWeibullSolverBySolverArgument(ArgsParser parser) throws InvalidInputException {
+        if (parser.hasOptionSolver()) {
+            switch (parser.getOptionValueSolver()) {
+                case SOLVER_LEAST_SQUARES:
+                    return new WeibullLeastSquaresSolver(R_ENGINE);
+                case SOLVER_MAXIMUM_LIKELIHOOD:
+                    throw new InvalidInputException(Arrays.asList("No such solver implemented: '"
+                            + parser.getOptionValueSolver() + "'"));
+                default:
+                    throw new InvalidInputException(Arrays.asList("No such solver implemented: '"
+                            + parser.getOptionValueSolver() + "'"));
+            }
+        } else {
+            return new WeibullLeastSquaresSolver(R_ENGINE);
+        }
+    }
+
     private static Solver getGOSolverBySolverArgument(ArgsParser parser) throws InvalidInputException {
         if (parser.hasOptionSolver()) {
             switch (parser.getOptionValueSolver()) {

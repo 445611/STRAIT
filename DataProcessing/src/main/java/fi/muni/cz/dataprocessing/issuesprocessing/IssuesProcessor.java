@@ -19,9 +19,9 @@ public interface IssuesProcessor {
     List<GeneralIssue> process(List<GeneralIssue> list);
     
     /**
-     * Information about filter used with atributes.
+     * Information about processor used with attributes.
      * 
      * @return String info
      */
-    String infoAboutFilter();
+    String infoAboutProcessor();
 }

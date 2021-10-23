@@ -30,7 +30,7 @@ public class GitHubDataProviderTest {
     IssueService issueService;
 
     @InjectMocks
-    private GitHubDataProvider provider = new GitHubDataProvider(new GitHubClient());
+    private GitHubGeneralIssueDataProvider provider = new GitHubGeneralIssueDataProvider(new GitHubClient());
     
     @BeforeClass
     public void setUp() {

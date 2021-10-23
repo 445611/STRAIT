@@ -20,7 +20,6 @@ import java.io.InputStreamReader;
 import java.util.ArrayList;
 import java.util.List;
 import org.apache.commons.cli.CommandLine;
-import org.apache.commons.cli.CommandLineParser;
 import org.apache.commons.cli.DefaultParser;
 import org.apache.commons.cli.HelpFormatter;
 import org.apache.commons.cli.Option;
@@ -48,11 +47,13 @@ public class ArgsParser {
     public static final String OPT_FILTER_LABELS = "fl";
     public static final String OPT_FILTER_CLOSED = "fc";
     public static final String OPT_FILTER_TIME = "ft";
+    public static final String OPT_FILTER_DUPLICATIONS = "fdu";
+    public static final String OPT_FILTER_DEFECTS = "fde";
     public static final String OPT_MODELS = "ms";
     public static final String OPT_OUT = "out";
     public static final String OPT_GRAPH_MULTIPLE = "gm";
     public static final String OPT_NEW_SNAPSHOT = "ns";
-    public static final String OPT_PRIOD_OF_TESTING = "pt";
+    public static final String OPT_PERIOD_OF_TESTING = "pt";
     public static final String OPT_TIME_BETWEEN_ISSUES_UNIT = "tb";
     public static final String OPT_SOLVER = "so";
     
@@ -66,11 +67,11 @@ public class ArgsParser {
      * Parse and check input arguments.
      * 
      * @param args arguments to check and parse.
-     * @throws InvalidInputException If some error occures.
+     * @throws InvalidInputException If some error occurs.
      */
     public void parse(String[] args) throws InvalidInputException {
         List<String> errors = new ArrayList<>();
-        getConfiguratedOptions();
+        getConfiguredOptions();
         if (checkToReadFromConfigFile(args, errors)) {
             cmdl = parseArgumentsFromConfigFile(args[1], options, errors);
         } else {
@@ -83,7 +84,7 @@ public class ArgsParser {
     }
    
     /**
-     * Print argument opritons.
+     * Print argument options.
      */
     public void printHelp(){
         HelpFormatter formatter = new HelpFormatter();
@@ -102,9 +103,7 @@ public class ArgsParser {
 
     private CommandLine parseArgumentsFromCommandLine(String[] args, Options options, List<String> errors) {
         try {
-            CommandLineParser parser = new DefaultParser();
-            CommandLine cmd = parser.parse(options, args);
-            return cmd;
+            return new DefaultParser().parse(options, args);
         } catch (ParseException ex) {
             errors.add(ex.getMessage());
         }
@@ -123,7 +122,7 @@ public class ArgsParser {
         return args[0].equals(ArgsParser.FLAG_CONFIG_FILE);
     }
     
-    private void getConfiguratedOptions() {
+    private void getConfiguredOptions() {
         options = new Options();
         
         OptionGroup mandatoryOptionGroup = new OptionGroup();
@@ -166,11 +165,16 @@ public class ArgsParser {
         option = Option.builder(OPT_FILTER_TIME).longOpt("filterTime").hasArgs()
                 .argName("Time").numberOfArgs(2).desc("Filter by start time and end time. Format: " 
                         + FilterFactory.DATE_FORMAT).build();
-        options.addOption(option);        
+        options.addOption(option);
+        option = Option.builder(OPT_FILTER_DUPLICATIONS).longOpt("filterDuplications")
+                .desc("Filter out duplications.").build();
+        options.addOption(option);
+        option = Option.builder(OPT_FILTER_DEFECTS).longOpt("filterDefects").desc("Filter defects.").build();
+        options.addOption(option);
         option = Option.builder(OPT_MODELS).longOpt("models").hasArgs().argName("Model name").
                 desc("Models to evaluate.").build();
         options.addOption(option);
-        option = Option.builder(OPT_PRIOD_OF_TESTING).longOpt("periodOfTesting").hasArg().argName("Period").
+        option = Option.builder(OPT_PERIOD_OF_TESTING).longOpt("periodOfTesting").hasArg().argName("Period").
                 desc("Period of testing. e.g.: " + IssuesCounter.WEEKS + ", " + IssuesCounter.MONTHS).build();
         options.addOption(option);
         option = Option.builder(OPT_TIME_BETWEEN_ISSUES_UNIT).longOpt("timBetweenIssues")
@@ -340,7 +344,25 @@ public class ArgsParser {
     public boolean hasOptionFilterLabels() {
         return cmdl.hasOption(OPT_FILTER_LABELS);
     }
-    
+
+    /**
+     * Check if option 'fdu' is on command line.
+     *
+     * @return true if there is 'fdu' command line, false otherwise.
+     */
+    public boolean hasOptionFilterDuplications() {
+        return cmdl.hasOption(OPT_FILTER_DUPLICATIONS);
+    }
+
+    /**
+     * Check if option 'fde' is on command line.
+     *
+     * @return true if there is 'fde' command line, false otherwise.
+     */
+    public boolean hasOptionFilterDefects() {
+        return cmdl.hasOption(OPT_FILTER_DEFECTS);
+    }
+
     /**
      * Check if option 'ms' is on command line.
      * 
@@ -365,7 +387,7 @@ public class ArgsParser {
      * @return true if there is 'pt' command line, false otherwise.
      */
     public boolean hasOptionPeriodOfTestiong() {
-        return cmdl.hasOption(OPT_PRIOD_OF_TESTING);
+        return cmdl.hasOption(OPT_PERIOD_OF_TESTING);
     }
     
     /**
@@ -428,7 +450,7 @@ public class ArgsParser {
      * @return argument value.
      */
     public String getOptionValuePeriodOfTesting() {
-        return cmdl.getOptionValue(OPT_PRIOD_OF_TESTING);
+        return cmdl.getOptionValue(OPT_PERIOD_OF_TESTING);
     } 
     
     /**

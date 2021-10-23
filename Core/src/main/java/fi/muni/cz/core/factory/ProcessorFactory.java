@@ -14,27 +14,27 @@ public class ProcessorFactory {
      * Get string representation of processors with detail info.
      * 
      * @param parser  parsed CommandLine.
-     * @return list of filters as String.
+     * @return list of processors as String.
      */
     public static List<String> getProcessorsRanWithInfoAsList(ArgsParser parser) {
         List<String> list = new ArrayList<>();
-        
-        //Implement for processors
-        
+        for (IssuesProcessor processor: getProcessors(parser)) {
+            list.add(processor.infoAboutProcessor());
+        }
         return list;
     }
     
     /**
-     * Get all filters to run.
+     * Get all processors to run.
      * 
      * @param parser  parsed CommandLine.
-     * @return list of Filters.
+     * @return list of Processors.
      */
     public static List<IssuesProcessor> getProcessors(ArgsParser parser) {
-        List<IssuesProcessor> list = new ArrayList<>();
-        
+        List<IssuesProcessor> listOfProcessors = new ArrayList<>();
+
         //Implement for processors
-        
-        return list;
+
+        return listOfProcessors;
     }
 }

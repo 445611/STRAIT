@@ -21,7 +21,16 @@ public class OutputData implements Serializable {
     private List<Pair<Integer, Integer>> cumulativeDefects;
     private List<Pair<Integer, Integer>> timeBetweenDefects;
     private String timeBetweenDefectsUnit;
-    
+
+    private String repositoryDescription;
+    private int repositorySize;
+    private int repositoryContributors;
+    private int repositoryWatchers;
+    private int repositoryForks;
+    private Date repositoryCreatedAt;
+    private Date repositoryLastPushedAt;
+    private long developmentDays;
+
     private Map<String, Double> modelParameters;
     private List<Pair<Integer, Integer>> estimatedIssuesPrediction;
     private Map<String, String> goodnessOfFit;
@@ -61,6 +70,14 @@ public class OutputData implements Serializable {
         this.filtersUsed = builder.filtersUsed;
         this.processorsUsed = builder.processorsUsed;
         this.solver = builder.solver;
+        this.repositoryContributors = builder.repositoryContributors;
+        this.repositoryCreatedAt = builder.repositoryCreatedAt;
+        this.repositoryDescription = builder.repositoryDescription;
+        this.repositoryForks = builder.repositoryForks;
+        this.repositoryLastPushedAt = builder.repositoryLastPushedAt;
+        this.repositorySize = builder.repositorySize;
+        this.repositoryWatchers = builder.repositoryWatchers;
+        this.developmentDays = builder.developmentDays;
     }
 
     public String getSolver() {
@@ -225,6 +242,70 @@ public class OutputData implements Serializable {
         this.cumulativeDefects = cumulativeDefects;
     }
 
+    public String getRepositoryDescription() {
+        return repositoryDescription;
+    }
+
+    public void setRepositoryDescription(String repositoryDescription) {
+        this.repositoryDescription = repositoryDescription;
+    }
+
+    public int getRepositorySize() {
+        return repositorySize;
+    }
+
+    public void setRepositorySize(int repositorySize) {
+        this.repositorySize = repositorySize;
+    }
+
+    public int getRepositoryContributors() {
+        return repositoryContributors;
+    }
+
+    public void setRepositoryContributors(int repositoryContributors) {
+        this.repositoryContributors = repositoryContributors;
+    }
+
+    public int getRepositoryWatchers() {
+        return repositoryWatchers;
+    }
+
+    public void setRepositoryWatchers(int repositoryWatchers) {
+        this.repositoryWatchers = repositoryWatchers;
+    }
+
+    public int getRepositoryForks() {
+        return repositoryForks;
+    }
+
+    public void setRepositoryForks(int repositoryForks) {
+        this.repositoryForks = repositoryForks;
+    }
+
+    public Date getRepositoryCreatedAt() {
+        return repositoryCreatedAt;
+    }
+
+    public void setRepositoryCreatedAt(Date repositoryCreatedAt) {
+        this.repositoryCreatedAt = repositoryCreatedAt;
+    }
+
+    public Date getRepositoryLastPushedAt() {
+        return repositoryLastPushedAt;
+    }
+
+    public void setRepositoryLastPushedAt(Date repositoryLastPushedAt) {
+        this.repositoryLastPushedAt = repositoryLastPushedAt;
+    }
+
+    public long getDevelopmentDays() {
+        return developmentDays;
+    }
+
+    public void setDevelopmentDays(long developmentDays) {
+        this.developmentDays = developmentDays;
+    }
+
     @Override
     public int hashCode() {
         return Objects.hash(this.userName, this.repositoryName, this.createdAt);
@@ -275,6 +356,15 @@ public class OutputData implements Serializable {
         private List<Pair<Integer, Integer>> cumulativeDefects;
         private List<Pair<Integer, Integer>> timeBetweenDefects;
         private String timeBetweenDefectsUnit;
+
+        private String repositoryDescription;
+        private int repositorySize;
+        private int repositoryContributors;
+        private int repositoryWatchers;
+        private int repositoryForks;
+        private Date repositoryCreatedAt;
+        private Date repositoryLastPushedAt;
+        private long developmentDays;
 
         private Map<String, Double> modelParameters;
         private List<Pair<Integer, Integer>> estimatedIssuesPrediction;
@@ -507,7 +597,95 @@ public class OutputData implements Serializable {
             this.processorsUsed = processorsUsed;
             return this;
         }
-        
+
+        /**
+         * Set repository description.
+         *
+         * @param repositoryDescription repository description.
+         * @return this builder, to allow method chaining.
+         */
+        public OutputDataBuilder setRepositoryDescription(String repositoryDescription) {
+            this.repositoryDescription = repositoryDescription;
+            return this;
+        }
+
+        /**
+         * Set repository size.
+         *
+         * @param repositorySize repository size.
+         * @return this builder, to allow method chaining.
+         */
+        public OutputDataBuilder setRepositorySize(int repositorySize) {
+            this.repositorySize = repositorySize;
+            return this;
+        }
+
+        /**
+         * Set repository contributors count.
+         *
+         * @param repositoryContributors contributors count.
+         * @return this builder, to allow method chaining.
+         */
+        public OutputDataBuilder setRepositoryContributors(int repositoryContributors) {
+            this.repositoryContributors = repositoryContributors;
+            return this;
+        }
+
+        /**
+         * Set repository watchers count.
+         *
+         * @param repositoryWatchers watchers count.
+         * @return this builder, to allow method chaining.
+         */
+        public OutputDataBuilder setRepositoryWatchers(int repositoryWatchers) {
+            this.repositoryWatchers = repositoryWatchers;
+            return this;
+        }
+
+        /**
+         * Set repository forks count.
+         *
+         * @param repositoryForks forks count.
+         * @return this builder, to allow method chaining.
+         */
+        public OutputDataBuilder setRepositoryForks(int repositoryForks) {
+            this.repositoryForks = repositoryForks;
+            return this;
+        }
+
+        /**
+         * Set repository created at date.
+         *
+         * @param repositoryCreatedAt created at date.
+         * @return this builder, to allow method chaining.
+         */
+        public OutputDataBuilder setRepositoryCreatedAt(Date repositoryCreatedAt) {
+            this.repositoryCreatedAt = repositoryCreatedAt;
+            return this;
+        }
+
+        /**
+         * Set repository last updated at date.
+         *
+         * @param repositoryLastPushedAt last updated at date.
+         * @return this builder, to allow method chaining.
+         */
+        public OutputDataBuilder setRepositoryLastPushedAt(Date repositoryLastPushedAt) {
+            this.repositoryLastPushedAt = repositoryLastPushedAt;
+            return this;
+        }
+
+        /**
+         * Set repository development dates count.
+         *
+         * @param developmentDays development dates count.
+         * @return this builder, to allow method chaining.
+         */
+        public OutputDataBuilder setDevelopmentDays(long developmentDays) {
+            this.developmentDays = developmentDays;
+            return this;
+        }
+
         /**
          * Constructs an OutputData with the values declared by this OutputData.OutputDataBuilder
          * 

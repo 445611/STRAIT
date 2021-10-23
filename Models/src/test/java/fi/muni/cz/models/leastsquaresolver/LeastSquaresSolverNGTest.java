@@ -39,6 +39,8 @@ public class LeastSquaresSolverNGTest {
     private Solver hossainDahiyaSolver = new HossainDahiyaLeastSquaresSolver(rEngine);
     @InjectMocks
     private Solver musaOkumotoSolver = new MusaOkumotoLeastSquaresSolver(rEngine);
+    @InjectMocks
+    private Solver weibullSolver = new WeibullLeastSquaresSolver(rEngine);
     
     @BeforeClass
     public void setUp() {
@@ -51,7 +53,10 @@ public class LeastSquaresSolverNGTest {
     @Test
     public void testOptimizeOnAllSolvers() {
         double[] doubleArr = {1.0, 1.0};
-        when(rEngine.eval("coef(model)")).thenReturn(new REXP(doubleArr));
+        when(rEngine.eval("coef(modelGO)")).thenReturn(new REXP(doubleArr));
+        when(rEngine.eval("coef(modelGOS)")).thenReturn(new REXP(doubleArr));
+        when(rEngine.eval("coef(modelDuane)")).thenReturn(new REXP(doubleArr));
+        when(rEngine.eval("coef(modelMO)")).thenReturn(new REXP(doubleArr));
         int[] intArr = {1, 1};
         
         assertEquals(GOSolver.optimize(intArr, listOfPairs), doubleArr); 
@@ -61,7 +66,9 @@ public class LeastSquaresSolverNGTest {
         
         int[] int3Arr = {1, 1, 1};
         double[] double3Arr = {1.0, 1.0, 1.0};
-        when(rEngine.eval("coef(model)")).thenReturn(new REXP(double3Arr));
-        assertEquals(hossainDahiyaSolver.optimize(int3Arr, listOfPairs), double3Arr); 
+        when(rEngine.eval("coef(modelHD)")).thenReturn(new REXP(double3Arr));
+        when(rEngine.eval("coef(modelWeibull)")).thenReturn(new REXP(double3Arr));
+        assertEquals(hossainDahiyaSolver.optimize(int3Arr, listOfPairs), double3Arr);
+        assertEquals(weibullSolver.optimize(int3Arr, listOfPairs), double3Arr);
     }
 }

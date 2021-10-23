@@ -1,19 +1,7 @@
 package fi.muni.cz.core;
 
-import static fi.muni.cz.core.RunConfiguration.LIST_ALL_SNAPSHOTS;
-import static fi.muni.cz.core.RunConfiguration.NOT_SUPPORTED;
-import static fi.muni.cz.core.RunConfiguration.SNAPSHOT_NAME_AND_EVALUATE;
-import static fi.muni.cz.core.RunConfiguration.SNAPSHOT_NAME_AND_LIST_SNAPSHOTS;
-import static fi.muni.cz.core.RunConfiguration.SNAPSHOT_NAME_AND_SAVE;
-import static fi.muni.cz.core.RunConfiguration.URL_AND_EVALUATE;
-import static fi.muni.cz.core.RunConfiguration.URL_AND_LIST_SNAPSHOTS;
-import static fi.muni.cz.core.RunConfiguration.URL_AND_SAVE;
 import fi.muni.cz.core.exception.InvalidInputException;
-import fi.muni.cz.core.factory.FilterFactory;
-import fi.muni.cz.core.factory.IssuesWriterFactory;
-import fi.muni.cz.core.factory.ModelFactory;
-import fi.muni.cz.core.factory.OutputWriterFactory;
-import fi.muni.cz.core.factory.ProcessorFactory;
+import fi.muni.cz.core.factory.*;
 import fi.muni.cz.dataprocessing.issuesprocessing.Filter;
 import fi.muni.cz.dataprocessing.issuesprocessing.IssuesProcessor;
 import fi.muni.cz.dataprocessing.issuesprocessing.modeldata.CumulativeIssuesCounter;
@@ -22,22 +10,24 @@ import fi.muni.cz.dataprocessing.issuesprocessing.modeldata.TimeBetweenIssuesCou
 import fi.muni.cz.dataprocessing.output.OutputData;
 import fi.muni.cz.dataprocessing.persistence.GeneralIssuesSnapshot;
 import fi.muni.cz.dataprocessing.persistence.GeneralIssuesSnapshotDaoImpl;
-import fi.muni.cz.dataprovider.DataProvider;
-import fi.muni.cz.dataprovider.GeneralIssue;
-import fi.muni.cz.dataprovider.GitHubDataProvider;
+import fi.muni.cz.dataprovider.*;
 import fi.muni.cz.dataprovider.authenticationdata.GitHubAuthenticationDataProvider;
 import fi.muni.cz.dataprovider.utils.GitHubUrlParser;
 import fi.muni.cz.dataprovider.utils.ParsedUrlData;
 import fi.muni.cz.dataprovider.utils.UrlParser;
 import fi.muni.cz.models.Model;
+import fi.muni.cz.models.exception.ModelException;
 import fi.muni.cz.models.testing.ChiSquareGoodnessOfFitTest;
 import fi.muni.cz.models.testing.GoodnessOfFitTest;
 import fi.muni.cz.models.testing.LaplaceTrendTest;
 import fi.muni.cz.models.testing.TrendTest;
+import org.apache.commons.math3.util.Pair;
+import org.eclipse.egit.github.core.client.GitHubClient;
+
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
-import org.apache.commons.math3.util.Pair;
+import java.util.concurrent.TimeUnit;
 
 /**
  * @author Radoslav Micko, 445611@muni.cz
@@ -45,11 +35,13 @@ import org.apache.commons.math3.util.Pair;
 public class Core {
 
     private static final ArgsParser PARSER = new ArgsParser();
-    private static final DataProvider DATA_PROVIDER = 
-            new GitHubDataProvider(new GitHubAuthenticationDataProvider().getGitHubClientWithCreditials());
+    private static final GitHubClient CLIENT = new GitHubAuthenticationDataProvider().getGitHubClientWithCreditials();
+    private static final GeneralIssueDataProvider ISSUES_DATA_PROVIDER = new GitHubGeneralIssueDataProvider(CLIENT);
+    private static final RepositoryInformationDataProvider REPOSITORY_DATA_PROVIDER =
+            new GitHubRepositoryInformationDataProvider(CLIENT);
     private static ParsedUrlData parsedUrlData;
     private static final GeneralIssuesSnapshotDaoImpl DAO = new GeneralIssuesSnapshotDaoImpl();
-    
+
     /**
      * Main method, takes command line arguments.
      * 
@@ -118,23 +110,30 @@ public class Core {
     }
     
     private static void  doEvaluateForUrl() throws InvalidInputException {
+        System.out.println("On repository - " + parsedUrlData.getUrl());
         List<GeneralIssue> listOfGeneralIssues = null;
+        RepositoryInformation repositoryInformation = null;
         if (PARSER.hasOptionNewSnapshot()) {
             if (DAO.getSnapshotByName(PARSER.getOptionValueNewSnapshot()) != null) {
                 System.out.println("[-name <New name> should be unique name. '" 
                         + PARSER.getOptionValueNewSnapshot() + "' already exists]");
                 System.exit(1);
             } else {
-                listOfGeneralIssues = DATA_PROVIDER.getIssuesByUrl(parsedUrlData.getUrl().toString());
-                prepareGeneralIssuesSnapshotAndSave(listOfGeneralIssues);
+                listOfGeneralIssues = ISSUES_DATA_PROVIDER.getIssuesByUrl(parsedUrlData.getUrl().toString());
+                repositoryInformation = REPOSITORY_DATA_PROVIDER
+                        .getRepositoryInformation(parsedUrlData.getUrl().toString());
+                prepareGeneralIssuesSnapshotAndSave(listOfGeneralIssues, repositoryInformation);
             }
         } else {
-            listOfGeneralIssues = DATA_PROVIDER.getIssuesByUrl(parsedUrlData.getUrl().toString());
+            listOfGeneralIssues = ISSUES_DATA_PROVIDER.getIssuesByUrl(parsedUrlData.getUrl().toString());
+            repositoryInformation = REPOSITORY_DATA_PROVIDER
+                    .getRepositoryInformation(parsedUrlData.getUrl().toString());
         }
-        doEvaluate(listOfGeneralIssues);
+        doEvaluate(listOfGeneralIssues, repositoryInformation);
     }
     
-    private static void prepareGeneralIssuesSnapshotAndSave(List<GeneralIssue> listOfGeneralIssues) {
+    private static void prepareGeneralIssuesSnapshotAndSave(List<GeneralIssue> listOfGeneralIssues,
+                                                            RepositoryInformation repositoryInformation) {
         DAO.save(new GeneralIssuesSnapshot.GeneralIssuesSnapshotBuilder()
                     .setCreatedAt(new Date())
                     .setListOfGeneralIssues(listOfGeneralIssues)
@@ -142,6 +141,7 @@ public class Core {
                     .setUrl(parsedUrlData.getUrl().toString())
                     .setUserName(parsedUrlData.getUserName())
                     .setSnapshotName(PARSER.getOptionValueNewSnapshot())
+                    .setRepositoryInformation(repositoryInformation)
                     .build());
     }
     
@@ -153,7 +153,7 @@ public class Core {
             System.exit(1);
         }
         checkUrl(snapshot.getUrl());
-        doEvaluate(snapshot.getListOfGeneralIssues());
+        doEvaluate(snapshot.getListOfGeneralIssues(), snapshot.getRepositoryInformation());
     }
     
     private static List<GeneralIssue> runFilters(List<GeneralIssue> listOfGeneralIssues) {
@@ -192,9 +192,16 @@ public class Core {
     private static List<Model> runModels(List<Pair<Integer, Integer>> countedWeeksWithTotal, 
             GoodnessOfFitTest goodnessOfFitTest) throws InvalidInputException {
         List<Model> models = ModelFactory.getModels(countedWeeksWithTotal, goodnessOfFitTest, PARSER);
+        List<Model> modelsToRemove = new ArrayList<>();
         for (Model model: models) {
-            model.estimateModelData();
+            try {
+                model.estimateModelData();
+            } catch (ModelException ex) {
+                System.out.println("Ignored model - " + model.toString());
+                modelsToRemove.add(model);
+            }
         }
+        models.removeAll(modelsToRemove);
         return models;
     }
     
@@ -251,7 +258,7 @@ public class Core {
     
     private static List<OutputData> prepareOutputData(int initialNumberOfIssues, 
             List<GeneralIssue> listOfGeneralIssues, List<Pair<Integer, Integer>> countedWeeksWithTotal, 
-            TrendTest trendTest) throws InvalidInputException {
+            TrendTest trendTest, RepositoryInformation repositoryInformation) throws InvalidInputException {
         List<OutputData> outputDataList = new ArrayList<>();
         OutputData outputData;
         for (Model model: runModels(countedWeeksWithTotal, getGoodnessOfFitTest())) {
@@ -275,12 +282,58 @@ public class Core {
                     .setProcessorsUsed(ProcessorFactory.getProcessorsRanWithInfoAsList(PARSER))
                     .setTestingPeriodsUnit(getPeriodOfTesting())
                     .setTimeBetweenDefectsUnit(getTimeBetweenIssuesUnit())
-                    .setSolver(getSolver()).build();
+                    .setSolver(getSolver())
+                    .setRepositoryContributors(repositoryInformation.getContributors())
+                    .setRepositoryCreatedAt(repositoryInformation.getCreatedAt())
+                    .setRepositoryDescription(repositoryInformation.getDescription())
+                    .setRepositoryForks(repositoryInformation.getForks())
+                    .setRepositoryLastPushedAt(repositoryInformation.getPushedAt())
+                    .setRepositorySize(repositoryInformation.getSize())
+                    .setRepositoryWatchers(repositoryInformation.getWatchers())
+                    .setDevelopmentDays(getDaysBetween(repositoryInformation)).build();
             outputDataList.add(outputData);
         }
+
+        if (outputDataList.isEmpty()) {
+            outputData = getOutputDataForNoModels(initialNumberOfIssues, listOfGeneralIssues,
+                    countedWeeksWithTotal, trendTest, repositoryInformation);
+            outputDataList.add(outputData);
+        }
+
         return outputDataList;
     }
-    
+
+    private static OutputData getOutputDataForNoModels(int initialNumberOfIssues,
+                                                       List<GeneralIssue> listOfGeneralIssues,
+                                                       List<Pair<Integer, Integer>> countedWeeksWithTotal,
+                                                       TrendTest trendTest,
+                                                       RepositoryInformation repositoryInformation) {
+        return new OutputData.OutputDataBuilder()
+                .setCreatedAt(new Date())
+                .setRepositoryName(parsedUrlData.getRepositoryName())
+                .setUrl(parsedUrlData.getUrl().toString())
+                .setUserName(parsedUrlData.getUserName())
+                .setTotalNumberOfDefects(countedWeeksWithTotal.get(countedWeeksWithTotal.size() - 1).getSecond())
+                .setCumulativeDefects(countedWeeksWithTotal)
+                .setTimeBetweenDefects(getTimeBetweenIssuesList(listOfGeneralIssues))
+                .setTrend(trendTest.getTrendValue())
+                .setExistTrend(trendTest.getResult())
+                .setInitialNumberOfIssues(initialNumberOfIssues)
+                .setFiltersUsed(FilterFactory.getFiltersRanWithInfoAsList(PARSER))
+                .setProcessorsUsed(ProcessorFactory.getProcessorsRanWithInfoAsList(PARSER))
+                .setTestingPeriodsUnit(getPeriodOfTesting())
+                .setTimeBetweenDefectsUnit(getTimeBetweenIssuesUnit())
+                .setSolver(getSolver())
+                .setRepositoryContributors(repositoryInformation.getContributors())
+                .setRepositoryCreatedAt(repositoryInformation.getCreatedAt())
+                .setRepositoryDescription(repositoryInformation.getDescription())
+                .setRepositoryForks(repositoryInformation.getForks())
+                .setRepositoryLastPushedAt(repositoryInformation.getPushedAt())
+                .setRepositorySize(repositoryInformation.getSize())
+                .setRepositoryWatchers(repositoryInformation.getWatchers())
+                .setDevelopmentDays(getDaysBetween(repositoryInformation)).build();
+    }
+
     private static String getSolver() {
         if (PARSER.hasOptionSolver()) {
             if (PARSER.getOptionValueSolver().equals(ModelFactory.SOLVER_LEAST_SQUARES)) {
@@ -292,18 +345,20 @@ public class Core {
         return "Least Squares";
     }
     
-    private static void doEvaluate(List<GeneralIssue> listOfGeneralIssues) throws InvalidInputException { 
+    private static void doEvaluate(List<GeneralIssue> listOfGeneralIssues,
+                                   RepositoryInformation repositoryInformation) throws InvalidInputException {
+        System.out.println("Evaluating ...");
         List<GeneralIssue> filteredAndProcessedList = runFiltersAndProcessors(listOfGeneralIssues);
         List<Pair<Integer, Integer>> countedWeeksWithTotal = getCumulativeIssuesList(filteredAndProcessedList); 
         TrendTest trendTest = runTrendTest(filteredAndProcessedList); 
         List<OutputData> outputDataList = 
                 prepareOutputData(listOfGeneralIssues.size(), 
-                        filteredAndProcessedList, countedWeeksWithTotal, trendTest);
+                        filteredAndProcessedList, countedWeeksWithTotal, trendTest, repositoryInformation);
         writeOutput(outputDataList);
     }
 
     private static void doSaveToFileFromUrl() throws InvalidInputException {
-        List<GeneralIssue> listOfInitialIssues = DATA_PROVIDER.
+        List<GeneralIssue> listOfInitialIssues = ISSUES_DATA_PROVIDER.
                 getIssuesByUrl(PARSER.getOptionValueUrl());
         doSaveToFile(listOfInitialIssues, parsedUrlData.getRepositoryName());
     }
@@ -345,5 +400,10 @@ public class Core {
         for (GeneralIssuesSnapshot snap: listFromDB) {
             System.out.println(snap);
         }
-    } 
+    }
+
+    private static long getDaysBetween(RepositoryInformation repositoryInformation) {
+        return TimeUnit.DAYS.convert(Math.abs(repositoryInformation.getPushedAt().getTime()
+                - repositoryInformation.getCreatedAt().getTime()), TimeUnit.MILLISECONDS);
+    }
 }

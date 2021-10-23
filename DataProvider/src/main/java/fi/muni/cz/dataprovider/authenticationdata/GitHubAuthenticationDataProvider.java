@@ -1,6 +1,6 @@
 package fi.muni.cz.dataprovider.authenticationdata;
 
-import fi.muni.cz.dataprovider.GitHubDataProvider;
+import fi.muni.cz.dataprovider.GitHubGeneralIssueDataProvider;
 import fi.muni.cz.dataprovider.exception.AuthenticationException;
 import fi.muni.cz.dataprovider.exception.AuthenticationFileErrorException;
 import java.io.IOException;
@@ -106,7 +106,7 @@ public class GitHubAuthenticationDataProvider {
             password = properties.getProperty(PASSWORD_ELEMENT_TAG);
             oAuthToken = properties.getProperty(TOKEN_ELEMENT_TAG);
         } catch (IOException ex) {
-            Logger.getLogger(GitHubDataProvider.class.getName())
+            Logger.getLogger(GitHubGeneralIssueDataProvider.class.getName())
                     .log(Level.SEVERE, "Error while getting data from " + 
                             AUTH_FILE_NAME, ex);
             throw new AuthenticationFileErrorException("Error while getting data from " + 

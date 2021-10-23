@@ -21,7 +21,7 @@ import org.eclipse.egit.github.core.service.IssueService;
 /**
  * @author Radoslav Micko, 445611@muni.cz
  */
-public class GitHubDataProvider implements DataProvider {
+public class GitHubGeneralIssueDataProvider implements GeneralIssueDataProvider {
     
     private static final String MAPPING_FILE = "github_dozer_mapping.xml";
     
@@ -33,7 +33,7 @@ public class GitHubDataProvider implements DataProvider {
      * 
      * @param client GitHubClient with preset authentication data
      */
-    public GitHubDataProvider(GitHubClient client) {
+    public GitHubGeneralIssueDataProvider(GitHubClient client) {
         issueService = new IssueService(client);
         beanMapping = new GitHubMapping(MAPPING_FILE); 
     }
@@ -57,6 +57,7 @@ public class GitHubDataProvider implements DataProvider {
     private List<GeneralIssue> getIssuesByOwnerRepoName(String owner, String repositoryName) {
         List<GeneralIssue> generalIssueList = new ArrayList<>();
         try {
+            System.out.println("Downloading issues ...");
             generalIssueList = getAllGeneralIssues(owner, repositoryName);
         } catch (RequestException ex) {
             log(Level.SEVERE, "Error while getting repository by Owner and Repository name.", ex);
@@ -95,7 +96,7 @@ public class GitHubDataProvider implements DataProvider {
     
     
     private void log(Level level, String message, Exception ex) {
-        Logger.getLogger(GitHubDataProvider.class.getName())
+        Logger.getLogger(GitHubGeneralIssueDataProvider.class.getName())
                     .log(level, message, ex);
     }
 }

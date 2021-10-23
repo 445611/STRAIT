@@ -3,11 +3,7 @@ package fi.muni.cz.core.factory;
 import fi.muni.cz.core.ArgsParser;
 import static fi.muni.cz.core.ArgsParser.OPT_MODELS;
 import fi.muni.cz.core.exception.InvalidInputException;
-import fi.muni.cz.models.DuaneModelImpl;
-import fi.muni.cz.models.GOModelImpl;
-import fi.muni.cz.models.GOSShapedModelImpl;
-import fi.muni.cz.models.HossainDahiyaModelImpl;
-import fi.muni.cz.models.MusaOkumotoModelImpl;
+import fi.muni.cz.models.*;
 import fi.muni.cz.models.testing.ChiSquareGoodnessOfFitTest;
 import java.util.ArrayList;
 import org.apache.commons.cli.CommandLine;
@@ -40,7 +36,7 @@ public class ModelFactoryNGTest {
     public void testGetModelsWithoutModelOption() throws InvalidInputException {
         when(cmdl.hasOption(OPT_MODELS)).thenReturn(false);
         assertEquals(ModelFactory.getModels(new ArrayList<>(), 
-                new ChiSquareGoodnessOfFitTest(), argsParser).size(), 5);
+                new ChiSquareGoodnessOfFitTest(), argsParser).size(), 6);
         assertTrue(ModelFactory.getModels(new ArrayList<>(), 
                 new ChiSquareGoodnessOfFitTest(), argsParser).get(0) instanceof GOModelImpl);
     }
@@ -105,12 +101,20 @@ public class ModelFactoryNGTest {
         assertTrue(ModelFactory.getModels(new ArrayList<>(), 
                 new ChiSquareGoodnessOfFitTest(), argsParser).get(0) instanceof HossainDahiyaModelImpl);
     }
+
+    @Test
+    public void testGetModelsWithWEModelOption() throws InvalidInputException {
+        when(cmdl.hasOption(OPT_MODELS)).thenReturn(true);
+        when(cmdl.getOptionValues(OPT_MODELS)).thenReturn(new String[]{"we"});
+        assertTrue(ModelFactory.getModels(new ArrayList<>(),
+                new ChiSquareGoodnessOfFitTest(), argsParser).get(0) instanceof WeibullModelImpl);
+    }
     
     @Test
     public void testGetModelsWithAllModelOption() throws InvalidInputException {
         when(cmdl.hasOption(OPT_MODELS)).thenReturn(true);
-        when(cmdl.getOptionValues(OPT_MODELS)).thenReturn(new String[]{"hd", "go", "gos", "du", "mo"});
+        when(cmdl.getOptionValues(OPT_MODELS)).thenReturn(new String[]{"hd", "go", "gos", "du", "mo", "we"});
         assertEquals(ModelFactory.getModels(new ArrayList<>(), 
-                new ChiSquareGoodnessOfFitTest(), argsParser).size(), 5);
+                new ChiSquareGoodnessOfFitTest(), argsParser).size(), 6);
     }
 }
