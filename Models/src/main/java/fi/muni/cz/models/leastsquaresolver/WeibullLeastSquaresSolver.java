@@ -33,7 +33,7 @@ public class WeibullLeastSquaresSolver extends SolverAbstract {
         REXP result = rEngine.eval("coef(modelWeibull)");
         rEngine.end();
         if (result == null || result.asDoubleArray().length < 3) {
-            throw new ModelException("Repository data not suaitable for R evealuation.");
+            throw new ModelException("Repository data not suitable for R evaluation.");
         }
         double[] d = result.asDoubleArray();
         return new double[]{d[0], d[1], d[2]};

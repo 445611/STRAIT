@@ -2,19 +2,20 @@ package fi.muni.cz.models;
 
 import fi.muni.cz.models.leastsquaresolver.Solver;
 import fi.muni.cz.models.testing.GoodnessOfFitTest;
+import org.apache.commons.math3.util.Pair;
+
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import org.apache.commons.math3.util.Pair;
 
 /**
  * @author Radoslav Micko, 445611@muni.cz
  */
-public class WeibullModelImpl extends ModelAbstract {
+public class LogLogisticModelImpl extends ModelAbstract {
 
     private final String firstParameter = "a";
-    private final String secondParameter = "b";
-    private final String thirdParameter = "c";
+    private final String secondParameter = "λ";
+    private final String thirdParameter = "K";
 
     /**
      * Initialize model attributes.
@@ -23,7 +24,7 @@ public class WeibullModelImpl extends ModelAbstract {
      * @param goodnessOfFitTest     Goodness of fit test to execute.
      * @param solver                Solver to estimate model parameters.
      */
-    public WeibullModelImpl(
+    public LogLogisticModelImpl(
             List<Pair<Integer, Integer>> listOfIssues,
             GoodnessOfFitTest goodnessOfFitTest,
             Solver solver) {
@@ -33,8 +34,9 @@ public class WeibullModelImpl extends ModelAbstract {
     @Override
     protected double getFunctionValue(Integer testPeriod) {
         return modelParameters.get(firstParameter)
-                * (1 - Math.exp(- modelParameters.get(secondParameter)
-                * Math.pow(testPeriod, modelParameters.get(thirdParameter))));
+                * Math.pow((modelParameters.get(secondParameter) * testPeriod), modelParameters.get(thirdParameter))
+                / (1 + Math.pow(
+                        (modelParameters.get(secondParameter) * testPeriod), modelParameters.get(thirdParameter)));
     }
 
     @Override
@@ -53,11 +55,11 @@ public class WeibullModelImpl extends ModelAbstract {
 
     @Override
     public String getTextFormOfTheFunction() {
-        return "μ(t) = a * (1 - e<html><sup>-b*t<sup>c</sup></sup></html>)";
+        return "μ(t) = a * <html><sup>(λ*t)<sup>K</sup></sup>&frasl;<sub>1 + (λ*t)<sup>K</sup></sub></html>";
     }
 
     @Override
     public String toString() {
-        return "Weibull model";
+        return "Log-Logistic model";
     }
 }

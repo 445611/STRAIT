@@ -27,15 +27,10 @@ public class MusaOkumotoLeastSquaresSolver extends SolverAbstract {
                 + "start = list(a = %d,b = %d), "
                 + "control = list(warnOnly = TRUE), "
                 + "algorithm = \"port\")", startParameters[0], startParameters[1]));
-        /* FOR DUBUGGING */
-        /*REXP a = rEngine.eval(String.format("try(modelMO <- nls(yvalues ~ a*log(b * xvalues + 1), "
-                + "start = list(a = %d,b = %d), "
-                + "control = list(warnOnly = TRUE), "
-                + "algorithm = \"port\"), silent = TRUE)", startParameters[0], startParameters[1]));*/
         REXP result = rEngine.eval("coef(modelMO)");
         rEngine.end();
         if (result == null || result.asDoubleArray().length < 2) {
-            throw new ModelException("Repository data not suaitable for R evealuation.");
+            throw new ModelException("Repository data not suitable for R evaluation.");
         }
         double[] d = result.asDoubleArray();
         return new double[]{d[0], d[1]};

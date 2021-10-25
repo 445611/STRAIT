@@ -5,11 +5,12 @@ import fi.muni.cz.core.exception.InvalidInputException;
 import fi.muni.cz.models.*;
 import fi.muni.cz.models.leastsquaresolver.*;
 import fi.muni.cz.models.testing.GoodnessOfFitTest;
+import org.apache.commons.math3.util.Pair;
+import org.rosuda.JRI.Rengine;
+
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
-import org.apache.commons.math3.util.Pair;
-import org.rosuda.JRI.Rengine;
 
 /**
  * @author Radoslav Micko, 445611@muni.cz
@@ -22,6 +23,9 @@ public class ModelFactory {
     public static final String  DUANE = "du";
     public static final String  HOSSAIN_DAHIYA = "hd";
     public static final String  WEIBULL = "we";
+    public static final String  YAMADA_EXPONENTIAL = "ye";
+    public static final String  YAMADA_RALEIGH = "yr";
+    public static final String  LOG_LOGISITC = "ll";
 
     public static final String SOLVER_LEAST_SQUARES = "ls";
     public static final String SOLVER_MAXIMUM_LIKELIHOOD = "ml";
@@ -55,11 +59,14 @@ public class ModelFactory {
                     ModelFactory.MUSA_OKUMOTO, parser));
             models.add(ModelFactory.getModel(countedWeeksWithTotal, goodnessOfFitTest, 
                     ModelFactory.DUANE, parser));
-
             models.add(ModelFactory.getModel(countedWeeksWithTotal, goodnessOfFitTest,
                     ModelFactory.WEIBULL, parser));
-            // TODO Add new models + to parser as arguments
-
+            models.add(ModelFactory.getModel(countedWeeksWithTotal, goodnessOfFitTest,
+                    ModelFactory.YAMADA_EXPONENTIAL, parser));
+            models.add(ModelFactory.getModel(countedWeeksWithTotal, goodnessOfFitTest,
+                    ModelFactory.YAMADA_RALEIGH, parser));
+            models.add(ModelFactory.getModel(countedWeeksWithTotal, goodnessOfFitTest,
+                    ModelFactory.LOG_LOGISITC, parser));
         }
         return models;
     }
@@ -77,127 +84,58 @@ public class ModelFactory {
             GoodnessOfFitTest goodnessOfFitTest, String modelArg, ArgsParser parser) throws InvalidInputException {
         switch (modelArg) {
             case GOEL_OKUMOTO:
-                return new GOModelImpl(countedWeeksWithTotal, goodnessOfFitTest, 
-                        getGOSolverBySolverArgument(parser));
+                return new GOModelImpl(countedWeeksWithTotal, goodnessOfFitTest,
+                        getSolverBySolverArgument(parser, GOLeastSquaresSolver.class));
             case GOEL_OKEMURA_SSHAPED:
-                return new GOSShapedModelImpl(countedWeeksWithTotal, goodnessOfFitTest, 
-                        getGOSShapedSolverBySolverArgument(parser)); 
+                return new GOSShapedModelImpl(countedWeeksWithTotal, goodnessOfFitTest,
+                        getSolverBySolverArgument(parser, GOSShapedLeastSquaresSolver.class));
             case MUSA_OKUMOTO:
-                return new MusaOkumotoModelImpl(countedWeeksWithTotal, goodnessOfFitTest, 
-                        getMusaOkumotoSolverBySolverArgument(parser)); 
+                return new MusaOkumotoModelImpl(countedWeeksWithTotal, goodnessOfFitTest,
+                        getSolverBySolverArgument(parser, MusaOkumotoLeastSquaresSolver.class));
             case DUANE:
-                return new DuaneModelImpl(countedWeeksWithTotal, goodnessOfFitTest, 
-                        getDuaneSolverBySolverArgument(parser));
+                return new DuaneModelImpl(countedWeeksWithTotal, goodnessOfFitTest,
+                        getSolverBySolverArgument(parser, DuaneLeastSquaresSolver.class));
             case HOSSAIN_DAHIYA:
-                return new HossainDahiyaModelImpl(countedWeeksWithTotal, goodnessOfFitTest, 
-                        getHossainDahiyaSolverBySolverArgument(parser));
+                return new HossainDahiyaModelImpl(countedWeeksWithTotal, goodnessOfFitTest,
+                        getSolverBySolverArgument(parser, HossainDahiyaLeastSquaresSolver.class));
             case WEIBULL:
                 return new WeibullModelImpl(countedWeeksWithTotal, goodnessOfFitTest,
-                        getWeibullSolverBySolverArgument(parser));
+                        getSolverBySolverArgument(parser, WeibullLeastSquaresSolver.class));
+            case YAMADA_EXPONENTIAL:
+                return new YamadaExponentialModelImpl(countedWeeksWithTotal, goodnessOfFitTest,
+                        getSolverBySolverArgument(parser, YamadaExponentialLeastSquaresSolver.class));
+            case YAMADA_RALEIGH:
+                return new YamadaRaleighModelImpl(countedWeeksWithTotal, goodnessOfFitTest,
+                        getSolverBySolverArgument(parser, YamadaRaleighLeastSquaresSolver.class));
+            case LOG_LOGISITC:
+                return new LogLogisticModelImpl(countedWeeksWithTotal, goodnessOfFitTest,
+                        getSolverBySolverArgument(parser, LogLogisticLeastSquaresSolver.class));
             default:
                 throw new InvalidInputException(Arrays.asList("No such model implemented: '" + modelArg + "'")); 
         }
     }
 
-    private static Solver getWeibullSolverBySolverArgument(ArgsParser parser) throws InvalidInputException {
-        if (parser.hasOptionSolver()) {
-            switch (parser.getOptionValueSolver()) {
-                case SOLVER_LEAST_SQUARES:
-                    return new WeibullLeastSquaresSolver(R_ENGINE);
-                case SOLVER_MAXIMUM_LIKELIHOOD:
-                    throw new InvalidInputException(Arrays.asList("No such solver implemented: '"
-                            + parser.getOptionValueSolver() + "'"));
-                default:
-                    throw new InvalidInputException(Arrays.asList("No such solver implemented: '"
-                            + parser.getOptionValueSolver() + "'"));
+    private static <T> T getSolverBySolverArgument(ArgsParser parser, Class<T> solverClass)
+            throws InvalidInputException {
+        try {
+            if (parser.hasOptionSolver()) {
+                switch (parser.getOptionValueSolver()) {
+                    case SOLVER_LEAST_SQUARES:
+                        return solverClass.getDeclaredConstructor(Rengine.class).newInstance(R_ENGINE);
+                    case SOLVER_MAXIMUM_LIKELIHOOD:
+                        // To be implemented
+                        throw new InvalidInputException(Arrays.asList("No such solver implemented: '"
+                                + parser.getOptionValueSolver() + "'"));
+                    default:
+                        throw new InvalidInputException(Arrays.asList("No such solver implemented: '"
+                                + parser.getOptionValueSolver() + "'"));
+                }
+            } else {
+                return solverClass.getDeclaredConstructor(Rengine.class).newInstance(R_ENGINE);
             }
-        } else {
-            return new WeibullLeastSquaresSolver(R_ENGINE);
+        } catch (ReflectiveOperationException ex) {
+            throw new IllegalArgumentException(ex);
         }
-    }
 
-    private static Solver getGOSolverBySolverArgument(ArgsParser parser) throws InvalidInputException {
-        if (parser.hasOptionSolver()) {
-            switch (parser.getOptionValueSolver()) {
-                case SOLVER_LEAST_SQUARES:
-                    return new GOLeastSquaresSolver(R_ENGINE);
-                case SOLVER_MAXIMUM_LIKELIHOOD:
-                    throw new InvalidInputException(Arrays.asList("No such solver implemented: '" 
-                            + parser.getOptionValueSolver() + "'"));
-                default:
-                    throw new InvalidInputException(Arrays.asList("No such solver implemented: '" 
-                            + parser.getOptionValueSolver() + "'"));
-            }
-        } else {
-            return new GOLeastSquaresSolver(R_ENGINE);
-        }
-    }
-    
-    private static Solver getGOSShapedSolverBySolverArgument(ArgsParser parser) throws InvalidInputException {
-        if (parser.hasOptionSolver()) {
-            switch (parser.getOptionValueSolver()) {
-                case SOLVER_LEAST_SQUARES:
-                    return new GOSShapedLeastSquaresSolver(R_ENGINE);
-                case SOLVER_MAXIMUM_LIKELIHOOD:
-                    throw new InvalidInputException(Arrays.asList("No such solver implemented: '" 
-                            + parser.getOptionValueSolver() + "'"));
-                default:
-                    throw new InvalidInputException(Arrays.asList("No such solver implemented: '" 
-                            + parser.getOptionValueSolver() + "'"));
-            }
-        } else {
-            return new GOSShapedLeastSquaresSolver(R_ENGINE);
-        }
-    }
-    
-    private static Solver getDuaneSolverBySolverArgument(ArgsParser parser) throws InvalidInputException {
-        if (parser.hasOptionSolver()) {
-            switch (parser.getOptionValueSolver()) {
-                case SOLVER_LEAST_SQUARES:
-                    return new DuaneLeastSquaresSolver(R_ENGINE);
-                case SOLVER_MAXIMUM_LIKELIHOOD:
-                    throw new InvalidInputException(Arrays.asList("No such solver implemented: '" 
-                            + parser.getOptionValueSolver() + "'"));
-                default:
-                    throw new InvalidInputException(Arrays.asList("No such solver implemented: '" 
-                            + parser.getOptionValueSolver() + "'"));
-            }
-        } else {
-            return new DuaneLeastSquaresSolver(R_ENGINE);
-        }
-    }
-    
-    private static Solver getMusaOkumotoSolverBySolverArgument(ArgsParser parser) throws InvalidInputException {
-        if (parser.hasOptionSolver()) {
-            switch (parser.getOptionValueSolver()) {
-                case SOLVER_LEAST_SQUARES:
-                    return new MusaOkumotoLeastSquaresSolver(R_ENGINE);
-                case SOLVER_MAXIMUM_LIKELIHOOD:
-                    throw new InvalidInputException(Arrays.asList("No such solver implemented: '" 
-                            + parser.getOptionValueSolver() + "'"));
-                default:
-                    throw new InvalidInputException(Arrays.asList("No such solver implemented: '" 
-                            + parser.getOptionValueSolver() + "'"));
-            }
-        } else {
-            return new MusaOkumotoLeastSquaresSolver(R_ENGINE);
-        }
-    }
-    
-    private static Solver getHossainDahiyaSolverBySolverArgument(ArgsParser parser) throws InvalidInputException {
-        if (parser.hasOptionSolver()) {
-            switch (parser.getOptionValueSolver()) {
-                case SOLVER_LEAST_SQUARES:
-                    return new HossainDahiyaLeastSquaresSolver(R_ENGINE);
-                case SOLVER_MAXIMUM_LIKELIHOOD:
-                    throw new InvalidInputException(Arrays.asList("No such solver implemented: '" 
-                            + parser.getOptionValueSolver() + "'"));
-                default:
-                    throw new InvalidInputException(Arrays.asList("No such solver implemented: '" 
-                            + parser.getOptionValueSolver() + "'"));
-            }
-        } else {
-            return new HossainDahiyaLeastSquaresSolver(R_ENGINE);
-        }
     }
 }

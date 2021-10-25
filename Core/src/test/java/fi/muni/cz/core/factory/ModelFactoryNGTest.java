@@ -36,7 +36,7 @@ public class ModelFactoryNGTest {
     public void testGetModelsWithoutModelOption() throws InvalidInputException {
         when(cmdl.hasOption(OPT_MODELS)).thenReturn(false);
         assertEquals(ModelFactory.getModels(new ArrayList<>(), 
-                new ChiSquareGoodnessOfFitTest(), argsParser).size(), 6);
+                new ChiSquareGoodnessOfFitTest(), argsParser).size(), 9);
         assertTrue(ModelFactory.getModels(new ArrayList<>(), 
                 new ChiSquareGoodnessOfFitTest(), argsParser).get(0) instanceof GOModelImpl);
     }
@@ -109,12 +109,36 @@ public class ModelFactoryNGTest {
         assertTrue(ModelFactory.getModels(new ArrayList<>(),
                 new ChiSquareGoodnessOfFitTest(), argsParser).get(0) instanceof WeibullModelImpl);
     }
+
+    @Test
+    public void testGetModelsWithYEModelOption() throws InvalidInputException {
+        when(cmdl.hasOption(OPT_MODELS)).thenReturn(true);
+        when(cmdl.getOptionValues(OPT_MODELS)).thenReturn(new String[]{"ye"});
+        assertTrue(ModelFactory.getModels(new ArrayList<>(),
+                new ChiSquareGoodnessOfFitTest(), argsParser).get(0) instanceof YamadaExponentialModelImpl);
+    }
+
+    @Test
+    public void testGetModelsWithYRModelOption() throws InvalidInputException {
+        when(cmdl.hasOption(OPT_MODELS)).thenReturn(true);
+        when(cmdl.getOptionValues(OPT_MODELS)).thenReturn(new String[]{"yr"});
+        assertTrue(ModelFactory.getModels(new ArrayList<>(),
+                new ChiSquareGoodnessOfFitTest(), argsParser).get(0) instanceof YamadaRaleighModelImpl);
+    }
+
+    @Test
+    public void testGetModelsWithLLModelOption() throws InvalidInputException {
+        when(cmdl.hasOption(OPT_MODELS)).thenReturn(true);
+        when(cmdl.getOptionValues(OPT_MODELS)).thenReturn(new String[]{"ll"});
+        assertTrue(ModelFactory.getModels(new ArrayList<>(),
+                new ChiSquareGoodnessOfFitTest(), argsParser).get(0) instanceof LogLogisticModelImpl);
+    }
     
     @Test
     public void testGetModelsWithAllModelOption() throws InvalidInputException {
         when(cmdl.hasOption(OPT_MODELS)).thenReturn(true);
-        when(cmdl.getOptionValues(OPT_MODELS)).thenReturn(new String[]{"hd", "go", "gos", "du", "mo", "we"});
+        when(cmdl.getOptionValues(OPT_MODELS)).thenReturn(new String[]{"hd", "go", "gos", "du", "mo", "we", "ye", "yr", "ll"});
         assertEquals(ModelFactory.getModels(new ArrayList<>(), 
-                new ChiSquareGoodnessOfFitTest(), argsParser).size(), 6);
+                new ChiSquareGoodnessOfFitTest(), argsParser).size(), 9);
     }
 }
