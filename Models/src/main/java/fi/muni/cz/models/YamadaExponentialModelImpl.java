@@ -14,9 +14,8 @@ import java.util.Map;
 public class YamadaExponentialModelImpl extends ModelAbstract {
 
     private final String firstParameter = "a";
-    private final String secondParameter = "r";
-    private final String thirdParameter = "α";
-    private final String fourthParameter = "β";
+    private final String secondParameter = "r*α";
+    private final String thirdParameter = "β";
 
     /**
      * Initialize model attributes.
@@ -35,8 +34,8 @@ public class YamadaExponentialModelImpl extends ModelAbstract {
     @Override
     protected double getFunctionValue(Integer testPeriod) {
         return modelParameters.get(firstParameter)
-                * (1 - Math.exp(- modelParameters.get(secondParameter) * modelParameters.get(thirdParameter) *
-                (1 - Math.exp(- modelParameters.get(fourthParameter) * testPeriod))));
+                * (1 - Math.exp(- modelParameters.get(secondParameter) *
+                (1 - Math.exp(- modelParameters.get(thirdParameter) * testPeriod))));
     }
 
     @Override
@@ -45,7 +44,6 @@ public class YamadaExponentialModelImpl extends ModelAbstract {
         map.put(firstParameter, params[0]);
         map.put(secondParameter, params[1]);
         map.put(thirdParameter, params[2]);
-        map.put(fourthParameter, params[3]);
         modelParameters = map;
     }
 
@@ -56,7 +54,7 @@ public class YamadaExponentialModelImpl extends ModelAbstract {
 
     @Override
     public String getTextFormOfTheFunction() {
-        return "μ(t) = a * (1 - <html>e<sup>-r*a*(1 - e<sup>-β*t</sup>)</sup></html>)";
+        return "μ(t) = a * (1 - <html>e<sup>-r*α*(1 - e<sup>-β*t</sup>)</sup></html>)";
     }
 
     @Override

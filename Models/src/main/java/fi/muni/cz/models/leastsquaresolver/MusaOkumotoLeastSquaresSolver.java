@@ -2,6 +2,8 @@ package fi.muni.cz.models.leastsquaresolver;
 
 import fi.muni.cz.models.exception.ModelException;
 import java.util.List;
+import java.util.Locale;
+
 import org.apache.commons.math3.util.Pair;
 import org.rosuda.JRI.REXP;
 import org.rosuda.JRI.Rengine;
@@ -10,6 +12,8 @@ import org.rosuda.JRI.Rengine;
  * @author Radoslav Micko, 445611@muni.cz
  */
 public class MusaOkumotoLeastSquaresSolver extends SolverAbstract {
+
+    private static final String MODEL_FUNCTION = "a*log(b * xvalues + 1)";
 
     /**
      * Initialize Rengine.
@@ -21,12 +25,18 @@ public class MusaOkumotoLeastSquaresSolver extends SolverAbstract {
     
     @Override
     public double[] optimize(int[] startParameters, List<Pair<Integer, Integer>> listOfData) {
-        rEngine.eval(String.format("xvalues = c(%s)", getPreparedListWithCommas(getListOfFirstFromPair(listOfData))));
-        rEngine.eval(String.format("yvalues = c(%s)", getPreparedListWithCommas(getListOfSecondFromPair(listOfData))));
-        rEngine.eval(String.format("modelMO <- nls(yvalues ~ a*log(b * xvalues + 1), "
-                + "start = list(a = %d,b = %d), "
+        initializeOptimizationInR(listOfData);
+        rEngine.eval("modelMO2 <- nls2(yvalues ~ " + MODEL_FUNCTION + ", " +
+                "start = data.frame(a = c(1000, 1000000),b = c(0.00001, 10)), " +
+                "algorithm = \"brute-force\", control = nls.control(warnOnly = TRUE))");
+        REXP intermediate = rEngine.eval("coef(modelMO2)");
+        if (intermediate == null) {
+            throw new ModelException("Repository data not suitable for R evaluation.");
+        }
+        rEngine.eval(String.format(Locale.US, "modelMO <- nls(yvalues ~ " + MODEL_FUNCTION + ", "
+                + "start = list(a = %.10f,b = %.10f), "
                 + "control = list(warnOnly = TRUE), "
-                + "algorithm = \"port\")", startParameters[0], startParameters[1]));
+                + "algorithm = \"port\")", intermediate.asDoubleArray()[0], intermediate.asDoubleArray()[1]));
         REXP result = rEngine.eval("coef(modelMO)");
         rEngine.end();
         if (result == null || result.asDoubleArray().length < 2) {

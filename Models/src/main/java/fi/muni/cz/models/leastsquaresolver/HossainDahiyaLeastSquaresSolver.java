@@ -2,6 +2,8 @@ package fi.muni.cz.models.leastsquaresolver;
 
 import fi.muni.cz.models.exception.ModelException;
 import java.util.List;
+import java.util.Locale;
+
 import org.apache.commons.math3.util.Pair;
 import org.rosuda.JRI.REXP;
 import org.rosuda.JRI.Rengine;
@@ -10,6 +12,8 @@ import org.rosuda.JRI.Rengine;
  * @author Radoslav Micko, 445611@muni.cz
  */
 public class HossainDahiyaLeastSquaresSolver extends SolverAbstract {
+
+    private static final String MODEL_FUNCTION = "(a * (1 - exp(-b * xvalues)) / (1 + c * exp(-b * xvalues)))";
 
     /**
      * Initialize Rengine.
@@ -21,14 +25,20 @@ public class HossainDahiyaLeastSquaresSolver extends SolverAbstract {
     
     @Override
     public double[] optimize(int[] startParameters, List<Pair<Integer, Integer>> listOfData) {
-        rEngine.eval(String.format("xvalues = c(%s)", getPreparedListWithCommas(getListOfFirstFromPair(listOfData))));
-        rEngine.eval(String.format("yvalues = c(%s)", getPreparedListWithCommas(getListOfSecondFromPair(listOfData))));
-        rEngine.eval(String.format("modelHD <- nls(yvalues ~ ((a * (1 - exp(-b*xvalues))) "
-                + "/ (1 + c * exp(-b*xvalues))), "
-                + "start = list(a = %d,b = %d,c = %d), "
+        initializeOptimizationInR(listOfData);
+        rEngine.eval("modelHD2 <- nls2(yvalues ~ " + MODEL_FUNCTION + ", " +
+                "start = data.frame(a = c(100, 1000000),b = c(0.00001, 10), c = c(0.00001, 100)), " +
+                "algorithm = \"brute-force\", control = nls.control(warnOnly = TRUE))");
+        REXP intermediate = rEngine.eval("coef(modelHD2)");
+        if (intermediate == null) {
+            throw new ModelException("Repository data not suitable for R evaluation.");
+        }
+        rEngine.eval(String.format(Locale.US, "modelHD <- nls(yvalues ~ " + MODEL_FUNCTION + ", "
+                + "start = list(a = %.10f,b = %.10f,c = %.10f), "
                 + "lower = list(a = 0, b = 0, c = 0), "
                 + "control = list(warnOnly = TRUE), "
-                + "algorithm = \"port\")", startParameters[0], startParameters[1], startParameters[2]));
+                + "algorithm = \"port\")",
+                intermediate.asDoubleArray()[0], intermediate.asDoubleArray()[1], intermediate.asDoubleArray()[2]));
         REXP result = rEngine.eval("coef(modelHD)");
         rEngine.end();
         if (result == null || result.asDoubleArray().length < 3) {

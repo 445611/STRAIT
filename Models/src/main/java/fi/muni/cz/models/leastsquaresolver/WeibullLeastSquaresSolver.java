@@ -2,6 +2,8 @@ package fi.muni.cz.models.leastsquaresolver;
 
 import fi.muni.cz.models.exception.ModelException;
 import java.util.List;
+import java.util.Locale;
+
 import org.apache.commons.math3.util.Pair;
 import org.rosuda.JRI.REXP;
 import org.rosuda.JRI.Rengine;
@@ -11,7 +13,7 @@ import org.rosuda.JRI.Rengine;
  */
 public class WeibullLeastSquaresSolver extends SolverAbstract {
 
-    private static final Rengine R_ENGINE = new Rengine();
+    private static final String MODEL_FUNCTION = "a * (1 - exp(-b * (xvalues ^ c)))";
 
     /**
      * Initialize Rengine.
@@ -23,13 +25,19 @@ public class WeibullLeastSquaresSolver extends SolverAbstract {
 
     @Override
     public double[] optimize(int[] startParameters, List<Pair<Integer, Integer>> listOfData) {
-        rEngine.eval(String.format("xvalues = c(%s)", getPreparedListWithCommas(getListOfFirstFromPair(listOfData))));
-        rEngine.eval(String.format("yvalues = c(%s)", getPreparedListWithCommas(getListOfSecondFromPair(listOfData))));
-        rEngine.eval(String.format("modelWeibull <- nls(yvalues ~ a * (1 - exp(-b * (xvalues ^ c))), "
-                + "start = list(a = %d,b = %d,c = %d), "
+        initializeOptimizationInR(listOfData);
+        rEngine.eval("modelWeibull2 <- nls2(yvalues ~ " + MODEL_FUNCTION + ", " +
+                "start = data.frame(a = c(100, 10000),b = c(0.00001, 1), c = c(1, 10)), " +
+                "algorithm = \"brute-force\", control = nls.control(warnOnly = TRUE))");
+        REXP intermediate = rEngine.eval("coef(modelWeibull2)");
+        if (intermediate == null) {
+            throw new ModelException("Repository data not suitable for R evaluation.");
+        }
+        rEngine.eval(String.format(Locale.US, "modelWeibull <- nls(yvalues ~ " + MODEL_FUNCTION + ", "
+                + "start = list(a = %.10f,b = %.10f,c = %.10f), "
                 + "control = list(warnOnly = TRUE), "
                 + "lower = list(a = 0,b = 0,c = 0), algorithm = \"port\")",
-                startParameters[0], startParameters[1], startParameters[2]));
+                intermediate.asDoubleArray()[0], intermediate.asDoubleArray()[1], intermediate.asDoubleArray()[2]));
         REXP result = rEngine.eval("coef(modelWeibull)");
         rEngine.end();
         if (result == null || result.asDoubleArray().length < 3) {

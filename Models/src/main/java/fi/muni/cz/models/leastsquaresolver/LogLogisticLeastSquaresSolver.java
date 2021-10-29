@@ -6,11 +6,14 @@ import org.rosuda.JRI.REXP;
 import org.rosuda.JRI.Rengine;
 
 import java.util.List;
+import java.util.Locale;
 
 /**
  * @author Radoslav Micko, 445611@muni.cz
  */
 public class LogLogisticLeastSquaresSolver extends SolverAbstract {
+
+    private static final String MODEL_FUNCTION = "a*((b*xvalues)^c)/(1 + (b*xvalues)^c)";
 
     /**
      * Initialize Rengine.
@@ -23,13 +26,20 @@ public class LogLogisticLeastSquaresSolver extends SolverAbstract {
 
     @Override
     public double[] optimize(int[] startParameters, List<Pair<Integer, Integer>> listOfData) {
-        rEngine.eval(String.format("xvalues = c(%s)", getPreparedListWithCommas(getListOfFirstFromPair(listOfData))));
-        rEngine.eval(String.format("yvalues = c(%s)", getPreparedListWithCommas(getListOfSecondFromPair(listOfData))));
-        rEngine.eval(String.format("modelLogLogistic <- nls(yvalues ~ a*((b*xvalues)^c)/(1 + (b*xvalues)^c), "
-                        + "start = list(a = %d,b = %d, c = %d), "
+        initializeOptimizationInR(listOfData);
+        rEngine.eval("modelLogLogistic2 <- nls2(yvalues ~ " + MODEL_FUNCTION + ", " +
+                "start = data.frame(a = c(10, 10000),b = c(0.001, 10), c = c(0.001, 10)), " +
+                "algorithm = \"brute-force\", control = nls.control(warnOnly = TRUE))");
+        REXP intermediate = rEngine.eval("coef(modelLogLogistic2)");
+        if (intermediate == null) {
+            throw new ModelException("Repository data not suitable for R evaluation.");
+        }
+        rEngine.eval(String.format(Locale.US, "modelLogLogistic <- nls(yvalues ~ " + MODEL_FUNCTION + ", "
+                        + "start = list(a = %.10f,b = %.10f, c = %.10f), "
                         + "lower = list(a = 0, b = 0, c = 0), "
                         + "control = list(warnOnly = TRUE), "
-                        + "algorithm = \"port\")", startParameters[0], startParameters[1], startParameters[2]));
+                        + "algorithm = \"port\")",
+                intermediate.asDoubleArray()[0], intermediate.asDoubleArray()[1], intermediate.asDoubleArray()[2]));
         REXP result = rEngine.eval("coef(modelLogLogistic)");
         rEngine.end();
         if (result == null || result.asDoubleArray().length < 3) {

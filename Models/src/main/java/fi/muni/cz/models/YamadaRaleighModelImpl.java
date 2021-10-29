@@ -14,9 +14,8 @@ import java.util.Map;
 public class YamadaRaleighModelImpl extends ModelAbstract {
 
     private final String firstParameter = "a";
-    private final String secondParameter = "r";
-    private final String thirdParameter = "α";
-    private final String fourthParameter = "β";
+    private final String secondParameter = "r*α";
+    private final String thirdParameter = "β";
 
     /**
      * Initialize model attributes.
@@ -36,8 +35,8 @@ public class YamadaRaleighModelImpl extends ModelAbstract {
     @Override
     protected double getFunctionValue(Integer testPeriod) {
         return modelParameters.get(firstParameter)
-                * (1 - Math.exp(- modelParameters.get(secondParameter) * modelParameters.get(thirdParameter) *
-                (1 - Math.exp(- modelParameters.get(fourthParameter) *  Math.pow(testPeriod, 2) / 2))));
+                * (1 - Math.exp(- modelParameters.get(secondParameter) *
+                (1 - Math.exp(- modelParameters.get(thirdParameter) *  Math.pow(testPeriod, 2) / 2))));
     }
 
     @Override
@@ -46,7 +45,6 @@ public class YamadaRaleighModelImpl extends ModelAbstract {
         map.put(firstParameter, params[0]);
         map.put(secondParameter, params[1]);
         map.put(thirdParameter, params[2]);
-        map.put(fourthParameter, params[3]);
         modelParameters = map;
     }
 
@@ -57,7 +55,7 @@ public class YamadaRaleighModelImpl extends ModelAbstract {
 
     @Override
     public String getTextFormOfTheFunction() {
-        return "μ(t) = a * (1 - <html>e<sup>-r*a*(1 - e<sup>-β*t<sup>2</sup>/2</sup>)</sup></html>)";
+        return "μ(t) = a * (1 - <html>e<sup>-r*α*(1 - e<sup>-β*t<sup>2</sup>/2</sup>)</sup></html>)";
     }
 
     @Override

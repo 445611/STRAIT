@@ -75,15 +75,12 @@ public class LeastSquaresSolverNGTest {
         when(rEngine.eval("coef(modelHD)")).thenReturn(new REXP(double3Arr));
         when(rEngine.eval("coef(modelWeibull)")).thenReturn(new REXP(double3Arr));
         when(rEngine.eval("coef(modelLogLogistic)")).thenReturn(new REXP(double3Arr));
+        when(rEngine.eval("coef(modelYamadaExponential)")).thenReturn(new REXP(double3Arr));
+        when(rEngine.eval("coef(modelYamadaRaleigh)")).thenReturn(new REXP(double3Arr));
         assertEquals(hossainDahiyaSolver.optimize(int3Arr, listOfPairs), double3Arr);
         assertEquals(weibullSolver.optimize(int3Arr, listOfPairs), double3Arr);
         assertEquals(logLogisticSolver.optimize(int3Arr, listOfPairs), double3Arr);
-
-        int[] int4Arr = {1, 1, 1, 1};
-        double[] double4Arr = {1.0, 1.0, 1.0, 1.0};
-        when(rEngine.eval("coef(modelYamadaExponential)")).thenReturn(new REXP(double4Arr));
-        when(rEngine.eval("coef(modelYamadaRaleigh)")).thenReturn(new REXP(double4Arr));
-        assertEquals(yamadaExponentialSolver.optimize(int4Arr, listOfPairs), double4Arr);
-        assertEquals(yamadaRaleighSolver.optimize(int4Arr, listOfPairs), double4Arr);
+        assertEquals(yamadaExponentialSolver.optimize(int3Arr, listOfPairs), double3Arr);
+        assertEquals(yamadaRaleighSolver.optimize(int3Arr, listOfPairs), double3Arr);
     }
 }

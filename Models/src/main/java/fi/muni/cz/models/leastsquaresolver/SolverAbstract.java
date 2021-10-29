@@ -57,4 +57,10 @@ public abstract class SolverAbstract implements Solver {
     protected List<Integer> getListOfSecondFromPair(List<Pair<Integer, Integer>> listOfData) {
         return listOfData.stream().map((pair) -> pair.getSecond()).collect(Collectors.toList());
     }
+
+    protected void initializeOptimizationInR(List<Pair<Integer, Integer>> listOfData) {
+        rEngine.eval("library(nls2)");
+        rEngine.eval(String.format("xvalues = c(%s)", getPreparedListWithCommas(getListOfFirstFromPair(listOfData))));
+        rEngine.eval(String.format("yvalues = c(%s)", getPreparedListWithCommas(getListOfSecondFromPair(listOfData))));
+    }
 }

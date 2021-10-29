@@ -45,7 +45,7 @@ public class GitHubRepositoryInformationDataProvider implements RepositoryInform
             Repository repository = repositoryService.getRepository(owner, repositoryName);
             repositoryInformation = dozerBeanMapper
                     .map(repository, RepositoryInformation.class);
-            repositoryInformation.setContributors(repositoryService.getContributors(repository, true).size());
+            repositoryInformation.setContributors(repositoryService.getContributors(repository, false).size());
         } catch (RequestException ex) {
             log(Level.SEVERE, "Error while getting repository by Owner and Repository name.", ex);
             throw new AuthenticationException("Bad credentials set. "
