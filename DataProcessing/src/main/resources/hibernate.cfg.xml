@@ -41,8 +41,8 @@ Contributor(s):
 -->
 <hibernate-configuration>
   <session-factory>
-    <property name="connection.driver_class">org.apache.derby.jdbc.EmbeddedDriver</property>
-    <property name="connection.url">jdbc:derby:IssuesDB;create=true</property>
+    <property name="connection.driver_class">org.apache.derby.jdbc.ClientDriver</property>
+    <property name="connection.url">jdbc:derby://localhost:1527/STRAIT-IssuesDB;create=true</property>
     <property name="connection.username">tool</property>
     <property name="connection.password">tool123</property>
     <property name="dialect">org.hibernate.dialect.DerbyTenSevenDialect</property>

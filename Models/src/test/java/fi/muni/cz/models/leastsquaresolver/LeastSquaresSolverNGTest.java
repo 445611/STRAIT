@@ -63,6 +63,10 @@ public class LeastSquaresSolverNGTest {
         when(rEngine.eval("coef(modelGOS)")).thenReturn(new REXP(doubleArr));
         when(rEngine.eval("coef(modelDuane)")).thenReturn(new REXP(doubleArr));
         when(rEngine.eval("coef(modelMO)")).thenReturn(new REXP(doubleArr));
+        when(rEngine.eval("coef(modelGO2)")).thenReturn(new REXP(doubleArr));
+        when(rEngine.eval("coef(modelGOS2)")).thenReturn(new REXP(doubleArr));
+        when(rEngine.eval("coef(modelDuane2)")).thenReturn(new REXP(doubleArr));
+        when(rEngine.eval("coef(modelMO2)")).thenReturn(new REXP(doubleArr));
         int[] intArr = {1, 1};
         
         assertEquals(GOSolver.optimize(intArr, listOfPairs), doubleArr); 
@@ -77,6 +81,11 @@ public class LeastSquaresSolverNGTest {
         when(rEngine.eval("coef(modelLogLogistic)")).thenReturn(new REXP(double3Arr));
         when(rEngine.eval("coef(modelYamadaExponential)")).thenReturn(new REXP(double3Arr));
         when(rEngine.eval("coef(modelYamadaRaleigh)")).thenReturn(new REXP(double3Arr));
+        when(rEngine.eval("coef(modelHD2)")).thenReturn(new REXP(double3Arr));
+        when(rEngine.eval("coef(modelWeibull2)")).thenReturn(new REXP(double3Arr));
+        when(rEngine.eval("coef(modelLogLogistic2)")).thenReturn(new REXP(double3Arr));
+        when(rEngine.eval("coef(modelYamadaExponential2)")).thenReturn(new REXP(double3Arr));
+        when(rEngine.eval("coef(modelYamadaRaleigh2)")).thenReturn(new REXP(double3Arr));
         assertEquals(hossainDahiyaSolver.optimize(int3Arr, listOfPairs), double3Arr);
         assertEquals(weibullSolver.optimize(int3Arr, listOfPairs), double3Arr);
         assertEquals(logLogisticSolver.optimize(int3Arr, listOfPairs), double3Arr);

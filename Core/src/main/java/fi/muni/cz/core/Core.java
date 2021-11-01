@@ -146,13 +146,13 @@ public class Core {
     }
     
     private static void doEvaluateForSnapshot() throws InvalidInputException {
-        GeneralIssuesSnapshotDaoImpl dao = new GeneralIssuesSnapshotDaoImpl();
-        GeneralIssuesSnapshot snapshot = dao.getSnapshotByName(PARSER.getOptionValueSnapshotName());
+        GeneralIssuesSnapshot snapshot = DAO.getSnapshotByName(PARSER.getOptionValueSnapshotName());
         if (snapshot == null) {
             System.out.println("No such snapshot '" + PARSER.getOptionValueSnapshotName() + "' in database.");
             System.exit(1);
         }
         checkUrl(snapshot.getUrl());
+        System.out.println("On repository - " + snapshot.getUrl());
         doEvaluate(snapshot.getListOfGeneralIssues(), snapshot.getRepositoryInformation());
     }
     
@@ -193,14 +193,17 @@ public class Core {
             GoodnessOfFitTest goodnessOfFitTest) throws InvalidInputException {
         List<Model> models = ModelFactory.getModels(countedWeeksWithTotal, goodnessOfFitTest, PARSER);
         List<Model> modelsToRemove = new ArrayList<>();
-        for (Model model: models) {
+
+        models.parallelStream().forEach(model -> {
             try {
+                System.out.println("Evaluating - " + model.toString());
                 model.estimateModelData();
             } catch (ModelException ex) {
                 System.out.println("Ignored model - " + model.toString());
                 modelsToRemove.add(model);
             }
-        }
+        });
+
         models.removeAll(modelsToRemove);
         return models;
     }
@@ -374,7 +377,7 @@ public class Core {
     }
 
     private static void doListAllSnapshots() {
-        List<GeneralIssuesSnapshot> listFromDB = DAO.getAllSnapshots(); 
+        List<GeneralIssuesSnapshot> listFromDB = DAO.getAllSnapshots();
         if (listFromDB.isEmpty()) {
             System.out.println("No snapshots in Database.");
         } else {
@@ -396,7 +399,7 @@ public class Core {
     private static void doListSnapshotsForUrl() {
         List<GeneralIssuesSnapshot> listFromDB = DAO.
                 getAllSnapshotsForUserAndRepository(parsedUrlData.getUserName(), 
-                        parsedUrlData.getRepositoryName()); 
+                        parsedUrlData.getRepositoryName());
         for (GeneralIssuesSnapshot snap: listFromDB) {
             System.out.println(snap);
         }
