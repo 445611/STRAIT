@@ -27,8 +27,8 @@ public class OutputData implements Serializable {
     private int repositoryContributors;
     private int repositoryWatchers;
     private int repositoryForks;
-    private Date repositoryCreatedAt;
     private Date repositoryLastPushedAt;
+    private Date repositoryFirstPushedAt;
     private long developmentDays;
 
     private Map<String, Double> modelParameters;
@@ -71,10 +71,10 @@ public class OutputData implements Serializable {
         this.processorsUsed = builder.processorsUsed;
         this.solver = builder.solver;
         this.repositoryContributors = builder.repositoryContributors;
-        this.repositoryCreatedAt = builder.repositoryCreatedAt;
         this.repositoryDescription = builder.repositoryDescription;
         this.repositoryForks = builder.repositoryForks;
         this.repositoryLastPushedAt = builder.repositoryLastPushedAt;
+        this.repositoryFirstPushedAt = builder.repositoryFirstPushedAt;
         this.repositorySize = builder.repositorySize;
         this.repositoryWatchers = builder.repositoryWatchers;
         this.developmentDays = builder.developmentDays;
@@ -282,14 +282,6 @@ public class OutputData implements Serializable {
         this.repositoryForks = repositoryForks;
     }
 
-    public Date getRepositoryCreatedAt() {
-        return repositoryCreatedAt;
-    }
-
-    public void setRepositoryCreatedAt(Date repositoryCreatedAt) {
-        this.repositoryCreatedAt = repositoryCreatedAt;
-    }
-
     public Date getRepositoryLastPushedAt() {
         return repositoryLastPushedAt;
     }
@@ -304,6 +296,14 @@ public class OutputData implements Serializable {
 
     public void setDevelopmentDays(long developmentDays) {
         this.developmentDays = developmentDays;
+    }
+
+    public Date getRepositoryFirstPushedAt() {
+        return repositoryFirstPushedAt;
+    }
+
+    public void setRepositoryFirstPushedAt(Date repositoryFirstPushedAt) {
+        this.repositoryFirstPushedAt = repositoryFirstPushedAt;
     }
 
     @Override
@@ -362,8 +362,8 @@ public class OutputData implements Serializable {
         private int repositoryContributors;
         private int repositoryWatchers;
         private int repositoryForks;
-        private Date repositoryCreatedAt;
         private Date repositoryLastPushedAt;
+        private Date repositoryFirstPushedAt;
         private long developmentDays;
 
         private Map<String, Double> modelParameters;
@@ -654,17 +654,6 @@ public class OutputData implements Serializable {
         }
 
         /**
-         * Set repository created at date.
-         *
-         * @param repositoryCreatedAt created at date.
-         * @return this builder, to allow method chaining.
-         */
-        public OutputDataBuilder setRepositoryCreatedAt(Date repositoryCreatedAt) {
-            this.repositoryCreatedAt = repositoryCreatedAt;
-            return this;
-        }
-
-        /**
          * Set repository last updated at date.
          *
          * @param repositoryLastPushedAt last updated at date.
@@ -683,6 +672,17 @@ public class OutputData implements Serializable {
          */
         public OutputDataBuilder setDevelopmentDays(long developmentDays) {
             this.developmentDays = developmentDays;
+            return this;
+        }
+
+        /**
+         * Set repository first commit date.
+         *
+         * @param repositoryFirstPushedAt date of first commit.
+         * @return this builder, to allow method chaining.
+         */
+        public OutputDataBuilder setRepositoryFirstPushedAt(Date repositoryFirstPushedAt) {
+            this.repositoryFirstPushedAt = repositoryFirstPushedAt;
             return this;
         }
 

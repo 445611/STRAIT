@@ -22,10 +22,13 @@ public class RepositoryInformation implements Serializable {
     private int forks;
     private int contributors;
 
-    @Temporal(TemporalType.TIMESTAMP)
-    private Date createdAt;
+    // Last commit
     @Temporal(TemporalType.TIMESTAMP)
     private Date pushedAt;
+
+    // First commit
+    @Temporal(TemporalType.TIMESTAMP)
+    private Date pushedAtFirst;
 
     public Long getId() {
         return id;
@@ -41,14 +44,6 @@ public class RepositoryInformation implements Serializable {
 
     public void setName(String name) {
         this.name = name;
-    }
-
-    public Date getCreatedAt() {
-        return createdAt;
-    }
-
-    public void setCreatedAt(Date createdAt) {
-        this.createdAt = createdAt;
     }
 
     public Date getPushedAt() {
@@ -97,5 +92,13 @@ public class RepositoryInformation implements Serializable {
 
     public void setContributors(int contributors) {
         this.contributors = contributors;
+    }
+
+    public Date getPushedAtFirst() {
+        return pushedAtFirst;
+    }
+
+    public void setPushedAtFirst(Date pushedAtFirst) {
+        this.pushedAtFirst = pushedAtFirst;
     }
 }

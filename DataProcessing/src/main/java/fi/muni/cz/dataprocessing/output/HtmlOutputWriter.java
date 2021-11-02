@@ -66,14 +66,14 @@ public class HtmlOutputWriter implements OutputWriter {
         try (BufferedWriter writer = new BufferedWriter(new OutputStreamWriter(
             new FileOutputStream(file), StandardCharsets.UTF_8));) {
             Template template;
-            if (root.get("data") != null) {
+            if (root.get("noModelsData") != null) {
+                template = getTemplateFromConfiguration(TEMPLATE_EMPTY);
+            } else if (root.get("data") != null) {
                 template = getTemplateFromConfiguration(TEMPLATE_ONE);
             } else if (multipleGraphs){
                 template = getTemplateFromConfiguration(TEMPLATE_TWO);
-            } else if (root.get("dataList") != null) {
-                template = getTemplateFromConfiguration(TEMPLATE_THREE);
             } else {
-                template = getTemplateFromConfiguration(TEMPLATE_EMPTY);
+                template = getTemplateFromConfiguration(TEMPLATE_THREE);
             }
             template.process(root, writer);
             System.out.println("File created - " + fileName + ".html");

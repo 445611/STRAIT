@@ -287,10 +287,10 @@ public class Core {
                     .setTimeBetweenDefectsUnit(getTimeBetweenIssuesUnit())
                     .setSolver(getSolver())
                     .setRepositoryContributors(repositoryInformation.getContributors())
-                    .setRepositoryCreatedAt(repositoryInformation.getCreatedAt())
                     .setRepositoryDescription(repositoryInformation.getDescription())
                     .setRepositoryForks(repositoryInformation.getForks())
                     .setRepositoryLastPushedAt(repositoryInformation.getPushedAt())
+                    .setRepositoryFirstPushedAt(repositoryInformation.getPushedAtFirst())
                     .setRepositorySize(repositoryInformation.getSize())
                     .setRepositoryWatchers(repositoryInformation.getWatchers())
                     .setDevelopmentDays(getDaysBetween(repositoryInformation)).build();
@@ -328,10 +328,10 @@ public class Core {
                 .setTimeBetweenDefectsUnit(getTimeBetweenIssuesUnit())
                 .setSolver(getSolver())
                 .setRepositoryContributors(repositoryInformation.getContributors())
-                .setRepositoryCreatedAt(repositoryInformation.getCreatedAt())
                 .setRepositoryDescription(repositoryInformation.getDescription())
                 .setRepositoryForks(repositoryInformation.getForks())
                 .setRepositoryLastPushedAt(repositoryInformation.getPushedAt())
+                .setRepositoryFirstPushedAt(repositoryInformation.getPushedAtFirst())
                 .setRepositorySize(repositoryInformation.getSize())
                 .setRepositoryWatchers(repositoryInformation.getWatchers())
                 .setDevelopmentDays(getDaysBetween(repositoryInformation)).build();
@@ -407,6 +407,6 @@ public class Core {
 
     private static long getDaysBetween(RepositoryInformation repositoryInformation) {
         return TimeUnit.DAYS.convert(Math.abs(repositoryInformation.getPushedAt().getTime()
-                - repositoryInformation.getCreatedAt().getTime()), TimeUnit.MILLISECONDS);
+                - repositoryInformation.getPushedAtFirst().getTime()), TimeUnit.MILLISECONDS);
     }
 }
