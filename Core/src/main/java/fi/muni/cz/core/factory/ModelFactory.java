@@ -30,8 +30,12 @@ public class ModelFactory {
     public static final String SOLVER_LEAST_SQUARES = "ls";
     public static final String SOLVER_MAXIMUM_LIKELIHOOD = "ml";
         
-    private static final Rengine R_ENGINE = new Rengine(new String[] {"-–no-save"}, false, null);
-    
+    private static Rengine rengine;
+
+    public static void setREngine(Rengine rEngine) {
+        rengine = rEngine;
+    }
+
     /**
      * Get all Model to run.
      * 
@@ -121,7 +125,7 @@ public class ModelFactory {
             if (parser.hasOptionSolver()) {
                 switch (parser.getOptionValueSolver()) {
                     case SOLVER_LEAST_SQUARES:
-                        return solverClass.getDeclaredConstructor(Rengine.class).newInstance(R_ENGINE);
+                        return solverClass.getDeclaredConstructor(Rengine.class).newInstance(rengine);
                     case SOLVER_MAXIMUM_LIKELIHOOD:
                         // To be implemented
                         throw new InvalidInputException(Arrays.asList("No such solver implemented: '"
@@ -131,7 +135,7 @@ public class ModelFactory {
                                 + parser.getOptionValueSolver() + "'"));
                 }
             } else {
-                return solverClass.getDeclaredConstructor(Rengine.class).newInstance(R_ENGINE);
+                return solverClass.getDeclaredConstructor(Rengine.class).newInstance(rengine);
             }
         } catch (ReflectiveOperationException ex) {
             throw new IllegalArgumentException(ex);

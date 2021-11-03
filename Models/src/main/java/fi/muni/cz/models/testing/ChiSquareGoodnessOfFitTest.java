@@ -1,65 +1,55 @@
 package fi.muni.cz.models.testing;
 
-import java.util.ArrayList;
+import org.apache.commons.math3.util.Pair;
+import org.rosuda.JRI.Rengine;
+
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
-import org.apache.commons.math3.stat.inference.ChiSquareTest;
-import org.apache.commons.math3.util.Pair;
+import java.util.stream.Collectors;
 
 /**
  * @author Radoslav Micko, 445611@muni.cz
  */
 public class ChiSquareGoodnessOfFitTest implements GoodnessOfFitTest {
-    
-    private final ChiSquareTest test;
-    private double[] expected;
-    private long[] observed;
-    private final double alpha = 0.05;
-    
+
+    private static final double ALPHA = 0.05;
+    private Rengine rEngine;
+
     /**
-     * Default contructor to initialize attributes.
+     *  Default constructor to initialize attributes.
+     *
+     * @param rEngine engine for R chisq.test
      */
-    public ChiSquareGoodnessOfFitTest() {
-        test = new ChiSquareTest();
+    public ChiSquareGoodnessOfFitTest(Rengine rEngine) {
+        this.rEngine = rEngine;
     }
     
     @Override
     public Map<String, String> executeGoodnessOfFitTest(List<Pair<Integer, Integer>> expectedIssues, 
             List<Pair<Integer, Integer>> observedIssues) {
-        calculateExpectedAndObservedValues(expectedIssues, observedIssues);
-        return calculateChiSquareTest();
+        return calculateChiSquareTest(getPreparedListWithCommas(expectedIssues),
+                getPreparedListWithCommas(observedIssues));
     }
     
-    private void calculateExpectedAndObservedValues(List<Pair<Integer, Integer>> expectedIssues, 
-            List<Pair<Integer, Integer>> observedIssues) {
-        expected = getArrayOfDoubleFromList(expectedIssues);
-        observed = getArrayOfLongFromList(observedIssues);
-    }
-    
-    private Map<String, String> calculateChiSquareTest() {
+    private Map<String, String> calculateChiSquareTest(String expected, String observe) {
         Map<String, String> chiSquareMap = new LinkedHashMap<>();
-        chiSquareMap.put("Chi-Square = ", String.valueOf(test.chiSquare(expected, observed)));
-        chiSquareMap.put("Chi-Square significance level = ",
-                String.valueOf(test.chiSquareTest(expected, observed) * 100) + "%");
-        chiSquareMap.put("Chi-Square null hypothesis rejection = ", 
-                test.chiSquareTest(expected, observed, alpha) ? "REJECT" : "ACCEPT");
+
+        rEngine.eval(String.format("expected = c(%s)", expected));
+        rEngine.eval(String.format("observed = c(%s)", observe));
+        rEngine.eval("test <- chisq.test(cbind(expected, observed))");
+
+        double chisqTestStatistic = rEngine.eval("test$statistic").asDoubleArray()[0];
+        double chisqTestPValue = rEngine.eval("test$p.value").asDoubleArray()[0];
+
+        chiSquareMap.put("Chi-Square = ", String.valueOf(chisqTestStatistic));
+        chiSquareMap.put("Chi-Square significance level = ", String.valueOf(chisqTestPValue));
+        chiSquareMap.put("Chi-Square null hypothesis rejection = ",
+                chisqTestPValue < ALPHA ? "REJECT" : "ACCEPT");
         return chiSquareMap;
     }
-    
-    private double[] getArrayOfDoubleFromList(List<Pair<Integer, Integer>> list) {
-        List<Double> arr = new ArrayList<>();
-        for (Pair<Integer, Integer> pair: list) {
-             arr.add(pair.getSecond().doubleValue());
-        }
-        return arr.stream().mapToDouble(d -> d).toArray();
+
+    private String getPreparedListWithCommas(List<Pair<Integer, Integer>> list) {
+        return list.stream().map(value -> value.getSecond().toString()).collect(Collectors.joining(","));
     }
-    
-    private long[] getArrayOfLongFromList(List<Pair<Integer, Integer>> list) {
-        List<Double> arr = new ArrayList<>();
-        for (Pair<Integer, Integer> pair: list) {
-             arr.add(pair.getSecond().doubleValue());
-        }
-        return arr.stream().mapToLong(d -> d.longValue()).toArray();
-    } 
 }

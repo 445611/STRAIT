@@ -5,8 +5,16 @@ import fi.muni.cz.models.testing.ChiSquareGoodnessOfFitTest;
 import java.util.ArrayList;
 import java.util.List;
 import org.apache.commons.math3.util.Pair;
+
+import static org.mockito.Mockito.when;
 import static org.testng.Assert.assertEquals;
 import static org.testng.Assert.assertNotEquals;
+
+import org.mockito.InjectMocks;
+import org.mockito.Mock;
+import org.mockito.MockitoAnnotations;
+import org.rosuda.JRI.REXP;
+import org.rosuda.JRI.Rengine;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 
@@ -14,13 +22,19 @@ import org.testng.annotations.Test;
  * @author Radoslav Micko, 445611@muni.cz
  */
 public class ChiSquareGoodnessOfFitTestNGTest {
-    
+
+    @Mock
+    private Rengine rEngine;
+
+    @InjectMocks
+    private GoodnessOfFitTest test = new ChiSquareGoodnessOfFitTest(rEngine);
+
     private final List<Pair<Integer, Integer>> listOfPairs = new ArrayList<>();  
     private final List<Pair<Integer, Integer>> listOfShiftByOnePairs = new ArrayList<>();
-    private final GoodnessOfFitTest test = new ChiSquareGoodnessOfFitTest();
     
     @BeforeClass
     public void setUp() {
+        MockitoAnnotations.initMocks(this);
         Pair<Integer, Integer> pair = new Pair<>(1, 1);
         listOfPairs.add(pair);
         pair = new Pair<>(2, 2);
@@ -42,11 +56,17 @@ public class ChiSquareGoodnessOfFitTestNGTest {
     
     @Test
     public void testExactMatch() {
+        double[] doubleArr = {0.0};
+        when(rEngine.eval("test$statistic")).thenReturn(new REXP(doubleArr));
+        when(rEngine.eval("test$p.value")).thenReturn(new REXP(doubleArr));
         assertEquals(test.executeGoodnessOfFitTest(listOfPairs, listOfPairs).get("Chi-Square = "), "0.0");
     }
     
     @Test
     public void testShiftMatch() {
+        double[] doubleArr = {1.0};
+        when(rEngine.eval("test$statistic")).thenReturn(new REXP(doubleArr));
+        when(rEngine.eval("test$p.value")).thenReturn(new REXP(doubleArr));
         assertNotEquals(test.executeGoodnessOfFitTest(listOfPairs, listOfShiftByOnePairs).get("Chi-Square = "), "0.0");
     }
 }

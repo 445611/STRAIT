@@ -23,6 +23,7 @@ import fi.muni.cz.models.testing.LaplaceTrendTest;
 import fi.muni.cz.models.testing.TrendTest;
 import org.apache.commons.math3.util.Pair;
 import org.eclipse.egit.github.core.client.GitHubClient;
+import org.rosuda.JRI.Rengine;
 
 import java.util.ArrayList;
 import java.util.Date;
@@ -41,6 +42,7 @@ public class Core {
             new GitHubRepositoryInformationDataProvider(CLIENT);
     private static ParsedUrlData parsedUrlData;
     private static final GeneralIssuesSnapshotDaoImpl DAO = new GeneralIssuesSnapshotDaoImpl();
+    private static final Rengine RENGINE = new Rengine(new String[] {"-–no-save"}, false, null);
 
     /**
      * Main method, takes command line arguments.
@@ -54,17 +56,18 @@ public class Core {
         } catch (InvalidInputException e) {
             PARSER.printHelp();
             System.out.println(e.causes());
-            //e.printStackTrace();
+            e.printStackTrace();
             System.exit(1);
         } catch (Exception e) {
             System.out.println(e.getMessage());
-            //e.printStackTrace();
+            e.printStackTrace();
             System.exit(1);
         }
     }
     
     private static void run() throws InvalidInputException {
         System.out.println("Working...");
+        ModelFactory.setREngine(RENGINE);
         switch (PARSER.getRunConfiguration()) {
             case LIST_ALL_SNAPSHOTS:
                doListAllSnapshots();
@@ -209,7 +212,7 @@ public class Core {
     }
     
     private static GoodnessOfFitTest getGoodnessOfFitTest() {
-        return new ChiSquareGoodnessOfFitTest();
+        return new ChiSquareGoodnessOfFitTest(RENGINE);
     }
     
     private static TrendTest runTrendTest(List<GeneralIssue> listOfGeneralIssues) {

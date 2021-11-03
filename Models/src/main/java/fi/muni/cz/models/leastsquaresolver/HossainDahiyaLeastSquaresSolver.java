@@ -27,7 +27,7 @@ public class HossainDahiyaLeastSquaresSolver extends SolverAbstract {
     public double[] optimize(int[] startParameters, List<Pair<Integer, Integer>> listOfData) {
         initializeOptimizationInR(listOfData);
         rEngine.eval("modelHD2 <- nls2(yvalues ~ " + MODEL_FUNCTION + ", " +
-                "start = data.frame(a = c(100, 1000000),b = c(0.00001, 10), c = c(0.00001, 100)), " +
+                "start = data.frame(a = c(10000, 1000000),b = c(0.00001, 10), c = c(0.00001, 200)), " +
                 "algorithm = \"brute-force\", control = list(warnOnly = TRUE, maxiter = 100000))");
         REXP intermediate = rEngine.eval("coef(modelHD2)");
         if (intermediate == null) {
