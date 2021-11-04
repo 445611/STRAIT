@@ -45,7 +45,8 @@ public class ChiSquareGoodnessOfFitTest implements GoodnessOfFitTest {
         chiSquareMap.put("Chi-Square = ", String.valueOf(chisqTestStatistic));
         chiSquareMap.put("Chi-Square significance level = ", String.valueOf(chisqTestPValue));
         chiSquareMap.put("Chi-Square null hypothesis rejection = ",
-                chisqTestPValue < ALPHA ? "REJECT" : "ACCEPT");
+                chisqTestPValue < ALPHA ? "REJECT" : "NOT REJECT");
+        chiSquareMap.put("Null hypothesis = ", "No significant difference between observed and expected values");
         return chiSquareMap;
     }
 

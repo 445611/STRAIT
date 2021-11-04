@@ -27,7 +27,7 @@ public class GOSShapedLeastSquaresSolver extends SolverAbstract {
     public double[] optimize(int[] startParameters, List<Pair<Integer, Integer>> listOfData) {
         initializeOptimizationInR(listOfData);
         rEngine.eval("modelGOS2 <- nls2(yvalues ~ " + MODEL_FUNCTION + ", " +
-               "start = data.frame(a = c(100, 1000000),b = c(0.01, 10)), " +
+               "start = data.frame(a = c(10, 1000000),b = c(0.01, 10)), " +
                 "algorithm = \"random-search\", control = list(warnOnly = TRUE, maxiter = 1000000))");
         REXP intermediate = rEngine.eval("coef(modelGOS2)");
         if (intermediate == null) {

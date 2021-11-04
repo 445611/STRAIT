@@ -27,7 +27,7 @@ public class GOLeastSquaresSolver extends SolverAbstract {
     public double[] optimize(int[] startParameters, List<Pair<Integer, Integer>> listOfData) {
         initializeOptimizationInR(listOfData);
         rEngine.eval("modelGO2 <- nls2(yvalues ~ " + MODEL_FUNCTION + ", " +
-                "start = data.frame(a = c(1000, 1000000),b = c(0.00001, 10)), " +
+                "start = data.frame(a = c(10, 1000000),b = c(0.00001, 10)), " +
                 "algorithm = \"brute-force\", control = list(warnOnly = TRUE, maxiter = 100000))");
         REXP intermediate = rEngine.eval("coef(modelGO2)");
         if (intermediate == null) {

@@ -27,7 +27,7 @@ public class DuaneLeastSquaresSolver extends SolverAbstract {
     public double[] optimize(int[] startParameters, List<Pair<Integer, Integer>> listOfData) {
         initializeOptimizationInR(listOfData);
         rEngine.eval("modelDuane2 <- nls2(yvalues ~ " + MODEL_FUNCTION + ", " +
-                "start = data.frame(a = c(0.00001, 10),b = c(0.00001, 10)), " +
+                "start = data.frame(a = c(0.00001, 100),b = c(0.00001, 100)), " +
                 "algorithm = \"brute-force\", control = list(warnOnly = TRUE, maxiter = 1000000))");
         REXP intermediate = rEngine.eval("coef(modelDuane2)");
         if (intermediate == null) {

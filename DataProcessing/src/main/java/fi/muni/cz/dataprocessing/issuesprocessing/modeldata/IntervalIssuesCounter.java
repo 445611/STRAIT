@@ -39,13 +39,13 @@ public class IntervalIssuesCounter implements IssuesCounter {
             throw new NullPointerException("listOfIssues is null or empty.");
         }
         Date startOfTesting  = getDateFromMidNight(rawIssues.get(0).getCreatedAt());
-        Date endOfTesting = new Date();
+        Date endOfTesting = getDateFromMidNight(
+                addSpecificTimeToDate(rawIssues.get(rawIssues.size() - 1).getCreatedAt(), WEEKS));
         return sortingIssuesIntoTimePeriods(rawIssues, startOfTesting, endOfTesting);
     }
     
     /**
      * Get list of Pair of week and number of defects.
-     * @param startDate Date to starts counting weeks
      * @param listOfIssues List to iterate over
      * @param startOfTesting start of testing
      * @param endOfTesting end of testing
@@ -56,7 +56,7 @@ public class IntervalIssuesCounter implements IssuesCounter {
     private List<Pair<Integer, Integer>> sortingIssuesIntoTimePeriods(
             List<GeneralIssue> listOfIssues, Date startOfTesting, Date endOfTesting) {
         Date startOfTestingPeriod = startOfTesting;
-        Date endOfTestingPeriod = addSpecificTimeToDate(startOfTesting);
+        Date endOfTestingPeriod = addSpecificTimeToDate(startOfTesting, typeOfTimeToAdd);
 
         List<Pair<Integer, Integer>> countedList = new ArrayList<>();
         int periodsCounter = 1;
@@ -79,7 +79,7 @@ public class IntervalIssuesCounter implements IssuesCounter {
                 periodsCounter++;
                 defectsCounter = 0;
                 startOfTestingPeriod = endOfTestingPeriod;
-                endOfTestingPeriod = addSpecificTimeToDate(endOfTestingPeriod);
+                endOfTestingPeriod = addSpecificTimeToDate(endOfTestingPeriod, typeOfTimeToAdd);
                 continue;
             }
             
@@ -92,12 +92,12 @@ public class IntervalIssuesCounter implements IssuesCounter {
                 } else {
                     countedList.add(new Pair<>(periodsCounter, defectsCounter));
                     startOfTestingPeriod = endOfTestingPeriod;
-                    endOfTestingPeriod = addSpecificTimeToDate(endOfTestingPeriod);
+                    endOfTestingPeriod = addSpecificTimeToDate(endOfTestingPeriod, typeOfTimeToAdd);
                     while (endOfTestingPeriod.before(endOfTesting)) {
                         periodsCounter++;
                         countedList.add(new Pair<>(periodsCounter, 0));
                         startOfTestingPeriod = endOfTestingPeriod;
-                        endOfTestingPeriod = addSpecificTimeToDate(endOfTestingPeriod);
+                        endOfTestingPeriod = addSpecificTimeToDate(endOfTestingPeriod, typeOfTimeToAdd);
                     }
                 }
             } 
@@ -127,7 +127,7 @@ public class IntervalIssuesCounter implements IssuesCounter {
      * @param date to add to
      * @return Date after week
      */
-    private Date addSpecificTimeToDate(Date date) {
+    private Date addSpecificTimeToDate(Date date, String typeOfTimeToAdd) {
         Calendar c = Calendar.getInstance();
         c.setTime(date);
         switch (typeOfTimeToAdd) {

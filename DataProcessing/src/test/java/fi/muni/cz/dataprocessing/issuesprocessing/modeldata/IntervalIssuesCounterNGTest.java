@@ -47,7 +47,7 @@ public class IntervalIssuesCounterNGTest {
         listOfIssues.add(issue);
         issue = new GeneralIssue();
         
-        cal.set(2018, 10, 8, 0, 0, 0);
+        cal.set(2018, 10, 14, 0, 0, 0);
         date = cal.getTime();
         issue.setCreatedAt(date);
         listOfIssues.add(issue);
