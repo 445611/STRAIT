@@ -6,14 +6,12 @@ import fi.muni.cz.dataprovider.utils.ParsedUrlData;
 import fi.muni.cz.dataprovider.utils.UrlParser;
 import org.dozer.DozerBeanMapper;
 import org.eclipse.egit.github.core.Repository;
-import org.eclipse.egit.github.core.RepositoryCommit;
 import org.eclipse.egit.github.core.client.GitHubClient;
 import org.eclipse.egit.github.core.client.RequestException;
 import org.eclipse.egit.github.core.service.CommitService;
 import org.eclipse.egit.github.core.service.RepositoryService;
 
 import java.io.IOException;
-import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -48,11 +46,11 @@ public class GitHubRepositoryInformationDataProvider implements RepositoryInform
         try {
             System.out.println("Downloading repository information ...");
             Repository repository = repositoryService.getRepository(owner, repositoryName);
-            List<RepositoryCommit> commits = commitService.getCommits(repository);
+            // Takes too long for 100k+ commits
+            //List<RepositoryCommit> commits = commitService.getCommits(repository);
             repositoryInformation = dozerBeanMapper
                     .map(repository, RepositoryInformation.class);
-            repositoryInformation.setPushedAtFirst(
-                    commits.get(commits.size() - 1).getCommit().getCommitter().getDate());
+            repositoryInformation.setPushedAtFirst(repository.getCreatedAt());
             repositoryInformation.setContributors(repositoryService.getContributors(repository, false).size());
 
         } catch (RequestException ex) {

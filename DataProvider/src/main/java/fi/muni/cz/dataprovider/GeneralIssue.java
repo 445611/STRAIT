@@ -42,7 +42,9 @@ public class GeneralIssue implements Serializable {
     private String body;
     @Column(name = "IssueState")
     private String state;
-    
+
+    @Lob
+    @Column(columnDefinition="clob")
     private String title;
     private String url;
     private String htmlUrl;
@@ -68,6 +70,8 @@ public class GeneralIssue implements Serializable {
     
     @Column(name = "MilestoneState")
     private String milestoneState;
+    @Lob
+    @Column(columnDefinition="clob")
     private String milestoneTitle;
 
     public Date getMilestoneCreatedAt() {

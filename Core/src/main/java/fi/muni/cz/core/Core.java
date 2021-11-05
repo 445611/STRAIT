@@ -319,7 +319,8 @@ public class Core {
                 .setRepositoryName(parsedUrlData.getRepositoryName())
                 .setUrl(parsedUrlData.getUrl().toString())
                 .setUserName(parsedUrlData.getUserName())
-                .setTotalNumberOfDefects(countedWeeksWithTotal.get(countedWeeksWithTotal.size() - 1).getSecond())
+                .setTotalNumberOfDefects(countedWeeksWithTotal.isEmpty() ? 0 :
+                        countedWeeksWithTotal.get(countedWeeksWithTotal.size() - 1).getSecond())
                 .setCumulativeDefects(countedWeeksWithTotal)
                 .setTimeBetweenDefects(getTimeBetweenIssuesList(listOfGeneralIssues))
                 .setTrend(trendTest.getTrendValue())

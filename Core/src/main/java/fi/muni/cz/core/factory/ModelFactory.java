@@ -26,7 +26,7 @@ public class ModelFactory {
     public static final String  YAMADA_EXPONENTIAL = "ye";
     public static final String  YAMADA_RALEIGH = "yr";
     public static final String  LOG_LOGISITC = "ll";
-    public static final String  NO_MODEL = "nm";
+    public static final String EMPTY_MODEL = "em";
 
     public static final String SOLVER_LEAST_SQUARES = "ls";
     public static final String SOLVER_MAXIMUM_LIKELIHOOD = "ml";
@@ -115,7 +115,7 @@ public class ModelFactory {
             case LOG_LOGISITC:
                 return new LogLogisticModelImpl(countedWeeksWithTotal, goodnessOfFitTest,
                         getSolverBySolverArgument(parser, LogLogisticLeastSquaresSolver.class));
-            case NO_MODEL:
+            case EMPTY_MODEL:
                 return new EmptyModelImpl(countedWeeksWithTotal, goodnessOfFitTest,
                         getSolverBySolverArgument(parser, EmptyLeastSquaresSolver.class));
             default:
