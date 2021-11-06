@@ -28,7 +28,7 @@ public class GOSShapedLeastSquaresSolver extends SolverAbstract {
         initializeOptimizationInR(listOfData);
         rEngine.eval("modelGOS2 <- nls2(yvalues ~ " + MODEL_FUNCTION + ", " +
                "start = data.frame(a = c(10, 1000000),b = c(0.01, 10)), " +
-                "algorithm = \"brute-force\", control = list(warnOnly = TRUE, maxiter = 1000000))");
+                "algorithm = \"brute-force\", control = list(warnOnly = TRUE, maxiter = 100000))");
         REXP intermediate = rEngine.eval("coef(modelGOS2)");
         if (intermediate == null) {
             throw new ModelException("Repository data not suitable for R evaluation.");
@@ -36,7 +36,7 @@ public class GOSShapedLeastSquaresSolver extends SolverAbstract {
         rEngine.eval(String.format(Locale.US, "modelGOS <- nls(yvalues ~ " + MODEL_FUNCTION + ", "
                 + "start = list(a = %.10f,b = %.10f), "
                 + "lower = list(a = 0, b = 0), "
-                + "control = list(warnOnly = TRUE, maxiter = 1000000), "
+                + "control = list(warnOnly = TRUE, maxiter = 100000), "
                 + "algorithm = \"port\")", intermediate.asDoubleArray()[0], intermediate.asDoubleArray()[1]));
         REXP result = rEngine.eval("coef(modelGOS)");
         rEngine.end();

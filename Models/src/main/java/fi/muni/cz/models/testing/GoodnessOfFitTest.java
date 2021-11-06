@@ -14,8 +14,9 @@ public interface GoodnessOfFitTest {
      * 
      * @param expectedIssues    Estimated list of data from model.
      * @param observedIssues    Real observed data.
+     * @param modelName         Name of model.
      * @return                  Map with estimated goodness of fit data.
      */
     Map<String, String> executeGoodnessOfFitTest(List<Pair<Integer, Integer>> expectedIssues, 
-            List<Pair<Integer, Integer>> observedIssues);
+            List<Pair<Integer, Integer>> observedIssues, String modelName);
 }

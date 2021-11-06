@@ -51,4 +51,9 @@ public class EmptyModelImpl extends ModelAbstract {
     public String toString() {
         return "Empty model";
     }
+
+    @Override
+    protected String getModelShortName() {
+        return "EM";
+    }
 }

@@ -62,4 +62,9 @@ public class YamadaRaleighModelImpl extends ModelAbstract {
     public String toString() {
         return "Yamada Raleigh model";
     }
+
+    @Override
+    protected String getModelShortName() {
+        return "YR";
+    }
 }

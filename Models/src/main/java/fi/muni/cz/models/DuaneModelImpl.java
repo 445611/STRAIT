@@ -55,4 +55,9 @@ public class DuaneModelImpl extends ModelAbstract {
     public String toString() {
         return "Duane model";
     }
+
+    @Override
+    protected String getModelShortName() {
+        return "DU";
+    }
 }

@@ -51,7 +51,8 @@ public abstract class ModelAbstract implements Model {
     }
     
     private void calculateModelGoodnessOfFit() {
-        goodnessOfFit = goodnessOfFitTest.executeGoodnessOfFitTest(calculateEstimatedIssuesOccurance(0), listOfIssues);
+        goodnessOfFit = goodnessOfFitTest.executeGoodnessOfFitTest(calculateEstimatedIssuesOccurance(0),
+                listOfIssues, getModelShortName());
     }
     
     /**
@@ -91,6 +92,13 @@ public abstract class ModelAbstract implements Model {
      * @param params to be saved.
      */
     protected abstract void setParametersToMap(double[] params);
+
+    /**
+     * Get short name of Model.
+     *
+     * @return  short name of model.
+     */
+    protected abstract String getModelShortName();
     
     /**
      * Get initial estimation of model parameters.

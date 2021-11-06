@@ -51,7 +51,9 @@ public class GitHubRepositoryInformationDataProvider implements RepositoryInform
             repositoryInformation = dozerBeanMapper
                     .map(repository, RepositoryInformation.class);
             repositoryInformation.setPushedAtFirst(repository.getCreatedAt());
-            repositoryInformation.setContributors(repositoryService.getContributors(repository, false).size());
+            // for linux repository, error is thrown too many contributors
+            repositoryInformation.setContributors(repository.getName().equals("linux") ?
+                    0 : repositoryService.getContributors(repository, false).size());
 
         } catch (RequestException ex) {
             log(Level.SEVERE, "Error while getting repository by Owner and Repository name.", ex);

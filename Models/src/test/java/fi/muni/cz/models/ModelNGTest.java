@@ -58,7 +58,7 @@ public class ModelNGTest {
         Map<String, String> map = new LinkedHashMap<>();
         map.put("a", "a");
         when(solver.optimize(any(int[].class), any(List.class))).thenReturn(new double[]{1, 1});
-        when(goodnessOfFitTest.executeGoodnessOfFitTest(any(List.class), any(List.class)))
+        when(goodnessOfFitTest.executeGoodnessOfFitTest(any(List.class), any(List.class), any()))
                 .thenReturn(map);
     }
     
@@ -66,7 +66,7 @@ public class ModelNGTest {
         Map<String, String> map = new LinkedHashMap<>();
         map.put("a", "a");
         when(solver.optimize(any(int[].class), any(List.class))).thenReturn(new double[]{1, 1, 1});
-        when(goodnessOfFitTest.executeGoodnessOfFitTest(any(List.class), any(List.class)))
+        when(goodnessOfFitTest.executeGoodnessOfFitTest(any(List.class), any(List.class), any()))
                 .thenReturn(map);
     }
     

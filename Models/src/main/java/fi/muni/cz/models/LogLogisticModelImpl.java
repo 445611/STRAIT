@@ -62,4 +62,9 @@ public class LogLogisticModelImpl extends ModelAbstract {
     public String toString() {
         return "Log-Logistic model";
     }
+
+    @Override
+    protected String getModelShortName() {
+        return "LL";
+    }
 }

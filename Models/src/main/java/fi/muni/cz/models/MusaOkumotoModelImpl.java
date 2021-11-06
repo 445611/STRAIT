@@ -55,4 +55,9 @@ public class MusaOkumotoModelImpl extends ModelAbstract {
     public String toString() {
         return "Musa-Okumoto model";
     }
+
+    @Override
+    protected String getModelShortName() {
+        return "MO";
+    }
 }

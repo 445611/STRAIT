@@ -55,4 +55,9 @@ public class GOModelImpl extends ModelAbstract {
     public String toString() {
         return "Goel-Okemura model";
     }
+
+    @Override
+    protected String getModelShortName() {
+        return "GO";
+    }
 }

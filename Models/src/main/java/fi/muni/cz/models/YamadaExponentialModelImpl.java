@@ -61,4 +61,9 @@ public class YamadaExponentialModelImpl extends ModelAbstract {
     public String toString() {
         return "Yamada Exponential model";
     }
+
+    @Override
+    protected String getModelShortName() {
+        return "YE";
+    }
 }

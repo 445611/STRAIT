@@ -60,4 +60,9 @@ public class HossainDahiyaModelImpl extends ModelAbstract {
     public String toString() {
         return "Hossain-Dahiya model";
     }
+
+    @Override
+    protected String getModelShortName() {
+        return "HD";
+    }
 }

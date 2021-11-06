@@ -60,4 +60,9 @@ public class WeibullModelImpl extends ModelAbstract {
     public String toString() {
         return "Weibull model";
     }
+
+    @Override
+    protected String getModelShortName() {
+        return "WE";
+    }
 }

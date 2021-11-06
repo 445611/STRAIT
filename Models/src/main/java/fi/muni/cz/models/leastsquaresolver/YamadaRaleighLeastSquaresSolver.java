@@ -29,7 +29,7 @@ public class YamadaRaleighLeastSquaresSolver extends SolverAbstract {
         initializeOptimizationInR(listOfData);
         rEngine.eval("modelYamadaRaleigh2 <- nls2(yvalues ~ " + MODEL_FUNCTION + ", " +
                 "start = data.frame(a = c(1, 10000),b = c(0.00001, 100), c = c(0.00001, 100)), " +
-                "algorithm = \"brute-force\", control = list(warnOnly = TRUE, maxiter = 1000000))");
+                "algorithm = \"brute-force\", control = list(warnOnly = TRUE, maxiter = 100000))");
         REXP intermediate = rEngine.eval("coef(modelYamadaRaleigh2)");
         if (intermediate == null) {
             throw new ModelException("Repository data not suitable for R evaluation.");
@@ -37,7 +37,7 @@ public class YamadaRaleighLeastSquaresSolver extends SolverAbstract {
         rEngine.eval(String.format(Locale.US, "modelYamadaRaleigh <- nls(yvalues ~ " + MODEL_FUNCTION + ", "
                         + "start = list(a = %.10f,b = %.10f, c = %.10f), "
                         + "lower = list(a = 0, b = 0, c = 0), "
-                        + "control = list(warnOnly = TRUE, maxiter = 1000000), "
+                        + "control = list(warnOnly = TRUE, maxiter = 100000), "
                         + "algorithm = \"port\")",
                 intermediate.asDoubleArray()[0], intermediate.asDoubleArray()[1], intermediate.asDoubleArray()[2]));
         REXP result = rEngine.eval("coef(modelYamadaRaleigh)");

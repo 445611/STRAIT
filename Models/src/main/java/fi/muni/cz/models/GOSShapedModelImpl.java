@@ -56,4 +56,9 @@ public class GOSShapedModelImpl extends ModelAbstract {
     public String toString() {
         return "Goel-Okemura S-Shaped model";
     }
+
+    @Override
+    protected String getModelShortName() {
+        return "GOS";
+    }
 }

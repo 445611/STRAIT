@@ -27,8 +27,8 @@ public class DuaneLeastSquaresSolver extends SolverAbstract {
     public double[] optimize(int[] startParameters, List<Pair<Integer, Integer>> listOfData) {
         initializeOptimizationInR(listOfData);
         rEngine.eval("modelDuane2 <- nls2(yvalues ~ " + MODEL_FUNCTION + ", " +
-                "start = data.frame(a = c(0.00001, 100),b = c(0.00001, 100)), " +
-                "algorithm = \"brute-force\", control = list(warnOnly = TRUE, maxiter = 1000000))");
+                "start = data.frame(a = c(0.00001, 500),b = c(0.00001, 100)), " +
+                "algorithm = \"brute-force\", control = list(warnOnly = TRUE, maxiter = 100000))");
         REXP intermediate = rEngine.eval("coef(modelDuane2)");
         if (intermediate == null) {
             throw new ModelException("Repository data not suitable for R evaluation.");
@@ -36,7 +36,7 @@ public class DuaneLeastSquaresSolver extends SolverAbstract {
         rEngine.eval(String.format(Locale.US, "modelDuane <- nls(yvalues ~ " + MODEL_FUNCTION + ", "
                 + "start = list(a = %.10f,b = %.10f), "
                 + "lower = list(a = 0, b = 0), "
-                + "control = list(warnOnly = TRUE, maxiter = 1000000), "
+                + "control = list(warnOnly = TRUE, maxiter = 100000), "
                 + "algorithm = \"port\")", intermediate.asDoubleArray()[0], intermediate.asDoubleArray()[1]));
         REXP result = rEngine.eval("coef(modelDuane)");
         rEngine.end();

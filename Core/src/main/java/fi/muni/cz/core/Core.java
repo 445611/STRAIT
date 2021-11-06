@@ -25,6 +25,8 @@ import org.apache.commons.math3.util.Pair;
 import org.eclipse.egit.github.core.client.GitHubClient;
 import org.rosuda.JRI.Rengine;
 
+import java.time.Duration;
+import java.time.Instant;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -67,6 +69,7 @@ public class Core {
     
     private static void run() throws InvalidInputException {
         System.out.println("Working...");
+        Instant start = Instant.now();
         ModelFactory.setREngine(RENGINE);
         switch (PARSER.getRunConfiguration()) {
             case LIST_ALL_SNAPSHOTS:
@@ -108,7 +111,7 @@ public class Core {
                 PARSER.printHelp();
                 System.out.println("[Missing option: '-e' / '-s' / '-sl']");
         }
-        System.out.println("Done!");
+        System.out.println("Done! Duration - " + Duration.between(start, Instant.now()).toMinutes() + "min");
         System.exit(0);
     }
     

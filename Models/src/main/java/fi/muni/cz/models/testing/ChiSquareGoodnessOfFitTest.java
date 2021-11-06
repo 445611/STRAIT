@@ -27,20 +27,21 @@ public class ChiSquareGoodnessOfFitTest implements GoodnessOfFitTest {
     
     @Override
     public Map<String, String> executeGoodnessOfFitTest(List<Pair<Integer, Integer>> expectedIssues, 
-            List<Pair<Integer, Integer>> observedIssues) {
+            List<Pair<Integer, Integer>> observedIssues, String modelName) {
         return calculateChiSquareTest(getPreparedListWithCommas(expectedIssues),
-                getPreparedListWithCommas(observedIssues));
+                getPreparedListWithCommas(observedIssues), modelName);
     }
     
-    private Map<String, String> calculateChiSquareTest(String expected, String observe) {
+    private Map<String, String> calculateChiSquareTest(String expected, String observe, String modelName) {
         Map<String, String> chiSquareMap = new LinkedHashMap<>();
 
-        rEngine.eval(String.format("expected = c(%s)", expected));
-        rEngine.eval(String.format("observed = c(%s)", observe));
-        rEngine.eval("test <- chisq.test(cbind(expected, observed))");
+        rEngine.eval(String.format("expected%s = c(%s)", modelName, expected));
+        rEngine.eval(String.format("observed%s = c(%s)", modelName, observe));
+        rEngine.eval(String.format("test%s <- chisq.test(cbind(expected%s, observed%s))",
+                modelName, modelName, modelName));
 
-        double chisqTestStatistic = rEngine.eval("test$statistic").asDoubleArray()[0];
-        double chisqTestPValue = rEngine.eval("test$p.value").asDoubleArray()[0];
+        double chisqTestStatistic = rEngine.eval(String.format("test%s$statistic", modelName)).asDoubleArray()[0];
+        double chisqTestPValue = rEngine.eval(String.format("test%s$p.value", modelName)).asDoubleArray()[0];
 
         chiSquareMap.put("Chi-Square = ", String.valueOf(chisqTestStatistic));
         chiSquareMap.put("Chi-Square significance level = ", String.valueOf(chisqTestPValue));
