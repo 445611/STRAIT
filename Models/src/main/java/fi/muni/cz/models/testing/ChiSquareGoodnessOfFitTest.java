@@ -1,10 +1,12 @@
 package fi.muni.cz.models.testing;
 
 import org.apache.commons.math3.util.Pair;
+import org.rosuda.JRI.REXP;
 import org.rosuda.JRI.Rengine;
 
 import java.util.LinkedHashMap;
 import java.util.List;
+import java.util.Locale;
 import java.util.Map;
 import java.util.stream.Collectors;
 
@@ -35,19 +37,25 @@ public class ChiSquareGoodnessOfFitTest implements GoodnessOfFitTest {
     private Map<String, String> calculateChiSquareTest(String expected, String observe, String modelName) {
         Map<String, String> chiSquareMap = new LinkedHashMap<>();
 
+        rEngine.eval("library(broom)");
         rEngine.eval(String.format("expected%s = c(%s)", modelName, expected));
         rEngine.eval(String.format("observed%s = c(%s)", modelName, observe));
-        rEngine.eval(String.format("test%s <- chisq.test(cbind(expected%s, observed%s))",
+        rEngine.eval(String.format("test%s <- lm(expected%s ~ observed%s)",
                 modelName, modelName, modelName));
+        REXP rSquared = rEngine.eval(String.format("glance(test%s)$r.squared", modelName));
+        REXP aic = rEngine.eval(String.format("glance(test%s)$AIC", modelName));
+        REXP bic = rEngine.eval(String.format("glance(test%s)$BIC", modelName));
+        REXP rse = rEngine.eval(String.format("glance(test%s)$sigma", modelName));
 
-        double chisqTestStatistic = rEngine.eval(String.format("test%s$statistic", modelName)).asDoubleArray()[0];
-        double chisqTestPValue = rEngine.eval(String.format("test%s$p.value", modelName)).asDoubleArray()[0];
-
-        chiSquareMap.put("Chi-Square = ", String.valueOf(chisqTestStatistic));
-        chiSquareMap.put("Chi-Square significance level = ", String.valueOf(chisqTestPValue));
+        chiSquareMap.put("Chi-Square = ", String.format(Locale.US, "%.3f", rSquared.asDoubleArray()[0]));
         chiSquareMap.put("Chi-Square null hypothesis rejection = ",
-                chisqTestPValue < ALPHA ? "REJECT" : "NOT REJECT");
+                1 - rSquared.asDoubleArray()[0] > ALPHA ? "REJECT" : "NOT REJECT");
         chiSquareMap.put("Null hypothesis = ", "No significant difference between observed and expected values");
+        chiSquareMap.put("AIC (Akaike information criterion) = ",
+                String.format(Locale.US, "%.3f",aic.asDoubleArray()[0]));
+        chiSquareMap.put("BIC (Bayesian Information Criterion) = ",
+                String.format(Locale.US, "%.3f",bic.asDoubleArray()[0]));
+        chiSquareMap.put("RSE (Residual Standard Error) = ", String.format(Locale.US, "%.3f",rse.asDoubleArray()[0]));
         return chiSquareMap;
     }
 

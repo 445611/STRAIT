@@ -2,7 +2,11 @@ package fi.muni.cz.dataprovider;
 
 import javax.persistence.*;
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.Date;
+import java.util.List;
+import java.util.stream.Collectors;
 
 /**
  * @author Radoslav Micko, 445611@muni.cz
@@ -21,6 +25,10 @@ public class RepositoryInformation implements Serializable {
     private int watchers;
     private int forks;
     private int contributors;
+
+    @OneToMany(cascade = CascadeType.MERGE)
+    @JoinColumn(name = "repo_info_id")
+    private List<Release> listOfReleases = new ArrayList<>();
 
     // Last commit
     @Temporal(TemporalType.TIMESTAMP)
@@ -100,5 +108,19 @@ public class RepositoryInformation implements Serializable {
 
     public void setPushedAtFirst(Date pushedAtFirst) {
         this.pushedAtFirst = pushedAtFirst;
+    }
+
+    public List<Release> getListOfReleases() {
+        return listOfReleases.stream()
+                .sorted(Comparator.comparing(Release::getPublishedAt))
+                .collect(Collectors.toList());
+    }
+
+    /**
+     * Add one Release to list
+     * @param release   Release to be added
+     */
+    public void addRelease(Release release) {
+        this.listOfReleases.add(release);
     }
 }

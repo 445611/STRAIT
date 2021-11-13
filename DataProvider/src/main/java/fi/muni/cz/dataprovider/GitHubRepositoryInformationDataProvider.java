@@ -1,5 +1,6 @@
 package fi.muni.cz.dataprovider;
 
+import fi.muni.cz.dataprovider.authenticationdata.GitHubAuthenticationDataProvider;
 import fi.muni.cz.dataprovider.exception.AuthenticationException;
 import fi.muni.cz.dataprovider.utils.GitHubUrlParser;
 import fi.muni.cz.dataprovider.utils.ParsedUrlData;
@@ -10,6 +11,8 @@ import org.eclipse.egit.github.core.client.GitHubClient;
 import org.eclipse.egit.github.core.client.RequestException;
 import org.eclipse.egit.github.core.service.CommitService;
 import org.eclipse.egit.github.core.service.RepositoryService;
+import org.kohsuke.github.GitHub;
+import org.kohsuke.github.GitHubBuilder;
 
 import java.io.IOException;
 import java.util.logging.Level;
@@ -23,6 +26,7 @@ public class GitHubRepositoryInformationDataProvider implements RepositoryInform
     private final RepositoryService repositoryService;
     private final CommitService commitService;
     private final DozerBeanMapper dozerBeanMapper = new DozerBeanMapper();
+    private final GitHub github;
 
     /**
      * Initialize RepositoryService with client.
@@ -32,6 +36,12 @@ public class GitHubRepositoryInformationDataProvider implements RepositoryInform
     public GitHubRepositoryInformationDataProvider(GitHubClient client) {
         repositoryService = new RepositoryService(client);
         commitService = new CommitService(client);
+        try {
+            github = new GitHubBuilder().withOAuthToken(new GitHubAuthenticationDataProvider().getOAuthToken()).build();
+        } catch (IOException ex) {
+            throw new AuthenticationException("Couldn't create GitHub of hub4j.");
+        }
+
     }
 
     @Override
@@ -54,7 +64,7 @@ public class GitHubRepositoryInformationDataProvider implements RepositoryInform
             // for linux repository, error is thrown too many contributors
             repositoryInformation.setContributors(repository.getName().equals("linux") ?
                     0 : repositoryService.getContributors(repository, false).size());
-
+            addReleases(owner + "/" + repositoryName, repositoryInformation);
         } catch (RequestException ex) {
             log(Level.SEVERE, "Error while getting repository by Owner and Repository name.", ex);
             throw new AuthenticationException("Bad credentials set. "
@@ -64,6 +74,15 @@ public class GitHubRepositoryInformationDataProvider implements RepositoryInform
         }
 
         return repositoryInformation;
+    }
+
+    private void addReleases(String repoFullName, RepositoryInformation repositoryInformation) throws IOException {
+        github.getRepository(repoFullName).listReleases().forEach(release -> {
+            Release r = new Release();
+            r.setName(release.getName());
+            r.setPublishedAt(release.getPublished_at());
+            repositoryInformation.addRelease(r);
+        });
     }
 
     private void log(Level level, String message, Exception ex) {

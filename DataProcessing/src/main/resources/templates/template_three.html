@@ -65,6 +65,11 @@
             .c3-circle {
                 opacity: 1 !important;
             }
+
+            table, th, td {
+                text-align: center;
+                border:1px solid black;
+            }
             
         </style>
     </head>
@@ -89,6 +94,24 @@
                     <b>First pushed at:</b> ${dataList[0].repositoryFirstPushedAt?datetime}<br>
                     <b>Last pushed at:</b> ${dataList[0].repositoryLastPushedAt?datetime}<br>
                     <b>Count of development days:</b> ${dataList[0].developmentDays}<br>
+                    <hr class="hrstyle">
+                    <h3>Releases:</h3>
+                    <table>
+                        <tr>
+                            <th>#</th>
+                            <th>Name of Release</th>
+                            <th>Date of Release</th>
+                        </tr>
+                        <#if dataList[0].releases?size != 0>
+                            <#list dataList[0].releases as value>
+                                <tr>
+                                    <td>${value?index + 1}</td>
+                                    <td>${value.name}</td>
+                                    <td>${value.publishedAt?date}</td>
+                                </tr>
+                            </#list>
+                        </#if>
+                    </table>
                     <hr class="hrstyle">
                     <h3>Info:</h3>
                     <p>

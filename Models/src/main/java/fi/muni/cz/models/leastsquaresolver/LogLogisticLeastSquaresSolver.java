@@ -14,6 +14,7 @@ import java.util.Locale;
 public class LogLogisticLeastSquaresSolver extends SolverAbstract {
 
     private static final String MODEL_FUNCTION = "a*((b*xvalues)^c)/(1 + (b*xvalues)^c)";
+    private static final String MODEL_NAME = "modelLogLogistic";
 
     /**
      * Initialize Rengine.
@@ -30,7 +31,7 @@ public class LogLogisticLeastSquaresSolver extends SolverAbstract {
         rEngine.eval("modelLogLogistic2 <- nls2(yvalues ~ " + MODEL_FUNCTION + ", " +
                 "start = data.frame(a = c(10, 10000),b = c(0.001, 10), c = c(0.001, 10)), " +
                 "algorithm = \"brute-force\", control = list(warnOnly = TRUE, maxiter = 100000))");
-        REXP intermediate = rEngine.eval("coef(modelLogLogistic2)");
+        REXP intermediate = rEngine.eval("coef(" + MODEL_NAME + "2)");
         if (intermediate == null) {
             throw new ModelException("Repository data not suitable for R evaluation.");
         }
@@ -40,7 +41,7 @@ public class LogLogisticLeastSquaresSolver extends SolverAbstract {
                         + "control = list(warnOnly = TRUE, maxiter = 100000), "
                         + "algorithm = \"port\")",
                 intermediate.asDoubleArray()[0], intermediate.asDoubleArray()[1], intermediate.asDoubleArray()[2]));
-        REXP result = rEngine.eval("coef(modelLogLogistic)");
+        REXP result = rEngine.eval("coef(" + MODEL_NAME + ")");
         rEngine.end();
         if (result == null || result.asDoubleArray().length < 3) {
             throw new ModelException("Repository data not suitable for R evaluation.");

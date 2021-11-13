@@ -14,6 +14,7 @@ import org.rosuda.JRI.Rengine;
 public class GOLeastSquaresSolver extends SolverAbstract {
 
     private static final String MODEL_FUNCTION = "a*(1 - exp(-b*xvalues))";
+    private static final String MODEL_NAME = "modelGO";
 
     /**
      * Initialize Rengine.
@@ -29,7 +30,7 @@ public class GOLeastSquaresSolver extends SolverAbstract {
         rEngine.eval("modelGO2 <- nls2(yvalues ~ " + MODEL_FUNCTION + ", " +
                 "start = data.frame(a = c(10, 15000000),b = c(0.00001, 10)), " +
                 "algorithm = \"brute-force\", control = list(warnOnly = TRUE, maxiter = 100000))");
-        REXP intermediate = rEngine.eval("coef(modelGO2)");
+        REXP intermediate = rEngine.eval("coef(" + MODEL_NAME + "2)");
         if (intermediate == null) {
             throw new ModelException("Repository data not suitable for R evaluation.");
         }
@@ -39,7 +40,7 @@ public class GOLeastSquaresSolver extends SolverAbstract {
                 + "control = list(warnOnly = TRUE, maxiter = 100000), "
                 + "algorithm = \"port\")",
                 intermediate.asDoubleArray()[0], intermediate.asDoubleArray()[1]));
-        REXP result = rEngine.eval("coef(modelGO)");
+        REXP result = rEngine.eval("coef(" + MODEL_NAME + ")");
         rEngine.end();
         if (result == null || result.asDoubleArray().length < 2) {
             throw new ModelException("Repository data not suitable for R evaluation.");

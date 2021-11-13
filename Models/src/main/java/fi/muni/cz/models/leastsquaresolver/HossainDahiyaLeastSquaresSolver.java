@@ -1,12 +1,12 @@
 package fi.muni.cz.models.leastsquaresolver;
 
 import fi.muni.cz.models.exception.ModelException;
-import java.util.List;
-import java.util.Locale;
-
 import org.apache.commons.math3.util.Pair;
 import org.rosuda.JRI.REXP;
 import org.rosuda.JRI.Rengine;
+
+import java.util.List;
+import java.util.Locale;
 
 /**
  * @author Radoslav Micko, 445611@muni.cz
@@ -14,6 +14,7 @@ import org.rosuda.JRI.Rengine;
 public class HossainDahiyaLeastSquaresSolver extends SolverAbstract {
 
     private static final String MODEL_FUNCTION = "(a * (1 - exp(-b * xvalues)) / (1 + c * exp(-b * xvalues)))";
+    private static final String MODEL_NAME = "modelHD";
 
     /**
      * Initialize Rengine.
@@ -29,7 +30,7 @@ public class HossainDahiyaLeastSquaresSolver extends SolverAbstract {
         rEngine.eval("modelHD2 <- nls2(yvalues ~ " + MODEL_FUNCTION + ", " +
                 "start = data.frame(a = c(10, 1000000),b = c(0.00001, 10), c = c(0.00001, 200)), " +
                 "algorithm = \"brute-force\", control = list(warnOnly = TRUE, maxiter = 100000))");
-        REXP intermediate = rEngine.eval("coef(modelHD2)");
+        REXP intermediate = rEngine.eval("coef(" + MODEL_NAME + "2)");
         if (intermediate == null) {
             throw new ModelException("Repository data not suitable for R evaluation.");
         }
@@ -39,7 +40,7 @@ public class HossainDahiyaLeastSquaresSolver extends SolverAbstract {
                 + "control = list(warnOnly = TRUE, maxiter = 100000), "
                 + "algorithm = \"port\")",
                 intermediate.asDoubleArray()[0], intermediate.asDoubleArray()[1], intermediate.asDoubleArray()[2]));
-        REXP result = rEngine.eval("coef(modelHD)");
+        REXP result = rEngine.eval("coef(" + MODEL_NAME + ")");
         rEngine.end();
         if (result == null || result.asDoubleArray().length < 3) {
             throw new ModelException("Repository data not suitable for R evaluation.");

@@ -14,6 +14,7 @@ import org.rosuda.JRI.Rengine;
 public class MusaOkumotoLeastSquaresSolver extends SolverAbstract {
 
     private static final String MODEL_FUNCTION = "a*log(b * xvalues + 1)";
+    private static final String MODEL_NAME = "modelMO";
 
     /**
      * Initialize Rengine.
@@ -29,7 +30,7 @@ public class MusaOkumotoLeastSquaresSolver extends SolverAbstract {
         rEngine.eval("modelMO2 <- nls2(yvalues ~ " + MODEL_FUNCTION + ", " +
                 "start = data.frame(a = c(10, 1000000),b = c(0.00001, 10)), " +
                 "algorithm = \"brute-force\", control = list(warnOnly = TRUE, maxiter = 100000))");
-        REXP intermediate = rEngine.eval("coef(modelMO2)");
+        REXP intermediate = rEngine.eval("coef(" + MODEL_NAME + "2)");
         if (intermediate == null) {
             throw new ModelException("Repository data not suitable for R evaluation.");
         }
@@ -37,7 +38,7 @@ public class MusaOkumotoLeastSquaresSolver extends SolverAbstract {
                 + "start = list(a = %.10f,b = %.10f), "
                 + "control = list(warnOnly = TRUE, maxiter = 100000), "
                 + "algorithm = \"port\")", intermediate.asDoubleArray()[0], intermediate.asDoubleArray()[1]));
-        REXP result = rEngine.eval("coef(modelMO)");
+        REXP result = rEngine.eval("coef(" + MODEL_NAME + ")");
         rEngine.end();
         if (result == null || result.asDoubleArray().length < 2) {
             throw new ModelException("Repository data not suitable for R evaluation.");

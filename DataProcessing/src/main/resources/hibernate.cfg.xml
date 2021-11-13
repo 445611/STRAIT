@@ -51,5 +51,6 @@ Contributor(s):
     <mapping class="fi.muni.cz.dataprocessing.persistence.GeneralIssuesSnapshot"/>
     <mapping class="fi.muni.cz.dataprovider.GeneralIssue"/>
     <mapping class="fi.muni.cz.dataprovider.RepositoryInformation"/>
+    <mapping class="fi.muni.cz.dataprovider.Release"/>
     </session-factory>
 </hibernate-configuration>

@@ -56,17 +56,21 @@ public class ChiSquareGoodnessOfFitTestNGTest {
     
     @Test
     public void testExactMatch() {
-        double[] doubleArr = {0.0};
-        when(rEngine.eval("testGO$statistic")).thenReturn(new REXP(doubleArr));
-        when(rEngine.eval("testGO$p.value")).thenReturn(new REXP(doubleArr));
-        assertEquals(test.executeGoodnessOfFitTest(listOfPairs, listOfPairs, "GO").get("Chi-Square = "), "0.0");
+        double[] doubleArr = {1.000};
+        when(rEngine.eval("glance(testGO)$r.squared")).thenReturn(new REXP(doubleArr));
+        when(rEngine.eval("glance(testGO)$AIC")).thenReturn(new REXP(doubleArr));
+        when(rEngine.eval("glance(testGO)$BIC")).thenReturn(new REXP(doubleArr));
+        when(rEngine.eval("glance(testGO)$sigma")).thenReturn(new REXP(doubleArr));
+        assertEquals(test.executeGoodnessOfFitTest(listOfPairs, listOfPairs, "GO").get("Chi-Square = "), "1.000");
     }
     
     @Test
     public void testShiftMatch() {
         double[] doubleArr = {1.0};
-        when(rEngine.eval("testGO$statistic")).thenReturn(new REXP(doubleArr));
-        when(rEngine.eval("testGO$p.value")).thenReturn(new REXP(doubleArr));
+        when(rEngine.eval("glance(testGO)$r.squared")).thenReturn(new REXP(doubleArr));
+        when(rEngine.eval("glance(testGO)$AIC")).thenReturn(new REXP(doubleArr));
+        when(rEngine.eval("glance(testGO)$BIC")).thenReturn(new REXP(doubleArr));
+        when(rEngine.eval("glance(testGO)$sigma")).thenReturn(new REXP(doubleArr));
         assertNotEquals(test.executeGoodnessOfFitTest(listOfPairs, listOfShiftByOnePairs, "GO").get("Chi-Square = "), "0.0");
     }
 }

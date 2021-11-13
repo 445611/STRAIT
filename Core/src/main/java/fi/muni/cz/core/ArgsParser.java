@@ -146,7 +146,7 @@ public class ArgsParser {
         option = Option.builder(OPT_SAVE).longOpt("save").hasArg().argName("Format of data").
                 desc("Save repository data to file with specified format.").build();
         mandatoryOptionGroup.addOption(option);
-        option = Option.builder(OPT_EVALUATE).longOpt("evaluate")
+        option = Option.builder(OPT_EVALUATE).longOpt("evaluate").optionalArg(true).hasArg().argName("Output file name")
                 .desc("Evaluate repository data and persist to new snapshot with name.").build();
         mandatoryOptionGroup.addOption(option);
         options.addOptionGroup(mandatoryOptionGroup);
@@ -487,6 +487,15 @@ public class ArgsParser {
      */
     public String getOptionValuePredict() {
         return cmdl.getOptionValue(OPT_PREDICT);
+    }
+
+    /**
+     * Get argument value for 'e'.
+     *
+     * @return argument value.
+     */
+    public String getOptionValueEvaluation() {
+        return cmdl.getOptionValue(OPT_EVALUATE);
     }
     
     /**

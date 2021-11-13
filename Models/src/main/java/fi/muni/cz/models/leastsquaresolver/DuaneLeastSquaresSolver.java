@@ -14,6 +14,7 @@ import org.rosuda.JRI.Rengine;
 public class DuaneLeastSquaresSolver extends SolverAbstract {
 
     private static final String MODEL_FUNCTION = "a*(xvalues ^ b)";
+    private static final String MODEL_NAME = "modelDuane";
 
     /**
      * Initialize Rengine.
@@ -29,7 +30,7 @@ public class DuaneLeastSquaresSolver extends SolverAbstract {
         rEngine.eval("modelDuane2 <- nls2(yvalues ~ " + MODEL_FUNCTION + ", " +
                 "start = data.frame(a = c(0.00001, 500),b = c(0.00001, 100)), " +
                 "algorithm = \"brute-force\", control = list(warnOnly = TRUE, maxiter = 100000))");
-        REXP intermediate = rEngine.eval("coef(modelDuane2)");
+        REXP intermediate = rEngine.eval("coef(" + MODEL_NAME + "2)");
         if (intermediate == null) {
             throw new ModelException("Repository data not suitable for R evaluation.");
         }
@@ -38,7 +39,7 @@ public class DuaneLeastSquaresSolver extends SolverAbstract {
                 + "lower = list(a = 0, b = 0), "
                 + "control = list(warnOnly = TRUE, maxiter = 100000), "
                 + "algorithm = \"port\")", intermediate.asDoubleArray()[0], intermediate.asDoubleArray()[1]));
-        REXP result = rEngine.eval("coef(modelDuane)");
+        REXP result = rEngine.eval("coef(" + MODEL_NAME + ")");
         rEngine.end();
         if (result == null || result.asDoubleArray().length < 2) {
             throw new ModelException("Repository data not suitable for R evaluation.");

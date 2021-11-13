@@ -14,6 +14,7 @@ import java.util.Locale;
 public class YamadaExponentialLeastSquaresSolver extends SolverAbstract {
 
     private static final String MODEL_FUNCTION = "a*(1 - exp(-b*(1-exp(-c*xvalues))))";
+    private static final String MODEL_NAME = "modelYamadaExponential";
 
     /**
      * Initialize Rengine.
@@ -30,7 +31,7 @@ public class YamadaExponentialLeastSquaresSolver extends SolverAbstract {
         rEngine.eval("modelYamadaExponential2 <- nls2(yvalues ~ " + MODEL_FUNCTION + ", " +
                 "start = data.frame(a = c(1000, 100000),b = c(0.00001, 1), c = c(0.001, 10)), " +
                 "algorithm = \"brute-force\", control = list(warnOnly = TRUE, maxiter = 100000))");
-        REXP intermediate = rEngine.eval("coef(modelYamadaExponential2)");
+        REXP intermediate = rEngine.eval("coef(" + MODEL_NAME + "2)");
         if (intermediate == null) {
             throw new ModelException("Repository data not suitable for R evaluation.");
         }
@@ -40,7 +41,7 @@ public class YamadaExponentialLeastSquaresSolver extends SolverAbstract {
                 + "control = list(warnOnly = TRUE, maxiter = 100000), "
                 + "algorithm = \"port\")",
                 intermediate.asDoubleArray()[0], intermediate.asDoubleArray()[1], intermediate.asDoubleArray()[2]));
-        REXP result = rEngine.eval("coef(modelYamadaExponential)");
+        REXP result = rEngine.eval("coef(" + MODEL_NAME + ")");
         rEngine.end();
         if (result == null || result.asDoubleArray().length < 3) {
             throw new ModelException("Repository data not suitable for R evaluation.");

@@ -5,6 +5,8 @@ import java.util.Date;
 import java.util.List;
 import java.util.Map;
 import java.util.Objects;
+
+import fi.muni.cz.dataprovider.ReleaseDTO;
 import org.apache.commons.math3.util.Pair;
 
 /**
@@ -43,6 +45,8 @@ public class OutputData implements Serializable {
     private List<String> processorsUsed;
     private String solver;
 
+    private List<ReleaseDTO> releases;
+
     /**
      * Default constructor.
      */
@@ -78,6 +82,7 @@ public class OutputData implements Serializable {
         this.repositorySize = builder.repositorySize;
         this.repositoryWatchers = builder.repositoryWatchers;
         this.developmentDays = builder.developmentDays;
+        this.releases = builder.releases;
     }
 
     public String getSolver() {
@@ -306,6 +311,14 @@ public class OutputData implements Serializable {
         this.repositoryFirstPushedAt = repositoryFirstPushedAt;
     }
 
+    public List<ReleaseDTO> getReleases() {
+        return releases;
+    }
+
+    public void setReleases(List<ReleaseDTO> releases) {
+        this.releases = releases;
+    }
+
     @Override
     public int hashCode() {
         return Objects.hash(this.userName, this.repositoryName, this.createdAt);
@@ -377,6 +390,8 @@ public class OutputData implements Serializable {
         private List<String> filtersUsed;
         private List<String> processorsUsed;
         private String solver;
+
+        private List<ReleaseDTO> releases;
         
         /**
          * Set solver of models parameters.
@@ -683,6 +698,17 @@ public class OutputData implements Serializable {
          */
         public OutputDataBuilder setRepositoryFirstPushedAt(Date repositoryFirstPushedAt) {
             this.repositoryFirstPushedAt = repositoryFirstPushedAt;
+            return this;
+        }
+
+        /**
+         * Set repository releases.
+         *
+         * @param releases Releases to be added.
+         * @return this builder, to allow method chaining.
+         */
+        public OutputDataBuilder setReleases(List<ReleaseDTO> releases) {
+            this.releases = releases;
             return this;
         }
 

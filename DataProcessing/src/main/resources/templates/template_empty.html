@@ -29,6 +29,11 @@
             height: 100%;
         }
 
+        table, th, td {
+            text-align: center;
+            border:1px solid black;
+        }
+
         hr.hrstyle {
             border: 0;
             height: 1px;
@@ -62,6 +67,24 @@
             <b>First pushed at:</b> ${noModelsData.repositoryFirstPushedAt?datetime}<br>
             <b>Last pushed at:</b> ${noModelsData.repositoryLastPushedAt?datetime}<br>
             <b>Count of development days:</b> ${noModelsData.developmentDays}<br>
+            <hr class="hrstyle">
+            <h3>Releases:</h3>
+            <table>
+                <tr>
+                    <th>#</th>
+                    <th>Name of Release</th>
+                    <th>Date of Release</th>
+                </tr>
+                <#if noModelsData.releases?size != 0>
+                    <#list noModelsData.releases as value>
+                        <tr>
+                            <td>${value?index + 1}</td>
+                            <td>${value.name}</td>
+                            <td>${value.publishedAt?date}</td>
+                        </tr>
+                    </#list>
+                </#if>
+            </table>
             <hr class="hrstyle">
             <h3>Info:</h3>
             <p>

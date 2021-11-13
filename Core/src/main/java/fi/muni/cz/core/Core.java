@@ -31,6 +31,7 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
+import java.util.stream.Collectors;
 
 /**
  * @author Radoslav Micko, 445611@muni.cz
@@ -44,7 +45,7 @@ public class Core {
             new GitHubRepositoryInformationDataProvider(CLIENT);
     private static ParsedUrlData parsedUrlData;
     private static final GeneralIssuesSnapshotDaoImpl DAO = new GeneralIssuesSnapshotDaoImpl();
-    private static final Rengine RENGINE = new Rengine(new String[] {"-–no-save"}, false, null);
+    private static final Rengine RENGINE = new Rengine(new String[] {"--vanilla"}, false, null);
 
     /**
      * Main method, takes command line arguments.
@@ -200,6 +201,11 @@ public class Core {
         List<Model> models = ModelFactory.getModels(countedWeeksWithTotal, goodnessOfFitTest, PARSER);
         List<Model> modelsToRemove = new ArrayList<>();
 
+        if (countedWeeksWithTotal.size() < 1
+                || countedWeeksWithTotal.get(countedWeeksWithTotal.size() - 1).getSecond() < 1) {
+           return new ArrayList<>();
+        }
+
         models.parallelStream().forEach(model -> {
             try {
                 System.out.println("Evaluating - " + model.toString());
@@ -248,7 +254,9 @@ public class Core {
     
     private static void writeOutput(List<OutputData> outputDataList) throws InvalidInputException {
         OutputWriterFactory.getIssuesWriter(PARSER)
-                .writeOutputDataToFile(outputDataList, parsedUrlData.getRepositoryName());
+                .writeOutputDataToFile(outputDataList,
+                        PARSER.getOptionValueEvaluation() == null
+                                ? parsedUrlData.getRepositoryName() : PARSER.getOptionValueEvaluation());
     }
     
     private static List<GeneralIssue> runFiltersAndProcessors(List<GeneralIssue> listOfGeneralIssues) {
@@ -299,7 +307,10 @@ public class Core {
                     .setRepositoryFirstPushedAt(repositoryInformation.getPushedAtFirst())
                     .setRepositorySize(repositoryInformation.getSize())
                     .setRepositoryWatchers(repositoryInformation.getWatchers())
-                    .setDevelopmentDays(getDaysBetween(repositoryInformation)).build();
+                    .setDevelopmentDays(getDaysBetween(repositoryInformation))
+                    .setReleases(repositoryInformation.getListOfReleases()
+                            .stream().map(Release::toDto).collect(Collectors.toList()))
+                    .build();
             outputDataList.add(outputData);
         }
 
@@ -341,7 +352,10 @@ public class Core {
                 .setRepositoryFirstPushedAt(repositoryInformation.getPushedAtFirst())
                 .setRepositorySize(repositoryInformation.getSize())
                 .setRepositoryWatchers(repositoryInformation.getWatchers())
-                .setDevelopmentDays(getDaysBetween(repositoryInformation)).build();
+                .setDevelopmentDays(getDaysBetween(repositoryInformation))
+                .setReleases(repositoryInformation.getListOfReleases()
+                        .stream().map(Release::toDto).collect(Collectors.toList()))
+                .build();
     }
 
     private static String getSolver() {
