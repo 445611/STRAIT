@@ -29,7 +29,7 @@ public class YamadaExponentialLeastSquaresSolver extends SolverAbstract {
         // TODO CHECK
         initializeOptimizationInR(listOfData);
         rEngine.eval("modelYamadaExponential2 <- nls2(yvalues ~ " + MODEL_FUNCTION + ", " +
-                "start = data.frame(a = c(1000, 100000),b = c(0.00001, 1), c = c(0.001, 10)), " +
+                "start = data.frame(a = c(100, 100000),b = c(0.00001, 1), c = c(0.001, 10)), " +
                 "algorithm = \"brute-force\", control = list(warnOnly = TRUE, maxiter = 100000))");
         REXP intermediate = rEngine.eval("coef(" + MODEL_NAME + "2)");
         if (intermediate == null) {

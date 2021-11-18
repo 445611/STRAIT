@@ -29,7 +29,7 @@ public class YamadaRaleighLeastSquaresSolver extends SolverAbstract {
         // TODO CHECK
         initializeOptimizationInR(listOfData);
         rEngine.eval("modelYamadaRaleigh2 <- nls2(yvalues ~ " + MODEL_FUNCTION + ", " +
-                "start = data.frame(a = c(1, 10000),b = c(0.00001, 100), c = c(0.00001, 100)), " +
+                "start = data.frame(a = c(1, 10000),b = c(0.00001, 100), c = c(0.00001, 200)), " +
                 "algorithm = \"brute-force\", control = list(warnOnly = TRUE, maxiter = 100000))");
         REXP intermediate = rEngine.eval("coef(" + MODEL_NAME + "2)");
         if (intermediate == null) {
