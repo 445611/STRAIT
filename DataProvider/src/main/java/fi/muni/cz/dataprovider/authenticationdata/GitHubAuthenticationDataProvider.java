@@ -3,6 +3,8 @@ package fi.muni.cz.dataprovider.authenticationdata;
 import fi.muni.cz.dataprovider.GitHubGeneralIssueDataProvider;
 import fi.muni.cz.dataprovider.exception.AuthenticationException;
 import fi.muni.cz.dataprovider.exception.AuthenticationFileErrorException;
+
+import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.Properties;
@@ -16,7 +18,7 @@ import org.eclipse.egit.github.core.client.GitHubClient;
  */
 public class GitHubAuthenticationDataProvider {
     
-    private static final String AUTH_FILE_NAME = "git_hub_authentication_file.properties";
+    private static final String AUTH_FILE_NAME = "./git_hub_authentication_file.properties";
     
     private static final String NAME_ELEMENT_TAG = "name";
     private static final String PASSWORD_ELEMENT_TAG = "password";
@@ -99,8 +101,7 @@ public class GitHubAuthenticationDataProvider {
      */
     private void parseDataFromAuthenticationFile() {
         Properties properties = new Properties();
-        try (InputStream stream = getClass().getClassLoader()
-                .getResourceAsStream(AUTH_FILE_NAME)) {
+        try (InputStream stream = new FileInputStream(AUTH_FILE_NAME)) {
             properties.load(stream);
             userName = properties.getProperty(NAME_ELEMENT_TAG);
             password = properties.getProperty(PASSWORD_ELEMENT_TAG);

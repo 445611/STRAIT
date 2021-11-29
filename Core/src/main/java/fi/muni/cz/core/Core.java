@@ -59,11 +59,11 @@ public class Core {
         } catch (InvalidInputException e) {
             PARSER.printHelp();
             System.out.println(e.causes());
-            e.printStackTrace();
+            //e.printStackTrace();
             System.exit(1);
         } catch (Exception e) {
             System.out.println(e.getMessage());
-            e.printStackTrace();
+            //e.printStackTrace();
             System.exit(1);
         }
     }
