@@ -2,12 +2,7 @@ package fi.muni.cz.core.factory;
 
 import fi.muni.cz.core.ArgsParser;
 import fi.muni.cz.dataprocessing.exception.DataProcessingException;
-import fi.muni.cz.dataprocessing.issuesprocessing.Filter;
-import fi.muni.cz.dataprocessing.issuesprocessing.FilterByLabel;
-import fi.muni.cz.dataprocessing.issuesprocessing.FilterClosed;
-import fi.muni.cz.dataprocessing.issuesprocessing.FilterDuplications;
-import fi.muni.cz.dataprocessing.issuesprocessing.FilterDefects;
-import fi.muni.cz.dataprocessing.issuesprocessing.FilterByTime;
+import fi.muni.cz.dataprocessing.issuesprocessing.*;
 
 import java.text.DateFormat;
 import java.text.ParseException;

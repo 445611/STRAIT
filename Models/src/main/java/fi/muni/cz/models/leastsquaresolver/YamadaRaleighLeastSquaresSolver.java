@@ -26,7 +26,6 @@ public class YamadaRaleighLeastSquaresSolver extends SolverAbstract {
 
     @Override
     public double[] optimize(int[] startParameters, List<Pair<Integer, Integer>> listOfData) {
-        // TODO CHECK
         initializeOptimizationInR(listOfData);
         rEngine.eval("modelYamadaRaleigh2 <- nls2(yvalues ~ " + MODEL_FUNCTION + ", " +
                 "start = data.frame(a = c(1, 10000),b = c(0.00001, 100), c = c(0.00001, 200)), " +

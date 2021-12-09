@@ -144,6 +144,5 @@ public class ModelFactory {
         } catch (ReflectiveOperationException ex) {
             throw new IllegalArgumentException(ex);
         }
-
     }
 }

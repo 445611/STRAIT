@@ -26,7 +26,6 @@ public class YamadaExponentialLeastSquaresSolver extends SolverAbstract {
 
     @Override
     public double[] optimize(int[] startParameters, List<Pair<Integer, Integer>> listOfData) {
-        // TODO CHECK
         initializeOptimizationInR(listOfData);
         rEngine.eval("modelYamadaExponential2 <- nls2(yvalues ~ " + MODEL_FUNCTION + ", " +
                 "start = data.frame(a = c(100, 100000),b = c(0.00001, 1), c = c(0.001, 10)), " +

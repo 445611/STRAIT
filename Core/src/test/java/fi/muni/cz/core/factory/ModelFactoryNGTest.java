@@ -1,20 +1,22 @@
 package fi.muni.cz.core.factory;
 
 import fi.muni.cz.core.ArgsParser;
-import static fi.muni.cz.core.ArgsParser.OPT_MODELS;
 import fi.muni.cz.core.exception.InvalidInputException;
 import fi.muni.cz.models.*;
 import fi.muni.cz.models.testing.ChiSquareGoodnessOfFitTest;
-import java.util.ArrayList;
 import org.apache.commons.cli.CommandLine;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
-import static org.mockito.Mockito.when;
 import org.mockito.MockitoAnnotations;
-import static org.testng.Assert.assertEquals;
-import static org.testng.Assert.assertTrue;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
+
+import java.util.ArrayList;
+
+import static fi.muni.cz.core.ArgsParser.OPT_MODELS;
+import static org.mockito.Mockito.when;
+import static org.testng.Assert.assertEquals;
+import static org.testng.Assert.assertTrue;
 
 /**
  * @author Radoslav Micko, 445611@muni.cz

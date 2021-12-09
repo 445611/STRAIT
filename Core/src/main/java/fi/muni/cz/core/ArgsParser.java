@@ -1,31 +1,18 @@
 package fi.muni.cz.core;
 
-import static fi.muni.cz.core.RunConfiguration.HELP;
-import static fi.muni.cz.core.RunConfiguration.LIST_ALL_SNAPSHOTS;
-import static fi.muni.cz.core.RunConfiguration.NOT_SUPPORTED;
-import static fi.muni.cz.core.RunConfiguration.SNAPSHOT_NAME_AND_EVALUATE;
-import static fi.muni.cz.core.RunConfiguration.SNAPSHOT_NAME_AND_LIST_SNAPSHOTS;
-import static fi.muni.cz.core.RunConfiguration.SNAPSHOT_NAME_AND_SAVE;
-import static fi.muni.cz.core.RunConfiguration.UNSPECIFIED;
-import static fi.muni.cz.core.RunConfiguration.URL_AND_EVALUATE;
-import static fi.muni.cz.core.RunConfiguration.URL_AND_LIST_SNAPSHOTS;
-import static fi.muni.cz.core.RunConfiguration.URL_AND_SAVE;
 import fi.muni.cz.core.exception.InvalidInputException;
 import fi.muni.cz.core.factory.FilterFactory;
 import fi.muni.cz.dataprocessing.issuesprocessing.modeldata.IssuesCounter;
+import org.apache.commons.cli.*;
+
 import java.io.BufferedReader;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.ArrayList;
 import java.util.List;
-import org.apache.commons.cli.CommandLine;
-import org.apache.commons.cli.DefaultParser;
-import org.apache.commons.cli.HelpFormatter;
-import org.apache.commons.cli.Option;
-import org.apache.commons.cli.OptionGroup;
-import org.apache.commons.cli.Options;
-import org.apache.commons.cli.ParseException;
+
+import static fi.muni.cz.core.RunConfiguration.*;
 
 /**
  * @author Radoslav Micko, 445611@muni.cz

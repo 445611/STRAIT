@@ -3,11 +3,11 @@ package fi.muni.cz.dataprocessing.persistence;
 import fi.muni.cz.dataprovider.GeneralIssue;
 import fi.muni.cz.dataprovider.RepositoryInformation;
 
+import javax.persistence.*;
 import java.io.Serializable;
 import java.util.Date;
 import java.util.List;
 import java.util.Objects;
-import javax.persistence.*;
 
 /**
  * @author Radoslav Micko, 445611@muni.cz
