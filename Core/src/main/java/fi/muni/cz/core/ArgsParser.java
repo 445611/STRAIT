@@ -172,7 +172,7 @@ public class ArgsParser {
         option = Option.builder(OPT_FILTER_DEFECTS).longOpt("filterDefects").desc("Filter defects.").build();
         options.addOption(option);
         option = Option.builder(OPT_MODELS).longOpt("models").hasArgs().argName("Model name").
-                desc("Models to evaluate.").build();
+                desc("Models to evaluate. Available models: go, gos, mo, du, hd, we, ye, yr, ll, em.").build();
         options.addOption(option);
         option = Option.builder(OPT_PERIOD_OF_TESTING).longOpt("periodOfTesting").hasArg().argName("Period").
                 desc("Period of testing. e.g.: " + IssuesCounter.WEEKS + ", " + IssuesCounter.MONTHS).build();
@@ -185,7 +185,7 @@ public class ArgsParser {
                 .desc("Data show in multiple graphs.").build();
         options.addOption(option);
         option = Option.builder(OPT_SOLVER).longOpt("solver").hasArg()
-                .desc("Solver to evaluate model parameters.").build();
+                .desc("Solver to evaluate model parameters. Available solvers: ls, ml (Not implemented).").build();
         options.addOption(option);    
         option = Option.builder(OPT_OUT).hasArg().desc("Output type.").build();
         options.addOption(option);
