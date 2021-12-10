@@ -2,7 +2,7 @@
 A tool for software reliability analysis using GitHub repositories, developed as part of my [**Bachelor's thesis**](https://is.muni.cz/th/a2htp/) and extended in [**Master's thesis**](TODO). It was proposed in paper http://dx.doi.org/10.1109/MSR.2019.00025 on *2021 IEEE/ACM 18th International Conference on Mining Software Repositories (MSR)*
 
 
-A practical part of the thesis will consist of a tool that would allow automated reliability analysis of the projects hosted on GitHub using the selected Software Reliability Growth Models (SRGMs). The input data for the model will be collected from the issue tracker of the GitHub projects.
+The tool allows automated reliability analysis of the projects hosted on GitHub using the selected Software Reliability Growth Models (SRGMs). The input data for the model will be collected from the issue tracker of the GitHub projects.
 
 Tool Requirements
 * Java, version 8+: [https://www.java.com/en/](https://www.java.com/en/)
