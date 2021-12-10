@@ -53,7 +53,7 @@ public class GOModelImpl extends ModelAbstract {
     
     @Override
     public String toString() {
-        return "Goel-Okemura model";
+        return "Goel-Okumoto model";
     }
 
     @Override

@@ -18,7 +18,7 @@ import java.util.List;
 public class ModelFactory {
     
     public static final String  GOEL_OKUMOTO = "go";
-    public static final String  GOEL_OKEMURA_SSHAPED = "gos";
+    public static final String  GOEL_OKUMOTO_SSHAPED = "gos";
     public static final String  MUSA_OKUMOTO = "mo";
     public static final String  DUANE = "du";
     public static final String  HOSSAIN_DAHIYA = "hd";
@@ -57,7 +57,7 @@ public class ModelFactory {
             models.add(ModelFactory.getModel(countedWeeksWithTotal, goodnessOfFitTest, 
                     ModelFactory.GOEL_OKUMOTO, parser));
             models.add(ModelFactory.getModel(countedWeeksWithTotal, goodnessOfFitTest, 
-                    ModelFactory.GOEL_OKEMURA_SSHAPED, parser));
+                    ModelFactory.GOEL_OKUMOTO_SSHAPED, parser));
             models.add(ModelFactory.getModel(countedWeeksWithTotal, goodnessOfFitTest, 
                     ModelFactory.HOSSAIN_DAHIYA, parser));
             models.add(ModelFactory.getModel(countedWeeksWithTotal, goodnessOfFitTest, 
@@ -91,7 +91,7 @@ public class ModelFactory {
             case GOEL_OKUMOTO:
                 return new GOModelImpl(countedWeeksWithTotal, goodnessOfFitTest,
                         getSolverBySolverArgument(parser, GOLeastSquaresSolver.class));
-            case GOEL_OKEMURA_SSHAPED:
+            case GOEL_OKUMOTO_SSHAPED:
                 return new GOSShapedModelImpl(countedWeeksWithTotal, goodnessOfFitTest,
                         getSolverBySolverArgument(parser, GOSShapedLeastSquaresSolver.class));
             case MUSA_OKUMOTO:
