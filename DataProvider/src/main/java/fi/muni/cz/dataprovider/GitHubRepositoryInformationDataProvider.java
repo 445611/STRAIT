@@ -37,7 +37,13 @@ public class GitHubRepositoryInformationDataProvider implements RepositoryInform
         repositoryService = new RepositoryService(client);
         commitService = new CommitService(client);
         try {
-            github = new GitHubBuilder().withOAuthToken(new GitHubAuthenticationDataProvider().getOAuthToken()).build();
+            GitHubAuthenticationDataProvider authProvider = new GitHubAuthenticationDataProvider();
+            if (authProvider.getOAuthToken() == null || authProvider.getOAuthToken().isEmpty()) {
+                github = new GitHubBuilder()
+                        .withPassword(authProvider.getUserName(), authProvider.getPassword()).build();
+            } else {
+                github = new GitHubBuilder().withOAuthToken(authProvider.getOAuthToken()).build();
+            }
         } catch (IOException ex) {
             throw new AuthenticationException("Couldn't create GitHub of hub4j.");
         }
